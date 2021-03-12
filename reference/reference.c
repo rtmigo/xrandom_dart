@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: CC-BY-4.0
 
 // this file runs reference implementations of random number generators
-// to create lists of reference values and print them to the terminal
-//
-// The values can be used for testing implementations of the same algorithms 
-// in other languges
+// to create lists of reference values and print them to the terminal.
+// The values can be used for testing of alternate implementations of the same
+// RNGs
 
 // uh C, hello again
 
@@ -14,13 +13,14 @@
 
 #define VALUES_PER_SAMPLE 1000
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // sample from https://en.wikipedia.org/wiki/Xorshift
 
 // Refactored from
 // George Marsaglia 2003 "Xorshift RNGs"
 // https://www.jstatsoft.org/article/view/v008i14
-//		page 3: "Here is a basic 32-bit xorshift C procedure that takes a 32-bit seed value y:"
+//		page 3: "Here is a basic 32-bit xorshift C procedure that takes
+//      a 32-bit seed value y:"
 // 		unsigned long xor(){ 
 //			static unsigned long y=2463534242; 
 //			yˆ=(y<<13); y=(y>>17); return (yˆ=(y<<5)); 
@@ -141,7 +141,8 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
 
     char* name = "xorshift128_seed";
 
-    printf("const %s_%d_%d_%d_%d = [\n", name, state.a, state.b, state.c, state.d);
+    printf( "const %s_%d_%d_%d_%d = [\n",
+            name, state.a, state.b, state.c, state.d );
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
         printf("  \"%08x\",\n", xorshift128(&state)); // 08jx for long
@@ -149,7 +150,7 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
     printf("];\n\n");
 }
 
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Code found on from Wikipedia page.
 //
 // It's from:
@@ -174,7 +175,7 @@ uint64_t xorshift128p(struct xorshift128p_state *state)
 	return t + s;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 //	Sebastiano Vigna
 //	Further scramblings of Marsaglia’s xorshift generators
 //	https://arxiv.org/abs/1404.0390 [v2] Mon, 14 Dec 2015 - page 6
@@ -224,7 +225,6 @@ double xorshift128plus_double(uint64_t *s) {
 	return *((double *) &x_doublefied) - 1.0;
 }
 
-
 void print128plus(uint64_t a, uint64_t b)
 {
     printf("const xorshift128plus_%d_%d = [\n",  a, b);
@@ -255,7 +255,7 @@ void print128plus_double(uint64_t a, uint64_t b)
     printf("];\n\n");
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 int main()
 {
@@ -267,6 +267,7 @@ int main()
 	print128plus_double(1,2);	
 }
 
+// TODO:
 // https://prng.di.unimi.it/xoshiro256plus.c
 // https://prng.di.unimi.it/
 // https://prng.di.unimi.it/xoshiro256plusplus.c
