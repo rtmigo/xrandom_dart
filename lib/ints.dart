@@ -1,11 +1,16 @@
 extension BitInt on int {
 
+  /// Simulates result of `x >> shift` as if `x` were `uint64_t` in C.
   int signedRightShift(int shift) {
-    // todo unit test
-    int x = this;
+
+    // the difference between int64 and uint64 is that
+    // uint64 will shift all 64 of its bits,
+    // but int64 will shift lower 63 and preserve the highest bit
+
     if (this >= 0)
-      return x >> shift;
+      return this >> shift;
     else {
+      int x = this;
       // setting highest bit to zero
       x &= 0x7FFFFFFFFFFFFFFF;
       assert(x >= 0);

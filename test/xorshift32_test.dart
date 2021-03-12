@@ -1,0 +1,29 @@
+// SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <ortemeo@gmail
+// SPDX-License-Identifier: MIT
+
+
+import "package:test/test.dart";
+import 'package:xorhift/ints.dart';
+import 'package:xorhift/xorshift32.dart';
+
+import 'helper.dart';
+import 'reference.dart';
+
+void main() {
+
+  test("seed 23", () {
+    final random = XorShift32(23);
+    compareWithReference32(random, "xorshift32 (seed 23)");
+  });
+
+  test("seed 42", () {
+    final random = XorShift32(42);
+    compareWithReference32(random, "xorshift32 (seed 42)");
+  });
+
+  test("seed 777", () {
+    final random = XorShift32(777);
+    compareWithReference32(random, "xorshift32 (seed 777)");
+  });
+
+}
