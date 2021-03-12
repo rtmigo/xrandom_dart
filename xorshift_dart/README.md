@@ -7,3 +7,4 @@
 Dart adaptation of the JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library.
 
 
+:)
