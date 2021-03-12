@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <ortemeo@gmail
 // SPDX-License-Identifier: MIT
 
-
 import "package:test/test.dart";
 import 'package:xorhift/ints.dart';
 import 'package:xorhift/xorshift32.dart';
@@ -10,6 +9,20 @@ import 'helper.dart';
 import 'reference.dart';
 
 void main() {
+
+  test("reference data", () {
+    expect(
+        referenceSignature("xorshift32 (seed 23)"),
+        ['005ee2d6', '5c8dd654', 'a5f9cb9f', '14f18cc3']);
+    expect(
+        referenceSignature("xorshift32 (seed 42)"),
+        ['00ad4528', 'a90a34ac', 'd970c3c0', '7478bd43']);
+    expect(
+        referenceSignature("xorshift32 (seed 777)"),
+        ['0c454419', '3c00f93a', '1c1122b8', 'a6015c95']);
+
+  });
+  
 
   test("seed 23", () {
     final random = XorShift32(23);

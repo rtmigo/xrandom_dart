@@ -24,3 +24,14 @@ void compareWithReference32(UniRandom random, referenceKey) {
     expect(x.toRadixString(16),trimLeadingZeros(value));
   }
 }
+
+/// We just take a big list from our reference data, and return
+/// a few values from it.
+///
+/// Reference data in "always ok" except if we messed up data on update.
+/// This signature helps to make sure, that the reference is ok
+List<String> referenceSignature(String referenceKey)
+{
+  List<String> list = referenceData[referenceKey]!;
+  return [list[0], list[1], list[3], list[500]];
+}
