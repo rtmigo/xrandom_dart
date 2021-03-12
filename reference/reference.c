@@ -1,25 +1,30 @@
+// SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <ortemeo@gmail.com>
+// SPDX-License-Identifier: CC-BY-4.0
 
 // this file runs reference implementations of random number generators
-// to generate lists of reference values and print them to the terminal
+// to create lists of reference values and print them to the terminal
 //
 // The values can be used for testing implementations of the same algorithms 
 // in other languges
 
-// oh C, hello again
+// uh C, hello again
 
 #include <stdio.h>
 #include <stdint.h>
 
-#define VALUES_PER_SAMPLE 10
+#define VALUES_PER_SAMPLE 1000
 
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 // sample from https://en.wikipedia.org/wiki/Xorshift
 
 // Refactored from
 // George Marsaglia 2003 "Xorshift RNGs"
 // https://www.jstatsoft.org/article/view/v008i14
 //		page 3: "Here is a basic 32-bit xorshift C procedure that takes a 32-bit seed value y:"
-// 		unsigned long xor(){ static unsigned long y=2463534242; yˆ=(y<<13); y=(y>>17); return (yˆ=(y<<5)); }
+// 		unsigned long xor(){ 
+//			static unsigned long y=2463534242; 
+//			yˆ=(y<<13); y=(y>>17); return (yˆ=(y<<5)); 
+//		}
 
 struct xorshift32_state {
   uint32_t a;
@@ -36,19 +41,17 @@ uint32_t xorshift32(struct xorshift32_state *state)
 	return state->a = x;
 }
 
-void print32()
+void print32(uint32_t seed)
 {
-    char* name = "xorshift32_seed777";
-
-    printf("const %s = [\n", name);
+    printf("const xorshift32_%d = [\n", seed);
 
     struct xorshift32_state state;
-    state.a = 777;
+    state.a = seed;
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
-        printf("  \"%08x\",\n", xorshift32(&state)); // 08jx for long
+        printf("  \"%08x\",\n", xorshift32(&state));
 
-    printf("];\n");
+    printf("];\n\n");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,9 +61,12 @@ void print32()
 //	George Marsaglia 2003 "Xorshift RNGs" 
 // 	https://www.jstatsoft.org/article/view/v008i14
 //
-// 	page 4: For C compilers that have 64-bit integers, the following will provide an excellent period 264−1 RNG, 
-//	given a 64-bitseed x:
-//		unsigned long long xor64(){static unsigned long long x=88172645463325252LL;xˆ=(x<<13); xˆ=(x>>7); return (xˆ=(x<<17));
+// 	page 4: For C compilers that have 64-bit integers, the following will 
+//  provide an excellent period 264−1 RNG, given a 64-bitseed x:
+//		unsigned long long xor64(){
+//			static unsigned long long x=88172645463325252LL;
+//			xˆ=(x<<13); xˆ=(x>>7); return (xˆ=(x<<17));
+//		}
 
 struct xorshift64_state {
   uint64_t a;
@@ -80,14 +86,14 @@ void print64(uint64_t seed)
     struct xorshift64_state state;
     state.a = seed;
 
-    char* name = "xorshift64_seed";
+    char* name = "xorshift64_";
 
     printf("const %s%d = [\n", name, state.a);
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
 		printf("  \"%016llx\",\n", xorshift64(&state)); // 08jx for long
 
-    printf("];\n");
+    printf("];\n\n");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -135,14 +141,13 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
 
     char* name = "xorshift128_seed";
 
-    printf("const %s_%d = [\n", name, state.a);
+    printf("const %s_%d_%d_%d_%d = [\n", name, state.a, state.b, state.c, state.d);
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
         printf("  \"%08x\",\n", xorshift128(&state)); // 08jx for long
 
     printf("];\n\n");
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Code found on from Wikipedia page.
@@ -169,16 +174,30 @@ uint64_t xorshift128p(struct xorshift128p_state *state)
 	return t + s;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// found here: https://github.com/AndreasMadsen/xorshift/blob/master/reference.c
-//
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //	Sebastiano Vigna
 //	Further scramblings of Marsaglia’s xorshift generators
+//	https://arxiv.org/abs/1404.0390 [v2] Mon, 14 Dec 2015 - page 6
 //	https://arxiv.org/abs/1404.0390 [v3] Mon, 23 May 2016 - page 6
 
-uint64_t s[ 2 ];
+/* code from https://github.com/AndreasMadsen/xorshift/blob/master/reference.c
 
-uint64_t xorshift128plus_int(void) {
+	uint64_t s[ 2 ];
+
+	uint64_t xorshift128plus_int(void) {
+		uint64_t s1 = s[0];
+		const uint64_t s0 = s[1];
+		const uint64_t result = s0 + s1;
+		s[0] = s0;
+		s1 ^= s1 << 23; // a
+		s[1] = s1 ^ s0 ^ (s1 >> 18) ^ (s0 >> 5); // b, c
+		return result;
+}
+*/
+
+// the same refactored to avoid global variables:
+
+uint64_t xorshift128plus_int(uint64_t *s) {
 	uint64_t s1 = s[0];
 	const uint64_t s0 = s[1];
 	const uint64_t result = s0 + s1;
@@ -188,20 +207,64 @@ uint64_t xorshift128plus_int(void) {
 	return result;
 }
 
-// this if not from the article
-double xorshift128plus_double(void) {
-	const uint64_t x = xorshift128plus_int();
-	const uint64_t x_doublefied = UINT64_C(0x3FF) << 52 | x >> 12;
+/* code from https://github.com/AndreasMadsen/xorshift/blob/master/reference.c
+	this if not from the article
+	double xorshift128plus_double(void) {
+		const uint64_t x = xorshift128plus_int();
+		const uint64_t x_doublefied = UINT64_C(0x3FF) << 52 | x >> 12;
 
+		return *((double *) &x_doublefied) - 1.0;
+	}
+*/	
+
+// refactored to avoid global variables:
+double xorshift128plus_double(uint64_t *s) {
+	const uint64_t x = xorshift128plus_int(s);
+	const uint64_t x_doublefied = UINT64_C(0x3FF) << 52 | x >> 12;
 	return *((double *) &x_doublefied) - 1.0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
+void print128plus(uint64_t a, uint64_t b)
+{
+    printf("const xorshift128plus_%d_%d = [\n",  a, b);
+
+	uint64_t s[2];
+
+    s[0] = a;
+    s[1] = b;
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i)
+        printf("  \"%016llx\",\n", xorshift128plus_int(&s)); 
+
+    printf("];\n\n");
+}
+
+void print128plus_double(uint64_t a, uint64_t b)
+{
+    printf("const xorshift128plus_double_%d_%d = [\n",  a, b);
+
+	uint64_t s[2];
+
+    s[0] = a;
+    s[1] = b;
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i)
+        printf("  \"%.20e\",\n", xorshift128plus_double(&s)); 
+
+    printf("];\n\n");
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 int main()
 {
-    //print64(2);
-    print128(1,2,3,4);
+	printf("// generated by reference.c\n\n");
+	print32(1);
+    print64(3);
+    print128(1,2,3,3);
+	print128plus(1,2);
+	print128plus_double(1,2);	
 }
 
 // https://prng.di.unimi.it/xoshiro256plus.c
