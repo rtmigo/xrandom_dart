@@ -5,6 +5,9 @@ import "package:test/test.dart";
 import 'package:xorhift/ints.dart';
 import 'package:xorhift/xorshift64.dart';
 
+// xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)
+// 'xorshift128 (seed 5 23 42 777)'
+// xorshift128 (seed 1 2 3 4)'
 
 import 'helper.dart';
 import 'reference.dart';

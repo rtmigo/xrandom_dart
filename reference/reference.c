@@ -137,15 +137,12 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
     state.c = c;
     state.d = d;
 
-    char* name = "xorshift128_seed";
-
-    printf( "const %s_%d_%d_%d_%d = [\n",
-            name, state.a, state.b, state.c, state.d );
+    printf("'xorshift128 (seed %lu %lu %lu %lu)': [\n", state.a, state.b, state.c, state.d);
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
         printf("  \"%08x\",\n", xorshift128(&state)); // 08jx for long
 
-    printf("];\n\n");
+    printf("],\n\n");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -276,6 +273,10 @@ int main()
 	print64(1);
 	print64(42);
 	print64(PI64);
+
+	print128(1, 2, 3, 4);
+	print128(5, 23, 42, 777);
+	print128(1081037251u, 1975530394u, 2959134556u, 1579461830u);
 
 
 	printf("};");
