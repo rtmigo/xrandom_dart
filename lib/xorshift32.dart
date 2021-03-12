@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:xorhift/unirandom.dart';
 
-class XorShift32 extends UniRandom
+class XorShift32 extends UniRandom32
 {
   XorShift32(this._state);
   int _state;

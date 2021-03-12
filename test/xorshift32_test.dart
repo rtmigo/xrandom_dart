@@ -39,4 +39,7 @@ void main() {
     compareWithReference32(random, "xorshift32 (seed 777)");
   });
 
+  test("doubles", ()=>checkDoubles(XorShift32(777)));
+  test("bools", ()=>checkBools(XorShift32(777)));
+  test("ints", ()=>checkInts(XorShift32(777)));
 }
