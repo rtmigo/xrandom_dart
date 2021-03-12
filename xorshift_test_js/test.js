@@ -1,5 +1,5 @@
 var test = require('tap').test;
-var xorshift = require('../build_js/xorshift.js');
+var xorshift = require('./build_js/xorshift.js');
 var reference = require('./reference.json');
 
 
