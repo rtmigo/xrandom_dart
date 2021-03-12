@@ -1,4 +1,5 @@
-const int maxPositiveInt64 = 0x7FFFFFFFFFFFFFFF;
+const int MAX_POSITIVE_INT64 = 0x7FFFFFFFFFFFFFFF;
+const MAX_UINT32 = 0xFFFFFFFF;
 
 extension BitInt on int {
 

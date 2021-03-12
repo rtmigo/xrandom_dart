@@ -12,49 +12,49 @@ void main() {
 
   test("reference data", () {
     expect(
-        referenceSignature("xorshift32 (seed 23)"),
-        ['005ee2d6', '5c8dd654', 'a5f9cb9f', '14f18cc3']);
+        referenceSignature("xorshift32 (seed 1)"),
+        ['00042021', '04080601', '1255994f', '7c43326e']);
     expect(
         referenceSignature("xorshift32 (seed 42)"),
         ['00ad4528', 'a90a34ac', 'd970c3c0', '7478bd43']);
     expect(
-        referenceSignature("xorshift32 (seed 777)"),
-        ['0c454419', '3c00f93a', '1c1122b8', 'a6015c95']);
+        referenceSignature("xorshift32 (seed 314159265)"),
+        ['b11ddc17', '59781258', '10be1395', '8d87618b']);
 
   });
 
-  test("seed 23", () {
-    final random = XorShift32(23);
-    compareWithReference32(random, "xorshift32 (seed 23)");
+  test("seed 1", () {
+    final random = Xorshift32Random(1);
+    compareWithReference(random, "xorshift32 (seed 1)");
   });
 
   test("seed 42", () {
-    final random = XorShift32(42);
-    compareWithReference32(random, "xorshift32 (seed 42)");
+    final random = Xorshift32Random(42);
+    compareWithReference(random, "xorshift32 (seed 42)");
   });
 
-  test("seed 777", () {
-    final random = XorShift32(777);
-    compareWithReference32(random, "xorshift32 (seed 777)");
+  test("seed 314159265", () {
+    final random = Xorshift32Random(314159265);
+    compareWithReference(random, "xorshift32 (seed 314159265)");
   });
 
-  test("doubles", ()=>checkDoubles(XorShift32(777)));
-  test("bools", ()=>checkBools(XorShift32(777)));
-  test("ints", ()=>checkInts(XorShift32(777)));
+  test("doubles", ()=>checkDoubles(Xorshift32Random(777)));
+  test("bools", ()=>checkBools(Xorshift32Random(777)));
+  test("ints", ()=>checkInts(Xorshift32Random(777)));
 
   test("predefined next", () {
-    final random = XorShift32(42);
+    final random = Xorshift32Random.deterministic();
     expect(
         skipAndTake(()=>random.next().toHexUint32(), 5000, 3),
-        ['BCFAE4D7', 'EC6EE807', '1CAC06B0']
+        ['62982C53', '855D849A', '8C1511DD']
     );
   });
 
   test("predefined double", () {
-    final random = XorShift32(42);
+    final random = Xorshift32Random.deterministic();
     expect(
         skipAndTake(()=>random.nextDouble(), 5000, 3),
-        [0.7382033371222679, 0.9235672966864815, 0.11199991011805831]
+        [0.385134477723654, 0.5209582209403064, 0.5471964991994194]
     );
   });
 }

@@ -3,7 +3,8 @@
 
 import "package:test/test.dart";
 import 'package:xorhift/ints.dart';
-import 'package:xorhift/xorshift32.dart';
+import 'package:xorhift/xorshift64.dart';
+
 
 import 'helper.dart';
 import 'reference.dart';
@@ -12,49 +13,49 @@ void main() {
 
   test("reference data", () {
     expect(
-        referenceSignature("xorshift32 (seed 23)"),
-        ['005ee2d6', '5c8dd654', 'a5f9cb9f', '14f18cc3']);
+        referenceSignature("xorshift64 (seed 1)"),
+        ['0000000040822041', '100041060c011441', 'f554f503555d8025', '1a79f717c30cd499']);
     expect(
-        referenceSignature("xorshift32 (seed 42)"),
-        ['00ad4528', 'a90a34ac', 'd970c3c0', '7478bd43']);
+        referenceSignature("xorshift64 (seed 42)"),
+        ['0000000a95514aaa', 'a00aaafdf80202bf', '283b88fe5fdff568', '19534e6bc7e4c934']);
     expect(
-        referenceSignature("xorshift32 (seed 777)"),
-        ['0c454419', '3c00f93a', '1c1122b8', 'a6015c95']);
+        referenceSignature("xorshift64 (seed 3141592653589793238)"),
+        ['366b2d97e95498c5', '9546626d41d0a0b4', '2d7e0a58ba6f3eec', 'd81ada3db94a4ee1']);
 
   });
 
-  test("seed 23", () {
-    final random = XorShift32(23);
-    compareWithReference32(random, "xorshift32 (seed 23)");
+  test("seed 1", () {
+    final random = Xorshift64Random(1);
+    compareWithReference(random, "xorshift64 (seed 1)");
   });
 
   test("seed 42", () {
-    final random = XorShift32(42);
-    compareWithReference32(random, "xorshift32 (seed 42)");
+    final random = Xorshift64Random(42);
+    compareWithReference(random, "xorshift64 (seed 42)");
   });
 
-  test("seed 777", () {
-    final random = XorShift32(777);
-    compareWithReference32(random, "xorshift32 (seed 777)");
+  test("seed 3141592653589793238", () {
+    final random = Xorshift64Random(3141592653589793238);
+    compareWithReference(random, "xorshift64 (seed 3141592653589793238)");
   });
 
-  test("doubles", ()=>checkDoubles(XorShift32(777)));
-  test("bools", ()=>checkBools(XorShift32(777)));
-  test("ints", ()=>checkInts(XorShift32(777)));
+  test("doubles", ()=>checkDoubles(Xorshift64Random(777)));
+  test("bools", ()=>checkBools(Xorshift64Random(777)));
+  test("ints", ()=>checkInts(Xorshift64Random(777)));
 
   test("predefined next", () {
-    final random = XorShift32(42);
+    final random = Xorshift64Random.deterministic();
     expect(
-        skipAndTake(()=>random.next().toHexUint32(), 5000, 3),
-        ['BCFAE4D7', 'EC6EE807', '1CAC06B0']
+        skipAndTake(()=>random.next().toHexUint64(), 5000, 3),
+        ['A78D8BFA5E7260CA', '5DB7D12B9759F68B', 'ABD3D730279787A6']
     );
   });
 
-  // test("predefined double", () {
-  //   final random = XorShift32(42);
-  //   expect(
-  //       skipAndTake(()=>random.nextDouble(), 5000, 3),
-  //       [0.7382033373550986, 0.9235672969193122, 0.11199991035088895]
-  //   );
-  // });
+  test("predefined double", () {
+    final random = Xorshift64Random.deterministic();
+    expect(
+        skipAndTake(()=>random.nextDouble(), 5000, 3),
+        [0.3090071651939921, 0.7321721518371331, 0.3424023614053875]
+    );
+  });
 }

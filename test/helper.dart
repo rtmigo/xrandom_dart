@@ -18,12 +18,12 @@ String trimLeadingZeros(String s) {
   return s.replaceAll(new RegExp(r'^0+(?=.)'), '');
 }
 
-void compareWithReference32(UniRandom random, referenceKey) {
+void compareWithReference(UniRandom random, referenceKey) {
   final refList = referenceData[referenceKey]!;
   for (final value in refList)
   {
     final x = random.next();
-    expect(x.toRadixString(16),trimLeadingZeros(value));
+    expect(trimLeadingZeros(x.toHexUint64()),trimLeadingZeros(value.toUpperCase()));
   }
 }
 

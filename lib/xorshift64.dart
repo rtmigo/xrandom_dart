@@ -3,9 +3,9 @@ import 'dart:math';
 import 'ints.dart';
 import 'package:xorhift/unirandom.dart';
 
-class XorShift64 extends UniRandom32
+class Xorshift64Random extends UniRandom64
 {
-  XorShift64(this._state);
+  Xorshift64Random(this._state);
   int _state;
 
   int next() {
@@ -33,6 +33,11 @@ class XorShift64 extends UniRandom32
     // x &= 0xFFFFFFFFFFFFFFFF;
     // return state = x;
 
+  }
+
+  static Xorshift64Random deterministic()
+  {
+    return Xorshift64Random(0x76a5c5b65ce8677c);
   }
 
   // int next() {
