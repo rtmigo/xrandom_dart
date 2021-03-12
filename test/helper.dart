@@ -99,3 +99,15 @@ void checkInts(Random r)
   expect(countMax, greaterThan(N * 0.08));
   expect(countMax, lessThan(N * 0.12));
 }
+
+List<T> skipAndTake<T>(T func(), int skip, int take) {
+  for (var i=0;i<skip;++i)
+    func();
+
+  final result = <T>[];
+  for (var i=0;i<take;++i)
+    result.add(func());
+  
+  assert(result.length==take);
+  return result;
+}

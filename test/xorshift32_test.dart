@@ -22,7 +22,6 @@ void main() {
         ['0c454419', '3c00f93a', '1c1122b8', 'a6015c95']);
 
   });
-  
 
   test("seed 23", () {
     final random = XorShift32(23);
@@ -42,4 +41,21 @@ void main() {
   test("doubles", ()=>checkDoubles(XorShift32(777)));
   test("bools", ()=>checkBools(XorShift32(777)));
   test("ints", ()=>checkInts(XorShift32(777)));
+
+  test("predefined next", () {
+    final random = XorShift32(42);
+    expect(
+        skipAndTake(()=>random.next().toHexUint32(), 5000, 3),
+        ['BCFAE4D7', 'EC6EE807', '1CAC06B0']
+    );
+  });
+
+  test("predefined double", () {
+    final random = XorShift32(42);
+    expect(
+        skipAndTake(()=>random.nextDouble(), 5000, 3),
+        [0.7382033373550986, 0.9235672969193122, 0.11199991035088895]
+    );
+  });
+
 }
