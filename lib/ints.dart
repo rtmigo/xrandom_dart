@@ -1,4 +1,16 @@
+const int maxPositiveInt64 = 0x7FFFFFFFFFFFFFFF;
+
 extension BitInt on int {
+
+
+
+  // int get maxPositiveInt64 {
+  //   return 0x7FFFFFFFFFFFFFFF;
+  // }
+
+  int unsetHighestBit64() {
+    return this & 0x7FFFFFFFFFFFFFFF;
+  }
 
   /// Simulates result of `x >> shift` as if `x` were `uint64_t` in C.
   int signedRightShift(int shift) {
