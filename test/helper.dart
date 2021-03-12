@@ -35,7 +35,7 @@ void compareWithReference(UniRandom random, referenceKey) {
 List<String> referenceSignature(String referenceKey)
 {
   List<String> list = referenceData[referenceKey]!;
-  return [list[0], list[1], list[3], list[500]];
+  return [list[0], list[1], list[2], list[500]];
 }
 
 void checkDoubles(Random r) {

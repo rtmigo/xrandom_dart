@@ -17,13 +17,13 @@ void main() {
   test("reference data", () {
     expect(
         referenceSignature("xorshift128 (seed 1 2 3 4)"),
-        ['00002025', '0000383e', '00002025', '2ee0065b']);
+        ['00002025', '0000383e', '0000282c', '2ee0065b']);
     expect(
         referenceSignature("xorshift128 (seed 5 23 42 777)"),
-        ['00185347', '0019023e', '001992bc', '91050530']);
+        ['00185347', '0019023e', '0019ba92', '91050530']);
     expect(
         referenceSignature("xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)"),
-        ['3b568794', '8dfab58d', 'c309acfb', '4b5d88e5']);
+        ['3b568794', '8dfab58d', 'f9d21b4b', '4b5d88e5']);
 
   });
 

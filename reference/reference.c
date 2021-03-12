@@ -137,7 +137,7 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
     state.c = c;
     state.d = d;
 
-    printf("'xorshift128 (seed %lu %lu %lu %lu)': [\n", state.a, state.b, state.c, state.d);
+    printf("'xorshift128 (seed %u %u %u %u)': [\n", state.a, state.b, state.c, state.d);
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
         printf("  \"%08x\",\n", xorshift128(&state)); // 08jx for long
@@ -222,7 +222,7 @@ double xorshift128plus_double(uint64_t *s) {
 
 void print128plus(uint64_t a, uint64_t b)
 {
-    printf("const xorshift128plus_%d_%d = [\n",  a, b);
+    printf("'xorshift128plus (seed %llu %llu)': [\n",  a, b);
 
 	uint64_t s[2];
 
@@ -230,11 +230,11 @@ void print128plus(uint64_t a, uint64_t b)
     s[1] = b;
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
-        printf("  \"%016llx\",\n", xorshift128plus_int(&s)); 
+        printf("  \"%016llx\",\n", xorshift128plus_int(s));
 
-    printf("];\n\n");
+    printf("],\n\n");
 }
-
+/*
 void print128plus_double(uint64_t a, uint64_t b)
 {
     printf("const xorshift128plus_double_%d_%d = [\n",  a, b);
@@ -248,7 +248,7 @@ void print128plus_double(uint64_t a, uint64_t b)
         printf("  \"%.20e\",\n", xorshift128plus_double(&s)); 
 
     printf("];\n\n");
-}
+}*/
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -277,6 +277,10 @@ int main()
 	print128(1, 2, 3, 4);
 	print128(5, 23, 42, 777);
 	print128(1081037251u, 1975530394u, 2959134556u, 1579461830u);
+
+	print128plus(1, 2);
+	print128plus(42, 777);
+	print128plus(8378522730901710845llu, 1653112583875186020llu);
 
 
 	printf("};");
