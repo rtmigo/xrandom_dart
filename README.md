@@ -12,3 +12,4 @@ sources in C are taken directly from scientific articles by George Marsaglia and
 the inventors of the algorithms. The Xorshift128+ results are also matched to reference values from
 JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that that tested the
 algorithm in a similar way. 
+
