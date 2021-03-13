@@ -9,8 +9,22 @@ import 'package:xorshift/src/ints.dart';
 
 void main() {
 
+  //print(0xFFFFFFFFFFFFFFFF.unsignedRightShift(31).toHexUint64());
+
+  //return;
+
   test("are we", () {
     expect(INT64_SUPPORTED, true);
+  });
+
+  test("lower32", () {
+    expect(0x9876543277755111.lower32(), 0x77755111);
+    expect(0x9876543201234567.lower32(), 0x01234567);
+  });
+
+  test("higher32", () {
+    expect(0x9876543277755111.higher32(), 0x98765432);
+    expect(0xFFFFFFFFFFFFFFFF.higher32(), 0xFFFFFFFF);
   });
 
   test("hex", () {

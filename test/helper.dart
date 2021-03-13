@@ -15,14 +15,24 @@ String trimLeadingZeros(String s) {
   return s.replaceAll(new RegExp(r'^0+(?=.)'), '');
 }
 
-void compareWithReference(UniRandom random, referenceKey) {
+void compareWithReference32(UniRandom32 random, referenceKey) {
   final refList = referenceData[referenceKey]!;
   for (final value in refList)
   {
-    final x = random.next();
+    final x = random.next32();
     expect(trimLeadingZeros(x.toHexUint64()),trimLeadingZeros(value.toUpperCase()));
   }
 }
+
+void compareWithReference64(UniRandom64 random, referenceKey) {
+  final refList = referenceData[referenceKey]!;
+  for (final value in refList)
+  {
+    final x = random.next64();
+    expect(trimLeadingZeros(x.toHexUint64()),trimLeadingZeros(value.toUpperCase()));
+  }
+}
+
 
 /// We just take a big list from our reference data, and return
 /// a few values from it.

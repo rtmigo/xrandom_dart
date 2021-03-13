@@ -39,3 +39,27 @@ Xorshift128Plus	DoWhat.nextDouble	4281
 Xorshift32	DoWhat.nextDouble	2921
 Xorshift64	DoWhat.nextDouble	4510
 Xorshift128	DoWhat.nextDouble	4985
+
+UniRandom32
+  @override
+  bool nextBool() {
+    final rndUint32 = this.next();
+    assert(0<=rndUint32 && rndUint32<=MAX_UINT32);
+    return rndUint32 >= 0x80000000;
+  }
+
+Random	DoWhat.nextBool	2445
+Xorshift128Plus	DoWhat.nextBool	4561
+Xorshift32	DoWhat.nextBool	1821
+Xorshift64	DoWhat.nextBool	3729
+Xorshift128	DoWhat.nextBool	2756
+Random	DoWhat.nextInt	2550
+Xorshift128Plus	DoWhat.nextInt	6867
+Xorshift32	DoWhat.nextInt	2405
+Xorshift64	DoWhat.nextInt	6836
+Xorshift128	DoWhat.nextInt	3527
+Random	DoWhat.nextDouble	3331
+Xorshift128Plus	DoWhat.nextDouble	4245
+Xorshift32	DoWhat.nextDouble	2788
+Xorshift64	DoWhat.nextDouble	4519
+Xorshift128	DoWhat.nextDouble	4872

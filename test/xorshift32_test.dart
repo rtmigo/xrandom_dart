@@ -26,17 +26,17 @@ void main() {
 
   test("seed 1", () {
     final random = Xorshift32(1);
-    compareWithReference(random, "xorshift32 (seed 1)");
+    compareWithReference32(random, "xorshift32 (seed 1)");
   });
 
   test("seed 42", () {
     final random = Xorshift32(42);
-    compareWithReference(random, "xorshift32 (seed 42)");
+    compareWithReference32(random, "xorshift32 (seed 42)");
   });
 
   test("seed 314159265", () {
     final random = Xorshift32(314159265);
-    compareWithReference(random, "xorshift32 (seed 314159265)");
+    compareWithReference32(random, "xorshift32 (seed 314159265)");
   });
 
   test("doubles", ()=>checkDoubles(Xorshift32(777)));
@@ -46,7 +46,7 @@ void main() {
   test("predefined next", () {
     final random = Xorshift32.deterministic();
     expect(
-        skipAndTake(()=>random.next().toHexUint32(), 5000, 3),
+        skipAndTake(()=>random.next32().toHexUint32(), 5000, 3),
         ['62982C53', '855D849A', '8C1511DD']
     );
   });
@@ -65,7 +65,7 @@ void main() {
     final random2 = Xorshift32();
 
     expect(
-        [random1.next(), random1.next()],
-        isNot([random2.next(), random2.next()]));
+        [random1.next32(), random1.next32()],
+        isNot([random2.next32(), random2.next32()]));
   });
 }

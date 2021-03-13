@@ -30,17 +30,17 @@ void main() {
 
   test("seed A", () {
     final random = Xorshift128(1, 2, 3, 4);
-    compareWithReference(random, "xorshift128 (seed 1 2 3 4)");
+    compareWithReference32(random, "xorshift128 (seed 1 2 3 4)");
   });
 
   test("seed B", () {
     final random = Xorshift128(5, 23, 42, 777);
-    compareWithReference(random, "xorshift128 (seed 5 23 42 777)");
+    compareWithReference32(random, "xorshift128 (seed 5 23 42 777)");
   });
 
   test("seed C", () {
     final random = Xorshift128(1081037251, 1975530394, 2959134556, 1579461830);
-    compareWithReference(random, "xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)");
+    compareWithReference32(random, "xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)");
   });
 
 
@@ -53,7 +53,7 @@ void main() {
   test("predefined next", () {
     final random = Xorshift128.deterministic();
     expect(
-        skipAndTake(()=>random.next().toHexUint32(), 5000, 3),
+        skipAndTake(()=>random.next32().toHexUint32(), 5000, 3),
         ['682C4EE4', '208190FD', '455F4A85']
     );
   });
@@ -72,8 +72,8 @@ void main() {
     final random2 = Xorshift128();
 
     expect(
-        [random1.next(), random1.next()],
-        isNot([random2.next(), random2.next()]));
+        [random1.next32(), random1.next32()],
+        isNot([random2.next32(), random2.next32()]));
   });
 
 }

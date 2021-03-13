@@ -12,10 +12,10 @@ class Xorshift128 extends UniRandom32
   {
     if (a!=null || b!=null || c!=null || d!=null) {
 
-      RangeError.checkValueInInterval(a!, 0, MAX_UINT32);
-      RangeError.checkValueInInterval(b!, 0, MAX_UINT32);
-      RangeError.checkValueInInterval(c!, 0, MAX_UINT32);
-      RangeError.checkValueInInterval(d!, 0, MAX_UINT32);
+      RangeError.checkValueInInterval(a!, 0, UINT32_MAX);
+      RangeError.checkValueInInterval(b!, 0, UINT32_MAX);
+      RangeError.checkValueInInterval(c!, 0, UINT32_MAX);
+      RangeError.checkValueInInterval(d!, 0, UINT32_MAX);
 
       // todo check they cannot be null the same time?
 
@@ -35,7 +35,7 @@ class Xorshift128 extends UniRandom32
   }
   late int _a, _b, _c, _d;
 
-  int next() {
+  int next32() {
 
     // algorithm from p.5 of "Xorshift RNGs"
     // by George Marsaglia, 2003

@@ -6,7 +6,7 @@
 
 final int INT64_LOWER_7_BYTES = BigInt.parse("0x00FFFFFFFFFFFFFF").toInt();
 final int INT64_MAX_POSITIVE = BigInt.parse("0x7FFFFFFFFFFFFFFF").toInt();
-const MAX_UINT32 = 0xFFFFFFFF;
+const UINT32_MAX = 0xFFFFFFFF;
 const INT64_SUPPORTED = (1<<62) > (1<<61); // false for JS, true for others
 
 
@@ -16,6 +16,15 @@ extension BitInt on int {
   int unsetHighestBit64() {
     return this & INT64_MAX_POSITIVE;
   }
+
+  int lower32() {
+    return this & UINT32_MAX;
+  }
+
+  int higher32() {
+    return this.unsignedRightShift(32);
+  }
+
 
   /// Simulates result of `x >> shift` as if `x` were `uint64_t` in C.
   int unsignedRightShift_long(int shift) {
