@@ -107,6 +107,24 @@ abstract class UniRandom32 implements Random {
     return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
   }
 
+  //int _nextIntRaw() => this.next32();
+
+  bool _nextBool(int getInt(), int bits)
+  {
+    if (_boolCache==0) {
+      _boolCache = getInt();
+      _boolCachePos = 0;
+      return _boolCache&1 == 1;
+    } else {
+      ++_boolCachePos;
+      final result = (_boolCache & (1<<_boolCachePos)) != 0;
+      if (_boolCachePos==(bits-1))
+        _boolCache = 0;
+      return result;
+    }
+  }
+
+
   @override
   bool nextBool() {
 
@@ -120,17 +138,19 @@ abstract class UniRandom32 implements Random {
     //    XorShift32  this.next() % 2 == 0        1903
     //    XorShift32  this.next() >= 0x80000000   1821
 
-    if (_boolCache==0) {
-      _boolCache = next32();
-      _boolCachePos = 0;
-      return _boolCache&1 == 1;
-    } else {
-      ++_boolCachePos;
-      final result = (_boolCache & (1<<_boolCachePos)) != 0;
-      if (_boolCachePos==31)
-        _boolCache = 0;
-      return result;
-    }
+    return this._nextBool(this.next32, 32);
+
+    // if (_boolCache==0) {
+    //   _boolCache = next32();
+    //   _boolCachePos = 0;
+    //   return _boolCache&1 == 1;
+    // } else {
+    //   ++_boolCachePos;
+    //   final result = (_boolCache & (1<<_boolCachePos)) != 0;
+    //   if (_boolCachePos==31)
+    //     _boolCache = 0;
+    //   return result;
+    // }
   }
 
   int _boolCache = 0;
@@ -186,6 +206,12 @@ abstract class UniRandom64 extends UniRandom32 {
 
     // scaling x from (0, MAX_POSITIVE_INT64] to [0.0, 1.0).
     return (x - 1) / INT64_MAX_POSITIVE;
+  }
+
+  @override
+  bool nextBool() {
+
+    return this._nextBool(this.next64, 64);
   }
 
   // @override
