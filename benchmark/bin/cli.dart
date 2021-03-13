@@ -15,7 +15,7 @@ int measureTime(Random r, DoWhat dbl)
 
   final sw = Stopwatch()..start();
 
-  for (var i = 0; i < 100000000; ++i) {
+  for (var i = 0; i < 10000000; ++i) {
     switch (dbl)
     {
       case DoWhat.nextDouble:
@@ -41,7 +41,7 @@ void main(List<String> arguments) {
 
   // git stash && git pull origin master && dart pub get && ./run.sh
 
-  for (var i=0; i<5; ++i)
+  for (var i=0; i<2; ++i)
     {
       for (final what in [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble])
       //for (var j=0; j<2; ++j)

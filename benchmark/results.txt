@@ -63,3 +63,22 @@ Xorshift128Plus	DoWhat.nextDouble	4245
 Xorshift32	DoWhat.nextDouble	2788
 Xorshift64	DoWhat.nextDouble	4519
 Xorshift128	DoWhat.nextDouble	4872
+
+===
+After making next32 to return two parts of next64
+
+Random              DoWhat.nextBool	2453
+Xorshift128Plus 	DoWhat.nextBool	2993
+Xorshift32          DoWhat.nextBool	1843
+Xorshift64          DoWhat.nextBool	2761
+Xorshift128         DoWhat.nextBool	2719
+Random              DoWhat.nextInt	2537
+Xorshift128Plus     DoWhat.nextInt	3645 (was 6867)
+Xorshift32	        DoWhat.nextInt	2555
+Xorshift64	        DoWhat.nextInt	3432 (was 6836)
+Xorshift128	        DoWhat.nextInt	3658
+Random	            DoWhat.nextDouble	3316
+Xorshift128Plus     DoWhat.nextDouble	4136
+Xorshift32          DoWhat.nextDouble	2945
+Xorshift64          DoWhat.nextDouble	4468
+Xorshift128         DoWhat.nextDouble	5068

@@ -5,7 +5,7 @@
 # [xorshift](https://github.com/rtmigo/xorshift)
 
 This library implements [Xorshift](https://en.wikipedia.org/wiki/Xorshift) random number generators
-in native Dart.
+in Dart.
 
 Xorshift algorithms are known among the **fastest random number generators**, requiring very small
 code and state.

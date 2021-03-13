@@ -136,19 +136,20 @@ abstract class UniRandom64 extends UniRandom32 {
 
   int next64();
   
-  int next32() { // todo unittest
+  int next32() {
     
     // we assume that the random generator never returns 0,
     // so 0 means "not initialized".
     
-    if (_valueFor64==0) {
-      _valueFor64 = this.next64();
-      return _valueFor64 & UINT32_MAX;
+    if (_forNext32==0) {
+      _forNext32 = this.next64();
+      return _forNext32 & UINT32_MAX; // returning lower 4 bytes
     } else {
-      // we have a value: that means, we're already returned the lower 4 bytes.
+      // we have a value: that means, we're already returned
+      // the lower 4 bytes of it. Now we'll return the higher 4 bytes
 
-      final x = _valueFor64;
-      _valueFor64 = 0; // on the next call we'll a new random here
+      final x = _forNext32;
+      _forNext32 = 0; // on the next call we'll a new random here
 
       const shift = 32;
       // and here's our favorite unsigned right shift
@@ -158,7 +159,7 @@ abstract class UniRandom64 extends UniRandom32 {
     }
   }
 
-  int _valueFor64 = 0;
+  int _forNext32 = 0;
 
   
   @override
