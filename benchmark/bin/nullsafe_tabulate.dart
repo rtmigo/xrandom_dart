@@ -58,7 +58,7 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
     );
   }
 
-  var bar = List.generate(columnsCount, (i) => '-' * columnsWidths[i]).join('|');
+  var bar = List.generate(columnsCount, (i) => '-' * (columnsWidths[i]+2)).join('|');
   bar = '|'+bar+'|';
 
 
