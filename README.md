@@ -10,19 +10,40 @@ in Dart.
 Xorshift algorithms are known among the **fastest random number generators**, requiring very small
 code and state.
 
-# Benchmarks
+# Speed
 
 Generating 100 million of random numbers. Lower is better.
 
 | Class              | nextBool | nextInt | nextDouble | next32 | next64 |
 |--------------------|----------|---------|------------|--------|--------|
-| Random (dart:math) |   2386   |  2378   |    3246    |   -    |   -    |
-| Xorshift32         |   1435   |  2948   |    1640    |  735   |   -    |
-| Xorshift64         |   1462   |  3962   |    4303    |  1932  |  2529  |
-| Xorshift128        |   1483   |  4325   |    2870    |  1733  |   -    |
-| Xorshift128Plus    |   1478   |  4499   |    4351    |  2252  |  3146  |
+| Random (dart:math) |   2330   |  2465   |    3223    |   -    |   -    |
+| Xorshift32         |   1468   |  1303   |    1607    |  714   |   -    |
+| Xorshift64         |   1488   |  2496   |    4462    |  1847  |  2536  |
+| Xorshift128        |   1470   |  2287   |    2864    |  1723  |   -    |
+| Xorshift128Plus    |   1503   |  2775   |    4098    |  2151  |  3047  |
 
 Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
+
+# Determinism
+
+All classes have a `deterministic` method. By creating an object with this method, you end up with a
+generator that produces the same sequence of numbers every time.
+
+``` dart
+test('my test', () {
+    final sameValuesEachTime = Xorshift.deterministic();
+    // results based on randoms are predictable now
+    expect(sameValuesEachTime.nextInt(1000), 543);
+    expect(sameValuesEachTime.nextInt(1000), 488);
+    expect(sameValuesEachTime.nextInt(1000), 284);    
+});    
+```
+
+You can achieve the same by creating a system `Random` with a `seed` argument. However, the
+system `Random` implementation may change with the next Dart update. In contrast to this, Xorshift
+is a very specific algorithm. And the library is built with an emphasis on maximum predictability (
+funny, right?) Therefore, the predictability of the Xorshift's `deterministic`
+sequences can be relied upon.
 
 # Usage
 
@@ -38,29 +59,6 @@ print(random.nextDouble());
 
 In addition, they have a `next()` method that returns an `int` with no range restrictions. For some
 algorithms this is a 32-bit number, for another a 64-bit number.
-
-# Deterministic
-
-All classes have a `deterministic` method. By creating an object with this method, you end up with a
-generator that produces the same sequence of numbers every time.
-
-``` dart
-test('my test', () {
-    final sameValuesEachTime = Xorshift.deterministic();
-    // wow, results based on randoms are predictable now
-    expect(sameValuesEachTime.nextInt(1000), 543);
-    expect(sameValuesEachTime.nextInt(1000), 488);
-    expect(sameValuesEachTime.nextInt(1000), 284);    
-});    
-```
-
-You can achieve the same by creating a system `Random` with a `seed` argument. However, the
-system `Random` implementation may change with the next Dart update. As a result, with the
-same seed value, you will get different numbers.
-
-In contrast to this, Xorshift is a very specific algorithm. And the library is built with an emphasis
-on maximum predictability (funny, right?) Therefore, the predictability of the Xorshift's `deterministic`
-sequences can be relied upon.
 
 # Classes
 
@@ -80,8 +78,8 @@ the inventors of the algorithms. The Xorshift128+ results are also matched to re
 JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that tested the 128+
 similarly.
 
-Some classes only work on platforms with full support for 64-bit integers. That is, 
-on all but JavaScript.
+Some classes only work on platforms with full support for 64-bit integers. That is, on all but
+JavaScript.
 
 | Class                            | 64-bit platforms | JavaScript |
 |----------------------------------|------------------|------------|
