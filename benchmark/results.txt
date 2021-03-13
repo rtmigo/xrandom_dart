@@ -82,3 +82,13 @@ Xorshift128Plus     DoWhat.nextDouble	4136
 Xorshift32          DoWhat.nextDouble	2945
 Xorshift64          DoWhat.nextDouble	4468
 Xorshift128         DoWhat.nextDouble	5068
+
+==
+
+| Class           | nextBool | nextInt | nextDouble |
+|-----------------|----------|---------|------------|
+| _Random         |   2412   |  2549   |    3584    |
+| Xorshift32      |   1873   |  2548   |    2890    |
+| Xorshift64      |   2801   |  3445   |    4388    |
+| Xorshift128     |   2857   |  3635   |    5004    |
+| Xorshift128Plus |   2990   |  3655   |    4177    |

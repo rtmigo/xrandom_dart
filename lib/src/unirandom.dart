@@ -120,10 +120,21 @@ abstract class UniRandom32 implements Random {
     //    XorShift32  this.next() % 2 == 0        1903
     //    XorShift32  this.next() >= 0x80000000   1821
 
-    final rndUint32 = this.next32();
-    assert(0<=rndUint32 && rndUint32<=UINT32_MAX);
-    return rndUint32 >= 0x80000000;
+    if (_boolCache==0) {
+      _boolCache = next32();
+      _boolCachePos = 0;
+      return _boolCache&1 == 1;
+    } else {
+      ++_boolCachePos;
+      final result = (_boolCache & (1<<_boolCachePos)) != 0;
+      if (_boolCachePos==7)
+        _boolCache = 0;
+      return result;
+    }
   }
+
+  int _boolCache = 0;
+  int _boolCachePos = 0;
 }
 
 // enum SplitterState
