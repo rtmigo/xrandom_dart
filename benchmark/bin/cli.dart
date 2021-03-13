@@ -23,6 +23,7 @@ void main(List<String> arguments) {
 
   for (var i=0; i<3; ++i)
     {
+      results.putIfAbsent('Random', () => <int>[]).add(measureTime(Random(777)));
       results.putIfAbsent('Xorshift128Plus', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic()));
       results.putIfAbsent('Xorshift32', () => <int>[]).add(measureTime(Xorshift32.deterministic()));
       results.putIfAbsent('Xorshift64', () => <int>[]).add(measureTime(Xorshift64.deterministic()));
@@ -32,7 +33,7 @@ void main(List<String> arguments) {
 
   for (final entry in results.entries)
     {
-      print('{${entry.key} ${mean(entry.value)}');
+      print('${entry.key} ${mean(entry.value)}');
     }
 
   //final r = Xorshift128Plus(1,2);
