@@ -11,7 +11,7 @@ extension BitInt on int {
   }
 
   /// Simulates result of `x >> shift` as if `x` were `uint64_t` in C.
-  int unsignedRightShift(int shift) {
+  int unsignedRightShift_long(int shift) {
 
     // the difference between int64 and uint64 is that
     // uint64 will shift all 64 of its bits,
@@ -31,6 +31,30 @@ extension BitInt on int {
       return x;
     }
   }
+
+  int unsignedRightShift(int shift) {
+
+    // the difference between int64 and uint64 is that
+    // uint64 will shift all 64 of its bits,
+    // but int64 will shift lower 63 and preserve the highest bit
+
+    return this >= 0 ? this >> shift : ((this & 0x7FFFFFFFFFFFFFFF) >> shift) | (1 << (63 - shift));
+
+    if (this >= 0)
+      return this >> shift;
+    else {
+      int x = this;
+      // setting highest bit to zero
+      return ((x & 0x7FFFFFFFFFFFFFFF)>>shift)|(1 << (63 - shift));
+      //assert(x >= 0);
+      // shifting all except the highest
+//      x >>= shift;
+      // restoring the highest bit at proper position
+  //    x |= 1 << (63 - shift);
+      return x;
+    }
+  }
+
 
   String toHexUint32() {
     return this.toRadixString(16).toUpperCase().padLeft(8, '0');
