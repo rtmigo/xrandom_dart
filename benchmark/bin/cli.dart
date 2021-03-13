@@ -114,7 +114,7 @@ void main(List<String> arguments) {
   }
 
   otherRows.sort((a,b) => a[0].compareTo(b[0]));
-  rows.addAll(rows);
+  rows.addAll(otherRows);
 
   print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
 }
