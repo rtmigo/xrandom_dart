@@ -109,20 +109,20 @@ abstract class UniRandom32 implements Random {
 
   //int _nextIntRaw() => this.next32();
 
-  bool _nextBool(int getInt(), int bits)
-  {
-    if (_boolCache==0) {
-      _boolCache = getInt();
-      _boolCachePos = 0;
-      return _boolCache&1 == 1;
-    } else {
-      ++_boolCachePos;
-      final result = (_boolCache & (1<<_boolCachePos)) != 0;
-      if (_boolCachePos==(bits-1))
-        _boolCache = 0;
-      return result;
-    }
-  }
+  // bool _nextBool(int getIntFunc(), int bits)
+  // {
+  //   if (_boolCache==0) {
+  //     _boolCache = getIntFunc();
+  //     _boolCachePos = 0;
+  //     return _boolCache&1 == 1;
+  //   } else {
+  //     ++_boolCachePos;
+  //     final result = (_boolCache & (1<<_boolCachePos)) != 0; // todo int64?
+  //     if (_boolCachePos==(bits-1))
+  //       _boolCache = 0;
+  //     return result;
+  //   }
+  // }
 
 
   @override
@@ -138,19 +138,19 @@ abstract class UniRandom32 implements Random {
     //    XorShift32  this.next() % 2 == 0        1903
     //    XorShift32  this.next() >= 0x80000000   1821
 
-    return this._nextBool(this.next32, 32);
+    //return this._nextBool(this.next32, 32);
 
-    // if (_boolCache==0) {
-    //   _boolCache = next32();
-    //   _boolCachePos = 0;
-    //   return _boolCache&1 == 1;
-    // } else {
-    //   ++_boolCachePos;
-    //   final result = (_boolCache & (1<<_boolCachePos)) != 0;
-    //   if (_boolCachePos==31)
-    //     _boolCache = 0;
-    //   return result;
-    // }
+    if (_boolCache==0) {
+      _boolCache = next32();
+      _boolCachePos = 0;
+      return _boolCache&1 == 1;
+    } else {
+      ++_boolCachePos;
+      final result = (_boolCache & (1<<_boolCachePos)) != 0;
+      if (_boolCachePos==31)
+        _boolCache = 0;
+      return result;
+    }
   }
 
   int _boolCache = 0;
@@ -208,16 +208,40 @@ abstract class UniRandom64 extends UniRandom32 {
     return (x - 1) / INT64_MAX_POSITIVE;
   }
 
-  @override
-  bool nextBool() {
-
-    return this._nextBool(this.next64, 64);
-  }
-
   // @override
   // bool nextBool() {
   //
-  //   final rnd = this.next64();
-  //   return (rnd & 0x80000000)>0; // todo
+  //   return this._nextBool(this.next64, 64);
   // }
+
+  @override
+  bool nextBool() {
+
+    // in dart:math it is return nextInt(2) == 0;
+    // which is an equivalent of
+    //   if ((2&-2)==2) return next()&(2-1);
+
+    // benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
+    //    Random      (from dart:math)            2424
+    //    XorShift32  return nextInt(2)==0        2136
+    //    XorShift32  this.next() % 2 == 0        1903
+    //    XorShift32  this.next() >= 0x80000000   1821
+
+    //return this._nextBool(this.next32, 32);
+
+    if (_boolCache==0) {
+      _boolCache = next64();
+      _boolCachePos = 0;
+      return _boolCache&1 == 1;
+    } else {
+      ++_boolCachePos;
+      final result = (_boolCache & (1<<_boolCachePos)) != 0;
+      if (_boolCachePos==63)
+        _boolCache = 0;
+      return result;
+    }
+  }
+
+  int _boolCache = 0;
+  int _boolCachePos = 0;
 }
