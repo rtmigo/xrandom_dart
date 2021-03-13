@@ -64,7 +64,11 @@ void main(List<String> arguments) {
     for (final doingWhat in [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble]) {
       for (var random in [Random(777), Xorshift128Plus.deterministic()]) {
         final time = measureTime(random, doingWhat);
-        results[random.runtimeType.toString()]![doingWhat.toString()]!.add(time);
+          results.putIfAbsent(
+              random.runtimeType.toString(),
+              () => <String,List<int>>{})
+            .putIfAbsent(doingWhat.toString(), () => <int>[])
+            .add(time);
       }
 
       //
