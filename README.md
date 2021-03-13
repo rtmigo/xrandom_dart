@@ -69,11 +69,11 @@ similarly.
 The library will work on all the platforms where `int` represents a 64-bit signed integer. That is,
 on all platforms except Web/JavaScript.
 
-Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS.
+Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE m.
 
-| Class | JavaScript |
-|------------|------|
-| Xorshift32 | supported |
-| Xorshift64 | no |
-| Xorshift128 | supported |
-| Xorshift128Plus | no |
+| Class                          | VM    | JavaScript |
+|--------------------------------|-------|------------|
+| Xorshift32                     | yes   | yes        |
+| Xorshift64                     | yes   |            |
+| Xorshift (aka Xorshift128)     | yes   | yes        |
+| Xorshift128Plus                | yes   |            |
