@@ -58,4 +58,14 @@ void main() {
         [0.385134477723654, 0.5209582209403064, 0.5471964991994194]
     );
   });
+
+  test("create without args", ()  async {
+    final random1 = Xorshift32Random();
+    await Future.delayed(Duration(milliseconds: 2));
+    final random2 = Xorshift32Random();
+
+    expect(
+        [random1.next(), random1.next()],
+        isNot([random2.next(), random2.next()]));
+  });
 }

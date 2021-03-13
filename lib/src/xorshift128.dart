@@ -8,14 +8,32 @@ import 'package:xorhift/src/unirandom.dart';
 
 class Xorshift128Random extends UniRandom32
 {
-  Xorshift128Random(this._a, this._b, this._c, this._d)
+  Xorshift128Random([int? a, int? b, int? c, int? d])
   {
-    RangeError.checkValueInInterval(this._a, 0, MAX_UINT32);
-    RangeError.checkValueInInterval(this._b, 0, MAX_UINT32);
-    RangeError.checkValueInInterval(this._c, 0, MAX_UINT32);
-    RangeError.checkValueInInterval(this._d, 0, MAX_UINT32);
+    if (a!=null || b!=null || c!=null || d!=null) {
+
+      RangeError.checkValueInInterval(a!, 0, MAX_UINT32);
+      RangeError.checkValueInInterval(b!, 0, MAX_UINT32);
+      RangeError.checkValueInInterval(c!, 0, MAX_UINT32);
+      RangeError.checkValueInInterval(d!, 0, MAX_UINT32);
+
+      // todo check they cannot be null the same time?
+
+      _a = a;
+      _b = b;
+      _c = c;
+      _d = d;
+    }
+    else {
+      final now = DateTime.now().microsecondsSinceEpoch;
+      // just creating a mess
+      _a = now & 0xFFFFFFFF;
+      _b = ((now>>4) ^ 0xa925b6aa) & 0xFFFFFFFF;
+      _c = ((now>>8) ^ 0xcf044101) & 0xFFFFFFFF;
+      _d = ((now>>11) ^ 0x716ac5dd) & 0xFFFFFFFF;
+    }
   }
-  int _a, _b, _c, _d;
+  late int _a, _b, _c, _d;
 
   int next() {
 
@@ -43,8 +61,6 @@ class Xorshift128Random extends UniRandom32
 
     return _a; //return _a = t ^ s ^ (s >> 19);
   }
-
-
 
   static Xorshift128Random deterministic()
   {

@@ -8,8 +8,18 @@ import 'package:xorhift/src/unirandom.dart';
 
 class Xorshift64Random extends UniRandom64
 {
-  Xorshift64Random(this._state);
-  int _state;
+  Xorshift64Random([seed])
+  {
+    if (seed!=null) {
+      if (seed==0)
+        throw RangeError("The seed must be greater than 0.");
+      this._state = seed;
+    }
+    else
+      this._state = DateTime.now().microsecondsSinceEpoch;
+
+  }
+  late int _state;
 
   int next() {
 

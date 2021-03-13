@@ -3,7 +3,6 @@
 
 import "package:test/test.dart";
 import 'package:xorhift/src/ints.dart';
-import 'package:xorhift/src/xorshift128.dart';
 import 'package:xorhift/src/xorshift128plus.dart';
 
 import 'helper.dart';
@@ -87,5 +86,15 @@ void main() {
     for (String expectedStr in madsen)
       expect(random.nextDouble(), double.parse(expectedStr));
 
+  });
+
+  test("create without args", ()  async {
+    final random1 = Xorshift128Plus();
+    await Future.delayed(Duration(milliseconds: 2));
+    final random2 = Xorshift128Plus();
+
+    expect(
+        [random1.next(), random1.next()],
+        isNot([random2.next(), random2.next()]));
   });
 }

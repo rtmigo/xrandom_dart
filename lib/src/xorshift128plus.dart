@@ -8,12 +8,21 @@ import 'package:xorhift/src/unirandom.dart';
 
 class Xorshift128Plus extends UniRandom64
 {
-  Xorshift128Plus(this._S0, this._S1)
+  Xorshift128Plus([int? a, int? b])
   {
-    // this._S0 = a;
-    // this._S1 = b;
+    if (a!=null || b!=null)
+      {
+        this._S0 = a!;
+        this._S1 = b!;
+      }
+    else {
+      final now = DateTime.now().microsecondsSinceEpoch;
+      // just creating a mess
+      this._S0 = now;
+      this._S1 = ((now<<32)^(0xa925b6aa<<32)) | ((now>>32)^0x716ac5dd);
+    }
   }
-  int _S0, _S1;
+  late int _S0, _S1;
 
   int next() {
 

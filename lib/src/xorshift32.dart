@@ -7,8 +7,16 @@ import 'package:xorhift/src/unirandom.dart';
 
 class Xorshift32Random extends UniRandom32
 {
-  Xorshift32Random(this._state);
-  int _state;
+  Xorshift32Random([seed])
+  {
+    if (seed!=null) {
+      RangeError.checkValueInInterval(seed, 1, 0xFFFFFFFF);
+      this._state = seed;
+    }
+    else
+      this._state = DateTime.now().millisecondsSinceEpoch & 0xFFFFFFFF;
+  }
+  late int _state;
 
   static Xorshift32Random deterministic() => Xorshift32Random(314159265);
 
