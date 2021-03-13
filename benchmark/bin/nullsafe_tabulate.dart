@@ -8,6 +8,13 @@ int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
 //   return text.padLeft(maxSpace) + ' | ';
 // }
 
+String alignCenter(String text, int targetWidth) {
+  final half = (targetWidth-text.length)>>1;
+  text = text.padLeft(half);
+  text = text.padRight(targetWidth-text.length);
+  return text;
+}
+
 String tabulate(List<List<String>> rows) {
 
   //String retString = '';
@@ -42,7 +49,7 @@ String tabulate(List<List<String>> rows) {
     var iCol = 0;
     for (final cell in row) {
       formatted += ' ';
-      formatted += cell.padRight(columnsWidths[iCol++]);
+      formatted += alignCenter(cell, columnsWidths[iCol++]);
       formatted += ' |';
     }
     formattedRows.add(formatted);
