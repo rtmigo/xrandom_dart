@@ -39,7 +39,7 @@ algorithms this is a 32-bit number, for another a 64-bit number.
 ## Classes
 
 ``` dart 
-Xorshift();         // xorshift128+ by Sebastiano Vigna [2014] 
+Xorshift();         // xorshift128+ by Sebastiano Vigna [2015] 
 Xorshift32();       // xorshift32 by George Marsaglia [2003] 
 Xorshift64();       // xorshift64 by George Marsaglia [2003]
 Xorshift128();      // xorshift128 by George Marsaglia [2003]
