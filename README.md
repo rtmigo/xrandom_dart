@@ -16,11 +16,11 @@ Generating 100 million of random numbers. Lower is better.
 
 | Class              | nextBool | nextInt | nextDouble | next32 | next64 |
 |--------------------|----------|---------|------------|--------|--------|
-| Random (dart:math) |   2222   |  2314   |    3206    |   -    |   -    |
-| Xorshift32         | **1431** |  2362   |  **2963**  |  712   |   -    |
-| Xorshift64         |   1412   |  3192   |    4349    |  1846  |  2529  |
-| Xorshift128        |   1453   |  3446   |    4978    |  1662  |   -    |
-| Xorshift128Plus    |   1444   |  3485   |    4101    |  2120  |  3087  |
+| Random (dart:math) |   2386   |  2378   |    3246    |   -    |   -    |
+| Xorshift32         |   1435   |  2948   |    1640    |  735   |   -    |
+| Xorshift64         |   1462   |  3962   |    4303    |  1932  |  2529  |
+| Xorshift128        |   1483   |  4325   |    2870    |  1733  |   -    |
+| Xorshift128Plus    |   1478   |  4499   |    4351    |  2252  |  3146  |
 
 Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
 

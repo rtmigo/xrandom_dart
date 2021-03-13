@@ -87,17 +87,12 @@ abstract class UniRandom32 implements Random {
     assert(0<=rnd32 && rnd32<=UINT32_MAX);
 
 
-
-    // kept here for reference. Not used for now
-
     // (1, MAX_UINT32] -> [0.0, 1)
-    final one = rnd32/UINT32_MAX;
+    final double one = rnd32/UINT32_MAX;
     assert(0.0<=one && one<1.0);
 
     // [0.0, 1) -> [0, max)
-    final result = (one*max).floor();
-//    if (!(0<result && result<max))
-  //    throw AssertionError("$result, ")
+    final int result = (one*max).floor();
     assert(0<=result && result<max);
     return result;
 //    return (one*max).floor();
