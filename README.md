@@ -45,7 +45,7 @@ system `Random` implementation may change with the next Dart update. As a result
 same seed value, you will get different numbers.
 
 At the same time, Xorshift is a very specific algorithm. And the library is built with an emphasis
-on maximum predictability (funny, right?) Therefore, the predictability of the `deterministic`
+on maximum predictability (funny, right?) Therefore, the predictability of the Xorshift's `deterministic`
 sequences can be relied upon.
 
 # Classes
