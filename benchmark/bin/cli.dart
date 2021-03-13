@@ -99,15 +99,22 @@ void main(List<String> arguments) {
 
   rows.add(header);
 
+  final otherRows = <List<String>>[];
+
+
+
   for (final type in results.keys) {
     final row = [type];
-    rows.add(row);
+    otherRows.add(row);
     for (final doWhat in dowhatz) {
       final times = results[type]![doWhat]!;
       final avg = mean(times);
       row.add(avg.toString());
     }
   }
+
+  otherRows.sort((a,b) => a[0].compareTo(b[0]));
+  rows.addAll(rows);
 
   print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
 }
