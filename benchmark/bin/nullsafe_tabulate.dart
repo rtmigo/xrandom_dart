@@ -10,8 +10,8 @@ int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
 
 String alignCenter(String text, int targetWidth) {
   final half = (targetWidth-text.length)>>1;
-  text = text.padLeft(half);
-  text = text.padRight(targetWidth-text.length);
+  text = text.padLeft(text.length+half);
+  text = text.padRight(targetWidth);
   return text;
 }
 
