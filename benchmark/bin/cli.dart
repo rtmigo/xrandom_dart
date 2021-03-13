@@ -99,9 +99,10 @@ void main(List<String> arguments) {
 
   final rows = <List<String>>[];
 
-  final header = ['Alg'];
+  final header = ['Class'];
   for (final x in dowhatz) {
-    header.add(x.toString());
+    final str = x.toString();
+    header.add(str.substring(str.lastIndexOf('.')));
   }
 
   rows.add(header);
