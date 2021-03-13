@@ -19,11 +19,11 @@ All classes implement the standard `Random`, so they can be used in the same way
 ``` dart
 import 'package:xorshift/xorshift.dart';
 
-Random a = Xorshift();
-print(b.nextInt(100));
-print(b.nextDouble());
+Random random = Xorshift();
+print(random.nextInt(100));
+print(random.nextDouble());
 
-Random x32 = Xorshift32();
-print(x32.nextInt(100));
-print(x32.nextDouble());
+Random random32 = Xorshift32();
+print(random32.nextInt(100));
+print(random32.nextDouble());
 ```
