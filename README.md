@@ -2,6 +2,8 @@
 [![Actions Status](https://github.com/rtmigo/xorshift/workflows/unittest/badge.svg?branch=master)](https://github.com/rtmigo/xorshift/actions)
 ![Generic badge](https://img.shields.io/badge/tested_on-Windows_|_MacOS_|_Ubuntu-blue.svg)
 
+# [xorshift](https://github.com/rtmigo/xorshift)
+
 This library implements [Xorshift](https://en.wikipedia.org/wiki/Xorshift) random number generators in native Dart.
 
 
