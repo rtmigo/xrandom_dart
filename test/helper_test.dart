@@ -1,24 +1,18 @@
-// SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <ortemeo@gmail
-// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 import "package:test/test.dart";
-import 'package:xorhift/ints.dart';
-import 'package:xorhift/xorshift32.dart';
+import 'package:xorhift/src/ints.dart';
 
 import 'helper.dart';
-import 'reference.dart';
 
 void main() {
-
   test("test", () {
-    expect(trimLeadingZeros(""),"");
-    expect(trimLeadingZeros("1"),"1");
-    expect(trimLeadingZeros("01"),"1");
-    expect(trimLeadingZeros("0001"),"1");
-    expect(trimLeadingZeros("00004242"),"4242");
+    expect(trimLeadingZeros(""), "");
+    expect(trimLeadingZeros("1"), "1");
+    expect(trimLeadingZeros("01"), "1");
+    expect(trimLeadingZeros("0001"), "1");
+    expect(trimLeadingZeros("00004242"), "4242");
   });
-
-
-
 }

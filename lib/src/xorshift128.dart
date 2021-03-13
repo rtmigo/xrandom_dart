@@ -1,7 +1,10 @@
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
+
 import 'dart:math';
 
 import 'ints.dart';
-import 'package:xorhift/unirandom.dart';
+import 'package:xorhift/src/unirandom.dart';
 
 class Xorshift128Random extends UniRandom32
 {
@@ -40,6 +43,8 @@ class Xorshift128Random extends UniRandom32
 
     return _a; //return _a = t ^ s ^ (s >> 19);
   }
+
+
 
   static Xorshift128Random deterministic()
   {

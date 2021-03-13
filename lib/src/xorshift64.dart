@@ -1,7 +1,10 @@
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
+
 import 'dart:math';
 
 import 'ints.dart';
-import 'package:xorhift/unirandom.dart';
+import 'package:xorhift/src/unirandom.dart';
 
 class Xorshift64Random extends UniRandom64
 {

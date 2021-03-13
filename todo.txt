@@ -1,0 +1,7 @@
+Match 128+.toDouble to the javascript
+
+Prevent running in JavaScript
+
+Create deterministic() for the 128
+
+Describe the deterministic()

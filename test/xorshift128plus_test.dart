@@ -1,10 +1,10 @@
-// SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <ortemeo@gmail
-// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
 
 import "package:test/test.dart";
-import 'package:xorhift/ints.dart';
-import 'package:xorhift/xorshift128.dart';
-import 'package:xorhift/xorshift128plus.dart';
+import 'package:xorhift/src/ints.dart';
+import 'package:xorhift/src/xorshift128.dart';
+import 'package:xorhift/src/xorshift128plus.dart';
 
 import 'helper.dart';
 import 'reference.dart';
@@ -37,37 +37,55 @@ void main() {
   });
 
   test("seed A", () {
-    final random = Xorshift128PlusRandom(1, 2);
+    final random = Xorshift128Plus(1, 2);
     compareWithReference(random, 'xorshift128plus (seed 1 2)');
   });
 
   test("seed B", () {
-    final random = Xorshift128PlusRandom(42, 777);
+    final random = Xorshift128Plus(42, 777);
     compareWithReference(random, 'xorshift128plus (seed 42 777)');
   });
 
   test("seed C", () {
-    final random = Xorshift128PlusRandom(8378522730901710845, 1653112583875186020);
+    final random = Xorshift128Plus(8378522730901710845, 1653112583875186020);
     compareWithReference(random, 'xorshift128plus (seed 8378522730901710845 1653112583875186020)');
   });
 
-  test("doubles", () => checkDoubles(Xorshift128PlusRandom(42, 777)));
-  test("bools", () => checkBools(Xorshift128PlusRandom(42, 777)));
-  test("ints", () => checkInts(Xorshift128PlusRandom(42, 777)));
-  //
-  // test("predefined next", () {
-  //   final random = Xorshift128Random.deterministic();
-  //   expect(
-  //       skipAndTake(()=>random.next().toHexUint32(), 5000, 3),
-  //       ['682C4EE4', '208190FD', '455F4A85']
-  //   );
-  // });
-  //
-  // test("predefined double", () {
-  //   final random = Xorshift128Random.deterministic();
-  //   expect(
-  //       skipAndTake(()=>random.nextDouble(), 5000, 3),
-  //       [0.40692608882834347, 0.12697702556079649, 0.27098527650138954]
-  //   );
-  // });
+  test("doubles", () => checkDoubles(Xorshift128Plus(42, 777)));
+  test("bools", () => checkBools(Xorshift128Plus(42, 777)));
+  test("ints", () => checkInts(Xorshift128Plus(42, 777)));
+
+  test("predefined next", () {
+    final random = Xorshift128Plus.deterministic();
+    expect(
+        skipAndTake(()=>random.next().toHexUint64(), 5000, 3),
+        ['1F1CCFAF5A83DC2A', 'AE8708051CB834DF', '897E4E4BA735BC15']
+    );
+  });
+
+  test("predefined double", () {
+    final random = Xorshift128Plus.deterministic();
+
+    // check the first values are not zeroes
+    expect(
+        skipAndTake(()=>random.nextDouble(), 0, 3),
+        [0.5438160400931709, 0.4886339482268167, 0.28405510382445276]
+    );
+
+    expect(
+        skipAndTake(()=>random.nextDouble(), 5000, 3),
+        [0.9056777920011874, 0.530136740954974, 0.7211288399533309]
+    );
+  });
+
+
+  test("madsen double", () {
+
+    final madsen = madsenSample["double"]!["1-2"]!;
+    final random = Xorshift128Plus(1, 2);
+
+    for (String expectedStr in madsen)
+      expect(random.nextDouble(), double.parse(expectedStr));
+
+  });
 }

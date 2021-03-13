@@ -1,9 +1,10 @@
-// SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <ortemeo@gmail
-// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 import "package:test/test.dart";
-import 'package:xorhift/ints.dart';
-import 'package:xorhift/xorshift64.dart';
+import 'package:xorhift/src/ints.dart';
+import 'package:xorhift/src/xorshift64.dart';
 
 // xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)
 // 'xorshift128 (seed 5 23 42 777)'

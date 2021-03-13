@@ -1,13 +1,10 @@
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
+
 const int MAX_POSITIVE_INT64 = 0x7FFFFFFFFFFFFFFF;
 const MAX_UINT32 = 0xFFFFFFFF;
 
 extension BitInt on int {
-
-
-
-  // int get maxPositiveInt64 {
-  //   return 0x7FFFFFFFFFFFFFFF;
-  // }
 
   int unsetHighestBit64() {
     return this & 0x7FFFFFFFFFFFFFFF;
