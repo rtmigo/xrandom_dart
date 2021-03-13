@@ -106,9 +106,13 @@ void main(List<String> arguments) {
 
 
   for (final random in listGenerators()) {
-    final type = random.runtimeType.toString();
-    final row = [type];
+    final row = <String>[];
     otherRows.add(row);
+
+    final type = random.runtimeType.toString();
+    row.add(type);
+
+
     for (final doWhat in dowhatz) {
       final times = results[type]![doWhat]!;
       final avg = mean(times);
@@ -116,7 +120,6 @@ void main(List<String> arguments) {
     }
   }
 
-  otherRows.sort((a,b) => -a[0].compareTo(b[0]));
   rows.addAll(otherRows);
 
   print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
