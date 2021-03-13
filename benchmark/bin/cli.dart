@@ -70,16 +70,18 @@ void main(List<String> arguments) {
   // git stash && git pull origin master && dart pub get && ./run.sh
 
   final dowhatz = [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble, DoWhat.next32, DoWhat.next64];
+  
+  List<Random> listGenerators() => [
+    Random(777),
+    Xorshift32.deterministic(),
+    Xorshift64.deterministic(),
+    Xorshift128.deterministic(),
+    Xorshift128Plus.deterministic(),
+  ];
 
   for (var experiment = 0; experiment < 2; ++experiment) {
     for (final doingWhat in dowhatz) {
-      for (var random in [
-        Random(777),
-        Xorshift32.deterministic(),
-        Xorshift64.deterministic(),
-        Xorshift128.deterministic(),
-        Xorshift128Plus.deterministic(),
-      ]..shuffle()) {
+      for (var random in listGenerators()..shuffle()) {
         final time = measureTime(random, doingWhat);
         results
             .putIfAbsent(random.runtimeType.toString(), () => <DoWhat, List<int>>{})
@@ -103,7 +105,8 @@ void main(List<String> arguments) {
 
 
 
-  for (final type in results.keys) {
+  for (final random in listGenerators()) {
+    final type = random.runtimeType.toString();
     final row = [type];
     otherRows.add(row);
     for (final doWhat in dowhatz) {
@@ -113,7 +116,7 @@ void main(List<String> arguments) {
     }
   }
 
-  otherRows.sort((a,b) => a[0].compareTo(b[0]));
+  otherRows.sort((a,b) => -a[0].compareTo(b[0]));
   rows.addAll(otherRows);
 
   print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
