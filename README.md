@@ -14,7 +14,7 @@ JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that t
 
 # Usage
 
-All classes implement the methods of the standard `Random`, so they can be used in the same way. 
+All classes implement the standard `Random`, so they can be used in the same way. 
 
 ``` dart
 import 'package:xorhift/xorhift.dart';
