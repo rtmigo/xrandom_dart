@@ -60,6 +60,10 @@ class Bench implements Comparable {
   int compareTo(other) => toString().compareTo(other.toString());
 }
 
+//List<T> shuffled(List<T> a) {
+  //a.s
+//}
+
 void main(List<String> arguments) {
   final results = <String, Map<DoWhat, List<int>>>{};
 
@@ -75,7 +79,7 @@ void main(List<String> arguments) {
         Xorshift64.deterministic(),
         Xorshift128.deterministic(),
         Xorshift128Plus.deterministic(),
-      ]) {
+      ]..shuffle()) {
         final time = measureTime(random, doingWhat);
         results
             .putIfAbsent(random.runtimeType.toString(), () => <DoWhat, List<int>>{})
