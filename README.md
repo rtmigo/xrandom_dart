@@ -71,9 +71,9 @@ on all but JavaScript.
 
 | Class                            | 64-bit platforms | JavaScript |
 |----------------------------------|------------------|------------|
+| `Xorshift` aka `Xorshift128`     | yes              | yes        |
 | `Xorshift32`                     | yes              | yes        |
 | `Xorshift64`                     | yes              |            |
-| `Xorshift` aka `Xorshift128`     | yes              | yes        |
 | `Xorshift128Plus`                | yes              |            |
 
 Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE modes.
