@@ -83,18 +83,35 @@ abstract class UniRandom32 implements Random {
           max, 1, _POW2_32, "max", "Must be positive and <= 2^32");
     }
 
+
+    if ((max & -max) == max) {
+      // fast case for powers of two
+      // like in dart:math https://git.io/JqCbB
+      final rnd32 = this.next32();
+      assert(0<=rnd32 && rnd32<=UINT32_MAX);
+      final result = rnd32 & (max - 1);
+      assert(0<=result);
+      assert(result<max);
+    }
+
     final rnd32 = next32();
     assert(0<=rnd32 && rnd32<=UINT32_MAX);
 
+    final result = rnd32 % max;
 
-    // (1, MAX_UINT32] -> [0.0, 1)
-    final double one = rnd32/UINT32_MAX;
-    assert(0.0<=one && one<1.0);
-
-    // [0.0, 1) -> [0, max)
-    final int result = (one*max).floor();
     assert(0<=result && result<max);
+
     return result;
+
+
+    // // (1, MAX_UINT32] -> [0.0, 1)
+    // final double one = rnd32/UINT32_MAX;
+    // assert(0.0<=one && one<1.0);
+    //
+    // // [0.0, 1) -> [0, max)
+    // final int result = (one*max).floor();
+    // assert(0<=result && result<max);
+    // return result;
 //    return (one*max).floor();
 
 
@@ -105,14 +122,7 @@ abstract class UniRandom32 implements Random {
 
 
 
-    // if ((max & -max) == max) {
-    //   // fast case for powers of two.
-    //   final rnd32 = this.next32();
-    //   assert(0<=rnd32 && rnd32<=UINT32_MAX);
-    //   final result = rnd32 & (max - 1);
-    //   assert(0<=result);
-    //   assert(result<max);
-    // }
+
     //
     // var rnd32;
     // var result;
