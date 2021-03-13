@@ -23,7 +23,7 @@ class Xorshift64Random extends UniRandom64
 
     int x = _state;
     x ^= x << 13;
-    x ^= x.signedRightShift(7);
+    x ^= x.unsignedRightShift(7);
     x ^= x << 17;
     return _state = x;
   }

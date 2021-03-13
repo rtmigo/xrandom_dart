@@ -35,7 +35,7 @@ class Xorshift128Random extends UniRandom32
     t ^= t << 11;
     t &= 0xFFFFFFFF;
 
-    t ^= t.signedRightShift(8); //t ^= t >> 8;
+    t ^= t.unsignedRightShift(8); //t ^= t >> 8;
     //return _a = t ^ s ^ (s >> 19);
 
     _a = t ^ s ^ (s >> 19);

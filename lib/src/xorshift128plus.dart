@@ -29,7 +29,7 @@ class Xorshift128Plus extends UniRandom64
     _S0 = s0;
     s1 ^= s1 << 23; // a
     //_S1 = s1 ^ s0 ^ (s1 >> 18) ^ (s0 >> 5); // b, c
-    _S1 = s1 ^ s0 ^ (s1.signedRightShift(18)) ^ (s0.signedRightShift(5)); // b, c
+    _S1 = s1 ^ s0 ^ (s1.unsignedRightShift(18)) ^ (s0.unsignedRightShift(5)); // b, c
     return result;
 
   }
@@ -48,14 +48,9 @@ class Xorshift128Plus extends UniRandom64
     // https://github.com/AndreasMadsen/xorshift/blob/master/xorshift.js
 
     int resL = x&0xffffffff;
-    int resU = x.signedRightShift(32); // todo replace by inline
+    int resU = x.unsignedRightShift(32); // todo replace by inline
 
     return resU*2.3283064365386963e-10 + (resL>>12)*2.220446049250313e-16;
-
-
-
-    // return this._resU * 2.3283064365386963e-10 +
-    //     ((this._resL & 0xffffffff) >> 12) * 2.220446049250313e-16;
   }
 
   static Xorshift128Plus deterministic()

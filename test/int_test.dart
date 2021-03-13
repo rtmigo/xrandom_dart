@@ -18,9 +18,9 @@ void main() {
 
   test("signedRightShift", () {
 
-    expect(0xFF.signedRightShift(4), 0xF);
-    expect(0x9FFFFFFFFFFFFFFF.signedRightShift(4).toHexUint64(), "09FFFFFFFFFFFFFF");
-    expect(0xFFFFFFFFFFFFFFFF.signedRightShift(4).toHexUint64(), "0FFFFFFFFFFFFFFF");
+    expect(0xFF.unsignedRightShift(4), 0xF);
+    expect(0x9FFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64(), "09FFFFFFFFFFFFFF");
+    expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64(), "0FFFFFFFFFFFFFFF");
 
   });
 }
