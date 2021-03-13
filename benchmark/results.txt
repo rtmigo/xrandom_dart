@@ -1,0 +1,20 @@
+with UniRandom32
+  bool nextBool() {
+     return nextInt(2) == 0;
+   }
+
+Random	        DoWhat.nextBool	2424
+Xorshift128Plus	DoWhat.nextBool	4408
+Xorshift32	    DoWhat.nextBool	2136
+Xorshift64	    DoWhat.nextBool	3697
+Xorshift128	    DoWhat.nextBool	3125
+Random	        DoWhat.nextInt	2548
+Xorshift128Plus	DoWhat.nextInt	6933
+Xorshift32	    DoWhat.nextInt	2435
+Xorshift64	    DoWhat.nextInt	6807
+Xorshift128	    DoWhat.nextInt	3523
+Random	        DoWhat.nextDouble	3266
+Xorshift128Plus	DoWhat.nextDouble	4281
+Xorshift32	    DoWhat.nextDouble	3166
+Xorshift64	    DoWhat.nextDouble	4550
+Xorshift128	    DoWhat.nextDouble	4926

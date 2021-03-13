@@ -50,11 +50,13 @@ abstract class UniRandom32 extends UniRandom {
 
   @override
   int nextInt(int max) {
+
     const limit = 0x3FFFFFFF;
     if ((max <= 0) || ((max > limit) && (max > _POW2_32))) {
       throw new RangeError.range(
           max, 1, _POW2_32, "max", "Must be positive and <= 2^32");
     }
+
     if ((max & -max) == max) {
       // Fast case for powers of two.
       final rnd32 = this.next();
@@ -77,10 +79,10 @@ abstract class UniRandom32 extends UniRandom {
     return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
   }
 
-  @override
-  bool nextBool() {
-    return nextInt(2) == 0;
-  }
+  // @override
+  // bool nextBool() {
+  //   return nextInt(2) == 0;
+  // }
 }
 
 
