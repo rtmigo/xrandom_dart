@@ -8,6 +8,10 @@ import 'dart:math';
 
 int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
 
+// String fillSpace(int maxSpace, String text) {
+//   return text.padLeft(maxSpace) + ' | ';
+// }
+
 String tabulate(List<List<String>> rows, List<String> header) {
 
   String retString = '';
@@ -39,9 +43,14 @@ String tabulate(List<List<String>> rows, List<String> header) {
 
   for (var row in rows) {
     var formatted = '|';
+    var iCol = 0;
     for (final cell in row) {
-      formatted += cell;
-      formatted += '|';
+      iCol++;
+      if (iCol>0) {
+        formatted += ' ';
+      }
+      formatted += cell.padRight(columnsWidths[iCol]);
+      formatted += ' |';
     }
     formattedRows.add(formatted);
   }
