@@ -18,7 +18,7 @@ That is, on all platforms except Web/JavaScript.
 
 Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS.
 
-# Usage
+## Usage
 
 All classes implement the standard `Random` from `dart:math`, so they can be used in the same way. 
 
@@ -32,4 +32,14 @@ print(random.nextDouble());
 Random random32 = Xorshift32();
 print(random32.nextInt(100));
 print(random32.nextDouble());
+```
+
+## Classes
+
+``` dart 
+Xorshift();         // xorshift128+ by Sebastiano Vigna [2014] 
+Xorshift32();       // xorshift32 by George Marsaglia [2003] 
+Xorshift64();       // xorshift64 by George Marsaglia [2003]
+Xorshift128();      // xorshift128 by George Marsaglia [2003]
+Xorshift128Plus();  // the same class as Xorshift();
 ```
