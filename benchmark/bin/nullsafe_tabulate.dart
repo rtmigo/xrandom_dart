@@ -2,22 +2,30 @@
 // MIT License
 // Copyright (c) 2019 BLeAmz
 
-String tabulate(List<List<String>> models, List<String> header) {
+// rewriting (from scratch?)
+
+String tabulate(List<List<String>> rows, List<String> header) {
+
   String retString = '';
-  int cols = header.length;
-  List<int> colLength = List.filled(cols, 0);
-  if (models.any((model) => model.length != cols)) {
+
+  header = rows[0];
+
+  final columnsCount = header.length;
+  final colWidth = List<int>.filled(columnsCount, 0);
+  
+  
+  
+  if (rows.any((model) => model.length != columnsCount)) {
     throw Exception('Column\'s no. of each model does not match.');
   }
 
   //preparing colLength.
-  for (int i = 0; i < cols; i++) {
-    List<String> _chunk = [];
-    _chunk.add(header[i]);
-    for (var model in models) {
+  for (var i = 0; i < columnsCount; i++) {
+    final _chunk = <String>[];
+    for (final model in rows) {
       _chunk.add(model[i]);
     }
-    colLength[i] = ([for (var c in _chunk) c.length]..sort()).last;
+    colWidth[i] = ([for (var c in _chunk) c.length]..sort()).last; // max ?
   }
   // here we got prepared colLength.
 
@@ -26,9 +34,9 @@ String tabulate(List<List<String>> models, List<String> header) {
   }
 
   void addRow(List<String> model, List<List<String>> row) {
-    List<String> l = [];
-    for (var i = 0; i < cols; i++) {
-      int max = colLength[i];
+    final l = <String>[];
+    for (var i = 0; i < columnsCount; i++) {
+      int max = colWidth[i];
       l.add(fillSpace(max, model[i]));
     }
     row.add(l);
@@ -36,9 +44,9 @@ String tabulate(List<List<String>> models, List<String> header) {
 
   List<List<String>> rowList = [];
   addRow(header, rowList);
-  List<String> topBar = List.generate(cols, (i) => '-' * colLength[i]);
+  List<String> topBar = List.generate(columnsCount, (i) => '-' * colWidth[i]);
   addRow(topBar, rowList);
-  models.forEach((model) => addRow(model, rowList));
+  rows.forEach((model) => addRow(model, rowList));
   rowList.forEach((row) {
     var rowText = row.join();
     rowText = rowText.substring(0, rowText.length - 2);
