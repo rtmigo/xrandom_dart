@@ -92,11 +92,12 @@ void main(List<String> arguments) {
     }
   }
 
-  final rows = <String>[];
+  final rows = <List<String>>[];
 
   for (final type in results.keys)
     {
       final row = [type];
+      rows.add(row);
       for (final dowhat in results[type]!.keys) {
         final times = results[type]![dowhat]!;
         final avg = mean(times);
