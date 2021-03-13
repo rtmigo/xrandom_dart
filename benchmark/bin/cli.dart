@@ -5,23 +5,37 @@ import 'package:xorshift/xorshift.dart';
 
 import 'nullsafe_tabulate.dart';
 
-enum DoWhat { nextDouble, nextInt, nextBool }
+enum DoWhat { nextDouble, nextInt, nextBool, next32, next64 }
 
 int measureTime(Random r, DoWhat dbl) {
   print('Bechmarking ${r.runtimeType}');
 
   final sw = Stopwatch()..start();
 
+  const N = 100000;
+
   for (var i = 0; i < 1000000; ++i) {
     switch (dbl) {
       case DoWhat.nextDouble:
-        r.nextDouble();
+        for (var i=0; i<N; ++i) r.nextDouble();
         break;
       case DoWhat.nextBool:
-        r.nextBool();
+        for (var i=0; i<N; ++i) r.nextBool();
         break;
       case DoWhat.nextInt:
-        r.nextInt(100);
+        for (var i=0; i<N; ++i) r.nextInt(100);
+        break;
+      case DoWhat.next32:
+        if (r is UniRandom32) {
+          for (var i = 0; i < N; ++i)
+            r.next32();
+        }
+        break;
+      case DoWhat.next64:
+        if (r is UniRandom64) {
+          for (var i = 0; i < N; ++i)
+            r.next64();
+        }
         break;
     }
   }
@@ -51,7 +65,7 @@ void main(List<String> arguments) {
 
   // git stash && git pull origin master && dart pub get && ./run.sh
 
-  final dowhatz = [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble];
+  final dowhatz = [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble, DoWhat.next32, DoWhat.next64];
 
   for (var experiment = 0; experiment < 2; ++experiment) {
     for (final doingWhat in dowhatz) {
