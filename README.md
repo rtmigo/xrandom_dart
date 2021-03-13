@@ -12,3 +12,15 @@ sources in C are taken directly from scientific articles by George Marsaglia and
 the inventors of the algorithms. The Xorshift128+ results are also matched to reference values from
 JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that tested the 128+ similarly. 
 
+# Usage
+
+All classes implement the methods of the standard `Random`, so they can be used in the same way. 
+
+``` dart
+import 'package:xorhift/xorhift.dart';
+
+Random r = Xorshift128Plus();
+
+print(r.nextInt(100));
+print(r.nextDouble());
+```
