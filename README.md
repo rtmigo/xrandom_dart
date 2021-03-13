@@ -34,6 +34,9 @@ generator that produces the same sequence of numbers every time.
 test('my test', () {
     final sameValuesEachTime = Xorshift.deterministic();
     // wow, the test results based on randoms are predictable now
+    expect(sameValuesEachTime.nextInt(1000), 543);
+    expect(sameValuesEachTime.nextInt(1000), 488);
+    expect(sameValuesEachTime.nextInt(1000), 284);    
 }    
 ```
 

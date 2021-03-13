@@ -97,4 +97,12 @@ void main() {
         [random1.next(), random1.next()],
         isNot([random2.next(), random2.next()]));
   });
+
+  test("deterministic", ()  async {
+    final random1 = Xorshift128Plus.deterministic();
+
+    expect(random1.nextInt(1000), 543);
+    expect(random1.nextInt(1000), 488);
+    expect(random1.nextInt(1000), 284);
+  });
 }
