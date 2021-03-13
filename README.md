@@ -44,7 +44,7 @@ You can achieve the same by creating a system `Random` with a `seed` argument. H
 system `Random` implementation may change with the next Dart update. As a result, with the
 same seed value, you will get different numbers.
 
-At the same time, Xorshift is a very specific algorithm. And the library is built with an emphasis
+In contrast to this, Xorshift is a very specific algorithm. And the library is built with an emphasis
 on maximum predictability (funny, right?) Therefore, the predictability of the Xorshift's `deterministic`
 sequences can be relied upon.
 
