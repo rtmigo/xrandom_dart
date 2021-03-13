@@ -56,7 +56,7 @@ class Bench implements Comparable {
 
 void main(List<String> arguments) {
 
-  final results = <String, Map<String,List<int>>> {};
+  final results = <String, Map<DoWhat,List<int>>> {};
 
 
 
@@ -71,8 +71,8 @@ void main(List<String> arguments) {
         final time = measureTime(random, doingWhat);
           results.putIfAbsent(
               random.runtimeType.toString(),
-              () => <String,List<int>>{})
-            .putIfAbsent(doingWhat.toString(), () => <int>[])
+              () => <DoWhat,List<int>>{})
+            .putIfAbsent(doingWhat, () => <int>[])
             .add(time);
       }
 

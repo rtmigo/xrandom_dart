@@ -1,8 +1,4 @@
-// https://github.com/BLeAm/tabulate/blob/master/lib/tabulate.dart
-// MIT License
-// Copyright (c) 2019 BLeAmz
 
-// rewriting (from scratch?)
 
 import 'dart:math';
 
@@ -14,7 +10,7 @@ int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
 
 String tabulate(List<List<String>> rows) {
 
-  String retString = '';
+  //String retString = '';
 
   //header = rows[0];
 
@@ -58,7 +54,12 @@ String tabulate(List<List<String>> rows) {
   return formattedRows.join('\n');
 
 
-  
+
+  // https://github.com/BLeAm/tabulate/blob/master/lib/tabulate.dart
+  // MIT License
+  // Copyright (c) 2019 BLeAmz
+
+  // rewriting (from scratch?)
   //
   // if (rows.any((model) => model.length != columnsCount)) {
   //   throw Exception('Column\'s no. of each model does not match.');
