@@ -92,13 +92,18 @@ void main(List<String> arguments) {
     }
   }
 
+  final rows = <String>[];
+
   for (final type in results.keys)
     {
+      final row = [type];
       for (final dowhat in results[type]!.keys) {
         final times = results[type]![dowhat]!;
         final avg = mean(times);
 
-        print("$type $dowhat $avg");
+        row.add(avg.toString());
+
+        //print("$type $dowhat $avg");
       }
       //for (final results in typeToDowhat.value[type]) {
 
@@ -107,6 +112,9 @@ void main(List<String> arguments) {
 
       //print('${entry.key}\t${mean(entry.value)}');
     }
+
+  for (var r in rows)
+    print(r);
 
   //final r = Xorshift128Plus(1,2);
   //print('Hello $xxxx world: ${r.next()}!');
