@@ -30,10 +30,6 @@ import 'package:xorshift/xorshift.dart';
 Random random = Xorshift();
 print(random.nextInt(100));
 print(random.nextDouble());
-
-Random random32 = Xorshift32();
-print(random32.nextInt(100));
-print(random32.nextDouble());
 ```
 
 In addition, they have a `next()` method that returns an `int` with no range restrictions. For some algorithms this is a 32-bit number, for another 64-bit number.
@@ -46,4 +42,10 @@ Xorshift32();       // xorshift32 by George Marsaglia [2003]
 Xorshift64();       // xorshift64 by George Marsaglia [2003]
 Xorshift128();      // xorshift128 by George Marsaglia [2003]
 Xorshift128Plus();  // the same class as Xorshift()
+```
+
+## Deterministic
+
+``` dart
+final sameValuesEachTime = Xorshift.deterministic();
 ```
