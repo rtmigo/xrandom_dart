@@ -4,7 +4,7 @@
 
 import "package:test/test.dart";
 
-import 'package:xorhift/src/ints.dart';
+import 'package:xorshift/src/ints.dart';
 
 void main() {
   test("hex", () {

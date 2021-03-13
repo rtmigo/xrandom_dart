@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 import "package:test/test.dart";
-import 'package:xorhift/src/ints.dart';
-import 'package:xorhift/src/xorshift128plus.dart';
+import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/xorshift128plus.dart';
 
 import 'helper.dart';
 import 'reference.dart';

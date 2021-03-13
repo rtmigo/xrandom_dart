@@ -4,7 +4,7 @@
 import 'dart:math';
 
 import 'ints.dart';
-import 'package:xorhift/src/unirandom.dart';
+import 'package:xorshift/src/unirandom.dart';
 
 class Xorshift64 extends UniRandom64
 {

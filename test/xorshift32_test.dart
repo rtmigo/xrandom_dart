@@ -3,8 +3,8 @@
 
 
 import "package:test/test.dart";
-import 'package:xorhift/src/ints.dart';
-import 'package:xorhift/src/xorshift32.dart';
+import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/xorshift32.dart';
 
 import 'helper.dart';
 import 'reference.dart';
