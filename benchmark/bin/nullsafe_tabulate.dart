@@ -16,7 +16,7 @@ String tabulate(List<List<String>> rows) {
 
   String retString = '';
 
-  header = rows[0];
+  //header = rows[0];
 
   final columnsCount = rows.map((r) => r.length).reduce(max);
 
