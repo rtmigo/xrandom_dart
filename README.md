@@ -66,14 +66,14 @@ the inventors of the algorithms. The Xorshift128+ results are also matched to re
 JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that tested the 128+
 similarly.
 
-The library will work on all the platforms where `int` represents a 64-bit signed integer. That is,
-on all platforms except Web/JavaScript.
+Some classes only work on platforms with full support for 64-bit integers. That is, 
+on all but JavaScript.
 
-Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE m.
+| Class                            | 64-bit platforms | JavaScript |
+|----------------------------------|------------------|------------|
+| `Xorshift32`                     | yes              | yes        |
+| `Xorshift64`                     | yes              |            |
+| `Xorshift` aka `Xorshift128`     | yes              | yes        |
+| `Xorshift128Plus`                | yes              |            |
 
-| Class                            | JavaScript |
-|----------------------------------|------------|
-| `Xorshift32`                     | yes        |
-| `Xorshift64`                     |            |
-| `Xorshift` aka `Xorshift128`     | yes        |
-| `Xorshift128Plus`                |            |
+Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE modes.
