@@ -17,7 +17,7 @@ Generating 100 million of random numbers. Lower is better.
 | Class           | nextBool | nextInt | nextDouble | next32 | next64 |
 |-----------------|----------|---------|------------|--------|--------|
 | Random (dart:math) |   2305   |  2421   |    3242    |   -    |   -    |
-| Xorshift32      |   1468   |  2424   |    2901    |  718   |   -    |
+| Xorshift32      |   **1468**   |  2424   |    **2901**    |  718   |   -    |
 | Xorshift64      |   1486   |  3261   |    4386    |  1874  |  2557  |
 | Xorshift128     |   1498   |  3484   |    5042    |  1856  |   -    |
 | Xorshift128Plus |   1500   |  3474   |    4154    |  2204  |  3029  |
