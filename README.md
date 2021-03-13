@@ -41,5 +41,5 @@ Xorshift();         // xorshift128+ by Sebastiano Vigna [2014]
 Xorshift32();       // xorshift32 by George Marsaglia [2003] 
 Xorshift64();       // xorshift64 by George Marsaglia [2003]
 Xorshift128();      // xorshift128 by George Marsaglia [2003]
-Xorshift128Plus();  // the same class as Xorshift();
+Xorshift128Plus();  // the same class as Xorshift()
 ```
