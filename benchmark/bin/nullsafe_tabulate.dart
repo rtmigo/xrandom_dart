@@ -2,11 +2,29 @@
 
 import 'dart:math';
 
+enum Align {
+  left,
+  right,
+  center
+}
+
 int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
 
 // String fillSpace(int maxSpace, String text) {
 //   return text.padLeft(maxSpace) + ' | ';
 // }
+
+String alignCell(String text, int targetWidth, Align align)
+{
+  switch (align) {
+    case Align.left:
+      return text.padRight(targetWidth);
+    case Align.right:
+      return text.padLeft(targetWidth);
+    case Align.center:
+      return alignCenter(text, targetWidth);
+  }
+}
 
 String alignCenter(String text, int targetWidth) {
   final half = (targetWidth-text.length)>>1;
@@ -15,7 +33,7 @@ String alignCenter(String text, int targetWidth) {
   return text;
 }
 
-String tabulate(List<List<String>> rows) {
+String tabulate(List<List<String>> rows, {List<Align>? headerAlign}) {
 
   //String retString = '';
 
@@ -44,12 +62,25 @@ String tabulate(List<List<String>> rows) {
 
   final formattedRows = <String>[];
 
+  int iRow = 0;
   for (var row in rows) {
+
     var formatted = '|';
-    var iCol = 0;
+    var iCol = -1;
+
     for (final cell in row) {
       formatted += ' ';
-      formatted += alignCenter(cell, columnsWidths[iCol++]);
+      iCol++;
+
+      var align = Align.center;
+      if (iRow++ == 0) {
+        // header
+        if (headerAlign != null && headerAlign.length > iCol) {
+          align = headerAlign[iCol];
+        }
+      }
+
+      formatted += alignCell(cell, columnsWidths[iCol], align);
       formatted += ' |';
     }
     formattedRows.add(formatted);
