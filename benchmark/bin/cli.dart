@@ -14,7 +14,7 @@ int measureTime(Random r, DoWhat dbl) {
 
   const N = 100000;
 
-  for (var i = 0; i < 1000000; ++i) {
+
     switch (dbl) {
       case DoWhat.nextDouble:
         for (var i=0; i<N; ++i) r.nextDouble();
@@ -38,7 +38,7 @@ int measureTime(Random r, DoWhat dbl) {
         }
         break;
     }
-  }
+
   return sw.elapsed.inMilliseconds;
 }
 

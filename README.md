@@ -78,7 +78,7 @@ Generating 10 million of random numbers. Lower is better.
 | Xorshift128     |   1848   |  4157   |    5971    |
 | Xorshift128Plus |   1866   |  4184   |    4938    |
 
-Made with AMD A9-9420e processor on Ubuntu 20.04.
+Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
 
 # Compatibility
 
