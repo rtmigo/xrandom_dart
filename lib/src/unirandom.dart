@@ -114,7 +114,7 @@ abstract class UniRandom32 implements Random {
     // which is an equivalent of
     //   if ((2&-2)==2) return next()&(2-1);
 
-    // benchmarks 2021-03 with XorShift32 (on Dell Seashell):
+    // benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
     //    Random      (from dart:math)            2424
     //    XorShift32  return nextInt(2)==0        2136
     //    XorShift32  this.next() % 2 == 0        1903
@@ -127,7 +127,7 @@ abstract class UniRandom32 implements Random {
     } else {
       ++_boolCachePos;
       final result = (_boolCache & (1<<_boolCachePos)) != 0;
-      if (_boolCachePos==7)
+      if (_boolCachePos==31)
         _boolCache = 0;
       return result;
     }
