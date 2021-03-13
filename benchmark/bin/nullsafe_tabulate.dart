@@ -4,54 +4,89 @@
 
 // rewriting (from scratch?)
 
+import 'dart:math';
+
+int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
+
 String tabulate(List<List<String>> rows, List<String> header) {
 
   String retString = '';
 
   header = rows[0];
 
-  final columnsCount = header.length;
-  final colWidth = List<int>.filled(columnsCount, 0);
-  
-  
-  
-  if (rows.any((model) => model.length != columnsCount)) {
-    throw Exception('Column\'s no. of each model does not match.');
-  }
+  final columnsCount = rows.map((r) => r.length).reduce(max);
 
-  //preparing colLength.
-  for (var i = 0; i < columnsCount; i++) {
-    final _chunk = <String>[];
-    for (final model in rows) {
-      _chunk.add(model[i]);
+  for (final row in rows) {
+    while (row.length < columnsCount) {
+      row.add('');
     }
-    colWidth[i] = ([for (var c in _chunk) c.length]..sort()).last; // max ?
-  }
-  // here we got prepared colLength.
-
-  String fillSpace(int maxSpace, String text) {
-    return text.padLeft(maxSpace) + ' | ';
   }
 
-  void addRow(List<String> model, List<List<String>> row) {
-    final l = <String>[];
-    for (var i = 0; i < columnsCount; i++) {
-      int max = colWidth[i];
-      l.add(fillSpace(max, model[i]));
+  final columnsWidths = <int>[];
+  for (var iCol=0; iCol<columnsCount; iCol) {
+    columnsWidths.add(
+      rows.map((row) => row[iCol]).map((cell) => cell.length).reduce(max)
+    );
+  }
+
+  final formattedRows = <String>[];
+
+  for (var row in rows) {
+    var formatted = '|';
+    for (final cell in row) {
+      formatted += cell;
+      formatted += '|';
     }
-    row.add(l);
+    formattedRows.add(formatted);
   }
 
-  List<List<String>> rowList = [];
-  addRow(header, rowList);
-  List<String> topBar = List.generate(columnsCount, (i) => '-' * colWidth[i]);
-  addRow(topBar, rowList);
-  rows.forEach((model) => addRow(model, rowList));
-  rowList.forEach((row) {
-    var rowText = row.join();
-    rowText = rowText.substring(0, rowText.length - 2);
-    retString += rowText + '\n';
-  });
+  return formattedRows.join('\n');
 
-  return retString;
+
+  
+  //
+  // if (rows.any((model) => model.length != columnsCount)) {
+  //   throw Exception('Column\'s no. of each model does not match.');
+  // }
+  //
+  // //preparing colLength.
+  // for (var i = 0; i < columnsCount; i++) {
+  //   final _chunk = <String>[];
+  //
+  //   int rowNum = 0;
+  //   for (final row in rows) {
+  //     rowNum++;
+  //     if (row.length!=header.length)
+  //       throw ArgumentError("$rowNum ja");
+  //     _chunk.add(row[i]);
+  //   }
+  //   colWidth[i] = ([for (var c in _chunk) c.length]..sort()).last; // max ?
+  // }
+  // // here we got prepared colLength.
+  //
+  // String fillSpace(int maxSpace, String text) {
+  //   return text.padLeft(maxSpace) + ' | ';
+  // }
+  //
+  // void addRow(List<String> model, List<List<String>> row) {
+  //   final l = <String>[];
+  //   for (var i = 0; i < columnsCount; i++) {
+  //     int max = colWidth[i];
+  //     l.add(fillSpace(max, model[i]));
+  //   }
+  //   row.add(l);
+  // }
+  //
+  // List<List<String>> rowList = [];
+  // addRow(header, rowList);
+  // List<String> topBar = List.generate(columnsCount, (i) => '-' * colWidth[i]);
+  // addRow(topBar, rowList);
+  // rows.forEach((model) => addRow(model, rowList));
+  // rowList.forEach((row) {
+  //   var rowText = row.join();
+  //   rowText = rowText.substring(0, rowText.length - 2);
+  //   retString += rowText + '\n';
+  // });
+  //
+  // return retString;
 }
