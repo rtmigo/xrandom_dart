@@ -21,8 +21,9 @@ void main(List<String> arguments) {
 
   final results = <String,List<int>>{};
 
-  for (var i=0; i<3; ++i)
+  for (var i=0; i<5; ++i)
     {
+      print('== $i ==');
       results.putIfAbsent('Random', () => <int>[]).add(measureTime(Random(777)));
       results.putIfAbsent('Xorshift128Plus', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic()));
       results.putIfAbsent('Xorshift32', () => <int>[]).add(measureTime(Xorshift32.deterministic()));
