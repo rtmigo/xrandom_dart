@@ -12,7 +12,7 @@ int measureTime(Random r, DoWhat dbl) {
 
   final sw = Stopwatch()..start();
 
-  const N = 100000;
+  const N = 10000000;
 
 
     switch (dbl) {
