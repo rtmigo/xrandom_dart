@@ -43,7 +43,7 @@ String tabulate(List<List<String>> rows, List<String> header) {
 
   for (var row in rows) {
     var formatted = '|';
-    var iCol = 0;
+    var iCol = -1;
     for (final cell in row) {
       iCol++;
       if (iCol>0) {
