@@ -7,7 +7,7 @@ int measureTime(Random r)
 {
   final sw = Stopwatch()..start();
 
-  for (var i = 0; i < 10000000; ++i) {
+  for (var i = 0; i < 100000000; ++i) {
     r.nextBool();
   }
   return sw.elapsed.inMilliseconds;
