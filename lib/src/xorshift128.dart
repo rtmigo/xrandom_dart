@@ -6,9 +6,9 @@ import 'dart:math';
 import 'ints.dart';
 import 'package:xorhift/src/unirandom.dart';
 
-class Xorshift128Random extends UniRandom32
+class Xorshift128 extends UniRandom32
 {
-  Xorshift128Random([int? a, int? b, int? c, int? d])
+  Xorshift128([int? a, int? b, int? c, int? d])
   {
     if (a!=null || b!=null || c!=null || d!=null) {
 
@@ -62,8 +62,8 @@ class Xorshift128Random extends UniRandom32
     return _a; //return _a = t ^ s ^ (s >> 19);
   }
 
-  static Xorshift128Random deterministic()
+  static Xorshift128 deterministic()
   {
-    return Xorshift128Random(1081037251, 1975530394, 2959134556, 1579461830);
+    return Xorshift128(1081037251, 1975530394, 2959134556, 1579461830);
   }
 }

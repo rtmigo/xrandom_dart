@@ -29,29 +29,29 @@ void main() {
   });
 
   test("seed A", () {
-    final random = Xorshift128Random(1, 2, 3, 4);
+    final random = Xorshift128(1, 2, 3, 4);
     compareWithReference(random, "xorshift128 (seed 1 2 3 4)");
   });
 
   test("seed B", () {
-    final random = Xorshift128Random(5, 23, 42, 777);
+    final random = Xorshift128(5, 23, 42, 777);
     compareWithReference(random, "xorshift128 (seed 5 23 42 777)");
   });
 
   test("seed C", () {
-    final random = Xorshift128Random(1081037251, 1975530394, 2959134556, 1579461830);
+    final random = Xorshift128(1081037251, 1975530394, 2959134556, 1579461830);
     compareWithReference(random, "xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)");
   });
 
 
 
 
-  test("doubles", ()=>checkDoubles(Xorshift128Random(5, 23, 42, 777)));
-  test("bools", ()=>checkBools(Xorshift128Random(5, 23, 42, 777)));
-  test("ints", ()=>checkInts(Xorshift128Random(5, 23, 42, 777)));
+  test("doubles", ()=>checkDoubles(Xorshift128(5, 23, 42, 777)));
+  test("bools", ()=>checkBools(Xorshift128(5, 23, 42, 777)));
+  test("ints", ()=>checkInts(Xorshift128(5, 23, 42, 777)));
 
   test("predefined next", () {
-    final random = Xorshift128Random.deterministic();
+    final random = Xorshift128.deterministic();
     expect(
         skipAndTake(()=>random.next().toHexUint32(), 5000, 3),
         ['682C4EE4', '208190FD', '455F4A85']
@@ -59,7 +59,7 @@ void main() {
   });
 
   test("predefined double", () {
-    final random = Xorshift128Random.deterministic();
+    final random = Xorshift128.deterministic();
     expect(
         skipAndTake(()=>random.nextDouble(), 5000, 3),
         [0.40692608882834347, 0.12697702556079649, 0.27098527650138954]
@@ -67,9 +67,9 @@ void main() {
   });
 
   test("create without args", ()  async {
-    final random1 = Xorshift128Random();
+    final random1 = Xorshift128();
     await Future.delayed(Duration(milliseconds: 2));
-    final random2 = Xorshift128Random();
+    final random2 = Xorshift128();
 
     expect(
         [random1.next(), random1.next()],

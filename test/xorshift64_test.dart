@@ -33,26 +33,26 @@ void main() {
   });
 
   test("seed 1", () {
-    final random = Xorshift64Random(1);
+    final random = Xorshift64(1);
     compareWithReference(random, "xorshift64 (seed 1)");
   });
 
   test("seed 42", () {
-    final random = Xorshift64Random(42);
+    final random = Xorshift64(42);
     compareWithReference(random, "xorshift64 (seed 42)");
   });
 
   test("seed 3141592653589793238", () {
-    final random = Xorshift64Random(3141592653589793238);
+    final random = Xorshift64(3141592653589793238);
     compareWithReference(random, "xorshift64 (seed 3141592653589793238)");
   });
 
-  test("doubles", ()=>checkDoubles(Xorshift64Random(777)));
-  test("bools", ()=>checkBools(Xorshift64Random(777)));
-  test("ints", ()=>checkInts(Xorshift64Random(777)));
+  test("doubles", ()=>checkDoubles(Xorshift64(777)));
+  test("bools", ()=>checkBools(Xorshift64(777)));
+  test("ints", ()=>checkInts(Xorshift64(777)));
 
   test("predefined next", () {
-    final random = Xorshift64Random.deterministic();
+    final random = Xorshift64.deterministic();
     expect(
         skipAndTake(()=>random.next().toHexUint64(), 5000, 3),
         ['A78D8BFA5E7260CA', '5DB7D12B9759F68B', 'ABD3D730279787A6']
@@ -60,7 +60,7 @@ void main() {
   });
 
   test("predefined double", () {
-    final random = Xorshift64Random.deterministic();
+    final random = Xorshift64.deterministic();
     expect(
         skipAndTake(()=>random.nextDouble(), 5000, 3),
         [0.3090071651939921, 0.7321721518371331, 0.3424023614053875]
@@ -68,9 +68,9 @@ void main() {
   });
 
   test("create without args", ()  async {
-    final random1 = Xorshift64Random();
+    final random1 = Xorshift64();
     await Future.delayed(Duration(milliseconds: 2));
-    final random2 = Xorshift64Random();
+    final random2 = Xorshift64();
 
     expect(
         [random1.next(), random1.next()],
