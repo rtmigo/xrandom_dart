@@ -73,7 +73,7 @@ on all but JavaScript.
 |----------------------------------|------------------|------------|
 | `Xorshift` aka `Xorshift128`     | yes              | yes        |
 | `Xorshift32`                     | yes              | yes        |
-| `Xorshift64`                     | yes              |            |
-| `Xorshift128Plus`                | yes              |            |
+| `Xorshift64`                     | yes              | no         |
+| `Xorshift128Plus`                | yes              | no         |
 
 Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE modes.
