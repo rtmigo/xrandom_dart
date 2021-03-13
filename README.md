@@ -33,11 +33,11 @@ generator that produces the same sequence of numbers every time.
 ``` dart
 test('my test', () {
     final sameValuesEachTime = Xorshift.deterministic();
-    // wow, the test results based on randoms are predictable now
+    // wow, results based on randoms are predictable now
     expect(sameValuesEachTime.nextInt(1000), 543);
     expect(sameValuesEachTime.nextInt(1000), 488);
     expect(sameValuesEachTime.nextInt(1000), 284);    
-}    
+});    
 ```
 
 You can achieve the same by creating a system `Random` with a `seed` argument. However, the
