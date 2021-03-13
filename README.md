@@ -71,9 +71,9 @@ on all platforms except Web/JavaScript.
 
 Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE m.
 
-| Class                          | JavaScript |
-|--------------------------------|------------|
-| Xorshift32                     | yes        |
-| Xorshift64                     |            |
-| Xorshift (aka Xorshift128)     | yes        |
-| Xorshift128Plus                |            |
+| Class                            | JavaScript |
+|----------------------------------|------------|
+| `Xorshift32`                     | yes        |
+| `Xorshift64`                     |            |
+| `Xorshift` aka `Xorshift128`     | yes        |
+| `Xorshift128Plus`                |            |
