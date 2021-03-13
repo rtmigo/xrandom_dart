@@ -36,5 +36,9 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Run tests
+      - name: VM tests
         run: dart test
+
+      - name: Node tests
+        run: dart test --platform node
+

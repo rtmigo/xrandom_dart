@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
 // SPDX-License-Identifier: BSD-3-Clause
 
+@TestOn('vm')
+
+import 'dart:io';
 
 import "package:test/test.dart";
 import 'package:xorshift/src/ints.dart';
@@ -18,6 +21,12 @@ import 'helper.dart';
 import 'reference.dart';
 
 void main() {
+
+  //#if (Platform.environment["test_env"]=="NODE")
+  // print(Platform.environment);
+  // return;
+
+
 
   test("reference data", () {
     expect(
@@ -43,7 +52,7 @@ void main() {
   });
 
   test("seed 3141592653589793238", () {
-    final random = Xorshift64(3141592653589793238);
+    final random = Xorshift64(BigInt.parse('3141592653589793238').toInt());
     compareWithReference(random, "xorshift64 (seed 3141592653589793238)");
   });
 

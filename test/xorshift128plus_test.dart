@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
 // SPDX-License-Identifier: BSD-3-Clause
 
+@TestOn('vm')
+
 import "package:test/test.dart";
 import 'package:xorshift/src/ints.dart';
 import 'package:xorshift/src/xorshift128plus.dart';

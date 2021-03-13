@@ -3,6 +3,7 @@
 
 import 'dart:math';
 
+import 'errors.dart';
 import 'ints.dart';
 import 'package:xorshift/src/unirandom.dart';
 
@@ -10,6 +11,10 @@ class Xorshift128Plus extends UniRandom64
 {
   Xorshift128Plus([int? a, int? b])
   {
+    if (!INT64_SUPPORTED)
+      throw Unsupported64Error();
+
+
     if (a!=null || b!=null)
       {
         this._S0 = a!;
@@ -43,10 +48,10 @@ class Xorshift128Plus extends UniRandom64
 
     _S1 = s1 ^ s0
         ^ ( //s1.unsignedRightShift(18)
-            s1 >= 0 ? s1 >> 18 : ((s1 & 0x7FFFFFFFFFFFFFFF) >> 18) | (1 << (63 - 18))
+            s1 >= 0 ? s1 >> 18 : ((s1 & INT64_MAX_POSITIVE) >> 18) | (1 << (63 - 18))
           )
         ^ (// s0.unsignedRightShift(5)
-          s0 >= 0 ? s0 >> 5 : ((s0 & 0x7FFFFFFFFFFFFFFF) >> 5) | (1 << (63 - 5))
+          s0 >= 0 ? s0 >> 5 : ((s0 & INT64_MAX_POSITIVE) >> 5) | (1 << (63 - 5))
           ); // b, c
 
 
@@ -68,12 +73,15 @@ class Xorshift128Plus extends UniRandom64
 
     int resL = x&0xffffffff;
     //int resU = x.unsignedRightShift(32);
-    int resU = x >= 0 ? x >> 32 : ((x & 0x7FFFFFFFFFFFFFFF) >> 32) | (1 << (63 - 32));
+    int resU = x >= 0 ? x >> 32 : ((x & INT64_MAX_POSITIVE) >> 32) | (1 << (63 - 32));
 
     return resU*2.3283064365386963e-10 + (resL>>12)*2.220446049250313e-16;
   }
 
+  static final int _deterministicSeedA = BigInt.parse("8378522730901710845").toInt();
+  static final int _deterministicSeedB = BigInt.parse("1653112583875186020").toInt();
+
   static Xorshift128Plus deterministic() {
-    return Xorshift128Plus(8378522730901710845, 1653112583875186020);
+    return Xorshift128Plus(_deterministicSeedA, _deterministicSeedB);
   }
 }

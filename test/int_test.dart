@@ -1,12 +1,18 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>
 // SPDX-License-Identifier: BSD-3-Clause
 
+@TestOn('vm')
 
 import "package:test/test.dart";
 
 import 'package:xorshift/src/ints.dart';
 
 void main() {
+
+  test("are we", () {
+    expect(INT64_SUPPORTED, true);
+  });
+
   test("hex", () {
 
     expect(0xFF.toHexUint32(), "000000FF");

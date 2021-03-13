@@ -3,13 +3,19 @@
 
 import 'dart:math';
 
+import 'errors.dart';
 import 'ints.dart';
 import 'package:xorshift/src/unirandom.dart';
 
 class Xorshift64 extends UniRandom64
 {
+  static final defaultSeed = BigInt.parse("0x76a5c5b65ce8677c").toInt();
+
   Xorshift64([seed])
   {
+    if (!INT64_SUPPORTED)
+      throw Unsupported64Error();
+
     if (seed!=null) {
       if (seed==0)
         throw RangeError("The seed must be greater than 0.");
@@ -40,6 +46,6 @@ class Xorshift64 extends UniRandom64
 
   static Xorshift64 deterministic()
   {
-    return Xorshift64(0x76a5c5b65ce8677c);
+    return Xorshift64(defaultSeed);
   }
 }
