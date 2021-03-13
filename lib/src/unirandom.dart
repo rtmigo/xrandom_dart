@@ -28,7 +28,7 @@ abstract class UniRandom implements Random {
   }
 }
 
-abstract class UniRandom32 extends UniRandom {
+abstract class UniRandom32_old extends UniRandom {
   @override
   double nextDouble() {
     int x = this.next();
@@ -39,6 +39,50 @@ abstract class UniRandom32 extends UniRandom {
     return (x - 1) / MAX_UINT32;
   }
 }
+
+abstract class UniRandom32 extends UniRandom {
+
+  // https://git.io/JqCbB
+
+  static const _POW2_32 = 1 << 32;
+  static const _POW2_53_D = 1.0 * (1 << 53);
+  static const _POW2_27_D = 1.0 * (1 << 27);
+
+  @override
+  int nextInt(int max) {
+    const limit = 0x3FFFFFFF;
+    if ((max <= 0) || ((max > limit) && (max > _POW2_32))) {
+      throw new RangeError.range(
+          max, 1, _POW2_32, "max", "Must be positive and <= 2^32");
+    }
+    if ((max & -max) == max) {
+      // Fast case for powers of two.
+      final rnd32 = this.next();
+      assert(rnd32<=MAX_UINT32);
+      return rnd32 & (max - 1);
+    }
+
+    var rnd32;
+    var result;
+    do {
+      rnd32 = this.next();
+      assert(rnd32<=MAX_UINT32);
+      result = rnd32 % max;
+    } while ((rnd32 - result + max) > _POW2_32);
+    return result;
+  }
+
+  @override
+  double nextDouble() {
+    return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
+  }
+
+  @override
+  bool nextBool() {
+    return nextInt(2) == 0;
+  }
+}
+
 
 abstract class UniRandom64 extends UniRandom {
   @override

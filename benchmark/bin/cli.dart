@@ -39,6 +39,8 @@ void main(List<String> arguments) {
 
   final results = <String,List<int>>{};
 
+  // git stash && git pull origin master && dart pub get && ./run.sh
+
   for (var i=0; i<5; ++i)
     {
       for (final what in [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble])

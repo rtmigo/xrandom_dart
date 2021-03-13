@@ -55,7 +55,7 @@ void main() {
     final random = Xorshift32.deterministic();
     expect(
         skipAndTake(()=>random.nextDouble(), 5000, 3),
-        [0.385134477723654, 0.5209582209403064, 0.5471964991994194]
+        [0.2990539312680619, 0.624981467496995, 0.8814333835274933]
     );
   });
 
