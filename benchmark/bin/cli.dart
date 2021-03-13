@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:cli/cli.dart' as cli;
 import 'package:xorshift/xorshift.dart';
 
+import 'nullsafe_tabulate.dart';
+
 enum DoWhat {
   nextDouble,
   nextInt,
@@ -114,8 +116,10 @@ void main(List<String> arguments) {
       //print('${entry.key}\t${mean(entry.value)}');
     }
 
-  for (var r in rows)
-    print(r);
+  tabulate(rows, ["A", "B"]);
+
+  //for (var r in rows)
+    //print(r);
 
   //final r = Xorshift128Plus(1,2);
   //print('Hello $xxxx world: ${r.next()}!');
