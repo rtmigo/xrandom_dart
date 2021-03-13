@@ -5,6 +5,8 @@ import 'package:xorshift/xorshift.dart';
 
 int measureTime(Random r)
 {
+  print('Bechmarking ${r.runtimeType}');
+
   final sw = Stopwatch()..start();
 
   for (var i = 0; i < 100000000; ++i) {
@@ -13,11 +15,18 @@ int measureTime(Random r)
   return sw.elapsed.inMilliseconds;
 }
 
+int mean(List<int> values) => (values.reduce((a, b) => a + b) / values.length).round();
+
 void main(List<String> arguments) {
 
   final results = <String,List<int>>{};
 
-  results.putIfAbsent('128+', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic()));
+  for (var i=0; i<3; ++i)
+    {
+      results.putIfAbsent('Xorshift128Plus', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic()));
+      results.putIfAbsent('Xorshift32', () => <int>[]).add(measureTime(Xorshift32.deterministic()));
+    }
+
 
   for (final entry in results.entries)
     {
