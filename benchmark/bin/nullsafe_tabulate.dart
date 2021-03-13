@@ -39,13 +39,10 @@ String tabulate(List<List<String>> rows) {
 
   for (var row in rows) {
     var formatted = '|';
-    var iCol = -1;
+    var iCol = 0;
     for (final cell in row) {
-      iCol++;
-      if (iCol>0) {
-        formatted += ' ';
-      }
-      formatted += cell.padRight(columnsWidths[iCol]);
+      formatted += ' ';
+      formatted += cell.padRight(columnsWidths[iCol++]);
       formatted += ' |';
     }
     formattedRows.add(formatted);
