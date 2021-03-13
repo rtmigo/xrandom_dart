@@ -1,5 +1,7 @@
 import 'package:cli/cli.dart' as cli;
+import 'package:xorshift/xorshift.dart';
 
 void main(List<String> arguments) {
-  print('Hello world: ${cli.calculate()}!');
+  final r = Xorshift();
+  print('Hello world: ${r.next()}!');
 }
