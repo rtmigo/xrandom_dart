@@ -39,9 +39,11 @@ void main() {
     compareWithReference32(random, "xorshift32 (seed 314159265)");
   });
 
-  test("doubles", ()=>checkDoubles(Xorshift32(777)));
-  test("bools", ()=>checkBools(Xorshift32(777)));
-  test("ints", ()=>checkInts(Xorshift32(777)));
+  testCommonRandom(Xorshift32.deterministic());
+
+  // test("doubles", ()=>checkDoubles(Xorshift32(777)));
+  // test("bools", ()=>checkBools(Xorshift32(777)));
+  // test("ints", ()=>checkInts(Xorshift32(777)));
 
   test("predefined next", () {
     final random = Xorshift32.deterministic();
@@ -51,13 +53,13 @@ void main() {
     );
   });
 
-  test("predefined double", () {
-    final random = Xorshift32.deterministic();
-    expect(
-        skipAndTake(()=>random.nextDouble(), 5000, 3),
-        [0.2990539312680619, 0.624981467496995, 0.8814333835274933]
-    );
-  });
+  // test("predefined double", () {
+  //   final random = Xorshift32.deterministic();
+  //   expect(
+  //       skipAndTake(()=>random.nextDouble(), 5000, 3),
+  //       [0.2990539312680619, 0.624981467496995, 0.8814333835274933]
+  //   );
+  // });
 
   test("create without args", ()  async {
     final random1 = Xorshift32();

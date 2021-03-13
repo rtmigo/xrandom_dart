@@ -87,7 +87,9 @@ abstract class UniRandom32 implements Random {
       // fast case for powers of two.
       final rnd32 = this.next32();
       assert(0<=rnd32 && rnd32<=UINT32_MAX);
-      return rnd32 & (max - 1);
+      final result = rnd32 & (max - 1);
+      assert(0<=result);
+      assert(result<max);
     }
 
     var rnd32;
@@ -97,6 +99,9 @@ abstract class UniRandom32 implements Random {
       assert(0<=rnd32 && rnd32<=UINT32_MAX);
       result = rnd32 % max;
     } while ((rnd32 - result + max) > _POW2_32);
+
+    assert(0<=result);
+    assert(result<max);
     return result;
   }
 
@@ -104,7 +109,12 @@ abstract class UniRandom32 implements Random {
   double nextDouble() {
     // almost the same as _Random.nextDouble() from dart:math (https://git.io/JqCbB)
     // Here we're trying to be JavaScript-compatible
-    return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
+    //return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
+    return scaleUint32toDouble(next32());
+
+    // double nextDouble() {
+    //   return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
+    // }
   }
 
   //int _nextIntRaw() => this.next32();

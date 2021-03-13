@@ -14,13 +14,13 @@ code and state.
 
 Generating 100 million of random numbers. Lower is better.
 
-| Class           | nextBool | nextInt | nextDouble | next32 | next64 |
-|-----------------|----------|---------|------------|--------|--------|
-| Random (dart:math) |   2305   |  2421   |    3242    |   -    |   -    |
-| Xorshift32      |   **1468**   |  2424   |    **2901**    |  718   |   -    |
-| Xorshift64      |   1486   |  3261   |    4386    |  1874  |  2557  |
-| Xorshift128     |   1498   |  3484   |    5042    |  1856  |   -    |
-| Xorshift128Plus |   1500   |  3474   |    4154    |  2204  |  3029  |
+| Class              | nextBool | nextInt | nextDouble | next32 | next64 |
+|--------------------|----------|---------|------------|--------|--------|
+| Random (dart:math) |   2222   |  2314   |    3206    |   -    |   -    |
+| Xorshift32         | **1431** |  2362   |  **2963**  |  712   |   -    |
+| Xorshift64         |   1412   |  3192   |    4349    |  1846  |  2529  |
+| Xorshift128        |   1453   |  3446   |    4978    |  1662  |   -    |
+| Xorshift128Plus    |   1444   |  3485   |    4101    |  2120  |  3087  |
 
 Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
 
@@ -64,14 +64,6 @@ sequences can be relied upon.
 
 # Classes
 
-``` dart 
-Xorshift();         // xorshift128+ by Sebastiano Vigna [2015] 
-Xorshift32();       // xorshift32 by George Marsaglia [2003] 
-Xorshift64();       // xorshift64 by George Marsaglia [2003]
-Xorshift128();      // xorshift128 by George Marsaglia [2003]
-Xorshift128Plus();  // the same class as Xorshift()
-```
-
 | Class             | Algorithm    | Author           | Year |
 |-------------------|--------------|------------------|------|
 | `Xorshift`        | xorshift32   | George Marsaglia | 2003 |
@@ -79,8 +71,6 @@ Xorshift128Plus();  // the same class as Xorshift()
 | `Xorshift64`      | xorshift64   | George Marsaglia | 2003 |
 | `Xorshift128`     | xorshift128  | George Marsaglia | 2003 |
 | `Xorshift128Plus` | xorshift128+ | Sebastiano Vigna | 2015 |
-
-
 
 # Compatibility
 

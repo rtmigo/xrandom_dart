@@ -52,9 +52,7 @@ void main() {
     compareWithReference64(random, 'xorshift128plus (seed 8378522730901710845 1653112583875186020)');
   });
 
-  test("doubles", () => checkDoubles(Xorshift128Plus(42, 777)));
-  test("bools", () => checkBools(Xorshift128Plus(42, 777)));
-  test("ints", () => checkInts(Xorshift128Plus(42, 777)));
+  testCommonRandom(Xorshift128Plus.deterministic());
 
   test("predefined next", () {
     final random = Xorshift128Plus.deterministic();

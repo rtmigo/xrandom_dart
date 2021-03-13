@@ -46,9 +46,7 @@ void main() {
 
 
 
-  test("doubles", ()=>checkDoubles(Xorshift128(5, 23, 42, 777)));
-  test("bools", ()=>checkBools(Xorshift128(5, 23, 42, 777)));
-  test("ints", ()=>checkInts(Xorshift128(5, 23, 42, 777)));
+  testCommonRandom(Xorshift128.deterministic());
 
   test("predefined next", () {
     final random = Xorshift128.deterministic();
@@ -58,13 +56,13 @@ void main() {
     );
   });
 
-  test("predefined double", () {
-    final random = Xorshift128.deterministic();
-    expect(
-        skipAndTake(()=>random.nextDouble(), 5000, 3),
-        [0.8217153680630882, 0.16883535742482325, 0.2059260621445983]
-    );
-  });
+  // test("predefined double", () {
+  //   final random = Xorshift128.deterministic();
+  //   expect(
+  //       skipAndTake(()=>random.nextDouble(), 5000, 3),
+  //       [0.8217153680630882, 0.16883535742482325, 0.2059260621445983]
+  //   );
+  // });
 
   test("create without args", ()  async {
     final random1 = Xorshift128();
