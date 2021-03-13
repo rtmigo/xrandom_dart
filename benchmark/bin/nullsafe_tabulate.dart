@@ -27,7 +27,7 @@ String tabulate(List<List<String>> rows, List<String> header) {
   print('POINT B');
 
   final columnsWidths = <int>[];
-  for (var iCol=0; iCol<columnsCount; iCol) {
+  for (var iCol=0; iCol<columnsCount; iCol++) {
     columnsWidths.add(
       rows.map((row) => row[iCol]).map((cell) => cell.length).reduce(max)
     );
