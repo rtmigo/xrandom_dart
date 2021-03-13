@@ -41,7 +41,7 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
 
   final columnsCount = rows.map((r) => r.length).reduce(max);
 
-  print('columnsCount $columnsCount');
+//  print('columnsCount $columnsCount');
 
   for (final row in rows) {
     while (row.length < columnsCount) {
@@ -49,7 +49,7 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
     }
   }
 
-  print('POINT B');
+//  print('POINT B');
 
   final columnsWidths = <int>[];
   for (var iCol=0; iCol<columnsCount; iCol++) {
@@ -58,12 +58,21 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
     );
   }
 
-  print('POINT C');
+  var bar = List.generate(columnsCount, (i) => '-' * columnsWidths[i]).join('|');
+  bar = '|'+bar+'|';
+
+
+//  print('POINT C');
 
   final formattedRows = <String>[];
 
-  int iRow = 0;
+  var iRow = -1;
   for (var row in rows) {
+    iRow++;
+
+    if (iRow==1) {
+      formattedRows.add(bar);
+    }
 
     var formatted = '|';
     var iCol = -1;
@@ -73,13 +82,14 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
       iCol++;
 
       var align = Align.center;
-      if (iRow++ == 0) {
+      if (iRow == 0) {
         // header
         if (headerAlign != null && headerAlign.length > iCol) {
           align = headerAlign[iCol];
         }
       }
       else {
+        // not header
         if (rowAlign != null && rowAlign.length > iCol) {
           align = rowAlign[iCol];
         }
