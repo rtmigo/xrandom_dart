@@ -136,7 +136,7 @@ void main(List<String> arguments) {
       //print('${entry.key}\t${mean(entry.value)}');
     }
 
-  print(tabulate(rows));
+  print(tabulate(rows, rowAlign: [Align.left]));
 
   //for (var r in rows)
     //print(r);

@@ -33,7 +33,7 @@ String alignCenter(String text, int targetWidth) {
   return text;
 }
 
-String tabulate(List<List<String>> rows, {List<Align>? headerAlign}) {
+String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>? rowAlign}) {
 
   //String retString = '';
 
@@ -77,6 +77,11 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign}) {
         // header
         if (headerAlign != null && headerAlign.length > iCol) {
           align = headerAlign[iCol];
+        }
+      }
+      else {
+        if (rowAlign != null && rowAlign.length > iCol) {
+          align = rowAlign[iCol];
         }
       }
 
