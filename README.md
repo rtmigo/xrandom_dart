@@ -34,6 +34,8 @@ print(random32.nextInt(100));
 print(random32.nextDouble());
 ```
 
+In addition, they have a `next()` method that returns an `int` with no range restrictions. For some algorithms this is a 32-bit number, for another 64-bit number.
+
 ## Classes
 
 ``` dart 
