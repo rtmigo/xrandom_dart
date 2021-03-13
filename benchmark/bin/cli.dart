@@ -79,7 +79,7 @@ void main(List<String> arguments) {
     Xorshift128Plus.deterministic(),
   ];
 
-  for (var experiment = 0; experiment < 2; ++experiment) {
+  for (var experiment = 0; experiment < 4; ++experiment) {
     for (final doingWhat in dowhatz) {
       for (var random in listGenerators()..shuffle()) {
         final time = measureTime(random, doingWhat);

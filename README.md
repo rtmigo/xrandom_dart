@@ -10,6 +10,20 @@ in Dart.
 Xorshift algorithms are known among the **fastest random number generators**, requiring very small
 code and state.
 
+# Benchmarks
+
+Generating 100 million of random numbers. Lower is better.
+
+| Class           | nextBool | nextInt | nextDouble | next32 | next64 |
+|-----------------|----------|---------|------------|--------|--------|
+| Random (dart:math) |   2305   |  2421   |    3242    |   -    |   -    |
+| Xorshift32      |   1468   |  2424   |    2901    |  718   |   -    |
+| Xorshift64      |   1486   |  3261   |    4386    |  1874  |  2557  |
+| Xorshift128     |   1498   |  3484   |    5042    |  1856  |   -    |
+| Xorshift128Plus |   1500   |  3474   |    4154    |  2204  |  3029  |
+
+Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
+
 # Usage
 
 All classes implement the standard `Random` from `dart:math`, so they can be used in the same way.
@@ -66,19 +80,7 @@ Xorshift128Plus();  // the same class as Xorshift()
 | `Xorshift128`     | xorshift128  | George Marsaglia | 2003 |
 | `Xorshift128Plus` | xorshift128+ | Sebastiano Vigna | 2015 |
 
-# Benchmarks
 
-Generating 100 million of random numbers. Lower is better.
-
-| Class           | nextBool | nextInt | nextDouble | next32 | next64 |
-|-----------------|----------|---------|------------|--------|--------|
-| Random (dart:math) |   2305   |  2421   |    3242    |   -    |   -    |
-| Xorshift32      |   1468   |  2424   |    2901    |  718   |   -    |
-| Xorshift64      |   1486   |  3261   |    4386    |  1874  |  2557  |
-| Xorshift128     |   1498   |  3484   |    5042    |  1856  |   -    |
-| Xorshift128Plus |   1500   |  3474   |    4154    |  2204  |  3029  |
-
-Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
 
 # Compatibility
 
@@ -93,8 +95,8 @@ on all but JavaScript.
 
 | Class                            | 64-bit platforms | JavaScript |
 |----------------------------------|------------------|------------|
-| `Xorshift` aka `Xorshift128`     | yes              | yes        |
-| `Xorshift32`                     | yes              | yes        |
+| `Xorshift` aka `Xorshift32`      | yes              | yes        |
+| `Xorshift128`                    | yes              | yes        |
 | `Xorshift64`                     | yes              | no         |
 | `Xorshift128Plus`                | yes              | no         |
 
