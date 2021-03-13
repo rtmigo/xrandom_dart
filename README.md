@@ -17,10 +17,13 @@ JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that t
 All classes implement the standard `Random`, so they can be used in the same way. 
 
 ``` dart
-import 'package:xorhift/xorhift.dart';
+import 'package:xorshift/xorshift.dart';
 
-Random r = Xorshift128Plus();
+Random a = Xorshift();
+print(b.nextInt(100));
+print(b.nextDouble());
 
-print(r.nextInt(100));
-print(r.nextDouble());
+Random x32 = Xorshift32();
+print(x32.nextInt(100));
+print(x32.nextDouble());
 ```
