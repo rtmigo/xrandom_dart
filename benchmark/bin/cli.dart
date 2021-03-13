@@ -30,7 +30,7 @@ void main(List<String> arguments) {
         {
           final doubles = j==0;
           print('== $i double:$doubles ==');
-          final suffix = doubles ? " double" : " bool"
+          final suffix = doubles ? " double" : " bool";
           results.putIfAbsent('Random$suffix', () => <int>[]).add(measureTime(Random(777), doubles));
           results.putIfAbsent('Xorshift128Plus$suffix', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic(), doubles));
           results.putIfAbsent('Xorshift32$suffix', () => <int>[]).add(measureTime(Xorshift32.deterministic(), doubles));
