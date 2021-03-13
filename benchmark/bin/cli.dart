@@ -25,12 +25,14 @@ void main(List<String> arguments) {
     {
       results.putIfAbsent('Xorshift128Plus', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic()));
       results.putIfAbsent('Xorshift32', () => <int>[]).add(measureTime(Xorshift32.deterministic()));
+      results.putIfAbsent('Xorshift64', () => <int>[]).add(measureTime(Xorshift64.deterministic()));
+      results.putIfAbsent('Xorshift128', () => <int>[]).add(measureTime(Xorshift128.deterministic()));
     }
 
 
   for (final entry in results.entries)
     {
-      print('{${entry.key} ${entry.value}');
+      print('{${entry.key} ${mean(entry.value)}');
     }
 
   //final r = Xorshift128Plus(1,2);
