@@ -62,8 +62,11 @@ void main(List<String> arguments) {
 
   // git stash && git pull origin master && dart pub get && ./run.sh
 
+  final dowhatz = [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble];
+
+
   for (var experiment = 0; experiment < 2; ++experiment) {
-    for (final doingWhat in [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble]) {
+    for (final doingWhat in dowhatz) {
       for (var random in [Random(777), Xorshift128Plus.deterministic()]) {
         final time = measureTime(random, doingWhat);
           results.putIfAbsent(
@@ -96,11 +99,21 @@ void main(List<String> arguments) {
 
   final rows = <List<String>>[];
 
+  final header = ['Alg'];
+  for (final x in dowhatz) {
+    header.add(x.toString());
+  }
+
+  rows.add(header);
+
+
+  //rows.add("value")
+
   for (final type in results.keys)
     {
       final row = [type];
       rows.add(row);
-      for (final dowhat in results[type]!.keys) {
+      for (final dowhat in dowhatz) {
         final times = results[type]![dowhat]!;
         final avg = mean(times);
 
@@ -116,7 +129,7 @@ void main(List<String> arguments) {
       //print('${entry.key}\t${mean(entry.value)}');
     }
 
-  print(tabulate(rows, ["A", "B", "C"]));
+  print(tabulate(rows));
 
   //for (var r in rows)
     //print(r);

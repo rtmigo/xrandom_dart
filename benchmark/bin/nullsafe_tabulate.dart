@@ -12,7 +12,7 @@ int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
 //   return text.padLeft(maxSpace) + ' | ';
 // }
 
-String tabulate(List<List<String>> rows, List<String> header) {
+String tabulate(List<List<String>> rows) {
 
   String retString = '';
 
