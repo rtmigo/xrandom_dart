@@ -12,7 +12,7 @@ int measureTime(Random r, DoWhat dbl) {
 
   final sw = Stopwatch()..start();
 
-  for (var i = 0; i < 100000000; ++i) {
+  for (var i = 0; i < 1000000; ++i) {
     switch (dbl) {
       case DoWhat.nextDouble:
         r.nextDouble();
@@ -53,7 +53,7 @@ void main(List<String> arguments) {
 
   final dowhatz = [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble];
 
-  for (var experiment = 0; experiment < 5; ++experiment) {
+  for (var experiment = 0; experiment < 2; ++experiment) {
     for (final doingWhat in dowhatz) {
       for (var random in [
         Random(777),

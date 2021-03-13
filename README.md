@@ -58,15 +58,27 @@ Xorshift128();      // xorshift128 by George Marsaglia [2003]
 Xorshift128Plus();  // the same class as Xorshift()
 ```
 
+| Class             | Algorithm    | Author           | Year |
+|-------------------|--------------|------------------|------|
+| `Xorshift`        | xorshift32   | George Marsaglia | 2003 |
+| `Xorshift32`      | xorshift32   | George Marsaglia | 2003 |
+| `Xorshift64`      | xorshift64   | George Marsaglia | 2003 |
+| `Xorshift128`     | xorshift128  | George Marsaglia | 2003 |
+| `Xorshift128Plus` | xorshift128+ | Sebastiano Vigna | 2015 |
+
 # Benchmarks
 
-| Class           | nextBool | nextInt | nextDouble |
+Generating 10 million of random numbers. Lower is better.
+
+| Time in msec => | nextBool | nextInt | nextDouble |
 |-----------------|----------|---------|------------|
-| _Random         |   2470   |  2586   |    3808    |
-| Xorshift32      |   5277   |  2625   |    3070    |
-| Xorshift64      |   5188   |  3536   |    4408    |
-| Xorshift128     |   5360   |  3745   |    5134    |
-| Xorshift128Plus |   5201   |  3774   |    4337    |
+| _Random         |   2748   |  2865   |    3723    |
+| Xorshift32      |   1844   |  2828   |    3433    |
+| Xorshift64      |   1868   |  3866   |    5118    |
+| Xorshift128     |   1848   |  4157   |    5971    |
+| Xorshift128Plus |   1866   |  4184   |    4938    |
+
+Made with AMD A9-9420e processor on Ubuntu 20.04.
 
 # Compatibility
 
