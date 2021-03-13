@@ -12,7 +12,7 @@ int measureTime(Random r, DoWhat dbl) {
 
   final sw = Stopwatch()..start();
 
-  const N = 10000000;
+  const N = 100000000;
 
 
     switch (dbl) {
@@ -112,7 +112,7 @@ void main(List<String> arguments) {
     for (final doWhat in dowhatz) {
       final times = results[type]![doWhat]!;
       final avg = mean(times);
-      row.add(avg.toString());
+      row.add(avg==0 ? '-' : avg.toString());
     }
   }
 
