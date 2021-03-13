@@ -16,11 +16,15 @@ String tabulate(List<List<String>> rows, List<String> header) {
 
   final columnsCount = rows.map((r) => r.length).reduce(max);
 
+  print('columnsCount $columnsCount');
+
   for (final row in rows) {
     while (row.length < columnsCount) {
       row.add('');
     }
   }
+
+  print('POINT B');
 
   final columnsWidths = <int>[];
   for (var iCol=0; iCol<columnsCount; iCol) {
@@ -28,6 +32,8 @@ String tabulate(List<List<String>> rows, List<String> header) {
       rows.map((row) => row[iCol]).map((cell) => cell.length).reduce(max)
     );
   }
+
+  print('POINT C');
 
   final formattedRows = <String>[];
 
