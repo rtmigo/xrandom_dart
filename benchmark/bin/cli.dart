@@ -67,7 +67,13 @@ void main(List<String> arguments) {
 
   for (var experiment = 0; experiment < 2; ++experiment) {
     for (final doingWhat in dowhatz) {
-      for (var random in [Random(777), Xorshift128Plus.deterministic()]) {
+      for (var random in [
+          Random(777),
+          Xorshift32.deterministic(),
+          Xorshift64.deterministic(),
+          Xorshift128.deterministic(),
+          Xorshift128Plus.deterministic(),
+        ]) {
         final time = measureTime(random, doingWhat);
           results.putIfAbsent(
               random.runtimeType.toString(),
@@ -102,7 +108,7 @@ void main(List<String> arguments) {
   final header = ['Class'];
   for (final x in dowhatz) {
     final str = x.toString();
-    header.add(str.substring(str.lastIndexOf('.')));
+    header.add(str.substring(str.lastIndexOf('.')+1));
   }
 
   rows.add(header);
