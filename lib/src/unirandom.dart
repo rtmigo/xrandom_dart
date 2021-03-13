@@ -79,10 +79,12 @@ abstract class UniRandom32 extends UniRandom {
     return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
   }
 
-  // @override
-  // bool nextBool() {
-  //   return nextInt(2) == 0;
-  // }
+  @override
+  bool nextBool() {
+    final rndUint32 = this.next();
+    assert(0<=rndUint32 && rndUint32<=MAX_UINT32);
+    return rndUint32 >= 0x80000000;
+  }
 }
 
 

@@ -1,4 +1,4 @@
-with UniRandom32
+UniRandom32
   bool nextBool() {
      return nextInt(2) == 0;
    }
@@ -18,3 +18,24 @@ Xorshift128Plus	DoWhat.nextDouble	4281
 Xorshift32	    DoWhat.nextDouble	3166
 Xorshift64	    DoWhat.nextDouble	4550
 Xorshift128	    DoWhat.nextDouble	4926
+
+UniRandom32
+  bool nextBool() {
+    return this.next() % 2 == 0;
+  }
+
+Random	DoWhat.nextBool	2426
+Xorshift128Plus	DoWhat.nextBool	4566
+Xorshift32	DoWhat.nextBool	1903
+Xorshift64	DoWhat.nextBool	3834
+Xorshift128	DoWhat.nextBool	2947
+Random	DoWhat.nextInt	2570
+Xorshift128Plus	DoWhat.nextInt	6975
+Xorshift32	DoWhat.nextInt	2479
+Xorshift64	DoWhat.nextInt	6945
+Xorshift128	DoWhat.nextInt	3577
+Random	DoWhat.nextDouble	3288
+Xorshift128Plus	DoWhat.nextDouble	4281
+Xorshift32	DoWhat.nextDouble	2921
+Xorshift64	DoWhat.nextDouble	4510
+Xorshift128	DoWhat.nextDouble	4985
