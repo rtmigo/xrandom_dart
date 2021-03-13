@@ -3,17 +3,32 @@ import 'dart:math';
 import 'package:cli/cli.dart' as cli;
 import 'package:xorshift/xorshift.dart';
 
-int measureTime(Random r, bool dbl)
+enum DoWhat {
+  nextDouble,
+  nextInt,
+  nextBool
+}
+
+int measureTime(Random r, DoWhat dbl)
 {
   print('Bechmarking ${r.runtimeType}');
 
   final sw = Stopwatch()..start();
 
   for (var i = 0; i < 100000000; ++i) {
-    if (dbl)
-      r.nextDouble();
-    else
-      r.nextBool();
+    switch (dbl)
+    {
+      case DoWhat.nextDouble:
+        r.nextDouble();
+        break;
+      case DoWhat.nextBool:
+        r.nextBool();
+        break;
+      case DoWhat.nextInt:
+        r.nextInt(100);
+        break;
+
+    }
   }
   return sw.elapsed.inMilliseconds;
 }
@@ -26,23 +41,24 @@ void main(List<String> arguments) {
 
   for (var i=0; i<5; ++i)
     {
-      for (var j=0; j<2; ++j)
+      for (final what in [DoWhat.nextBool, DoWhat.nextInt, DoWhat.nextDouble])
+      //for (var j=0; j<2; ++j)
         {
-          final doubles = j==0;
-          print('== $i double:$doubles ==');
-          final suffix = doubles ? " double" : " bool";
-          results.putIfAbsent('Random$suffix', () => <int>[]).add(measureTime(Random(777), doubles));
-          results.putIfAbsent('Xorshift128Plus$suffix', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic(), doubles));
-          results.putIfAbsent('Xorshift32$suffix', () => <int>[]).add(measureTime(Xorshift32.deterministic(), doubles));
-          results.putIfAbsent('Xorshift64$suffix', () => <int>[]).add(measureTime(Xorshift64.deterministic(), doubles));
-          results.putIfAbsent('Xorshift128$suffix', () => <int>[]).add(measureTime(Xorshift128.deterministic(), doubles));
+          //final doubles = j==0;
+          print('== $i $what ==');
+          //final suffix = doubles ? " double" : " bool";
+          results.putIfAbsent('Random\t$what', () => <int>[]).add(measureTime(Random(777), what));
+          results.putIfAbsent('Xorshift128Plus\t$what', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic(), what));
+          results.putIfAbsent('Xorshift32\t$what', () => <int>[]).add(measureTime(Xorshift32.deterministic(), what));
+          results.putIfAbsent('Xorshift64\t$what', () => <int>[]).add(measureTime(Xorshift64.deterministic(), what));
+          results.putIfAbsent('Xorshift128\t$what', () => <int>[]).add(measureTime(Xorshift128.deterministic(), what));
         }
     }
 
 
   for (final entry in results.entries)
     {
-      print('${entry.key} ${mean(entry.value)}');
+      print('${entry.key}\t${mean(entry.value)}');
     }
 
   //final r = Xorshift128Plus(1,2);
