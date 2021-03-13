@@ -116,7 +116,7 @@ void main(List<String> arguments) {
       //print('${entry.key}\t${mean(entry.value)}');
     }
 
-  tabulate(rows, ["A", "B", "C"]);
+  print(tabulate(rows, ["A", "B", "C"]));
 
   //for (var r in rows)
     //print(r);
