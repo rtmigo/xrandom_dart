@@ -3,14 +3,17 @@ import 'dart:math';
 import 'package:cli/cli.dart' as cli;
 import 'package:xorshift/xorshift.dart';
 
-int measureTime(Random r)
+int measureTime(Random r, bool dbl)
 {
   print('Bechmarking ${r.runtimeType}');
 
   final sw = Stopwatch()..start();
 
   for (var i = 0; i < 100000000; ++i) {
-    r.nextBool();
+    if (dbl)
+      r.nextDouble();
+    else
+      r.nextBool();
   }
   return sw.elapsed.inMilliseconds;
 }
@@ -23,12 +26,17 @@ void main(List<String> arguments) {
 
   for (var i=0; i<5; ++i)
     {
-      print('== $i ==');
-      results.putIfAbsent('Random', () => <int>[]).add(measureTime(Random(777)));
-      results.putIfAbsent('Xorshift128Plus', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic()));
-      results.putIfAbsent('Xorshift32', () => <int>[]).add(measureTime(Xorshift32.deterministic()));
-      results.putIfAbsent('Xorshift64', () => <int>[]).add(measureTime(Xorshift64.deterministic()));
-      results.putIfAbsent('Xorshift128', () => <int>[]).add(measureTime(Xorshift128.deterministic()));
+      for (var j=0; j<2; ++j)
+        {
+          final doubles = j==0;
+          print('== $i double:$doubles ==');
+          final suffix = doubles ? " double" : " bool"
+          results.putIfAbsent('Random$suffix', () => <int>[]).add(measureTime(Random(777), doubles));
+          results.putIfAbsent('Xorshift128Plus$suffix', () => <int>[]).add(measureTime(Xorshift128Plus.deterministic(), doubles));
+          results.putIfAbsent('Xorshift32$suffix', () => <int>[]).add(measureTime(Xorshift32.deterministic(), doubles));
+          results.putIfAbsent('Xorshift64$suffix', () => <int>[]).add(measureTime(Xorshift64.deterministic(), doubles));
+          results.putIfAbsent('Xorshift128$suffix', () => <int>[]).add(measureTime(Xorshift128.deterministic(), doubles));
+        }
     }
 
 
