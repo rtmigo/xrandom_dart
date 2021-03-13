@@ -39,10 +39,9 @@ test('my test', () {
 });    
 ```
 
-You can achieve the same by creating a system `Random` with a `seed` argument. However, the
-system `Random` implementation may change with the next Dart update. In contrast to this, Xorshift
-is a very specific algorithm. And the library is built with an emphasis on maximum predictability (
-funny, right?) Therefore, the predictability of the Xorshift's `deterministic`
+You can achieve the same by creating the `Random` with a `seed` argument. However, the random 
+implementation in `dart:math` with the next Dart update. In contrast to this, Xorshift
+is a very specific algorithm. Therefore, the predictability of the Xorshift's `deterministic`
 sequences can be relied upon.
 
 # Usage
