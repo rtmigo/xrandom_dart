@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: CC-BY-4.0
 
 // this file runs reference implementations of random number generators
-// to create lists of reference values and print them to the terminal.
-// The values can be used for testing of alternate implementations of the same
-// RNGs
-
-// uh C, hello again
+// (RNG) to create lists of numbers. Those numbers are printed to the stdout
+// in JSON-like format (actually, it's a Dart code).
+//
+// The data can be used for testing of alternate implementations
+// of the same RNGs (to match the reference numbers to the newly generated)
 
 #include <stdio.h>
 #include <stdint.h>
@@ -15,7 +15,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // sample from https://en.wikipedia.org/wiki/Xorshift
-
+//
 // Refactored from
 // George Marsaglia 2003 "Xorshift RNGs"
 // https://www.jstatsoft.org/article/view/v008i14
@@ -56,7 +56,7 @@ void print32(uint32_t seed)
 
 ////////////////////////////////////////////////////////////////////////////////
 // sample from https://en.wikipedia.org/wiki/Xorshift
-
+//
 //	Refactored from
 //	George Marsaglia 2003 "Xorshift RNGs" 
 // 	https://www.jstatsoft.org/article/view/v008i14
@@ -96,7 +96,7 @@ void print64(uint64_t seed)
 
 ////////////////////////////////////////////////////////////////////////////////
 // sample from https://en.wikipedia.org/wiki/Xorshift
-
+//
 //	Refactored from
 //	George Marsaglia 2003 "Xorshift RNGs" 
 // 	https://www.jstatsoft.org/article/view/v008i14
@@ -188,10 +188,9 @@ uint64_t xorshift128p(struct xorshift128p_state *state)
 		s1 ^= s1 << 23; // a
 		s[1] = s1 ^ s0 ^ (s1 >> 18) ^ (s0 >> 5); // b, c
 		return result;
-}
-*/
+} */
 
-// the same refactored to avoid global variables:
+// the same code without using global variables:
 
 uint64_t xorshift128plus_int(uint64_t *s) {
 	uint64_t s1 = s[0];
@@ -215,6 +214,7 @@ uint64_t xorshift128plus_int(uint64_t *s) {
 
 // refactored to avoid global variables:
 double xorshift128plus_double(uint64_t *s) {
+
 	const uint64_t x = xorshift128plus_int(s);
 	const uint64_t x_doublefied = UINT64_C(0x3FF) << 52 | x >> 12;
 	return *((double *) &x_doublefied) - 1.0;
@@ -234,7 +234,10 @@ void print128plus(uint64_t a, uint64_t b)
 
     printf("],\n\n");
 }
-/*
+
+/* It it commented out because it was not needed for testing
+   the dart xorshift.
+
 void print128plus_double(uint64_t a, uint64_t b)
 {
     printf("const xorshift128plus_double_%d_%d = [\n",  a, b);
@@ -282,16 +285,9 @@ int main()
 	print128plus(42, 777);
 	print128plus(8378522730901710845llu, 1653112583875186020llu);
 
-
 	printf("};");
-
-//    print64(3);
-//    print128(1,2,3,3);
-//	print128plus(1,2);
-//	print128plus_double(1,2);
 }
 
-// TODO:
+// TODO: Add xoshiro algorithms
 // https://prng.di.unimi.it/xoshiro256plus.c
-// https://prng.di.unimi.it/
 // https://prng.di.unimi.it/xoshiro256plusplus.c
