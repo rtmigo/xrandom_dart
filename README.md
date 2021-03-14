@@ -1,4 +1,5 @@
-![Generic badge](https://img.shields.io/badge/status-draft-red.svg)
+[![Pub Package](https://img.shields.io/pub/v/xrandom.svg)](https://pub.dev/packages/xrandom)
+[![pub points](https://badges.bar/xrandom/pub%20points)](https://pub.dev/packages/xrandom/score)
 [![Actions Status](https://github.com/rtmigo/xrandom/workflows/unittest/badge.svg?branch=master)](https://github.com/rtmigo/xrandom/actions)
 ![Generic badge](https://img.shields.io/badge/tested_on-Windows_|_MacOS_|_Ubuntu-blue.svg)
 ![Generic badge](https://img.shields.io/badge/tested_on-VM_|_JS-blue.svg)
