@@ -33,7 +33,8 @@ class Xorshift64 extends UniRandom64 {
 
     int x = _state;
     x ^= x << 13;
-    x ^= x.unsignedRightShift(7);
+    //x ^= x.unsignedRightShift(7);
+    x ^= x >= 0 ? x >> 7 : ((x & INT64_MAX_POSITIVE) >> 7) | (1 << (63 - 7));
     x ^= x << 17;
     return _state = x;
   }
