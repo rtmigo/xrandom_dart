@@ -27,7 +27,7 @@ Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20
 
 # Determinism
 
-All classes have a `deterministic` method. By creating an object with this method, you end up with a
+Xorshift's classes have a `deterministic` method. By creating an object with this method, you end up with a
 generator that produces the same sequence of numbers every time.
 
 ``` dart
