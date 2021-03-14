@@ -115,3 +115,7 @@ xorshift.nextInt64();  // 64-bit signed
 | Xorshift64         |  2011   |   1367    |   1394    |
 | Xorshift128        |  1862   |   1344    |     -     |
 | Xorshift128Plus    |  2086   |   1424    |   1533    |
+
+-----
+All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04.
+Time is measured in milliseconds.
