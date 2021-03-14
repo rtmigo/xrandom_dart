@@ -55,7 +55,7 @@ import 'package:xorshift/xorshift.dart';
 
 Random random = Xorshift();
 
-print('To be out not to be? ${random.nextBool()?"yes":"no"}');
+print('To be out not to be? ${random.nextBool() ? "yes" : "no"}');
 
 print(random.nextInt(100));
 print(random.nextDouble());

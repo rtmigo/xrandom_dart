@@ -132,6 +132,8 @@ void main(List<String> arguments) {
 
     rows.addAll(otherRows);
 
+//    print('To be out not to be? ${random.nextBool() ? "yes" : "no"}');
+
     print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
   }
 
