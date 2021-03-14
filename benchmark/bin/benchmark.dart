@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: BSD-3-Clause
 
+
 import 'dart:math';
 
 import 'package:xorshift/xorshift.dart';
@@ -154,7 +155,4 @@ void main(List<String> arguments) {
     DoWhat.nextDouble,
     DoWhat.nextDoubleFast,
   ]);
-
-
-
 }
