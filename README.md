@@ -23,7 +23,7 @@ Generating 100 million of random numbers with AOT-compiled binary.
 
 # Simplicity
 
-All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
+It's compatible with the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
 
 ``` dart
 import 'package:xrandom/xrandom.dart';
