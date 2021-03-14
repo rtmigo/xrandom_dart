@@ -17,11 +17,11 @@ Generating 100 million of random numbers. Time is in milliseconds. Lower is bett
 
 | Class              | nextBool | nextInt | nextDouble | next32 | next64 |
 |--------------------|----------|---------|------------|--------|--------|
-| Random (dart:math) |   2330   |  2465   |    3223    |   -    |   -    |
-| Xorshift32         |   1468   |  1303   |    1607    |  714   |   -    |
-| Xorshift64         |   1488   |  2496   |    4462    |  1847  |  2536  |
-| Xorshift128        |   1470   |  2287   |    2864    |  1723  |   -    |
-| Xorshift128Plus    |   1503   |  2775   |    4098    |  2151  |  3047  |
+| Random (dart:math) |   2284   |  2320   |    3227    |   -    |   -    |
+| Xorshift32         |   1416   |  1288   |    1323    |  740   |   -    |
+| Xorshift64         |   1461   |  2313   |    3671    |  1690  |  2259  |
+| Xorshift128        |   1451   |  1959   |    1934    |  1374  |   -    |
+| Xorshift128Plus    |   1492   |  2707   |    4079    |  2146  |  3009  |
 
 Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
 

@@ -48,11 +48,15 @@ class Xorshift128Plus extends UniRandom64
     // DartV1: _S1 = s1 ^ s0 ^ (s1.unsignedRightShift(18)) ^ (s0.unsignedRightShift(5)); // b, c
 
     _S1 = s1 ^ s0
-        ^ ( //s1.unsignedRightShift(18)
-            s1 >= 0 ? s1 >> 18 : ((s1 & INT64_MAX_POSITIVE) >> 18) | (1 << (63 - 18))
+        ^ ( // V1: s1.unsignedRightShift(18)
+            // V2: s1 >= 0 ? s1 >> 18 : ((s1 & INT64_MAX_POSITIVE) >> 18) | (1 << (63 - 18))
+            (s1 >> 18) & ~(-1 << (64 - 18))
+            //((s1 >= 0) ? s1 >> (n) : ~(~s1 >> (n)))
           )
-        ^ (// s0.unsignedRightShift(5)
-          s0 >= 0 ? s0 >> 5 : ((s0 & INT64_MAX_POSITIVE) >> 5) | (1 << (63 - 5))
+        ^ ( // V1: s0.unsignedRightShift(5)
+            // V2: s0 >= 0 ? s0 >> 5 : ((s0 & INT64_MAX_POSITIVE) >> 5) | (1 << (63 - 5))
+            (s0 >> 5) & ~(-1 << (64 - 5))
+            //((this >= 0) ? this >> (n) : ~(~this >> (n)))
           ); // b, c
 
 
