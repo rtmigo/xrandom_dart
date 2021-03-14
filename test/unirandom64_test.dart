@@ -5,9 +5,9 @@
 import 'dart:io';
 
 import "package:test/test.dart";
-import 'package:xorshift/src/00_ints.dart';
-import 'package:xorshift/src/xorshift32.dart';
-import 'package:xorshift/src/xorshift64.dart';
+import 'package:xrandom/src/00_ints.dart';
+import 'package:xrandom/src/xorshift32.dart';
+import 'package:xrandom/src/xorshift64.dart';
 
 import 'helper.dart';
 import 'reference.dart';

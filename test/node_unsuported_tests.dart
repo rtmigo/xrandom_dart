@@ -4,13 +4,13 @@
 @TestOn('node')
 
 import "package:test/test.dart";
-import 'package:xorshift/src/00_errors.dart';
-import 'package:xorshift/src/xorshift64.dart';
-import 'package:xorshift/src/xorshift128plus.dart';
+import 'package:xrandom/src/00_errors.dart';
+import 'package:xrandom/src/xorshift64.dart';
+import 'package:xrandom/src/xorshift128plus.dart';
 
 void main() {
   test("64", () {
     expect(()=>Xorshift64.deterministic(), throwsA(isA<Unsupported64Error>()));
-    expect(()=>Xorshift128Plus.deterministic(), throwsA(isA<Unsupported64Error>()));
+    expect(()=>Xorshift128p.deterministic(), throwsA(isA<Unsupported64Error>()));
   });
 }

@@ -5,8 +5,8 @@
 import 'dart:math';
 
 import 'package:test/test.dart';
-import 'package:xorshift/src/10_random_base.dart';
-import 'package:xorshift/src/00_ints.dart';
+import 'package:xrandom/src/10_random_base.dart';
+import 'package:xrandom/src/00_ints.dart';
 
 import 'reference.dart';
 

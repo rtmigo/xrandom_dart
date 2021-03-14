@@ -3,10 +3,10 @@
 
 import 'dart:math';
 
-import 'package:xorshift/src/seeding.dart';
+import 'package:xrandom/src/seeding.dart';
 
 import '00_ints.dart';
-import 'package:xorshift/src/10_random_base.dart';
+import 'package:xrandom/src/10_random_base.dart';
 
 
 /// Random number generator based on `xoshiro128++ 1.0` algorithm by D. Blackman and

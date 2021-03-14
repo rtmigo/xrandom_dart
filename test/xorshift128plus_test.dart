@@ -5,8 +5,8 @@
 @TestOn('vm')
 
 import "package:test/test.dart";
-import 'package:xorshift/src/00_ints.dart';
-import 'package:xorshift/src/xorshift128plus.dart';
+import 'package:xrandom/src/00_ints.dart';
+import 'package:xrandom/src/xorshift128plus.dart';
 
 import 'helper.dart';
 import 'reference.dart';
@@ -39,24 +39,24 @@ void main() {
   });
 
   test("seed A", () {
-    final random = Xorshift128Plus(1, 2);
+    final random = Xorshift128p(1, 2);
     compareWithReference64(random, 'xorshift128plus (seed 1 2)');
   });
 
   test("seed B", () {
-    final random = Xorshift128Plus(42, 777);
+    final random = Xorshift128p(42, 777);
     compareWithReference64(random, 'xorshift128plus (seed 42 777)');
   });
 
   test("seed C", () {
-    final random = Xorshift128Plus(8378522730901710845, 1653112583875186020);
+    final random = Xorshift128p(8378522730901710845, 1653112583875186020);
     compareWithReference64(random, 'xorshift128plus (seed 8378522730901710845 1653112583875186020)');
   });
 
-  testCommonRandom(()=>Xorshift128Plus());
+  testCommonRandom(()=>Xorshift128p());
 
   test("predefined next", () {
-    final random = Xorshift128Plus.deterministic();
+    final random = Xorshift128p.deterministic();
     expect(
         skipAndTake(()=>random.nextInt64().toHexUint64(), 5000, 3),
         ['1F1CCFAF5A83DC2A', 'AE8708051CB834DF', '897E4E4BA735BC15']
@@ -64,7 +64,7 @@ void main() {
   });
 
   test("predefined double", () {
-    final random = Xorshift128Plus.deterministic();
+    final random = Xorshift128p.deterministic();
 
     // check the first values are not zeroes
     expect(
@@ -82,7 +82,7 @@ void main() {
   test("madsen double", () {
 
     final madsen = madsenSample["double"]!["1-2"]!;
-    final random = Xorshift128Plus(1, 2);
+    final random = Xorshift128p(1, 2);
 
     for (String expectedStr in madsen)
       expect(random.nextDouble(), double.parse(expectedStr));
@@ -90,9 +90,9 @@ void main() {
   });
 
   test("create without args", ()  async {
-    final random1 = Xorshift128Plus();
+    final random1 = Xorshift128p();
     await Future.delayed(Duration(milliseconds: 2));
-    final random2 = Xorshift128Plus();
+    final random2 = Xorshift128p();
 
     expect(
         [random1.nextInt64(), random1.nextInt64()],

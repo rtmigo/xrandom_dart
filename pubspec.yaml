@@ -1,8 +1,8 @@
-name: xorshift
+name: xrandom
 description: "Xorshift random number generators: xorshift32, xorshift64, xorshift128 and xorshift128+"
 version: 0.0.1
 author: Art Galkin
-homepage: https://github.com/rtmigo/xorshift
+homepage: https://github.com/rtmigo/xrandom
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

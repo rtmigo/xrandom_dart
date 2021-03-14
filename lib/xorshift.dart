@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-export 'src/xorshift128plus.dart' show Xorshift128Plus;
+export 'src/xorshift128plus.dart' show Xorshift128p;
 export 'src/xorshift128.dart' show Xorshift128;
 export 'src/xorshift64.dart' show Xorshift64;
 export 'src/xorshift32.dart' show Xorshift32;

@@ -3,16 +3,16 @@
 
 import 'dart:math';
 
-import 'package:xorshift/src/seeding.dart';
+import 'package:xrandom/src/seeding.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
-import 'package:xorshift/src/10_random_base.dart';
+import 'package:xrandom/src/10_random_base.dart';
 
 /// Random number generator based on `xorshift128+` algorithm by S.Vigna (2015).
 /// The reference implementation in C can be found in <https://arxiv.org/abs/1404.0390> (V3).
-class Xorshift128Plus extends RandomBase64 {
-  Xorshift128Plus([int? a, int? b]) {
+class Xorshift128p extends RandomBase64 {
+  Xorshift128p([int? a, int? b]) {
     if (!INT64_SUPPORTED) {
       throw Unsupported64Error();
     }
@@ -83,7 +83,7 @@ class Xorshift128Plus extends RandomBase64 {
   static final int _deterministicSeedA = BigInt.parse("8378522730901710845").toInt();
   static final int _deterministicSeedB = BigInt.parse("1653112583875186020").toInt();
 
-  static Xorshift128Plus deterministic() {
-    return Xorshift128Plus(_deterministicSeedA, _deterministicSeedB);
+  static Xorshift128p deterministic() {
+    return Xorshift128p(_deterministicSeedA, _deterministicSeedB);
   }
 }

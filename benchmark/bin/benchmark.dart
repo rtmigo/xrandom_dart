@@ -4,7 +4,7 @@
 
 import 'dart:math';
 
-import 'package:xorshift/xorshift.dart';
+import 'package:xrandom/xorshift.dart';
 
 import 'nullsafe_tabulate.dart';
 
@@ -88,7 +88,7 @@ void main(List<String> arguments) {
         Xorshift32.deterministic(),
         Xorshift64.deterministic(),
         Xorshift128.deterministic(),
-        Xorshift128Plus.deterministic(),
+        Xorshift128p.deterministic(),
         Xoshiro128pp.deterministic(),
       ];
 

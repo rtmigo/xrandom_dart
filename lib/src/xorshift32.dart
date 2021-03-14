@@ -3,8 +3,8 @@
 
 import 'dart:math';
 
-import 'package:xorshift/src/10_random_base.dart';
-import 'package:xorshift/src/seeding.dart';
+import 'package:xrandom/src/10_random_base.dart';
+import 'package:xrandom/src/seeding.dart';
 
 /// Random number generator based on `xorshift32` algorithm by G.Marsaglia (2003).
 /// The reference implementation in C can be found in

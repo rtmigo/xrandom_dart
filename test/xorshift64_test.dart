@@ -7,8 +7,8 @@
 import 'dart:io';
 
 import "package:test/test.dart";
-import 'package:xorshift/src/00_ints.dart';
-import 'package:xorshift/src/xorshift64.dart';
+import 'package:xrandom/src/00_ints.dart';
+import 'package:xrandom/src/xorshift64.dart';
 
 // xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)
 // 'xorshift128 (seed 5 23 42 777)'
