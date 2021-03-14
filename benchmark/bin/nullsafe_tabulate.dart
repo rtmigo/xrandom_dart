@@ -1,4 +1,6 @@
-// TODO make a library
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 import 'dart:math';
 
