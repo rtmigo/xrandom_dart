@@ -13,7 +13,7 @@ code and state.
 
 # Speed
 
-Generating 100 million of random numbers. Lower is better. Time is in milliseconds.
+Generating 100 million of random numbers. 
 
 | Time (lower is better)              | nextInt | nextDouble | nextBool |
 |--------------------|---------|------------|----------|
@@ -24,7 +24,7 @@ Generating 100 million of random numbers. Lower is better. Time is in millisecon
 | Xorshift128Plus    |  2086   |    3064    |   1419   |
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04.
-
+Time is measured in milliseconds.
 # Simplicity
 
 All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
