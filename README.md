@@ -18,7 +18,7 @@ Generating 100 million of random numbers with AOT-compiled binary.
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
 | Random (dart:math)     |  2323   |    3107    |   2264   |
-| Xrandom                |  1269   |    1930    |   1467   |
+| Xorshift32             |  1269   |    1930    |   1467   |
 
 
 # Simplicity
@@ -62,7 +62,7 @@ sequences can be relied upon. *(but not until the library reaches stable release
 
 | Class                            | 64-bit platforms | JavaScript |
 |----------------------------------|------------------|------------|
-| **`Xrandom`** aka **`Xorshift32`**      | **yes**              | **yes**        |
+| **`Xorshift32`**      | **yes**              | **yes**        |
 | **`Xorshift128`**                    | **yes**              | **yes**        |
 | **`Xoshiro128pp`**                   | **yes**              | **yes**         |
 | `Xorshift64`                     | yes              | no         |
@@ -81,7 +81,6 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 
 | Class             | Algorithm    | Algorithm author | Published |
 |-------------------|--------------|------------------|------|
-| `Xrandom`        | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift32`      | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift64`      | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift128`     | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
@@ -90,9 +89,11 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 
 # Speed optimizations
 
-The `nextDoubleFast()` is a lightning fast mapping of 32-bit integers to a `double` in reduced detail.
+The `nextFloat()` is a faster mapping of 32-bit integers to a `double`.
+Since the source number is a 32-bit integer, the result is limited to 
+a maximum of 2^32-1 values.
 
-| Time (lower is better) | nextDouble | nextDoubleFast |
+| Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|----------------|
 | Random (dart:math)     |    3107    |       -        |
 | Xorshift32             |    1930    |      696       |
