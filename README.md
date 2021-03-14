@@ -1,9 +1,9 @@
 ![Generic badge](https://img.shields.io/badge/status-draft-red.svg)
-[![Actions Status](https://github.com/rtmigo/xorshift/workflows/unittest/badge.svg?branch=master)](https://github.com/rtmigo/xorshift/actions)
+[![Actions Status](https://github.com/rtmigo/xrandom/workflows/unittest/badge.svg?branch=master)](https://github.com/rtmigo/xrandom/actions)
 ![Generic badge](https://img.shields.io/badge/tested_on-Windows_|_MacOS_|_Ubuntu-blue.svg)
 ![Generic badge](https://img.shields.io/badge/tested_on-VM_|_JS-blue.svg)
 
-# [xorshift](https://github.com/rtmigo/xorshift)
+# [xrandom](https://github.com/rtmigo/xrandom)
 
 This library implements [Xorshift](https://en.wikipedia.org/wiki/Xorshift) random number generators
 in Dart.
