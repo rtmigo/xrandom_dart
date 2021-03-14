@@ -5,14 +5,15 @@
 import 'dart:math';
 import '00_ints.dart';
 
-/// Scales an integer from range `(1, MAX_UINT32]` to `[0.0, 1.0)` arithmetically.
-double scaleUint32toDouble(int x)
-{
-  // kept here for reference. Not used for now
-  if (x > 0xFFFFFFFF || x <= 0)
-    throw RangeError.value(x);
-  return (x - 1) / UINT32_MAX;
-}
+// /// Scales an integer from range `(1, MAX_UINT32]` to `[0.0, 1.0)` arithmetically.
+// double scaleUint32toDouble(int x)
+// {
+//   // kept here for reference. Not used for now
+//   if (x > 0xFFFFFFFF || x <= 0) {
+//     throw RangeError.value(x);
+//   }
+//   return (x - 1) / UINT32_MAX;
+// }
 
 abstract class RandomBase32 implements Random {
 
@@ -30,10 +31,11 @@ abstract class RandomBase32 implements Random {
   int nextInt(int max) {
     // slightly modified _Random.nextInt() from dart:math (https://git.io/JqCbB)
 
+    // todo loosen this restriction and test possible ranges
+
     const limit = 0x3FFFFFFF;
     if ((max <= 0) || ((max > limit) && (max > _POW2_32))) {
-      throw new RangeError.range(
-          max, 1, _POW2_32, "max", "Must be positive and <= 2^32");
+      throw RangeError.range(max, 1, _POW2_32, 'max', 'Must be positive and <= 2^32');
     }
 
     if ((max & -max) == max) {
@@ -143,6 +145,7 @@ abstract class RandomBase64 extends RandomBase32 {
   ///
   /// For 64-bit algorithms it sequentially returns the lower and higher bytes
   /// of the raw output of the generator.
+  @override
   int nextInt32() {
     
     // we assume that the random generator never returns 0,
