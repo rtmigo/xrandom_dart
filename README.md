@@ -81,7 +81,7 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
  
 # Classes
 
-| Class             | Algorithm    | Algorithm author | Year |
+| Class             | Algorithm    | Algorithm author | Published |
 |-------------------|--------------|------------------|------|
 | `Xorshift`        | xorshift32   | George Marsaglia | 2003 |
 | `Xorshift32`      | xorshift32   | George Marsaglia | 2003 |
