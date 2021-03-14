@@ -5,8 +5,7 @@
 
 # [xrandom](https://github.com/rtmigo/xrandom)
 
-This library implements [Xorshift](https://en.wikipedia.org/wiki/Xorshift) random number generators
-in Dart.
+Fast random number generators from the [Xorshift](https://en.wikipedia.org/wiki/Xorshift) family in Dart.
 
 Xorshift algorithms are known among the **fastest random number generators**, requiring very small
 code and state.
