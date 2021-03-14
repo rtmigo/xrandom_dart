@@ -19,10 +19,7 @@ Generating 100 million of random numbers with AOT-compiled binary.
 |------------------------|---------|------------|----------|
 | Random (dart:math)     |  2323   |    3107    |   2264   |
 | Xorshift32             |  1269   |    1930    |   1467   |
-| Xorshift64             |  1974   |    2164    |   1393   |
 | Xorshift128            |  1967   |    3164    |   1479   |
-| Xorshift128Plus        |  2015   |    3023    |   1413   |
-| Xoshiro128pp           |  2546   |    4535    |   1500   |
 
 Oh yeah.
 
@@ -123,6 +120,16 @@ xrandom.nextInt64();  // 64-bit signed
 | Xorshift128Plus        |  2015   |   1364    |   1521    |
 | Xoshiro128pp           |  2546   |   2048    |     -     |
 
+# More benchmarks
+
+| Time (lower is better) | nextInt | nextDouble | nextBool |
+|------------------------|---------|------------|----------|
+| Random (dart:math)     |  2323   |    3107    |   2264   |
+| Xorshift32             |  1269   |    1930    |   1467   |
+| Xorshift64             |  1974   |    2164    |   1393   |
+| Xorshift128            |  1967   |    3164    |   1479   |
+| Xorshift128Plus        |  2015   |    3023    |   1413   |
+| Xoshiro128pp           |  2546   |    4535    |   1500   |
 -----
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04.
 Time is measured in milliseconds.
