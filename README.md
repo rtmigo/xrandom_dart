@@ -25,6 +25,20 @@ Generating 100 million of random numbers. Lower is better. Time is in millisecon
 
 The benchmark was compiled to native binary. Executed on AMD A9-9420e with Ubuntu 20.04.
 
+# Simplicity
+
+All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
+
+``` dart
+import 'package:xorshift/xorshift.dart';
+
+Random random = Xorshift();
+
+var a = random.nextBool(); 
+var b = random.nextDouble();
+var c = random.nextInt(n);
+```
+
 # Determinism
 
 Xorshift's classes have a `deterministic` method. By creating like that, you'll get same 
@@ -46,19 +60,7 @@ seed does not protect you from `dart:math` implementation updates. In contrast t
 Xorshift's `deterministic`
 sequences can be relied upon. *(but not until the library reaches stable release status)*
 
-# Simplicity
 
-All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
-
-``` dart
-import 'package:xorshift/xorshift.dart';
-
-Random random = Xorshift();
-
-var a = random.nextBool(); 
-var b = random.nextDouble();
-var c = random.nextInt(n);
-```
 
 # Compatibility
 
