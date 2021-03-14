@@ -83,7 +83,6 @@ abstract class UniRandom32 implements Random {
           max, 1, _POW2_32, "max", "Must be positive and <= 2^32");
     }
 
-
     if ((max & -max) == max) {
       // fast case for powers of two
       // like in dart:math https://git.io/JqCbB
@@ -119,7 +118,6 @@ abstract class UniRandom32 implements Random {
     assert(0.0<=one && one<1.0);
     return one;
   }
-
 
 
   @override

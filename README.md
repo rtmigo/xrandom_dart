@@ -15,29 +15,13 @@ code and state.
 
 Generating 100 million of random numbers. Time is in milliseconds. Lower is better.
 
-| Class              | nextBool | nextInt | nextDouble | next32 | next64 |
-|--------------------|----------|---------|------------|--------|--------|
-| Random (dart:math) |   2284   |  2320   |    3227    |   -    |   -    |
-| Xorshift32         |   1416   |  1288   |    1323    |  740   |   -    |
-| Xorshift64         |   1461   |  2313   |    3671    |  1690  |  2259  |
-| Xorshift128        |   1451   |  1959   |    1934    |  1374  |   -    |
-| Xorshift128Plus    |   1492   |  2707   |    4079    |  2146  |  3009  |
-
-| Class              | nextBool | nextInt | nextDouble | next32 | next64 |
-|--------------------|----------|---------|------------|--------|--------|
-| Random (dart:math) |   2282   |  2414   |    3432    |   -    |   -    |
-| Xorshift32         |   1417   |  1232   |    1294    |  698   |   -    |
-| Xorshift64         |   1476   |  2346   |    3672    |  1678  |  2116  |
-| Xorshift128        |   1425   |  1881   |    1913    |  1308  |   -    |
-| Xorshift128Plus    |   1510   |  2012   |    2954    |  1384  |  1595  |
-| Class              | nextBool | nextInt | nextDouble | next32 | next64 |
-|--------------------|----------|---------|------------|--------|--------|
-
-| Random (dart:math) |   2322   |  2811   |    3251    |   -    |   -    |
-| Xorshift32         |   1474   |  1277   |    1306    |  714   |   -    |
-| Xorshift64         |   1388   |  1996   |    3176    |  1345  |  1440  |
-| Xorshift128        |   1498   |  1871   |    1928    |  1350  |   -    |
-| Xorshift128Plus    |   1445   |  2066   |    3053    |  1423  |  1577  |
+| Class              | nextInt | nextDouble | nextBool | nextInt32 | nextInt64 | nextDoubleFast |
+|--------------------|---------|------------|----------|-----------|-----------|----------------|
+| Random (dart:math) |  2392   |    3170    |   2281   |     -     |     -     |       -        |
+| Xorshift32         |  1246   |    1856    |   1460   |    765    |     -     |      679       |
+| Xorshift64         |  1944   |    3023    |   1350   |   1311    |   1371    |      1373      |
+| Xorshift128        |  1821   |    3202    |   1497   |   1399    |     -     |      1323      |
+| Xorshift128Plus    |  2046   |    3025    |   1402   |   1392    |   1489    |      1399      |
 
 Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
 
