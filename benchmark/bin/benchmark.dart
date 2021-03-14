@@ -14,7 +14,7 @@ int measureTime(Random r, DoWhat dbl) {
 
   final sw = Stopwatch()..start();
 
-  const N = 100000; //00000;
+  const N = 10000000000;
 
   switch (dbl) {
     case DoWhat.nextDouble:
@@ -140,11 +140,15 @@ void main(List<String> arguments) {
     DoWhat.nextBool
   ]);
 
+  print('');
+
   printColumns([
     DoWhat.nextInt,
     DoWhat.nextInt32,
     DoWhat.nextInt64,
   ]);
+
+  print('');
 
   printColumns([
     DoWhat.nextDouble,
