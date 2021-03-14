@@ -1,7 +1,6 @@
 name: xrandom
-description: "Xorshift random number generators: xorshift32, xorshift64, xorshift128 and xorshift128+"
+description: "Fast random number generators: xorshift32, xorshift64, xorshift128 and xorshift128+"
 version: 0.0.1
-author: Art Galkin
 homepage: https://github.com/rtmigo/xrandom
 
 environment:
@@ -12,6 +11,3 @@ dependencies:
 
 dev_dependencies:
   test: ^1.5.1
-
-
-

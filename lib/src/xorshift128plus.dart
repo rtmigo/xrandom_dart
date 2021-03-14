@@ -17,16 +17,16 @@ class Xorshift128p extends RandomBase64 {
       throw Unsupported64Error();
     }
     if (a != null || b != null) {
-      this._S0 = a!;
-      this._S1 = b!;
+      _S0 = a!;
+      _S1 = b!;
       if (a == 0 && b == 0) {
         throw ArgumentError("The seed should not consist of only zeros..");
       }
     } else {
       final now = DateTime.now().microsecondsSinceEpoch;
       // just creating a mess
-      this._S0 = mess2to64A(now, this.hashCode);
-      this._S1 = mess2to64B(now, this.hashCode);
+      _S0 = mess2to64A(now, hashCode);
+      _S1 = mess2to64B(now, hashCode);
     }
   }
 
@@ -39,9 +39,9 @@ class Xorshift128p extends RandomBase64 {
     // https://arxiv.org/abs/1404.0390 [v2] Mon, 14 Dec 2015 - page 6
     // https://arxiv.org/abs/1404.0390 [v3] Mon, 23 May 2016 - page 6
 
-    int s1 = _S0;
-    final int s0 = _S1;
-    final int result = s0 + s1;
+    var s1 = _S0;
+    final s0 = _S1;
+    final result = s0 + s1;
     _S0 = s0;
     s1 ^= s1 << 23; // a
 
@@ -62,7 +62,7 @@ class Xorshift128p extends RandomBase64 {
 
   @override
   double nextDouble() {
-    int x = this.nextInt64();
+    var x = nextInt64();
 
     // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
     // conversion" of Uint64 to double like that:
@@ -89,9 +89,9 @@ class Xorshift128p extends RandomBase64 {
     // We started with the fact that this is an alternative method without multiplication.
     // Now we have two multiplications and a few extra operations.
 
-    int resL = x & 0xffffffff;
+    final resL = x & 0xffffffff;
     //int resU = x.unsignedRightShift(32);
-    int resU = x >= 0 ? x >> 32 : ((x & INT64_MAX_POSITIVE) >> 32) | (1 << (63 - 32));
+    final resU = x >= 0 ? x >> 32 : ((x & INT64_MAX_POSITIVE) >> 32) | (1 << (63 - 32));
 
     return resU * 2.3283064365386963e-10 + (resL >> 12) * 2.220446049250313e-16;
   }

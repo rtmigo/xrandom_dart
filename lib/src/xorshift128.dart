@@ -22,8 +22,9 @@ class Xorshift128 extends RandomBase32
       RangeError.checkValueInInterval(c!, 0, UINT32_MAX);
       RangeError.checkValueInInterval(d!, 0, UINT32_MAX);
 
-      if (a==0 && b==0 && c==0 && d==0)
+      if (a==0 && b==0 && c==0 && d==0) {
         throw ArgumentError("The seed should not consist of only zeros..");
+      }
 
       _a = a;
       _b = b;
@@ -51,7 +52,7 @@ class Xorshift128 extends RandomBase32
     // rewritten for Dart from snippet
     // found at https://en.wikipedia.org/wiki/Xorshift
 
-    int t = _d;
+    var t = _d;
     final s = _a;
     _d = _c;
     _c = _b;

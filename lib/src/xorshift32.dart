@@ -15,10 +15,11 @@ class Xorshift32 extends RandomBase32
   {
     if (seed!=null) {
       RangeError.checkValueInInterval(seed, 1, 0xFFFFFFFF);
-      this._state = seed;
+      _state = seed;
     }
-    else
-      this._state = mess2to64A(DateTime.now().millisecondsSinceEpoch, this.hashCode)  & 0xFFFFFFFF;
+    else {
+      _state = mess2to64A(DateTime.now().millisecondsSinceEpoch, hashCode) & 0xFFFFFFFF;
+    }
   }
   late int _state;
 
@@ -33,7 +34,7 @@ class Xorshift32 extends RandomBase32
     // rewritten for Dart from snippet
     // found at https://en.wikipedia.org/wiki/Xorshift
 
-    int x = _state;
+    var x = _state;
 
     x ^= (x << 13);
     x &= 0xFFFFFFFF; // added

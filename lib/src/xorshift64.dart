@@ -19,15 +19,14 @@ class Xorshift64 extends RandomBase64 {
     if (!INT64_SUPPORTED) {
       throw Unsupported64Error();
     }
-
     if (seed != null) {
       if (seed == 0) {
         throw RangeError("The seed must be greater than 0.");
       }
-
-      this._state = seed;
-    } else
-      this._state = mess2to64A(DateTime.now().millisecondsSinceEpoch, this.hashCode);
+      _state = seed;
+    } else {
+      _state = mess2to64A(DateTime.now().millisecondsSinceEpoch, hashCode);
+    }
   }
 
   late int _state;
@@ -40,7 +39,7 @@ class Xorshift64 extends RandomBase64 {
     // rewritten for Dart from snippet
     // found at https://en.wikipedia.org/wiki/Xorshift
 
-    int x = _state;
+    var x = _state;
     x ^= x << 13;
     // V1: x ^= x.unsignedRightShift(7);
     // V2: x ^= x >= 0 ? x >> 7 : ((x & INT64_MAX_POSITIVE) >> 7) | (1 << (63 - 7));

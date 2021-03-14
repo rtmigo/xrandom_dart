@@ -4,7 +4,7 @@
 
 import 'dart:math';
 
-import 'package:xrandom/xorshift.dart';
+import 'package:xrandom/xrandom.dart';
 
 import 'nullsafe_tabulate.dart';
 
