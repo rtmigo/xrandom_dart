@@ -46,6 +46,22 @@ Xorshift is a very specific algorithm. Therefore, the predictability of the
 Xorshift's `deterministic`
 sequences can be relied upon. *(but not until the library reaches stable release status)*
 
+# Usage
+
+All classes implement the standard `Random` from `dart:math`, so they can be used in the same way.
+
+``` dart
+import 'package:xorshift/xorshift.dart';
+
+Random random = Xorshift();
+print(random.nextInt(100));
+print(random.nextDouble());
+```
+
+In addition, they have a `next32()` method that returns an unsigned 32-bit value stored in `int`.
+Some classes also have `next64()`. It returns 64-bit random signed `int`. The 64-bit numbers are only
+supported on platforms other than JavaScript.
+
 # Compatibility
 
 | Class                            | 64-bit platforms | JavaScript |
@@ -62,22 +78,6 @@ JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that t
 similarly.
 
 Testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE modes.
-
-# Usage
-
-All classes implement the standard `Random` from `dart:math`, so they can be used in the same way.
-
-``` dart
-import 'package:xorshift/xorshift.dart';
-
-Random random = Xorshift();
-print(random.nextInt(100));
-print(random.nextDouble());
-```
-
-In addition, they have a `next32()` method that returns an unsigned 32-bit value stored in `int`.
-Some classes also have `next64()`. It returns 64-bit random signed `int`. The 64-bit numbers are only
-supported on platforms other than JavaScript.
  
 # Classes
 
