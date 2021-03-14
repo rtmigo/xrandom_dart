@@ -14,6 +14,8 @@
 #define VALUES_PER_SAMPLE 1000
 
 ////////////////////////////////////////////////////////////////////////////////
+// XORSHIFT32
+//
 // sample from https://en.wikipedia.org/wiki/Xorshift
 //
 // Refactored from
@@ -55,6 +57,8 @@ void print32(uint32_t seed)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// XORSHIFT64
+//
 // sample from https://en.wikipedia.org/wiki/Xorshift
 //
 //	Refactored from
@@ -95,6 +99,8 @@ void print64(uint64_t seed)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// XORSHIFT128
+//
 // sample from https://en.wikipedia.org/wiki/Xorshift
 //
 //	Refactored from
@@ -146,6 +152,9 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// XORSHIFT128+ (V1 ?)
+// Not implemented in xrandom.
+//
 // Code found on from Wikipedia page.
 //
 // It's from:
@@ -171,6 +180,9 @@ uint64_t xorshift128p(struct xorshift128p_state *state)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+//	XORSHIFT128+ (V2 ?)
+//  Implemented in xrandom as Xorshift128p.
+//
 //	Sebastiano Vigna
 //	Further scramblings of Marsaglia’s xorshift generators
 //	https://arxiv.org/abs/1404.0390 [v2] Mon, 14 Dec 2015 - page 6
@@ -202,15 +214,14 @@ uint64_t xorshift128plus_int(uint64_t *s) {
 	return result;
 }
 
-/* code from https://github.com/AndreasMadsen/xorshift/blob/master/reference.c
-	this if not from the article
-	double xorshift128plus_double(void) {
-		const uint64_t x = xorshift128plus_int();
-		const uint64_t x_doublefied = UINT64_C(0x3FF) << 52 | x >> 12;
+// code from https://github.com/AndreasMadsen/xorshift/blob/master/reference.c
+// this is not from the article
+// double xorshift128plus_double(void) {
+// 	const uint64_t x = xorshift128plus_int();
+// 	const uint64_t x_doublefied = UINT64_C(0x3FF) << 52 | x >> 12;
+// 	return *((double *) &x_doublefied) - 1.0;
+// } 
 
-		return *((double *) &x_doublefied) - 1.0;
-	}
-*/	
 
 // refactored to avoid global variables:
 double xorshift128plus_double(uint64_t *s) {
@@ -235,26 +246,22 @@ void print128plus(uint64_t a, uint64_t b)
     printf("],\n\n");
 }
 
-/* It it commented out because it was not needed for testing
-   the dart xorshift.
-
-void print128plus_double(uint64_t a, uint64_t b)
-{
-    printf("const xorshift128plus_double_%d_%d = [\n",  a, b);
-
-	uint64_t s[2];
-
-    s[0] = a;
-    s[1] = b;
-
-    for (int i=0; i<VALUES_PER_SAMPLE; ++i)
-        printf("  \"%.20e\",\n", xorshift128plus_double(&s)); 
-
-    printf("];\n\n");
-}*/
+// It it commented out because it was not needed for testing
+// the dart xorshift.
+// void print128plus_double(uint64_t a, uint64_t b)
+// {
+//     printf("const xorshift128plus_double_%d_%d = [\n",  a, b);
+// 	uint64_t s[2];
+//     s[0] = a;
+//     s[1] = b;
+//     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
+//         printf("  \"%.20e\",\n", xorshift128plus_double(&s)); 
+//     printf("];\n\n");
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
-
+// XOSHIRO128++ 1.0
+//
 // https://prng.di.unimi.it/xoshiro128plusplus.c
 // Written in 2019 by David Blackman and Sebastiano Vigna (vigna@acm.org) CC-0
 //
@@ -348,7 +355,3 @@ int main()
 
 	printf("};");
 }
-
-// TODO: Add xoshiro algorithms
-// https://prng.di.unimi.it/xoshiro256plus.c
-// https://prng.di.unimi.it/xoshiro256plusplus.c
