@@ -30,7 +30,7 @@ Oh yeah.
 All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
 
 ``` dart
-import 'package:xorshift/xorshift.dart';
+import 'package:xrandom/xrandom.dart';
 
 Random xrandom = Xorshift();
 
