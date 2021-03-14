@@ -14,7 +14,7 @@ int measureTime(Random r, DoWhat dbl) {
 
   final sw = Stopwatch()..start();
 
-  const N = 1000; //00000;
+  const N = 100000; //00000;
 
   switch (dbl) {
     case DoWhat.nextDouble:
