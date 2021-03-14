@@ -89,6 +89,7 @@ void main(List<String> arguments) {
         Xorshift64.deterministic(),
         Xorshift128.deterministic(),
         Xorshift128Plus.deterministic(),
+        Xoshiro128pp.deterministic(),
       ];
 
   for (var experiment = 0; experiment < 4; ++experiment) {

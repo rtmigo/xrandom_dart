@@ -255,6 +255,59 @@ void print128plus_double(uint64_t a, uint64_t b)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// https://prng.di.unimi.it/xoshiro128plusplus.c
+// Written in 2019 by David Blackman and Sebastiano Vigna (vigna@acm.org) CC-0
+//
+// "This is xoshiro128++ 1.0, one of our 32-bit all-purpose, rock-solid
+//  generators. It has excellent speed, a state size (128 bits) that is
+//  large enough for mild parallelism, and it passes all tests we are aware
+//  of."
+
+static inline uint32_t xoshiro128pp_rotl(const uint32_t x, int k) {
+	return (x << k) | (x >> (32 - k));
+}
+
+
+//static uint32_t s[4];
+
+uint32_t xoshiro128pp(uint32_t* s) {
+	const uint32_t result = xoshiro128pp_rotl(s[0] + s[3], 7) + s[0];
+
+	const uint32_t t = s[1] << 9;
+
+	s[2] ^= s[0];
+	s[3] ^= s[1];
+	s[1] ^= s[2];
+	s[0] ^= s[3];
+
+	s[2] ^= t;
+
+	s[3] = xoshiro128pp_rotl(s[3], 11);
+
+	return result;
+}
+
+void printXoshiro128pp(uint32_t a, uint32_t b, uint32_t c, uint32_t d)
+{
+    printf("'xoshiro128++ (seed %08x %08x %08x %08x)': [\n", a, b, c, d);
+
+	uint32_t s[4];
+	s[0]=a;
+	s[1]=b;
+	s[2]=c;
+	s[3]=d;
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i)
+        printf("  \"%08x\",\n", xoshiro128pp(s));
+
+    printf("],\n\n");
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
 int main()
 {
     #define PI32 314159265
@@ -287,6 +340,11 @@ int main()
 	print128plus(1, 2);
 	print128plus(42, 777);
 	print128plus(8378522730901710845llu, 1653112583875186020llu);
+
+	printXoshiro128pp(1, 2, 3, 4);
+	printXoshiro128pp(5, 23, 42, 777);
+	printXoshiro128pp(1081037251u, 1975530394u, 2959134556u, 1579461830u);
+
 
 	printf("};");
 }

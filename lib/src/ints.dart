@@ -10,6 +10,11 @@ final int INT64_MAX_POSITIVE = BigInt.parse("0x7FFFFFFFFFFFFFFF").toInt();
 const UINT32_MAX = 0xFFFFFFFF;
 const INT64_SUPPORTED = (1<<62) > (1<<61); // false for JS, true for others
 
+String unsignedRightShiftCode(String x, String shift)
+{
+return '(// ($x) >>> ($shift)\n'
+    '($x) >> ($shift)) & ~(-1 << (64 - ($shift)) )';
+}
 
 
 extension BitInt on int {
@@ -48,6 +53,7 @@ extension BitInt on int {
       return x;
     }
   }
+
 
   int unsignedRightShift(int shift) {
 
