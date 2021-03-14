@@ -54,6 +54,9 @@ All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1
 import 'package:xorshift/xorshift.dart';
 
 Random random = Xorshift();
+
+print('To be out not to be? ${random.nextBool()?"yes":"no"}');
+
 print(random.nextInt(100));
 print(random.nextDouble());
 ```
