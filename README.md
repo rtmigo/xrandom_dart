@@ -97,13 +97,14 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 
 The `nextDoubleFast()` is a lightning fast mapping of 32-bit integers to a `double` in reduced detail.
 
-| Time (lower is better)              | nextDouble | nextDoubleFast |
-|--------------------|------------|----------------|
-| Random (dart:math) |    3227    |       -        |
-| Xorshift32         |    1955    |      694       |
-| Xorshift64         |    2228    |      1341      |
-| Xorshift128        |    3321    |      1309      |
-| Xorshift128Plus    |    3064    |      1387      |
+| Time (lower is better) | nextDouble | nextDoubleFast |
+|------------------------|------------|----------------|
+| Random (dart:math)     |    3107    |       -        |
+| Xorshift32             |    1930    |      696       |
+| Xorshift64             |    2164    |      1340      |
+| Xorshift128            |    3164    |      1293      |
+| Xorshift128Plus        |    3023    |      1373      |
+| Xoshiro128pp           |    4535    |      2086      |
 
 The `nextInt32()` and `nextInt64()` do not accept any arguments. They return the raw output of the RNGs.
 
@@ -114,12 +115,13 @@ xrandom.nextInt64();  // 64-bit signed
 ```
 
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
-|--------------------|---------|-----------|-----------|
-| Random (dart:math) |  2407   |     -     |     -     |
-| Xorshift32         |  1253   |    780    |     -     |
-| Xorshift64         |  2011   |   1367    |   1394    |
-| Xorshift128        |  1862   |   1344    |     -     |
-| Xorshift128Plus    |  2086   |   1424    |   1533    |
+|------------------------|---------|-----------|-----------|
+| Random (dart:math)     |  2323   |     -     |     -     |
+| Xorshift32             |  1269   |    767    |     -     |
+| Xorshift64             |  1974   |   1292    |   1381    |
+| Xorshift128            |  1967   |   1301    |     -     |
+| Xorshift128Plus        |  2015   |   1364    |   1521    |
+| Xoshiro128pp           |  2546   |   2048    |     -     |
 
 -----
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04.
