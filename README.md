@@ -23,7 +23,7 @@ Generating 100 million of random numbers. Lower is better. Time is in millisecon
 | Xorshift128        |  1862   |    3321    |   1518   |
 | Xorshift128Plus    |  2086   |    3064    |   1419   |
 
-The benchmark was compiled to native binary. Executed on AMD A9-9420e with Ubuntu 20.04.
+All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04.
 
 # Simplicity
 
