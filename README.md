@@ -15,7 +15,7 @@ code and state.
 
 Generating 100 million of random numbers. Lower is better. Time is in milliseconds.
 
-| Class              | nextInt | nextDouble | nextBool |
+| Time (lower is better)              | nextInt | nextDouble | nextBool |
 |--------------------|---------|------------|----------|
 | Random (dart:math) |  2407   |    3227    |   2329   |
 | Xorshift32         |  1253   |    1955    |   1506   |

@@ -106,7 +106,7 @@ void main(List<String> arguments) {
   void printColumns(List<DoWhat> whatz) {
     final rows = <List<String>>[];
 
-    final header = ['Class'];
+    final header = ['Time (lower is better)'];
     for (final x in whatz) {
       final str = x.toString();
       header.add(str.substring(str.lastIndexOf('.') + 1));
