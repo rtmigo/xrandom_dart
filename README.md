@@ -75,9 +75,10 @@ print(random.nextInt(100));
 print(random.nextDouble());
 ```
 
-In addition, they have a `next()` method that returns an `int` with no range restrictions. For some
-algorithms this is a 32-bit number, for another a 64-bit number.
-
+In addition, they have a `next32()` method that returns an unsigned 32-bit value stored in `int`.
+Some classes also have `next64()`. It returns 64-bit random signed `int`. The 64-bit numbers are only
+supported on platforms other than JavaScript.
+ 
 # Classes
 
 | Class             | Algorithm    | Author           | Year |
