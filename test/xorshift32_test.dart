@@ -54,6 +54,14 @@ void main() {
     );
   });
 
+  test("expected nextInt", () {
+    final random = Xorshift32.deterministic();
+    expect(
+        skipAndTake(()=>random.nextInt(1000), 0, 3),
+        [119, 240, 369]
+    );
+  });
+
   // test("predefined double", () {
   //   final random = Xorshift32.deterministic();
   //   expect(

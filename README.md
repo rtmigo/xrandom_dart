@@ -34,9 +34,9 @@ sequence of numbers every time.
 test('my test', () {
     final predictablyRandom = Xorshift.deterministic();
     // run this test twice ;)
-    expect(predictablyRandom.nextInt(1000), 543);
-    expect(predictablyRandom.nextInt(1000), 488);
-    expect(predictablyRandom.nextInt(1000), 284);    
+    expect(predictablyRandom.nextInt(1000), 119);
+    expect(predictablyRandom.nextInt(1000), 240);
+    expect(predictablyRandom.nextInt(1000), 369);    
 });    
 ```
 
