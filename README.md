@@ -33,7 +33,7 @@ sequence of numbers every time.
 ``` dart
 test('my test', () {
     final predictablyRandom = Xorshift.deterministic();
-    // results based on randoms are predictable now
+    // run this test twice ;)
     expect(predictablyRandom.nextInt(1000), 543);
     expect(predictablyRandom.nextInt(1000), 488);
     expect(predictablyRandom.nextInt(1000), 284);    
