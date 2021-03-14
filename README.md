@@ -23,6 +23,8 @@ Generating 100 million of random numbers with AOT-compiled binary.
 | Xorshift128        |  1862   |    3321    |   1518   |
 | Xorshift128Plus    |  2086   |    3064    |   1419   |
 
+Oh yeah.
+
 # Simplicity
 
 All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
