@@ -13,7 +13,7 @@ code and state.
 
 # Speed
 
-Generating 100 million of random numbers. Lower is better.
+Generating 100 million of random numbers. Time is in milliseconds. Lower is better.
 
 | Class              | nextBool | nextInt | nextDouble | next32 | next64 |
 |--------------------|----------|---------|------------|--------|--------|
