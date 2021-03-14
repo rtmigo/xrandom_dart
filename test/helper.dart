@@ -5,8 +5,8 @@
 import 'dart:math';
 
 import 'package:test/test.dart';
-import 'package:xorshift/src/unirandom.dart';
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/10_random_base.dart';
+import 'package:xorshift/src/00_ints.dart';
 
 import 'reference.dart';
 
@@ -15,7 +15,7 @@ String trimLeadingZeros(String s) {
   return s.replaceAll(new RegExp(r'^0+(?=.)'), '');
 }
 
-void compareWithReference32(UniRandom32 random, referenceKey) {
+void compareWithReference32(RandomBase32 random, referenceKey) {
   final refList = referenceData[referenceKey]!;
   for (final value in refList)
   {
@@ -24,7 +24,7 @@ void compareWithReference32(UniRandom32 random, referenceKey) {
   }
 }
 
-void compareWithReference64(UniRandom64 random, referenceKey) {
+void compareWithReference64(RandomBase64 random, referenceKey) {
   final refList = referenceData[referenceKey]!;
   for (final value in refList)
   {
@@ -45,13 +45,30 @@ List<String> referenceSignature(String referenceKey)
   return [list[0], list[1], list[2], list[500]];
 }
 
-void testCommonRandom(Random r) {
-  group("Common random ${r.runtimeType}", () {
-    test("doubles", ()=>checkDoubles(r));
-    test("bools", ()=>checkBools(r));
-    test("ints", ()=>checkInts(r));
+// void testCommonRandomOld(Random r) {
+//   group("Common random ${r.runtimeType}", () {
+//     test("doubles", ()=>checkDoubles(r));
+//     test("bools", ()=>checkBools(r));
+//     test("ints", ()=>checkInts(r));
+//   });
+// }
+
+void testCommonRandom(Random createRandom()) {
+  group("Common random ${createRandom().runtimeType}", () {
+    test("doubles", ()=>checkDoubles(createRandom()));
+    test("bools", ()=>checkBools(createRandom()));
+    test("ints", ()=>checkInts(createRandom()));
+    
+    test("Seed is different each time", () {
+      // even with different seeds, we can get rare matches of results.
+      // But most of the the results should be unique
+      expect(
+        List.generate(100, (index) => createRandom().nextDouble()).toSet().length,
+        greaterThan(90));
+    });
   });
 }
+
 
 void checkDoubles(Random r) {
   int countSmall = 0;
@@ -125,4 +142,10 @@ List<T> skipAndTake<T>(T func(), int skip, int take) {
   
   assert(result.length==take);
   return result;
+}
+
+String unsignedRightShiftCode(String x, String shift)
+{
+  return '(// ($x) >>> ($shift)\n'
+      '($x) >> ($shift)) & ~(-1 << (64 - ($shift)) )';
 }

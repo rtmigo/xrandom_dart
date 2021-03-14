@@ -3,7 +3,7 @@
 
 
 import "package:test/test.dart";
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/00_ints.dart';
 
 import 'helper.dart';
 

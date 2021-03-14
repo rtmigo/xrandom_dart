@@ -3,7 +3,7 @@
 
 
 import "package:test/test.dart";
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/00_ints.dart';
 import 'package:xorshift/src/xorshift128.dart';
 
 // xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)
@@ -14,6 +14,8 @@ import 'helper.dart';
 import 'reference.dart';
 
 void main() {
+
+  testCommonRandom(()=>Xorshift128());
 
   test("reference data", () {
     expect(
@@ -45,8 +47,6 @@ void main() {
 
 
 
-
-  testCommonRandom(Xorshift128.deterministic());
 
   test("predefined next", () {
     final random = Xorshift128.deterministic();

@@ -1,24 +1,33 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 import 'dart:math';
 
-import 'errors.dart';
-import 'ints.dart';
-import 'package:xorshift/src/unirandom.dart';
+import 'package:xorshift/src/seeding.dart';
 
-class Xorshift64 extends UniRandom64 {
+import '00_errors.dart';
+import '00_ints.dart';
+import 'package:xorshift/src/10_random_base.dart';
+
+/// Random number generator based on `xorshift64` algorithm by G.Marsaglia (2003).
+/// The reference implementation in C can be found in
+/// <https://www.jstatsoft.org/article/view/v008i14>.
+class Xorshift64 extends RandomBase64 {
   static final _defaultSeed = BigInt.parse("0x76a5c5b65ce8677c").toInt();
 
   Xorshift64([seed]) {
-    if (!INT64_SUPPORTED) throw Unsupported64Error();
+    if (!INT64_SUPPORTED) {
+      throw Unsupported64Error();
+    }
 
     if (seed != null) {
-      if (seed == 0) throw RangeError("The seed must be greater than 0.");
+      if (seed == 0) {
+        throw RangeError("The seed must be greater than 0.");
+      }
+
       this._state = seed;
     } else
-      this._state = DateTime.now().microsecondsSinceEpoch;
+      this._state = mess2to64A(DateTime.now().millisecondsSinceEpoch, this.hashCode);
   }
 
   late int _state;

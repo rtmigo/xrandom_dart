@@ -1,17 +1,19 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: BSD-3-Clause
 
+import 'dart:ffi';
 import 'dart:math';
 
-import 'ints.dart';
-import 'package:xorshift/src/unirandom.dart';
+import 'package:xorshift/src/seeding.dart';
 
-// Based on
-// https://prng.di.unimi.it/xoshiro128plusplus.c
-// Written in 2019 by David Blackman and Sebastiano Vigna (vigna@acm.org)
-// License: CC-0
+import '00_ints.dart';
+import 'package:xorshift/src/10_random_base.dart';
 
-class Xoshiro128pp extends UniRandom32
+
+/// Random number generator based on `xoshiro128++ 1.0` algorithm by D. Blackman and
+/// S. Vigna (2019). The reference implementation in C can be found in
+/// <https://prng.di.unimi.it/xoshiro128plusplus.c>.
+class Xoshiro128pp extends RandomBase32
 {
   Xoshiro128pp([int? a, int? b, int? c, int? d])
   {
@@ -22,7 +24,8 @@ class Xoshiro128pp extends UniRandom32
       RangeError.checkValueInInterval(c!, 0, UINT32_MAX);
       RangeError.checkValueInInterval(d!, 0, UINT32_MAX);
 
-      // todo check they cannot be null the same time?
+      if (a==0 && b==0 && c==0 && d==0)
+        throw ArgumentError("The seed should not consist of only zeros..");
 
       _S0 = a;
       _S1 = b;
@@ -31,53 +34,53 @@ class Xoshiro128pp extends UniRandom32
     }
     else {
       final now = DateTime.now().microsecondsSinceEpoch;
-      // just creating a mess
-      _S0 = now & 0xFFFFFFFF;
-      _S1 = ((now>>4) ^ 0xa925b6aa) & 0xFFFFFFFF;
-      _S2 = ((now>>8) ^ 0xcf044101) & 0xFFFFFFFF;
-      _S3 = ((now>>11) ^ 0x716ac5dd) & 0xFFFFFFFF;
+      _S0 = mess2to64A(now, this.hashCode) & 0xFFFFFFFF;
+      _S1 = mess2to64B(now, this.hashCode) & 0xFFFFFFFF;
+      _S2 = mess2to64C(now, this.hashCode) & 0xFFFFFFFF;
+      _S3 = mess2to64D(now, this.hashCode) & 0xFFFFFFFF;
     }
   }
+
+  @Uint32()
   late int _S0, _S1, _S2, _S3;
 
-  static rotl(int x, int k) {
-    //return (x << k) | (x >> (32 - k));
-    return ((x << k)& 0xFFFFFFFF) |
+  //Uint64
 
-    ( // same as (x) >>> (32-k)
-        (x) >> (32-k)) & ~(-1 << (64 - (32-k))  )
-
-    //x.unsignedRightShift(32-k)
-
-    //(x >> (32 - k)) & ~(-1 << (64 - (32 - k)))
-    //(x >> (32 - k))
-
-    ;
-  }
-
-
+  // static rotl(int x, int k) {
+  //   //return (x << k) | (x >> (32 - k));
+  //   return ((x << k)& 0xFFFFFFFF) |
+  //
+  //   ( // same as (x) >>> (32-k)
+  //       (x) >> (32-k)) & ~(-1 << (64 - (32-k))  )
+  //
+  //   //x.unsignedRightShift(32-k)
+  //
+  //   //(x >> (32 - k)) & ~(-1 << (64 - (32 - k)))
+  //   //(x >> (32 - k))
+  //
+  //   ;
+  // }
 
   int nextInt32() {
 
     // https://prng.di.unimi.it/xoshiro128plusplus.c
 
     final rotlX1 = (_S0+_S3)&0xFFFFFFFF;
-    final rotlK1 = 7;
-    final rotl1 = ((rotlX1 << rotlK1)& 0xFFFFFFFF) |
-
+    //const rotlK1 = 7;
+    final rotl1 = ((rotlX1 << 7)& 0xFFFFFFFF) |
     ( // same as (x) >>> (32-k)
-        (rotlX1) >> (32-rotlK1)) & ~(-1 << (64 - (32-rotlK1))  );
+        (rotlX1) >> (32-7)) & ~(-1 << (64 - (32-7))  );
 
     final int result = rotl1 + _S0; // #rotl((_S0+_S3)&0xFFFFFFFF, 7) + _S0;
 
     final int t = (_S1 << 9)& 0xFFFFFFFF;
 
-    _S2 ^= _S0;// & 0xFFFFFFFF;
-    _S3 ^= _S1;// & 0xFFFFFFFF;
-    _S1 ^= _S2;// & 0xFFFFFFFF;
-    _S0 ^= _S3;// & 0xFFFFFFFF;
+    _S2 ^= _S0;
+    _S3 ^= _S1;
+    _S1 ^= _S2;
+    _S0 ^= _S3;
 
-    _S2 ^= t;// & 0xFFFFFFFF;
+    _S2 ^= t;
 
     // ROTL again
 
@@ -86,11 +89,7 @@ class Xoshiro128pp extends UniRandom32
     ( // same as (x) >>> (32-k)
         (_S3) >> (32-11)) & ~(-1 << (64 - (32-11))  );
 
-
-    //_S3 = rotl(_S3, 11);
-
     return result & 0xFFFFFFFF;
-
   }
 
   static Xoshiro128pp deterministic()

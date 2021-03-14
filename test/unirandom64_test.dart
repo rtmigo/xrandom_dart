@@ -6,13 +6,20 @@
 import 'dart:io';
 
 import "package:test/test.dart";
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/00_ints.dart';
 import 'package:xorshift/src/xorshift64.dart';
 
 import 'helper.dart';
 import 'reference.dart';
 
+// class MyObject {
+//
+// }
+
 void main() {
+
+  //var m = MyObject();
+  //print(m.hashCode);
 
 
 

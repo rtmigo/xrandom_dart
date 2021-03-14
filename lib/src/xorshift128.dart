@@ -3,10 +3,15 @@
 
 import 'dart:math';
 
-import 'ints.dart';
-import 'package:xorshift/src/unirandom.dart';
+import 'package:xorshift/src/seeding.dart';
 
-class Xorshift128 extends UniRandom32
+import '00_ints.dart';
+import 'package:xorshift/src/10_random_base.dart';
+
+/// Random number generator based on `xorshift128` algorithm by G.Marsaglia (2003).
+/// The reference implementation in C can be found in
+/// <https://www.jstatsoft.org/article/view/v008i14>.
+class Xorshift128 extends RandomBase32
 {
   Xorshift128([int? a, int? b, int? c, int? d])
   {
@@ -17,7 +22,8 @@ class Xorshift128 extends UniRandom32
       RangeError.checkValueInInterval(c!, 0, UINT32_MAX);
       RangeError.checkValueInInterval(d!, 0, UINT32_MAX);
 
-      // todo check they cannot be null the same time?
+      if (a==0 && b==0 && c==0 && d==0)
+        throw ArgumentError("The seed should not consist of only zeros..");
 
       _a = a;
       _b = b;
@@ -27,10 +33,11 @@ class Xorshift128 extends UniRandom32
     else {
       final now = DateTime.now().microsecondsSinceEpoch;
       // just creating a mess
-      _a = now & 0xFFFFFFFF;
-      _b = ((now>>4) ^ 0xa925b6aa) & 0xFFFFFFFF;
-      _c = ((now>>8) ^ 0xcf044101) & 0xFFFFFFFF;
-      _d = ((now>>11) ^ 0x716ac5dd) & 0xFFFFFFFF;
+
+      _a = mess2to64A(now, this.hashCode) & 0xFFFFFFFF;
+      _b = mess2to64B(now, this.hashCode) & 0xFFFFFFFF;
+      _c = mess2to64C(now, this.hashCode) & 0xFFFFFFFF;
+      _d = mess2to64D(now, this.hashCode) & 0xFFFFFFFF;
     }
   }
   late int _a, _b, _c, _d;

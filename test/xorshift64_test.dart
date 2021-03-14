@@ -7,7 +7,7 @@
 import 'dart:io';
 
 import "package:test/test.dart";
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/00_ints.dart';
 import 'package:xorshift/src/xorshift64.dart';
 
 // xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)
@@ -23,11 +23,7 @@ import 'reference.dart';
 
 void main() {
 
-  //#if (Platform.environment["test_env"]=="NODE")
-  // print(Platform.environment);
-  // return;
-
-
+  testCommonRandom(()=>Xorshift64());
 
   test("reference data", () {
     expect(
@@ -56,8 +52,6 @@ void main() {
     final random = Xorshift64(BigInt.parse('3141592653589793238').toInt());
     compareWithReference64(random, "xorshift64 (seed 3141592653589793238)");
   });
-
-  testCommonRandom(Xorshift64.deterministic());
 
   test("predefined next", () {
     final random = Xorshift64.deterministic();

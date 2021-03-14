@@ -28,18 +28,18 @@ int measureTime(Random r, DoWhat dbl) {
       for (var i = 0; i < N; ++i) r.nextInt(100);
       break;
     case DoWhat.nextInt32:
-      if (r is UniRandom32) {
+      if (r is RandomBase32) {
         for (var i = 0; i < N; ++i) r.nextInt32();
       }
       break;
     case DoWhat.nextInt64:
-      if (r is UniRandom64) {
+      if (r is RandomBase64) {
         for (var i = 0; i < N; ++i) r.nextInt64();
       }
       break;
     case DoWhat.nextDoubleFast:
-      if (r is UniRandom32) {
-        for (var i = 0; i < N; ++i) r.nextDoubleFast();
+      if (r is RandomBase32) {
+        for (var i = 0; i < N; ++i) r.nextFloat();
       }
       break;
   }

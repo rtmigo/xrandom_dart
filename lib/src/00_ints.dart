@@ -10,11 +10,6 @@ final int INT64_MAX_POSITIVE = BigInt.parse("0x7FFFFFFFFFFFFFFF").toInt();
 const UINT32_MAX = 0xFFFFFFFF;
 const INT64_SUPPORTED = (1<<62) > (1<<61); // false for JS, true for others
 
-String unsignedRightShiftCode(String x, String shift)
-{
-return '(// ($x) >>> ($shift)\n'
-    '($x) >> ($shift)) & ~(-1 << (64 - ($shift)) )';
-}
 
 
 extension BitInt on int {
@@ -57,32 +52,38 @@ extension BitInt on int {
 
   int unsignedRightShift(int shift) {
 
-    // the difference between int64 and uint64 is that
+    // as of 2021 Dart does not have neither unsigned 64-bit integers or the ">>>"
+    // unsigned right shift that can be found in Java or JavaScript
+    //
+    // The difference between int64 and uint64 is that
     // uint64 will shift all 64 of its bits,
     // but int64 will shift lower 63 and preserve the highest bit
 
-    return this >= 0 ? this >> shift : ((this & INT64_MAX_POSITIVE) >> shift) | (1 << (63 - shift));
+    if (this >= 0)
+      return this >> shift;
+    else {
+      int x = this;
+      // setting highest bit to zero
+      x &= INT64_MAX_POSITIVE;
+      assert(x >= 0);
+      // shifting all except the highest
+      x >>= shift;
+      // restoring the highest bit at proper position
+      x |= 1 << (63 - shift);
+      return x;
+    }
 
-    // or  ?
-
-    // Here is a discussion about >>> in Dart
+    // Here is a discussion about implementing >>> in Dart
     // https://github.com/dart-lang/language/issues/478
-    //    ((this >= 0) ? this >> (n) : ~(~this >> (n)))
-    //    (this >> count) & ~(-1 << (64 - count))       - seems to be OK for native (not tested in JS)
-
-//     if (this >= 0)
-//       return this >> shift;
-//     else {
-//       int x = this;
-//       // setting highest bit to zero
-//       return ((x & 0x7FFFFFFFFFFFFFFF)>>shift)|(1 << (63 - shift));
-//       //assert(x >= 0);
-//       // shifting all except the highest
-// //      x >>= shift;
-//       // restoring the highest bit at proper position
-//   //    x |= 1 << (63 - shift);
-//       return x;
-//    }
+    //
+    // (this >> count) & ~(-1 << (64 - count))
+    //    seems to be OK (not tested in JS)
+    //
+    //  ((this >= 0) ? this >> (n) : ~(~this >> (n)))
+    //    not tested
+    //
+    // Here is also my first one-liner:
+    //   this >= 0 ? this >> shift : ((this & INT64_MAX_POSITIVE) >> shift) | (1 << (63 - shift))
   }
 
 

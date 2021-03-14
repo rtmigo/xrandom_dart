@@ -4,13 +4,15 @@
 
 
 import "package:test/test.dart";
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/00_ints.dart';
 import 'package:xorshift/src/xorshift32.dart';
 
 import 'helper.dart';
 import 'reference.dart';
 
 void main() {
+
+  testCommonRandom(()=>Xorshift32());
 
   test("reference data", () {
     expect(
@@ -40,7 +42,7 @@ void main() {
     compareWithReference32(random, "xorshift32 (seed 314159265)");
   });
 
-  testCommonRandom(Xorshift32.deterministic());
+
 
   // test("doubles", ()=>checkDoubles(Xorshift32(777)));
   // test("bools", ()=>checkBools(Xorshift32(777)));

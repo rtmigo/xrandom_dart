@@ -3,7 +3,7 @@
 
 
 import "package:test/test.dart";
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/00_ints.dart';
 import 'package:xorshift/src/xoshiro128pp.dart';
 
 // xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)
@@ -53,7 +53,7 @@ void main() {
 
 
 
-  testCommonRandom(Xoshiro128pp.deterministic());
+  testCommonRandom(()=>Xoshiro128pp());
   //
   // test("predefined next", () {
   //   final random = Xoshiro128.deterministic();

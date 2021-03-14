@@ -3,9 +3,13 @@
 
 import 'dart:math';
 
-import 'package:xorshift/src/unirandom.dart';
+import 'package:xorshift/src/10_random_base.dart';
+import 'package:xorshift/src/seeding.dart';
 
-class Xorshift32 extends UniRandom32
+/// Random number generator based on `xorshift32` algorithm by G.Marsaglia (2003).
+/// The reference implementation in C can be found in
+/// <https://www.jstatsoft.org/article/view/v008i14>.
+class Xorshift32 extends RandomBase32
 {
   Xorshift32([seed])
   {
@@ -14,7 +18,7 @@ class Xorshift32 extends UniRandom32
       this._state = seed;
     }
     else
-      this._state = DateTime.now().millisecondsSinceEpoch & 0xFFFFFFFF;
+      this._state = mess2to64A(DateTime.now().millisecondsSinceEpoch, this.hashCode)  & 0xFFFFFFFF;
   }
   late int _state;
 

@@ -5,7 +5,7 @@
 @TestOn('vm')
 
 import "package:test/test.dart";
-import 'package:xorshift/src/ints.dart';
+import 'package:xorshift/src/00_ints.dart';
 import 'package:xorshift/src/xorshift128plus.dart';
 
 import 'helper.dart';
@@ -53,7 +53,7 @@ void main() {
     compareWithReference64(random, 'xorshift128plus (seed 8378522730901710845 1653112583875186020)');
   });
 
-  testCommonRandom(Xorshift128Plus.deterministic());
+  testCommonRandom(()=>Xorshift128Plus());
 
   test("predefined next", () {
     final random = Xorshift128Plus.deterministic();
