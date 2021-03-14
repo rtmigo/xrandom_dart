@@ -77,7 +77,7 @@ Vigna, the inventors of the algorithms. The Xorshift128+ results are also matche
 values from JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that tested
 the 128+ similarly.
 
-Testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE modes.
+Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **macOS** in **VM** and **Node.js** modes.
  
 # Classes
 
