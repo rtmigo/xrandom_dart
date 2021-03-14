@@ -43,7 +43,7 @@ You can achieve the same by creating the `Random` with a `seed` argument. Howeve
 seed does not protect you from `dart:math` implementation updates. In contrast to this,
 Xorshift is a very specific algorithm. Therefore, the predictability of the
 Xorshift's `deterministic`
-sequences can be relied upon.
+sequences can be relied upon. *(but not until the library reaches stable state)*
 
 # Usage
 
