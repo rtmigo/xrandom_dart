@@ -20,7 +20,7 @@ class Xorshift32 extends UniRandom32
 
   static Xorshift32 deterministic() => Xorshift32(314159265);
 
-  int next32() {
+  int nextInt32() {
 
     // algorithm from p.4 of "Xorshift RNGs" 
     // by George Marsaglia, 2003 

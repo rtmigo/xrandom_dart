@@ -19,7 +19,7 @@ void compareWithReference32(UniRandom32 random, referenceKey) {
   final refList = referenceData[referenceKey]!;
   for (final value in refList)
   {
-    final x = random.next32();
+    final x = random.nextInt32();
     expect(trimLeadingZeros(x.toHexUint64()),trimLeadingZeros(value.toUpperCase()));
   }
 }
@@ -28,7 +28,7 @@ void compareWithReference64(UniRandom64 random, referenceKey) {
   final refList = referenceData[referenceKey]!;
   for (final value in refList)
   {
-    final x = random.next64();
+    final x = random.nextInt64();
     expect(trimLeadingZeros(x.toHexUint64()),trimLeadingZeros(value.toUpperCase()));
   }
 }

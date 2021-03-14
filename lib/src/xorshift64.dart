@@ -23,7 +23,7 @@ class Xorshift64 extends UniRandom64 {
 
   late int _state;
 
-  int next64() {
+  int nextInt64() {
     // algorithm from p.4 of "Xorshift RNGs"
     // by George Marsaglia, 2003
     // https://www.jstatsoft.org/article/view/v008i14

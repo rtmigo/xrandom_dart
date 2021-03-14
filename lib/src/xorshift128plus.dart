@@ -30,7 +30,7 @@ class Xorshift128Plus extends UniRandom64
   }
   late int _S0, _S1;
 
-  int next64() {
+  int nextInt64() {
 
     // algorithm from "Further scramblings of Marsaglia’s xorshift generators"
     // by Sebastiano Vigna
@@ -63,7 +63,7 @@ class Xorshift128Plus extends UniRandom64
 
   @override
   double nextDouble() {
-    int x = this.next64();
+    int x = this.nextInt64();
 
     // in C, this is implemented by casting the memory area to the double type.
     // This is not an option here

@@ -58,7 +58,7 @@ void main() {
   test("predefined next", () {
     final random = Xorshift128Plus.deterministic();
     expect(
-        skipAndTake(()=>random.next64().toHexUint64(), 5000, 3),
+        skipAndTake(()=>random.nextInt64().toHexUint64(), 5000, 3),
         ['1F1CCFAF5A83DC2A', 'AE8708051CB834DF', '897E4E4BA735BC15']
     );
   });
@@ -95,8 +95,8 @@ void main() {
     final random2 = Xorshift128Plus();
 
     expect(
-        [random1.next64(), random1.next64()],
-        isNot([random2.next64(), random2.next64()]));
+        [random1.nextInt64(), random1.nextInt64()],
+        isNot([random2.nextInt64(), random2.nextInt64()]));
   });
 
   // test("deterministic", ()  async {

@@ -69,10 +69,9 @@ abstract class UniRandom32 implements Random {
   // https://git.io/JqCbB
 
   static const _POW2_32 = 1 << 32;
-  static const _POW2_53_D = 1.0 * (1 << 53);
-  static const _POW2_27_D = 1.0 * (1 << 27);
+
   
-  int next32();
+  int nextInt32();
 
   @override
   int nextInt(int max) {
@@ -88,14 +87,14 @@ abstract class UniRandom32 implements Random {
     if ((max & -max) == max) {
       // fast case for powers of two
       // like in dart:math https://git.io/JqCbB
-      final rnd32 = this.next32();
+      final rnd32 = this.nextInt32();
       assert(0<=rnd32 && rnd32<=UINT32_MAX);
       final result = rnd32 & (max - 1);
       assert(0<=result);
       assert(result<max);
     }
 
-    final rnd32 = next32();
+    final rnd32 = nextInt32();
     assert(0<=rnd32 && rnd32<=UINT32_MAX);
 
     final result = rnd32 % max;
@@ -103,108 +102,57 @@ abstract class UniRandom32 implements Random {
     assert(0<=result && result<max);
 
     return result;
-
-
-    // // (1, MAX_UINT32] -> [0.0, 1)
-    // final double one = rnd32/UINT32_MAX;
-    // assert(0.0<=one && one<1.0);
-    //
-    // // [0.0, 1) -> [0, max)
-    // final int result = (one*max).floor();
-    // assert(0<=result && result<max);
-    // return result;
-//    return (one*max).floor();
-
-
-    //if (x > 0xFFFFFFFF || x <= 0)
-      //throw RangeError.value(x);
-    return ((rnd32 - 1) / max).floor();
-
-
-
-
-
-    //
-    // var rnd32;
-    // var result;
-    // do {
-    //   rnd32 = this.next32();
-    //   assert(0<=rnd32 && rnd32<=UINT32_MAX);
-    //   result = rnd32 % max;
-    // } while ((rnd32 - result + max) > _POW2_32);
-    //
-    // assert(0<=result);
-    // assert(result<max);
-    // return result;
   }
 
   /// Generates a non-negative random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
   ///
-  /// This method works faster than [nextDouble] due to some loss of precision.
-  /// There are only 2^32-1 possible values
+  /// This method works faster than [nextDouble] due to loss of precision.
+  /// The result is mapped from a single unsigned 32-bit non-zero integer.
+  /// Therefore, the variability is limited by the number of possible values
+  /// of such integer: 2^32-1 (= 4 294 967 295).
   double nextDoubleFast() {
-    final rnd32 = next32();
+    const FACTOR = 1/UINT32_MAX;
+    final rnd32 = nextInt32();
     assert(0.0<rnd32 && rnd32 <= UINT32_MAX);
-
-    final double one = (rnd32-1)/UINT32_MAX;
+    final double one = (rnd32-1)*FACTOR;
     assert(0.0<=one && one<1.0);
     return one;
   }
+
+
 
   @override
   double nextDouble() {
 
-    // we are about to convert 32-bit integer to a 64-bit double.
-    // We could possible create two ints (twice as slower) to get better precision.
-    // But let's face the truth: the 32-bit generators are for speed.
+    return nextInt32()*2.3283064365386963e-10 + (nextInt32()>>12)*2.220446049250313e-16;
 
-    return next32()*2.3283064365386963e-10 + (next32()>>12)*2.220446049250313e-16;
-
-
-    // almost the same as _Random.nextDouble() from dart:math (https://git.io/JqCbB)
-    // Here we're trying to be JavaScript-compatible
-    //return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
-    //**return scaleUint32toDouble(next32());
-
-    final rnd32 = next32();
-    assert(0.0<rnd32 && rnd32 <= UINT32_MAX);
-
-    final double one = (rnd32-1)/UINT32_MAX;
-    assert(0.0<=one && one<1.0);
-    return one;
-
-
-    // if (x > 0xFFFFFFFF || x <= 0)
-    //   throw RangeError.value(x);
-    // return (x - 1) / UINT32_MAX;
-
-
-    // double nextDouble() {
-    //   return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
+    // This method generates results that are similar to:
+    // http://rcs.bu.edu/examples/random_numbers/xoroshiro128_plus/C/xoroshiro128_plus.c
+    //
+    // double next_double(uint64_t seed[]) {
+    //    const union { uint64_t i; double d; }
+    //    u = { .i = UINT64_C(0x3FF) << 52 | next(seed) >> 12 };
+    //    return u.d - 1.0;
     // }
+    //
+    // A JavaScript snippet for the same results is found here (https://git.io/JqWCP).
+    // The similarity of results is also tested there
+    //
+    // ...
+    //
+    // dart:math maps (https://git.io/JqCbB) two integers to double like that:
+    //    static const _POW2_53_D = 1.0 * (1 << 53);
+    //    static const _POW2_27_D = 1.0 * (1 << 27);
+    //    return ((nextInt(1<<26)*_POW2_27_D) + nextInt(1<<27))/_POW2_53_D;
+    // but their code fails on JS (2021-03) for reasons beyond my comprehension.
+    // And it's also a way more inefficient: the nextInt itself a way slower than next32
   }
-
-  //int _nextIntRaw() => this.next32();
-
-  // bool _nextBool(int getIntFunc(), int bits)
-  // {
-  //   if (_boolCache==0) {
-  //     _boolCache = getIntFunc();
-  //     _boolCachePos = 0;
-  //     return _boolCache&1 == 1;
-  //   } else {
-  //     ++_boolCachePos;
-  //     final result = (_boolCache & (1<<_boolCachePos)) != 0; // todo int64?
-  //     if (_boolCachePos==(bits-1))
-  //       _boolCache = 0;
-  //     return result;
-  //   }
-  // }
-
 
   @override
   bool nextBool() {
+    
+    // here we return all the bits or the generated uint32 one by one
 
     // in dart:math it is return nextInt(2) == 0;
     // which is an equivalent of
@@ -216,10 +164,8 @@ abstract class UniRandom32 implements Random {
     //    XorShift32  this.next() % 2 == 0        1903
     //    XorShift32  this.next() >= 0x80000000   1821
 
-    //return this._nextBool(this.next32, 32);
-
     if (_boolCache==0) {
-      _boolCache = next32();
+      _boolCache = nextInt32();
       _boolCachePos = 0;
       return _boolCache&1 == 1;
     } else {
@@ -235,23 +181,17 @@ abstract class UniRandom32 implements Random {
   int _boolCachePos = 0;
 }
 
-// enum SplitterState
-// {
-//  
-// }
-
-
 abstract class UniRandom64 extends UniRandom32 {
 
-  int next64();
+  int nextInt64();
   
-  int next32() {
+  int nextInt32() {
     
     // we assume that the random generator never returns 0,
     // so 0 means "not initialized".
     
     if (_forNext32==0) {
-      _forNext32 = this.next64();
+      _forNext32 = this.nextInt64();
       return _forNext32 & UINT32_MAX; // returning lower 4 bytes
     } else {
       // we have a value: that means, we're already returned
@@ -273,8 +213,8 @@ abstract class UniRandom64 extends UniRandom32 {
   
   @override
   double nextDouble() {
-    // todo
-    int x = this.next64();
+
+    int x = this.nextInt64();
 
     if (x > INT64_MAX_POSITIVE)
       throw AssertionError("Unexpected 64-bit value generated by .next(): $x");
@@ -292,12 +232,6 @@ abstract class UniRandom64 extends UniRandom32 {
     return (x - 1) / INT64_MAX_POSITIVE;
   }
 
-  // @override
-  // bool nextBool() {
-  //
-  //   return this._nextBool(this.next64, 64);
-  // }
-
   @override
   bool nextBool() {
 
@@ -314,7 +248,7 @@ abstract class UniRandom64 extends UniRandom32 {
     //return this._nextBool(this.next32, 32);
 
     if (_boolCache==0) {
-      _boolCache = next64();
+      _boolCache = nextInt64();
       _boolCachePos = 0;
       return _boolCache&1 == 1;
     } else {

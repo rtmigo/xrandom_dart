@@ -35,7 +35,7 @@ class Xorshift128 extends UniRandom32
   }
   late int _a, _b, _c, _d;
 
-  int next32() {
+  int nextInt32() {
 
     // algorithm from p.5 of "Xorshift RNGs"
     // by George Marsaglia, 2003
