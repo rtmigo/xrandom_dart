@@ -40,7 +40,7 @@ test('my test', () {
 });    
 ```
 
-You can achieve the same by creating the `Random` with a `seed` argument. However, the unchangeable
+You can achieve about the same by creating the `Random` with a `seed` argument. However, the unchangeable
 seed does not protect you from `dart:math` implementation updates. In contrast to this,
 Xorshift is a very specific algorithm. Therefore, the predictability of the
 Xorshift's `deterministic`
