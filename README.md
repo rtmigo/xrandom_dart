@@ -32,11 +32,11 @@ All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1
 ``` dart
 import 'package:xorshift/xorshift.dart';
 
-Random random = Xorshift();
+Random xrandom = Xorshift();
 
-var a = random.nextBool(); 
-var b = random.nextDouble();
-var c = random.nextInt(n);
+var a = xrandom.nextBool(); 
+var b = xrandom.nextDouble();
+var c = xrandom.nextInt(n);
 ```
 
 # Determinism
