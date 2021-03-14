@@ -28,7 +28,7 @@ It's compatible with the standard [`Random`](https://api.dart.dev/stable/2.12.1/
 ``` dart
 import 'package:xrandom/xrandom.dart';
 
-Random xrandom = Xrandom();
+Random xrandom = Xorshift32();
 
 var a = xrandom.nextBool(); 
 var b = xrandom.nextDouble();
@@ -42,7 +42,7 @@ sequence of numbers every time.
 
 ``` dart
 test('my test', () {
-    final xrandom = Xrandom.deterministic();
+    final xrandom = Xorshift32.deterministic();
     // run this test twice ;)
     expect(xrandom.nextInt(1000), 119);
     expect(xrandom.nextInt(1000), 240);
