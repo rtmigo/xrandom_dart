@@ -140,6 +140,14 @@ abstract class UniRandom32 implements Random {
 
   @override
   double nextDouble() {
+
+    // we are about to convert 32-bit integer to a 64-bit double.
+    // We could possible create two ints (twice as slower) to get better precision.
+    // But let's face the truth: the 32-bit generators are for speed.
+
+    return next32()*2.3283064365386963e-10 + (next32()>>12)*2.220446049250313e-16;
+
+
     // almost the same as _Random.nextDouble() from dart:math (https://git.io/JqCbB)
     // Here we're trying to be JavaScript-compatible
     //return ((nextInt(1 << 26) * _POW2_27_D) + nextInt(1 << 27)) / _POW2_53_D;
