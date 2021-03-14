@@ -13,7 +13,7 @@ code and state.
 
 # Speed
 
-Generating 100 million of random numbers. Time is in milliseconds. Lower is better.
+Generating 100 million of random numbers. Lower is better. Time is in milliseconds.
 
 | Class              | nextInt | nextDouble | nextBool | nextInt32 | nextInt64 | nextDoubleFast |
 |--------------------|---------|------------|----------|-----------|-----------|----------------|
@@ -23,20 +23,20 @@ Generating 100 million of random numbers. Time is in milliseconds. Lower is bett
 | Xorshift128        |  1821   |    3202    |   1497   |   1399    |     -     |      1323      |
 | Xorshift128Plus    |  2046   |    3025    |   1402   |   1392    |   1489    |      1399      |
 
-Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
+The benchmark was compiled to native. Executed on AMD A9-9420e with Ubuntu 20.04.
 
 # Determinism
 
-Xorshift's classes have a `deterministic` method. By creating an object with this method, you end up with a
-generator that produces the same sequence of numbers every time.
+Xorshift's classes have a `deterministic` method. By creating like that, you'll get same 
+sequence of numbers every time.
 
 ``` dart
 test('my test', () {
-    final sameValuesEachTime = Xorshift.deterministic();
+    final predictablyRandom = Xorshift.deterministic();
     // results based on randoms are predictable now
-    expect(sameValuesEachTime.nextInt(1000), 543);
-    expect(sameValuesEachTime.nextInt(1000), 488);
-    expect(sameValuesEachTime.nextInt(1000), 284);    
+    expect(predictablyRandom.nextInt(1000), 543);
+    expect(predictablyRandom.nextInt(1000), 488);
+    expect(predictablyRandom.nextInt(1000), 284);    
 });    
 ```
 
