@@ -13,7 +13,7 @@ code and state.
 
 # Speed
 
-Generating 100 million of random numbers. 
+Generating 100 million of random numbers with AOT-compiled binary. 
 
 | Time (lower is better)              | nextInt | nextDouble | nextBool |
 |--------------------|---------|------------|----------|
@@ -23,8 +23,6 @@ Generating 100 million of random numbers.
 | Xorshift128        |  1862   |    3321    |   1518   |
 | Xorshift128Plus    |  2086   |    3064    |   1419   |
 
-All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04.
-Time is measured in milliseconds.
 # Simplicity
 
 All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
