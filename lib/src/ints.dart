@@ -57,6 +57,8 @@ extension BitInt on int {
 
     return this >= 0 ? this >> shift : ((this & INT64_MAX_POSITIVE) >> shift) | (1 << (63 - shift));
 
+    // or (this >> count) & ~(-1 << (64 - count)) ?
+
 //     if (this >= 0)
 //       return this >> shift;
 //     else {
