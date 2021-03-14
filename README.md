@@ -31,18 +31,18 @@ Oh yeah.
 All classes implement the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html).  They can be used in the same way.
 
 ``` dart
-import 'package:xorandom/xorandom.dart';
+import 'package:xrandom/xrandom.dart';
 
-Random xorandom = Xorandom();
+Random xrandom = Xrandom();
 
-var a = xorandom.nextBool(); 
-var b = xorandom.nextDouble();
-var c = xorandom.nextInt(n);
+var a = xrandom.nextBool(); 
+var b = xrandom.nextDouble();
+var c = xrandom.nextInt(n);
 ```
 
 # Determinism
 
-Xorshift's classes have a `deterministic` method. By creating the object like that, you'll get same 
+Xrandom's classes have a `deterministic` method. By creating the object like that, you'll get same 
 sequence of numbers every time.
 
 ``` dart
@@ -69,7 +69,7 @@ sequences can be relied upon. *(but not until the library reaches stable release
 |----------------------------------|------------------|------------|
 | `Xorandom` aka `Xorshift32`      | yes              | yes        |
 | `Xorshift128`                    | yes              | yes        |
-| `Xoshiro128pp`                   | yes              | yes         |
+| **`Xoshiro128pp`**                   | yes              | yes         |
 | `Xorshift64`                     | yes              | no         |
 | `Xorshift128Plus`                | yes              | no         |
 
