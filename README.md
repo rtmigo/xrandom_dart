@@ -98,13 +98,13 @@ The `nextDoubleFast()` is a lightning fast mapping of 32-bit integers to a `doub
 | Xorshift32             |    1930    |      696       |
 | Xorshift64             |    2164    |      1340      |
 | Xorshift128            |    3164    |      1293      |
-| Xorshift128Plus        |    3023    |      1373      |
+| Xorshift128p        |    3023    |      1373      |
 | Xoshiro128pp           |    4535    |      2086      |
 
 The `nextInt32()` and `nextInt64()` do not accept any arguments. They return the raw output of the RNGs.
 
 ``` dart 
-var xrandom = Xorshift(); 
+var xrandom = Xorshift128p(); 
 xrandom.nextInt32();  // 32-bit unsigned 
 xrandom.nextInt64();  // 64-bit signed
 ```
