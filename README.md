@@ -42,11 +42,11 @@ sequence of numbers every time.
 
 ``` dart
 test('my test', () {
-    final predictablyRandom = Xorshift.deterministic();
+    final xrandom = Xrandom.deterministic();
     // run this test twice ;)
-    expect(predictablyRandom.nextInt(1000), 119);
-    expect(predictablyRandom.nextInt(1000), 240);
-    expect(predictablyRandom.nextInt(1000), 369);    
+    expect(xrandom.nextInt(1000), 119);
+    expect(xrandom.nextInt(1000), 240);
+    expect(xrandom.nextInt(1000), 369);    
 });    
 ```
 
@@ -81,7 +81,7 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 
 | Class             | Algorithm    | Algorithm author | Published |
 |-------------------|--------------|------------------|------|
-| `Xorshift`        | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xrandom`        | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift32`      | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift64`      | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift128`     | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
