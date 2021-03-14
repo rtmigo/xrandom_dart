@@ -5,7 +5,7 @@
 
 # [xrandom](https://github.com/rtmigo/xrandom)
 
-Fast random number generators.
+Fast random number generators in Dart.
 
 [Xorshift](https://en.wikipedia.org/wiki/Xorshift) algorithms are known among the **fastest random number generators**, requiring very small
 code and state.
