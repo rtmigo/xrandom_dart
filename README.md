@@ -49,8 +49,8 @@ test('my test', () {
 });    
 ```
 
-You can achieve about the same by creating the `Random` with a `seed` argument. However, the unchangeable
-seed does not protect you from `dart:math` implementation updates. In contrast to this, **Xrandom** uses
+You can achieve the same determinism by creating the `Random` with a `seed` argument. However, this does
+not protect you from `dart:math` implementation updates. In contrast to this, **Xrandom** uses
 **xorshift32**, a very specific algorithm. Therefore, the predictability of the
 Xrandom's `deterministic`
 sequences can be relied upon. *(but not until the library reaches stable release status)*
