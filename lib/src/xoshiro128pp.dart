@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: BSD-3-Clause
 
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:xorshift/src/seeding.dart';
@@ -41,7 +40,6 @@ class Xoshiro128pp extends RandomBase32
     }
   }
 
-  @Uint32()
   late int _S0, _S1, _S2, _S3;
 
   //Uint64

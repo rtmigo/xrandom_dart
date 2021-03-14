@@ -20,7 +20,10 @@ abstract class RandomBase32 implements Random {
 
   static const _POW2_32 = 1 << 32;
 
-  
+  /// Generates a non-negative random integer uniformly distributed in the range
+  /// from 1 to 0xFFFFFFFF, both inclusive.
+  ///
+  /// For 32-bit algorithms it is the raw output of the generator.
   int nextInt32();
 
   @override
@@ -129,8 +132,17 @@ abstract class RandomBase32 implements Random {
 
 abstract class RandomBase64 extends RandomBase32 {
 
+  /// Generates a non-negative random integer uniformly distributed in the range
+  /// from 1 to 2^64-1, both inclusive.
+  ///
+  /// It is the raw output of the generator.
   int nextInt64();
-  
+
+  /// Generates a non-negative random integer uniformly distributed in the range
+  /// from 1 to 0xFFFFFFFF, both inclusive.
+  ///
+  /// For 64-bit algorithms it sequentially returns the lower and higher bytes
+  /// of the raw output of the generator.
   int nextInt32() {
     
     // we assume that the random generator never returns 0,
