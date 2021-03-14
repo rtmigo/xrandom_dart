@@ -17,11 +17,11 @@ Generating 100 million of random numbers. Lower is better. Time is in millisecon
 
 | Class              | nextInt | nextDouble | nextBool | nextInt32 | nextInt64 | nextDoubleFast |
 |--------------------|---------|------------|----------|-----------|-----------|----------------|
-| Random (dart:math) |  2392   |    3170    |   2281   |     -     |     -     |       -        |
-| Xorshift32         |  1246   |    1856    |   1460   |    765    |     -     |      679       |
-| Xorshift64         |  1944   |    3023    |   1350   |   1311    |   1371    |      1373      |
-| Xorshift128        |  1821   |    3202    |   1497   |   1399    |     -     |      1323      |
-| Xorshift128Plus    |  2046   |    3025    |   1402   |   1392    |   1489    |      1399      |
+| Random (dart:math) |  2737   |    3497    |   2668   |     -     |     -     |       -        |
+| Xorshift32         |  1300   |    2021    |   1632   |    746    |     -     |      833       |
+| Xorshift64         |  2343   |    2657    |   1497   |   1565    |   1530    |      1528      |
+| Xorshift128        |  2029   |    3699    |   1695   |   1449    |     -     |      1544      |
+| Xorshift128Plus    |  2272   |    3172    |   1509   |   1546    |   1850    |      1716      |
 
 The benchmark was compiled to native binary. Executed on AMD A9-9420e with Ubuntu 20.04.
 
@@ -42,7 +42,7 @@ test('my test', () {
 
 You can achieve about the same by creating the `Random` with a `seed` argument. However, the unchangeable
 seed does not protect you from `dart:math` implementation updates. In contrast to this,
-Xorshift is a very specific algorithm. Therefore, the predictability of the
+*xorshift32* is a very specific algorithm. Therefore, the predictability of the
 Xorshift's `deterministic`
 sequences can be relied upon. *(but not until the library reaches stable release status)*
 

@@ -14,7 +14,7 @@ int measureTime(Random r, DoWhat dbl) {
 
   final sw = Stopwatch()..start();
 
-  const N = 100000000;
+  const N = 1000; //00000;
 
   switch (dbl) {
     case DoWhat.nextDouble:
@@ -102,33 +102,55 @@ void main(List<String> arguments) {
     }
   }
 
-  final rows = <List<String>>[];
+  void printColumns(List<DoWhat> whatz) {
+    final rows = <List<String>>[];
 
-  final header = ['Class'];
-  for (final x in dowhatz) {
-    final str = x.toString();
-    header.add(str.substring(str.lastIndexOf('.') + 1));
-  }
-
-  rows.add(header);
-
-  final otherRows = <List<String>>[];
-
-  for (final random in listGenerators()) {
-    final row = <String>[];
-    otherRows.add(row);
-
-    final type = random.runtimeType.toString();
-    row.add(type == '_Random' ? 'Random (dart:math)' : type);
-
-    for (final doWhat in dowhatz) {
-      final times = results[type]![doWhat]!;
-      final avg = mean(times);
-      row.add(avg == 0 ? '-' : avg.toString());
+    final header = ['Class'];
+    for (final x in whatz) {
+      final str = x.toString();
+      header.add(str.substring(str.lastIndexOf('.') + 1));
     }
+
+    rows.add(header);
+
+    final otherRows = <List<String>>[];
+
+    for (final random in listGenerators()) {
+      final row = <String>[];
+      otherRows.add(row);
+
+      final type = random.runtimeType.toString();
+      row.add(type == '_Random' ? 'Random (dart:math)' : type);
+
+      for (final doWhat in whatz) {
+        final times = results[type]![doWhat]!;
+        final avg = mean(times);
+        row.add(avg == 0 ? '-' : avg.toString());
+      }
+    }
+
+    rows.addAll(otherRows);
+
+    print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
   }
 
-  rows.addAll(otherRows);
+  printColumns([
+    DoWhat.nextInt,
+    DoWhat.nextDouble,
+    DoWhat.nextBool
+  ]);
 
-  print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
+  printColumns([
+    DoWhat.nextInt,
+    DoWhat.nextInt32,
+    DoWhat.nextInt64,
+  ]);
+
+  printColumns([
+    DoWhat.nextDouble,
+    DoWhat.nextDoubleFast,
+  ]);
+
+
+
 }
