@@ -91,8 +91,7 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 
 `nextFloat`, unlike `nextDouble`, does not seek to create the highest quality 
 64-bit floating-point number. This method prefers speed to accuracy. It 
-transforms a single 32-bit integer into a `double` (which could contain 53 
-significant bits). Therefore, the result is limited to a maximum of 2^32-1 values.
+transforms a single 32-bit integer into a `double`. Therefore, the result is limited to a maximum of 2^32-1 values.
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|----------------|
