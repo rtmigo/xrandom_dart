@@ -81,15 +81,13 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
  
 # Classes
 
-| Class             | Algorithm    | Author           | Year |
+| Class             | Algorithm    | Algorithm author | Year |
 |-------------------|--------------|------------------|------|
 | `Xorshift`        | xorshift32   | George Marsaglia | 2003 |
 | `Xorshift32`      | xorshift32   | George Marsaglia | 2003 |
 | `Xorshift64`      | xorshift64   | George Marsaglia | 2003 |
 | `Xorshift128`     | xorshift128  | George Marsaglia | 2003 |
 | `Xorshift128Plus` | xorshift128+ | Sebastiano Vigna | 2015 |
-
---
 
 # Speed optimizations
 
