@@ -61,7 +61,7 @@ the inventors of the algorithms. The Xorshift128+ results are also matched to re
 JavaScript [xorshift](https://github.com/AndreasMadsen/xorshift) library, that tested the 128+
 similarly.
 
-Unit testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE modes.
+Testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM and NODE modes.
 
 # Usage
 
