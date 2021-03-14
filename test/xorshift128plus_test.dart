@@ -63,20 +63,20 @@ void main() {
     );
   });
 
-  test("predefined double", () {
-    final random = Xorshift128p.deterministic();
-
-    // check the first values are not zeroes
-    expect(
-        skipAndTake(()=>random.nextDouble(), 0, 3),
-        [0.5438160400931709, 0.4886339482268167, 0.28405510382445276]
-    );
-
-    expect(
-        skipAndTake(()=>random.nextDouble(), 5000, 3),
-        [0.9056777920011874, 0.530136740954974, 0.7211288399533309]
-    );
-  });
+  // test("predefined double", () {
+  //   final random = Xorshift128p.deterministic();
+  //
+  //   // check the first values are not zeroes
+  //   expect(
+  //       skipAndTake(()=>random.nextDouble(), 0, 3),
+  //       [0.5438160400931709, 0.4886339482268167, 0.28405510382445276]
+  //   );
+  //
+  //   expect(
+  //       skipAndTake(()=>random.nextDouble(), 5000, 3),
+  //       [0.9056777920011874, 0.530136740954974, 0.7211288399533309]
+  //   );
+  // });
 
 
   test("madsen double", () {
@@ -85,7 +85,7 @@ void main() {
     final random = Xorshift128p(1, 2);
 
     for (String expectedStr in madsen)
-      expect(random.nextDouble(), double.parse(expectedStr));
+      expect(random.nextDoubleMemcast(), double.parse(expectedStr));
 
   });
 
