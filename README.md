@@ -67,8 +67,8 @@ sequences can be relied upon. *(but not until the library reaches stable release
 
 | Class                            | 64-bit platforms | JavaScript |
 |----------------------------------|------------------|------------|
-| `Xorandom` aka `Xorshift32`      | yes              | yes        |
-| `Xorshift128`                    | yes              | yes        |
+| **`Xrandom`** aka **`Xorshift32`**      | yes              | yes        |
+| **`Xorshift128`**                    | yes              | yes        |
 | **`Xoshiro128pp`**                   | yes              | yes         |
 | `Xorshift64`                     | yes              | no         |
 | `Xorshift128Plus`                | yes              | no         |
