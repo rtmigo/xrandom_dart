@@ -89,7 +89,17 @@ Testing is done in the GitHub Actions cloud on Windows, Ubuntu and macOS in VM a
 
 # Speed optimizations
 
-The `next32()` and `next64()` do not accept any arguments.
+The `nextDoubleFast()` is a lightning fast mapping of 32-bit integers to a `double` in reduced detail.
+
+| Time (lower is better)              | nextDouble | nextDoubleFast |
+|--------------------|------------|----------------|
+| Random (dart:math) |    3227    |       -        |
+| Xorshift32         |    1955    |      694       |
+| Xorshift64         |    2228    |      1341      |
+| Xorshift128        |    3321    |      1309      |
+| Xorshift128Plus    |    3064    |      1387      |
+
+The `next32()` and `next64()` do not accept any arguments. They return the raw output of the RNGs.
 
 ``` dart 
 xorshift.next32();  // returns 32-bit unsigned 
@@ -103,13 +113,3 @@ xorshift.next64();  // returns 64-bit signed
 | Xorshift64         |  2011   |   1367    |   1394    |
 | Xorshift128        |  1862   |   1344    |     -     |
 | Xorshift128Plus    |  2086   |   1424    |   1533    |
-
-The `nextDoubleFast()` is a lightning fast mapping of 32-bit integers to a `double` in reduced detail.
-
-| Time (lower is better)              | nextDouble | nextDoubleFast |
-|--------------------|------------|----------------|
-| Random (dart:math) |    3227    |       -        |
-| Xorshift32         |    1955    |      694       |
-| Xorshift64         |    2228    |      1341      |
-| Xorshift128        |    3321    |      1309      |
-| Xorshift128Plus    |    3064    |      1387      |
