@@ -1,7 +1,7 @@
-[![Pub Package](https://img.shields.io/pub/v/xrandom.svg)](https://pub.dev/packages/xrandom)
 [![Actions Status](https://github.com/rtmigo/xrandom/workflows/unittest/badge.svg?branch=master)](https://github.com/rtmigo/xrandom/actions)
 ![Generic badge](https://img.shields.io/badge/tested_on-Windows_|_MacOS_|_Ubuntu-blue.svg)
 ![Generic badge](https://img.shields.io/badge/tested_on-VM_|_JS-blue.svg)
+[![Pub Package](https://img.shields.io/pub/v/xrandom.svg)](https://pub.dev/packages/xrandom)
 
 # [xrandom](https://github.com/rtmigo/xrandom)
 
