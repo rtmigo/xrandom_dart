@@ -34,10 +34,11 @@ extension BitInt on int {
     // uint64 will shift all 64 of its bits,
     // but int64 will shift lower 63 and preserve the highest bit
 
-    if (this >= 0)
+    if (this >= 0) {
       return this >> shift;
+    }
     else {
-      int x = this;
+      var x = this;
       // setting highest bit to zero
       x &= INT64_MAX_POSITIVE;
       assert(x >= 0);
@@ -59,10 +60,11 @@ extension BitInt on int {
     // uint64 will shift all 64 of its bits,
     // but int64 will shift lower 63 and preserve the highest bit
 
-    if (this >= 0)
+    if (this >= 0) {
       return this >> shift;
+    }
     else {
-      int x = this;
+      var x = this;
       // setting highest bit to zero
       x &= INT64_MAX_POSITIVE;
       assert(x >= 0);
@@ -93,8 +95,9 @@ extension BitInt on int {
 
   String toHexUint64() {
 
-    if (this>=0)
+    if (this>=0) {
       return this.toRadixString(16).toUpperCase().padLeft(16, '0');
+    }
 
     int lower7bytes = this & INT64_LOWER_7_BYTES;
     String strLow = lower7bytes.toRadixString(16).toUpperCase().padLeft(14, '0');
