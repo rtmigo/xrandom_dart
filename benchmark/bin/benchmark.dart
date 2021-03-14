@@ -78,7 +78,8 @@ void main(List<String> arguments) {
     DoWhat.nextDouble,
     DoWhat.nextBool,
     DoWhat.next32,
-    DoWhat.next64
+    DoWhat.next64,
+    DoWhat.nextDoubleFast
   ];
 
   List<Random> listGenerators() => [
