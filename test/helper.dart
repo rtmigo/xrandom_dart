@@ -45,13 +45,6 @@ List<String> referenceSignature(String referenceKey)
   return [list[0], list[1], list[2], list[500]];
 }
 
-// void testCommonRandomOld(Random r) {
-//   group("Common random ${r.runtimeType}", () {
-//     test("doubles", ()=>checkDoubles(r));
-//     test("bools", ()=>checkBools(r));
-//     test("ints", ()=>checkInts(r));
-//   });
-// }
 
 void testCommonRandom(Random createRandom()) {
   group("Common random ${createRandom().runtimeType}", () {

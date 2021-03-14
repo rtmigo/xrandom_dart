@@ -8,7 +8,7 @@ import 'package:xrandom/src/seeding.dart';
 import '00_ints.dart';
 import 'package:xrandom/src/10_random_base.dart';
 
-/// Random number generator based on `xorshift128` algorithm by G.Marsaglia (2003).
+/// Random number generator based on `xorshift128` algorithm by G. Marsaglia (2003).
 /// The reference implementation in C can be found in
 /// <https://www.jstatsoft.org/article/view/v008i14>.
 class Xorshift128 extends RandomBase32

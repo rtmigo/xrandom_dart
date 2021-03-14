@@ -64,14 +64,30 @@ class Xorshift128p extends RandomBase64 {
   double nextDouble() {
     int x = this.nextInt64();
 
-    // in C, this is implemented by casting the memory area to the double type.
-    // This is not an option here
-
+    // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
+    // conversion" of Uint64 to double like that:
+    //
+    // static inline double to_double(uint64_t x) {
+    //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
+    //   return u.d - 1.0;
+    // }
+    //
+    // IMHO "multiplication-free" is not a choice for languages that do not allow direct access
+    // to memory areas. But in the case specifically with xorshift128+ we were trying to match
+    // the results with <https://git.io/JqWCP>.
+    //
+    // Madsen uses the following reference code:
+    //
     // const uint64_t x_doublefied = UINT64_C(0x3FF) << 52 | x >> 12;
     // return *((double *) &x_doublefied) - 1.0;
-
-    // so we just reimplement it like here
-    // https://github.com/AndreasMadsen/xorshift/blob/master/xorshift.js
+    //
+    // Which is successfully simulated in javascript like this:
+    //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
+    // or
+    //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
+    //
+    // We started with the fact that this is an alternative method without multiplication.
+    // Now we have two multiplications and a few extra operations.
 
     int resL = x & 0xffffffff;
     //int resU = x.unsignedRightShift(32);
