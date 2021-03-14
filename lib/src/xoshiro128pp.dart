@@ -6,7 +6,10 @@ import 'dart:math';
 import 'ints.dart';
 import 'package:xorshift/src/unirandom.dart';
 
+// Based on
 // https://prng.di.unimi.it/xoshiro128plusplus.c
+// Written in 2019 by David Blackman and Sebastiano Vigna (vigna@acm.org)
+// License: CC-0
 
 class Xoshiro128pp extends UniRandom32
 {

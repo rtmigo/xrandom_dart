@@ -53,7 +53,7 @@ void main() {
 
 
 
-  // testCommonRandom(Xoshiro128.deterministic());
+  testCommonRandom(Xoshiro128pp.deterministic());
   //
   // test("predefined next", () {
   //   final random = Xoshiro128.deterministic();
