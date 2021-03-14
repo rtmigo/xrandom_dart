@@ -41,7 +41,7 @@ var c = random.nextInt(n);
 
 # Determinism
 
-Xorshift's classes have a `deterministic` method. By creating like that, you'll get same 
+Xorshift's classes have a `deterministic` method. By creating the object like that, you'll get same 
 sequence of numbers every time.
 
 ``` dart
