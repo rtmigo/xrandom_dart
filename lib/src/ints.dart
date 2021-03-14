@@ -62,7 +62,7 @@ extension BitInt on int {
     // Here is a discussion about >>> in Dart
     // https://github.com/dart-lang/language/issues/478
     //    ((this >= 0) ? this >> (n) : ~(~this >> (n)))
-    //    (this >> count) & ~(-1 << (64 - count))       - fails with large numbers
+    //    (this >> count) & ~(-1 << (64 - count))       - seems to be OK for native (not tested in JS)
 
 //     if (this >= 0)
 //       return this >> shift;

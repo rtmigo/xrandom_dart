@@ -23,6 +23,14 @@ Generating 100 million of random numbers. Time is in milliseconds. Lower is bett
 | Xorshift128        |   1451   |  1959   |    1934    |  1374  |   -    |
 | Xorshift128Plus    |   1492   |  2707   |    4079    |  2146  |  3009  |
 
+| Class              | nextBool | nextInt | nextDouble | next32 | next64 |
+|--------------------|----------|---------|------------|--------|--------|
+| Random (dart:math) |   2282   |  2414   |    3432    |   -    |   -    |
+| Xorshift32         |   1417   |  1232   |    1294    |  698   |   -    |
+| Xorshift64         |   1476   |  2346   |    3672    |  1678  |  2116  |
+| Xorshift128        |   1425   |  1881   |    1913    |  1308  |   -    |
+| Xorshift128Plus    |   1510   |  2012   |    2954    |  1384  |  1595  |
+
 Made with compiled-to-native executable on AMD A9-9420e processor with Ubuntu 20.04.
 
 # Determinism
