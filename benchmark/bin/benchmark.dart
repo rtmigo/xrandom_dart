@@ -7,7 +7,7 @@ import 'package:xorshift/xorshift.dart';
 
 import 'nullsafe_tabulate.dart';
 
-enum DoWhat { nextDouble, nextInt, nextBool, next32, next64 }
+enum DoWhat { nextDouble, nextInt, nextBool, next32, next64, nextDoubleFast }
 
 int measureTime(Random r, DoWhat dbl) {
   print('Benchmarking ${r.runtimeType}');
@@ -34,6 +34,11 @@ int measureTime(Random r, DoWhat dbl) {
     case DoWhat.next64:
       if (r is UniRandom64) {
         for (var i = 0; i < N; ++i) r.next64();
+      }
+      break;
+    case DoWhat.nextDoubleFast:
+      if (r is UniRandom32) {
+        for (var i = 0; i < N; ++i) r.nextDoubleFast();
       }
       break;
   }
@@ -69,9 +74,9 @@ void main(List<String> arguments) {
   // git stash && git pull origin master && dart pub get && ./run.sh
 
   final dowhatz = [
-    DoWhat.nextBool,
     DoWhat.nextInt,
     DoWhat.nextDouble,
+    DoWhat.nextBool,
     DoWhat.next32,
     DoWhat.next64
   ];
