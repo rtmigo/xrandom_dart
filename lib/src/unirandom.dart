@@ -141,7 +141,8 @@ abstract class UniRandom32 implements Random {
   /// Generates a non-negative random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
   ///
-  ///
+  /// This method works faster than [nextDouble] due to some loss of precision.
+  /// There are only 2^32-1 possible values
   double nextDoubleFast() {
     final rnd32 = next32();
     assert(0.0<rnd32 && rnd32 <= UINT32_MAX);
