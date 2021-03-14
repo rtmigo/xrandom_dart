@@ -99,8 +99,6 @@ abstract class RandomBase32 implements Random {
 
   @override
   bool nextBool() {
-    
-    // here we return all the bits or the generated uint32 one by one
 
     // in dart:math it is return nextInt(2) == 0;
     // which is an equivalent of
@@ -112,21 +110,21 @@ abstract class RandomBase32 implements Random {
     //    XorShift32  this.next() % 2 == 0        1903
     //    XorShift32  this.next() >= 0x80000000   1821
 
-    if (_boolCache==0) {
+    if (_boolCache_prevIdx==_MAX_BIT_INDEX) {
       _boolCache = nextInt32();
-      _boolCachePos = 0;
+      _boolCache_prevIdx = 0;
       return _boolCache&1 == 1;
     } else {
-      ++_boolCachePos;
-      final result = (_boolCache & (1<<_boolCachePos)) != 0;
-      if (_boolCachePos==31)
-        _boolCache = 0;
+      assert(_boolCache_prevIdx<_MAX_BIT_INDEX);
+      _boolCache_prevIdx++;
+      final result = (_boolCache & (1<<_boolCache_prevIdx)) != 0;
       return result;
     }
   }
 
+  static const _MAX_BIT_INDEX = 32-1;
   int _boolCache = 0;
-  int _boolCachePos = 0;
+  int _boolCache_prevIdx = _MAX_BIT_INDEX;
 }
 
 abstract class RandomBase64 extends RandomBase32 {
@@ -211,19 +209,20 @@ abstract class RandomBase64 extends RandomBase32 {
     //    XorShift32  this.next() % 2 == 0        1903
     //    XorShift32  this.next() >= 0x80000000   1821
 
-    if (_boolCache==0) {
+    if (_boolCache_prevIdx==_MAX_BIT_INDEX) {
+
       _boolCache = nextInt64();
-      _boolCachePos = 0;
+      _boolCache_prevIdx = 0;
       return _boolCache&1 == 1;
     } else {
-      ++_boolCachePos;
-      final result = (_boolCache & (1<<_boolCachePos)) != 0;
-      if (_boolCachePos==63)
-        _boolCache = 0;
+      assert(_boolCache_prevIdx<_MAX_BIT_INDEX);
+      _boolCache_prevIdx++;
+      final result = (_boolCache & (1<<_boolCache_prevIdx)) != 0;
       return result;
     }
   }
 
-  int _boolCache = 0;
-  int _boolCachePos = 0;
+  static const _MAX_BIT_INDEX = 64-1;
+  //int _boolCache = 0;
+  int _boolCache_prevIdx = _MAX_BIT_INDEX;
 }
