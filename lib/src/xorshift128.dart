@@ -61,20 +61,13 @@ class Xorshift128 extends RandomBase32
     t ^= t << 11;
     t &= 0xFFFFFFFF;
 
-    //t ^= t >> 8;
-    //t ^= t.unsignedRightShift(8); //t ^= t >> 8;
-    //t^=t >= 0 ? t >> 8 : ((t & INT64_MAX_POSITIVE) >> 8) | (1 << (63 - 8));
+    // rewritten `t ^= t.unsignedRightShift(8); //t ^= t >> 8;`
     t^=(t >> 8) & ~(-1 << (64 - 8));
-
-    //;
-
-
-    //return _a = t ^ s ^ (s >> 19);
 
     _a = t ^ s ^ (s >> 19);
     _a &= 0xFFFFFFFF;
 
-    return _a; //return _a = t ^ s ^ (s >> 19);
+    return _a;
   }
 
   static Xorshift128 expected()
