@@ -102,8 +102,8 @@ They do not accept any arguments.
 
 | Method | Returns | Equivalent of | 
 |--------|---------|-----------|
-| nextInt32() | 32-bit unsigned | nextInt(0xFFFFFFFE)+1 |
-| nextInt64() | 64-bit signed | nextInt(0xFFFFFFFFFFFFFFFE)+1 |
+| `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1` |
+| `nextInt64()` | 64-bit signed | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
 
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
