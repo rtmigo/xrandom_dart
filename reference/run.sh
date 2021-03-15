@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e && cd ${0%/*}
+set -e && cd "${0%/*}"
 
 mkdir -p build
 rm build/reference.compiled || true
