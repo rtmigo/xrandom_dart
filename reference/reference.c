@@ -251,6 +251,41 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
     printf("],\n\n");
 }
 
+void write128(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t d) {
+
+    struct xorshift128_state state;
+    state.a = a;
+    state.b = b;
+    state.c = c;
+    state.d = d;
+
+	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "%u %u %u %u", state.a, state.b, state.c, state.d);
+
+	char* alg_name = "xorshift128";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+
+		uint32_t x1 = xorshift128(&state);
+		fprintf(ints_file, "%08x\n", x1);
+
+		uint32_t x2 = xorshift128(&state);
+		fprintf(ints_file, "%08x\n", x2);
+
+		uint64_t combined = (((uint64_t)x1)<<32)|x2;
+
+		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(combined));
+	}	
+
+	fclose(doubles_cast_file);
+	fclose(doubles_file);
+	fclose(ints_file);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // XORSHIFT128+ (V1 ?)
 // Not implemented in xrandom.
@@ -478,6 +513,10 @@ int main()
 	write128p("a", 1, 2);
 	write128p("b", 42, 777);
 	write128p("c", 8378522730901710845llu, 1653112583875186020llu);
+
+	write128("a", 1, 2, 3, 4);
+	write128("b", 5, 23, 42, 777);
+	write128("c", 1081037251u, 1975530394u, 2959134556u, 1579461830u);	
 
 	// print64(1);
 	// print64(42);

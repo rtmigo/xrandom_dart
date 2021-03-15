@@ -46,6 +46,10 @@ void main() {
     compareWithReference32(random, "xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)");
   });
 
+  checkReferenceFiles(()=>Xorshift128(1, 2, 3, 4), 'a');
+  checkReferenceFiles(()=>Xorshift128(5, 23, 42, 777), 'b');
+  checkReferenceFiles(()=>Xorshift128(1081037251, 1975530394, 2959134556, 1579461830), 'c');
+
 
 
 

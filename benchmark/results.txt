@@ -122,3 +122,6 @@ Double from two uint32s like in JS xorshift (?!)
 | Xorshift64         |   1388   |  1996   |    3176    |  1345  |  1440  |
 | Xorshift128        |   1498   |  1871   |    1928    |  1350  |   -    |
 | Xorshift128Plus    |   1445   |  2066   |    3053    |  1423  |  1577  |
+
+====
+2021-03-15

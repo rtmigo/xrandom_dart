@@ -43,8 +43,8 @@ void main() {
   });
 
   checkReferenceFiles(()=>Xorshift32(1), 'a');
-  //checkReferenceFiles(()=>Xorshift64(42), 'b');
-  //checkReferenceFiles(()=>Xorshift64(3141592653589793238), 'c');
+  checkReferenceFiles(()=>Xorshift32(42), 'b');
+  checkReferenceFiles(()=>Xorshift32(314159265), 'c');
 
 
 
