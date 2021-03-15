@@ -76,8 +76,8 @@ target 64-bit platforms (any other than JavaScript).
 
 # Classes
 
-| Class             | Is a | Algorithm     Algorithm author | Published |
-|-------------------|--------------|-----|-------------|------|
+| Class             | Is a | Algorithm  |   Algorithm author | Published |
+|-------------------|------|--------------|-------------|------|
 | `Xorshift32`      | 32-bit |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift64`      | 64-bit | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift128`     | 32-bit | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
