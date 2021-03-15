@@ -37,23 +37,6 @@ class Xoshiro256pp extends RandomBase64 {
 
   late int _S0, _S1, _S2, _S3;
 
-  //Uint64
-
-  // static rotl(int x, int k) {
-  //   //return (x << k) | (x >> (32 - k));
-  //   return ((x << k)& 0xFFFFFFFF) |
-  //
-  //   ( // same as (x) >>> (32-k)
-  //       (x) >> (32-k)) & ~(-1 << (64 - (32-k))  )
-  //
-  //   //x.unsignedRightShift(32-k)
-  //
-  //   //(x >> (32 - k)) & ~(-1 << (64 - (32 - k)))
-  //   //(x >> (32 - k))
-  //
-  //   ;
-  // }
-
   @override
   int nextInt64() {
     // https://prng.di.unimi.it/xoshiro256plusplus.c
@@ -75,6 +58,11 @@ class Xoshiro256pp extends RandomBase64 {
 
     return result;
   }
+
+  static Xoshiro256pp deterministic() {
+    return Xoshiro256pp(0x621b97ff9b08ce44, 0x92974ae633d5ee97, 0x9c7e491e8f081368, 0xf7d3b43bed078fa3);
+  }
+
 
   // static Xoshiro128pp deterministic() {
   //   return Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830);
