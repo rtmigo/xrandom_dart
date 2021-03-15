@@ -90,6 +90,8 @@ target 64-bit platforms (any other than JavaScript).
 | **Speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
+JavaScript-enabled classes are always some trade-offs in favor of compatibility.
+
 # Compatibility
 
 You can safely **use any classes on mobile and desktop** platforms. 
