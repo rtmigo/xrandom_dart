@@ -59,7 +59,7 @@ class Xoshiro256pp extends RandomBase64 {
     return result;
   }
 
-  static Xoshiro256pp deterministic() {
+  static Xoshiro256pp expected() {
     return Xoshiro256pp(_defaultSeedA, _defaultSeedB, _defaultSeedC, _defaultSeedD);
   }
 

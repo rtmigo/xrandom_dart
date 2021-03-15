@@ -13,7 +13,7 @@ import 'package:xrandom/src/10_random_base.dart';
 /// The reference implementation in C can be found in
 /// <https://www.jstatsoft.org/article/view/v008i14>.
 class Xorshift64 extends RandomBase64 {
-  static final _defaultSeed = BigInt.parse("0x76a5c5b65ce8677c").toInt();
+  static final _defaultSeed = int.parse('0x76a5c5b65ce8677c');
 
   Xorshift64([seed]) {
     if (!INT64_SUPPORTED) {
@@ -49,7 +49,7 @@ class Xorshift64 extends RandomBase64 {
     return _state = x;
   }
 
-  static Xorshift64 deterministic() {
+  static Xorshift64 expected() {
     return Xorshift64(_defaultSeed);
   }
 }

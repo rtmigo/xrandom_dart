@@ -23,7 +23,7 @@ class Xorshift32 extends RandomBase32
   }
   late int _state;
 
-  static Xorshift32 deterministic() => Xorshift32(314159265);
+  static Xorshift32 expected() => Xorshift32(0xd9e2fcc8);
 
   @override
   int nextInt32() {

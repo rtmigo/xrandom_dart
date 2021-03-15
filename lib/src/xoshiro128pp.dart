@@ -85,7 +85,7 @@ class Xoshiro128pp extends RandomBase32 {
     return result & 0xFFFFFFFF;
   }
 
-  static Xoshiro128pp deterministic() {
-    return Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830);
+  static Xoshiro128pp expected() {
+    return Xoshiro128pp(0x17f235fb, 0x53985f9c, 0xbc8d40f6, 0xc7b9d576);
   }
 }

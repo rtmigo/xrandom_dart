@@ -81,6 +81,14 @@ void main() {
 
   ), 'c');
 
+  test('expected values', () {
+    expect(expectedList(Xoshiro256pp.expected()),
+        [int.parse('9214259484446541290'), 3031, 0.9835800298090491, false, false, false]
+      //    [1225539925, 51686, 0.40665327328483225, false, true, false]
+    );
+  });
+
+
   //
   // test("predefined next", () {
   //   final random = Xoshiro128.deterministic();

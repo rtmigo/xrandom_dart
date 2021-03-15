@@ -49,18 +49,23 @@ void main() {
   checkReferenceFiles(()=>Xorshift128(5, 23, 42, 777), 'b');
   checkReferenceFiles(()=>Xorshift128(1081037251, 1975530394, 2959134556, 1579461830), 'c');
 
-
-
-
-
-
-  test("predefined next", () {
-    final random = Xorshift128.deterministic();
-    expect(
-        skipAndTake(()=>random.nextInt32().toHexUint32uc(), 5000, 3),
-        ['682C4EE4', '208190FD', '455F4A85']
+  test('expected values', () {
+    expect(expectedList(Xorshift128.expected()),
+        [620283008, 25651, 0.8583931512916125, false, false, false]
+      //    [1225539925, 51686, 0.40665327328483225, false, true, false]
     );
   });
+
+
+  //
+  //
+  // test("predefined next", () {
+  //   final random = Xorshift128.expected();
+  //   expect(
+  //       skipAndTake(()=>random.nextInt32().toHexUint32uc(), 5000, 3),
+  //       ['682C4EE4', '208190FD', '455F4A85']
+  //   );
+  // });
 
   // test("predefined double", () {
   //   final random = Xorshift128.deterministic();

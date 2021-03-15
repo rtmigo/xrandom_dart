@@ -13,11 +13,11 @@ import 'package:xrandom/src/xorshift64.dart';
 void main() {
 
   test('next32 returning parts of next64', () {
-    final random1 = Xorshift64.deterministic();
+    final random1 = Xorshift64.expected();
     int a64 = random1.nextInt64();
     int b64 = random1.nextInt64();
 
-    final random2 = Xorshift64.deterministic();
+    final random2 = Xorshift64.expected();
     expect(random2.nextInt32(), a64.higher32());
     expect(random2.nextInt32(), a64.lower32());
     expect(random2.nextInt32(), b64.higher32());
@@ -25,8 +25,8 @@ void main() {
   });
 
   test('nextBool on 64-bit generator: must return all bits', () {
-    final randomA = Xorshift64.deterministic();
-    final randomB = Xorshift64.deterministic();
+    final randomA = Xorshift64.expected();
+    final randomB = Xorshift64.expected();
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextInt64();
@@ -40,8 +40,8 @@ void main() {
   });
 
   test('nextBool on 32-bit generator: must return all bits', () {
-    final randomA = Xorshift128.deterministic();
-    final randomB = Xorshift128.deterministic();
+    final randomA = Xorshift128.expected();
+    final randomB = Xorshift128.expected();
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextInt32();

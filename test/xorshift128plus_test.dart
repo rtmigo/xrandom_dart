@@ -54,13 +54,13 @@ void main() {
 
   testCommonRandom(()=>Xorshift128p());
 
-  test('predefined next', () {
-    final random = Xorshift128p.deterministic();
-    expect(
-        skipAndTake(()=>random.nextInt64().toHexUint64uc(), 5000, 3),
-        ['1F1CCFAF5A83DC2A', 'AE8708051CB834DF', '897E4E4BA735BC15']
-    );
-  });
+  // test('predefined next', () {
+  //   final random = Xorshift128p.deterministic();
+  //   expect(
+  //       skipAndTake(()=>random.nextInt64().toHexUint64uc(), 5000, 3),
+  //       ['1F1CCFAF5A83DC2A', 'AE8708051CB834DF', '897E4E4BA735BC15']
+  //   );
+  // });
 
   // test("predefined double", () {
   //   final random = Xorshift128p.deterministic();
@@ -80,6 +80,13 @@ void main() {
   checkReferenceFiles(()=>Xorshift128p(1,2), 'a');
   checkReferenceFiles(()=>Xorshift128p(42, 777), 'b');
   checkReferenceFiles(()=>Xorshift128p(8378522730901710845, 1653112583875186020), 'c');
+
+  test('expected values', () {
+    expect(expectedList(Xorshift128p.expected()),
+        [int.parse('8256696158060995935'), 27312, 0.04017928972328655, false, true, false]
+      //    [1225539925, 51686, 0.40665327328483225, false, true, false]
+    );
+  });
 
 
   test("madsen double", () {

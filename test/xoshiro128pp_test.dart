@@ -57,6 +57,13 @@ void main() {
   checkReferenceFiles(()=>Xoshiro128pp(5, 23, 42, 777), 'b');
   checkReferenceFiles(()=>Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830), 'c');
 
+  test('expected values', () {
+    expect(expectedList(Xoshiro128pp.expected()),
+        [3992448746, 47897, 0.1329367530455241, false, true, false]
+      //    [1225539925, 51686, 0.40665327328483225, false, true, false]
+    );
+  });
+
   //
   // test("predefined next", () {
   //   final random = Xoshiro128.deterministic();

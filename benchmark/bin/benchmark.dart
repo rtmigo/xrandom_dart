@@ -88,12 +88,12 @@ void main(List<String> arguments) {
 
   List<Random> listGenerators() => [
         Random(777),
-        Xorshift32.deterministic(),
-        Xorshift64.deterministic(),
-        Xorshift128.deterministic(),
+        Xorshift32.expected(),
+        Xorshift64.expected(),
+        Xorshift128.expected(),
         Xorshift128p.deterministic(),
-        Xoshiro128pp.deterministic(),
-        Xoshiro256pp.deterministic(),
+        Xoshiro128pp.expected(),
+        Xoshiro256pp.expected(),
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {

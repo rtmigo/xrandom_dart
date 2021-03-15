@@ -12,6 +12,15 @@ void main() {
 
   testCommonRandom(()=>Xorshift32());
 
+  checkReferenceFiles(()=>Xorshift32(1), 'a');
+  checkReferenceFiles(()=>Xorshift32(42), 'b');
+  checkReferenceFiles(()=>Xorshift32(314159265), 'c');
+
+  test('expected values', () {
+    expect(expectedList(Xorshift32.expected()),
+        [1225539925, 51686, 0.40665327328483225, false, true, false]);
+  });
+
   // test("reference data", () {
   //   expect(
   //       referenceSignature("xorshift32 (seed 1)"),
@@ -40,31 +49,28 @@ void main() {
   //   compareWithReference32(random, "xorshift32 (seed 314159265)");
   // });
 
-  checkReferenceFiles(()=>Xorshift32(1), 'a');
-  checkReferenceFiles(()=>Xorshift32(42), 'b');
-  checkReferenceFiles(()=>Xorshift32(314159265), 'c');
 
 
 
   // test("doubles", ()=>checkDoubles(Xorshift32(777)));
   // test("bools", ()=>checkBools(Xorshift32(777)));
-  // test("ints", ()=>checkInts(Xorshift32(777)));
-
-  test("predefined next", () {
-    final random = Xorshift32.deterministic();
-    expect(
-        skipAndTake(()=>random.nextInt32().toHexUint32uc(), 5000, 3),
-        ['62982C53', '855D849A', '8C1511DD']
-    );
-  });
-
-  test("expected nextInt", () {
-    final random = Xorshift32.deterministic();
-    expect(
-        skipAndTake(()=>random.nextInt(1000), 0, 3),
-        [119, 240, 369]
-    );
-  });
+  // // test("ints", ()=>checkInts(Xorshift32(777)));
+  //
+  // test("predefined next", () {
+  //   final random = Xorshift32.expected();
+  //   expect(
+  //       skipAndTake(()=>random.nextInt32().toHexUint32uc(), 5000, 3),
+  //       ['62982C53', '855D849A', '8C1511DD']
+  //   );
+  // });
+  //
+  // test('Expected nextInt', () {
+  //   final random = Xorshift32.expected();
+  //   expect(
+  //       skipAndTake(()=>random.nextInt(1000), 0, 3),
+  //       [119, 240, 369]
+  //   );
+  // });
 
   // test("predefined double", () {
   //   final random = Xorshift32.deterministic();
@@ -74,7 +80,7 @@ void main() {
   //   );
   // });
 
-  test("create without args", ()  async {
+  test('Create without args', ()  async {
     final random1 = Xorshift32();
     await Future.delayed(Duration(milliseconds: 2));
     final random2 = Xorshift32();

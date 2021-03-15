@@ -58,17 +58,24 @@ void main() {
   //   compareWithReference64(random, "xorshift64 (seed 3141592653589793238)");
   // });
 
-  test('predefined next', () {
-    final random = Xorshift64.deterministic();
-    expect(
-        skipAndTake(()=>random.nextInt64().toHexUint64uc(), 5000, 3),
-        ['A78D8BFA5E7260CA', '5DB7D12B9759F68B', 'ABD3D730279787A6']
-    );
-  });
+  // test('predefined next', () {
+  //   final random = Xorshift64.expected();
+  //   expect(
+  //       skipAndTake(()=>random.nextInt64().toHexUint64uc(), 5000, 3),
+  //       ['A78D8BFA5E7260CA', '5DB7D12B9759F68B', 'ABD3D730279787A6']
+  //   );
+  // });
 
   checkReferenceFiles(()=>Xorshift64(1), 'a');
   checkReferenceFiles(()=>Xorshift64(42), 'b');
   checkReferenceFiles(()=>Xorshift64(3141592653589793238), 'c');
+
+  test('expected values', () {
+    expect(expectedList(Xorshift64.expected()),
+        [int.parse('-6926213550972868430'), 40031, 0.38167886102443327, false, true, false]
+    //    [1225539925, 51686, 0.40665327328483225, false, true, false]
+    );
+  });
 
 
     // test("doubles", () {

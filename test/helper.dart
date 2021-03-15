@@ -74,6 +74,8 @@ Map dataMap(String algo, String seedId, ReferenceType type) {
 //  return fileInData('${algo}_${seedId}_$suffix.txt');
 }
 
+
+
 // Iterable<double> loadDoubles(File file) sync* {
 //   for (var line in file.readAsLinesSync()) {
 //     if (line.trimLeft().startsWith('#') || line
@@ -198,6 +200,8 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 
   });
 }
+
+List expectedList(RandomBase32 r) => [(r is RandomBase64) ? r.nextInt64() : r.nextInt32(), r.nextInt(100000), r.nextDouble(), r.nextBool(), r.nextBool(), r.nextBool()];
 
 
 void compareDoubles(RandomBase64 random, Iterable<double> values) {
