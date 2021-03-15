@@ -1,6 +1,6 @@
 name: xrandom
-description: "Fast random number generators: xorshift32, xorshift64, xorshift128 and xorshift128+"
-version: 0.0.2
+description: "All-purpose, rock-solid random number generators"
+version: 0.1.0
 homepage: https://github.com/rtmigo/xrandom
 
 environment:
