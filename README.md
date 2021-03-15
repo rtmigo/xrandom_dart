@@ -65,7 +65,7 @@ sequences can be relied upon. *(but not until the library reaches stable release
 
 # Compatibility
 
-You can safely **use any classes on mobile platforms** and on the **desktop**. 
+You can safely **use any classes on mobile and desktop** platforms. 
 
 However, if you also target **JavaScript** (Web, Node.js), you will have to 
 **limit the choice**.
