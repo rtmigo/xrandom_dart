@@ -60,8 +60,13 @@ class Xoshiro256pp extends RandomBase64 {
   }
 
   static Xoshiro256pp deterministic() {
-    return Xoshiro256pp(0x621b97ff9b08ce44, 0x92974ae633d5ee97, 0x9c7e491e8f081368, 0xf7d3b43bed078fa3);
+    return Xoshiro256pp(_defaultSeedA, _defaultSeedB, _defaultSeedC, _defaultSeedD);
   }
+
+  static final _defaultSeedA = int.parse('0x621b97ff9b08ce44');
+  static final _defaultSeedB = int.parse('0x92974ae633d5ee97');
+  static final _defaultSeedC = int.parse('0x9c7e491e8f081368');
+  static final _defaultSeedD = int.parse('0xf7d3b43bed078fa3');
 
 
   // static Xoshiro128pp deterministic() {

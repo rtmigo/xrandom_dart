@@ -1,12 +1,13 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: BSD-3-Clause
 
+@TestOn('vm')
 
 import "package:test/test.dart";
 import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/xoshiro256pp.dart';
 
-@TestOn('vm')
+
 
 // xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)
 // 'xorshift128 (seed 5 23 42 777)'
@@ -15,6 +16,10 @@ import 'package:xrandom/src/xoshiro256pp.dart';
 import 'helper.dart';
 
 void main() {
+
+  // print(BigInt.parse('0xf7d3b43bed078fa3').toInt());
+  // print(0xf7d3b43bed078fa3);
+  // return;
 
   //print(unsignedRightShiftCode("x","32-k"));
   //return;
@@ -57,7 +62,24 @@ void main() {
   testCommonRandom(()=>Xoshiro256pp());
   checkReferenceFiles(()=>Xoshiro256pp(1, 2, 3, 4), 'a');
   checkReferenceFiles(()=>Xoshiro256pp(5, 23, 42, 777), 'b');
-  checkReferenceFiles(()=>Xoshiro256pp(0x621b97ff9b08ce44, 0x92974ae633d5ee97, 0x9c7e491e8f081368, 0xf7d3b43bed078fa3), 'c');
+  checkReferenceFiles(()=>Xoshiro256pp(
+      // 0x621b97ff9b08ce44,
+      // 0x92974ae633d5ee97,
+      // 0x9c7e491e8f081368,
+      // 0xf7d3b43bed078fa3
+
+      int.parse('0x621b97ff9b08ce44'),
+      int.parse('0x92974ae633d5ee97'),
+      int.parse('0x9c7e491e8f081368'),
+      int.parse('0xf7d3b43bed078fa3'),
+
+
+      // BigInt.parse('0x621b97ff9b08ce44').toInt(),
+      // BigInt.parse('0x92974ae633d5ee97').toInt(),
+      // BigInt.parse('0x9c7e491e8f081368').toInt(),
+      // BigInt.parse('0xf7d3b43bed078fa3').toInt()
+
+  ), 'c');
 
   //
   // test("predefined next", () {

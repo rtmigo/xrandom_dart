@@ -10,9 +10,29 @@ import 'package:xrandom/src/00_ints.dart';
 
 void main() {
 
+  //
+
+  //Random
+
+  test('string to int', () {
+    // the problem with BigInt.toInt():
+    expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(),
+        '7fffffffffffffff');
+    //expect(int.parse('0xf7d3b43bed078fa3'), 0xf7d3b43bed078fa3);
+  });
+
+  //print(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64());
+  //print(0xf7d3b43bed078fa3);
+  //return;
+
+
   //print(0xFFFFFFFFFFFFFFFF.unsignedRightShift(31).toHexUint64());
 
   //return;
+
+  // test("are we", () {
+  //   expect(INT64_SUPPORTED, true);
+  // });
 
   test("are we", () {
     expect(INT64_SUPPORTED, true);

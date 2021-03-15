@@ -643,7 +643,7 @@ int main()
 
 	write_xoshiro256pp("a", 1, 2, 3, 4);
 	write_xoshiro256pp("b", 5, 23, 42, 777);
-	write_xoshiro256pp("c", 0x621b97ff9b08ce44, 0x92974ae633d5ee97, 0x9c7e491e8f081368, 0xf7d3b43bed078fa3);
+	write_xoshiro256pp("c", 0x621b97ff9b08ce44ull, 0x92974ae633d5ee97ull, 0x9c7e491e8f081368ull, 0xf7d3b43bed078fa3ull);
 
 
 	// print64(1);
@@ -663,5 +663,5 @@ int main()
 	// printXoshiro128pp(1081037251u, 1975530394u, 2959134556u, 1579461830u);
 
 
-	printf("};");
+	//printf("};");
 }

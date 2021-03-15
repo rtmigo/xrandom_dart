@@ -71,7 +71,7 @@ extension BitInt on int {
 
   String toHexUint64() {
     if (this>=0) {
-      return this.toRadixString(16).toUpperCase().padLeft(16, '0');
+      return this.toRadixString(16).padLeft(16, '0');
     }
 
     int lower7bytes = this & INT64_LOWER_7_BYTES;
