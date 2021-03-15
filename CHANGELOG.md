@@ -1,4 +1,6 @@
-# 0.0.3
+# 0.1.0
+
+- Added xoshiro128++ 
 
 - Speed improvements
 
