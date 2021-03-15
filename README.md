@@ -12,7 +12,7 @@ Library priorities:
 - performance
 - quality of the numbers produced
 
-Namely, the [Xoshiro](https://prng.di.unimi.it/) for **quality** and 
+Algorithms are [Xoshiro](https://prng.di.unimi.it/) for **quality** and 
 [Xorshift](https://en.wikipedia.org/wiki/Xorshift) for **speed**.
 
 # Speed
