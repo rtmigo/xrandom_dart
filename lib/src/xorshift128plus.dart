@@ -17,10 +17,19 @@ class Xorshift128p extends RandomBase64 {
       throw Unsupported64Error();
     }
     if (a != null || b != null) {
-      _S0 = a!;
-      _S1 = b!;
+
+      if (a==null) {
+        throw ArgumentError.notNull('a');
+      }
+      if (b==null) {
+        throw ArgumentError.notNull('b');
+      }
+
+      _S0 = a;
+      _S1 = b;
+
       if (a == 0 && b == 0) {
-        throw ArgumentError("The seed should not consist of only zeros..");
+        throw ArgumentError('The seed should not consist of only zeros..');
       }
     } else {
       final now = DateTime.now().microsecondsSinceEpoch;

@@ -12,13 +12,18 @@ export 'src/xoshiro256pp.dart' show Xoshiro256pp;
 import 'src/xorshift32.dart';
 import 'src/xorshift128plus.dart';
 
+// TODO Replace with type aliases when feature will be available
+// https://github.com/dart-lang/language/issues/65
 
-//mixin ToAlias{}
+class Xrandom extends Xorshift32 {
+  Xrandom([seed]): super(seed);
+  static Xorshift32 expected() => Xorshift32.expected();
+}
 
-mixin Xrandom on Xorshift32 {}
-mixin Xrandom64 on Xorshift128p {}
-
-
+class Xrandom64 extends Xorshift128p {
+  Xrandom64([a,b]): super(a,b);
+  static Xorshift128p expected() => Xorshift128p.expected();
+}
 
 
 
