@@ -95,12 +95,12 @@ transforms a single 32-bit integer into a `double`. Therefore, the result is lim
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|----------------|
-| Random (dart:math)     |    3107    |       -        |
-| Xorshift32             |    1930    |      696       |
-| Xorshift64             |    2164    |      1340      |
-| Xorshift128            |    3164    |      1293      |
-| Xorshift128p        |    3023    |      1373      |
-| Xoshiro128pp           |    4535    |      2086      |
+| Random (dart:math)     |    3241    |       -        |
+| Xorshift32             |    1775    |      644       |
+| Xorshift64             |    1933    |      1588      |
+| Xorshift128            |    3009    |      1238      |
+| Xorshift128p           |    2047    |      1625      |
+| Xoshiro128pp           |    4174    |      1897      |
 
 The `nextInt32()` and `nextInt64()` do not accept any arguments. They return the raw output of the RNGs.
 
@@ -112,23 +112,23 @@ xrandom.nextInt64();  // 64-bit signed
 
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
-| Random (dart:math)     |  2323   |     -     |     -     |
-| Xorshift32             |  1269   |    767    |     -     |
-| Xorshift64             |  1974   |   1292    |   1381    |
-| Xorshift128            |  1967   |   1301    |     -     |
-| Xorshift128p        |  2015   |   1364    |   1521    |
-| Xoshiro128pp           |  2546   |   2048    |     -     |
+| Random (dart:math)     |  2352   |     -     |     -     |
+| Xorshift32             |  1254   |    717    |     -     |
+| Xorshift64             |  2154   |   1600    |   1381    |
+| Xorshift128            |  1791   |   1221    |     -     |
+| Xorshift128p           |  2173   |   1618    |   1475    |
+| Xoshiro128pp           |  2473   |   1832    |     -     |
 
 # More benchmarks
 
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
-| Random (dart:math)     |  2323   |    3107    |   2264   |
-| Xorshift32             |  1269   |    1930    |   1467   |
-| Xorshift64             |  1974   |    2164    |   1393   |
-| Xorshift128            |  1967   |    3164    |   1479   |
-| Xorshift128p        |  2015   |    3023    |   1413   |
-| Xoshiro128pp           |  2546   |    4535    |   1500   |
+| Random (dart:math)     |  2352   |    3241    |   2260   |
+| Xorshift32             |  1254   |    1775    |   1433   |
+| Xorshift64             |  2154   |    1933    |   1305   |
+| Xorshift128            |  1791   |    3009    |   1455   |
+| Xorshift128p           |  2173   |    2047    |   1310   |
+| Xoshiro128pp           |  2473   |    4174    |   1476   |
 
 -----
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04.

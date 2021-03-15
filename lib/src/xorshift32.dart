@@ -45,4 +45,9 @@ class Xorshift32 extends RandomBase32
 
     return _state = x;
   }
+
+  @override
+  bool nextBool() {
+    return this.nextInt32() >= 0x80000000;
+  }
 }

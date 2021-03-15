@@ -8,7 +8,7 @@ import 'package:xrandom/xrandom.dart';
 
 import 'nullsafe_tabulate.dart';
 
-enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextDoubleFast }
+enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat }
 
 int measureTime(Random r, DoWhat dbl) {
   print('Benchmarking ${r.runtimeType}');
@@ -37,7 +37,7 @@ int measureTime(Random r, DoWhat dbl) {
         for (var i = 0; i < N; ++i) r.nextInt64();
       }
       break;
-    case DoWhat.nextDoubleFast:
+    case DoWhat.nextFloat:
       if (r is RandomBase32) {
         for (var i = 0; i < N; ++i) r.nextFloat();
       }
@@ -80,7 +80,7 @@ void main(List<String> arguments) {
     DoWhat.nextBool,
     DoWhat.nextInt32,
     DoWhat.nextInt64,
-    DoWhat.nextDoubleFast
+    DoWhat.nextFloat
   ];
 
   List<Random> listGenerators() => [
@@ -156,6 +156,6 @@ void main(List<String> arguments) {
 
   printColumns([
     DoWhat.nextDouble,
-    DoWhat.nextDoubleFast,
+    DoWhat.nextFloat,
   ]);
 }
