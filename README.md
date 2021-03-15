@@ -73,6 +73,8 @@ target 64-bit platforms (any other than JavaScript).
 
 # Compatibility
 
+Quick selection:
+
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
 | **Speed**       | `Xorshift64`              | `Xorshift32`        |
