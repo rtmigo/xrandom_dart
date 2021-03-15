@@ -10,12 +10,15 @@ import 'nullsafe_tabulate.dart';
 
 enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat }
 
+const NUM_EXPERIMENTS = 10;
+const NUM_ITEMS_PER_EXPERIMENT = 10000000;
+
 int measureTime(Random r, DoWhat dbl) {
   print('Benchmarking ${r.runtimeType}');
 
   final sw = Stopwatch()..start();
 
-  const N = 100000000;
+  const N = NUM_ITEMS_PER_EXPERIMENT;
 
   switch (dbl) {
     case DoWhat.nextDouble:
@@ -92,7 +95,7 @@ void main(List<String> arguments) {
         Xoshiro128pp.deterministic(),
       ];
 
-  for (var experiment = 0; experiment < 4; ++experiment) {
+  for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
     for (final doingWhat in dowhatz) {
       for (var random in listGenerators()..shuffle()) {
         final time = measureTime(random, doingWhat);
