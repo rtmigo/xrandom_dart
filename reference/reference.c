@@ -11,7 +11,7 @@
 //#include <math.h>
 #include <stdint.h>
 
-#define VALUES_PER_SAMPLE 2048 
+#define VALUES_PER_SAMPLE 1024
 //4096
 
 ////////////////////////////////////////////////////////////////////////////////
