@@ -95,21 +95,10 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 
 # Speed optimizations
 
-`nextFloat`, unlike `nextDouble`, prefers speed to accuracy. It transforms 
-a single 32-bit integer into a `double`. Therefore, the result is limited 
-to a maximum of 2^32-1 values.
+### Raw bits
 
-| Time (lower is better) | nextDouble | nextFloat |
-|------------------------|------------|-----------|
-| Random (dart:math)     |    1541    |     -     |
-| Xorshift32             |    1122    |    405    |
-| Xorshift64             |    994     |    777    |
-| Xorshift128            |    1443    |    588    |
-| Xorshift128p           |    1073    |    803    |
-| Xoshiro128pp           |    2015    |    904    |
-| Xoshiro256pp           |    2152    |   1386    |
-
-The `nextInt32()` and `nextInt64()` do not accept any arguments. They return the raw output of the RNGs.
+The `nextInt32()` and `nextInt64()` return the raw output of the generator. 
+They do not accept any arguments.
 
 ``` dart 
 var xrandom = Xorshift128p(); 
@@ -126,6 +115,24 @@ xrandom.nextInt64();  // 64-bit signed
 | Xorshift128p           |  1081   |    802    |    857    |
 | Xoshiro128pp           |  1203   |    902    |     -     |
 | Xoshiro256pp           |  1691   |   1405    |   1890    |
+
+### Rough d˚ouble
+
+`nextFloat`, unlike `nextDouble`, prefers speed to accuracy. It transforms 
+a single 32-bit integer into a `double`. Therefore, the result is limited 
+to a maximum of 2^32-1 values.
+
+| Time (lower is better) | nextDouble | nextFloat |
+|------------------------|------------|-----------|
+| Random (dart:math)     |    1541    |     -     |
+| Xorshift32             |    1122    |    405    |
+| Xorshift64             |    994     |    777    |
+| Xorshift128            |    1443    |    588    |
+| Xorshift128p           |    1073    |    803    |
+| Xoshiro128pp           |    2015    |    904    |
+| Xoshiro256pp           |    2152    |   1386    |
+
+
 
 # More benchmarks
 
