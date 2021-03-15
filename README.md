@@ -48,7 +48,7 @@ sequence of numbers every time.
 
 ``` dart
 test('my test', () {
-    final random = Xrandom.deterministic();
+    final random = Xrandom.expected();
     // run this test twice ;)
     expect(random.nextInt(1000), 119);
     expect(random.nextInt(1000), 240);
