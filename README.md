@@ -68,8 +68,12 @@ sequences can be relied upon. *(but not until the library reaches stable release
 | `Xrandom`    | `Xorshift32`   |
 | `Xrandom64`  | `Xorshift64` |
 
-Those are speedy algorithms. You can use `Xrandom` on all platforms.
-You may prefer `Xrandom64` if you don't target JavaScript. 
+You can use `Xrandom` on all platforms. You may prefer `Xrandom64` if you 
+target modern platforms (and not JavaScript). 
+
+Reasons for choosing such defaults: if the user doesn't care, the algorithm 
+should be fast. If the user is interested in statistical nuances, he will 
+choose a specific algorithm, not the default one.
 
 # Compatibility
 
