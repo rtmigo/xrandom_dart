@@ -78,6 +78,10 @@ void main() {
   //   );
   // });
 
+  checkReferenceFiles(()=>Xorshift128p(1,2), 'a');
+  checkReferenceFiles(()=>Xorshift128p(42, 777), 'b');
+  checkReferenceFiles(()=>Xorshift128p(8378522730901710845, 1653112583875186020), 'c');
+
 
   test("madsen double", () {
 

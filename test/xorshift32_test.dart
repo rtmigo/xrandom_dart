@@ -42,6 +42,10 @@ void main() {
     compareWithReference32(random, "xorshift32 (seed 314159265)");
   });
 
+  //checkReferenceFiles(()=>Xorshift32(1), 'a');
+  //checkReferenceFiles(()=>Xorshift64(42), 'b');
+  //checkReferenceFiles(()=>Xorshift64(3141592653589793238), 'c');
+
 
 
   // test("doubles", ()=>checkDoubles(Xorshift32(777)));

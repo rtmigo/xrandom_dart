@@ -2,8 +2,7 @@
 // SPDX-License-Identifier: CC-BY-4.0
 
 // this file runs reference implementations of random number generators
-// (RNG) to create lists of numbers. Those numbers are printed to the stdout
-// in JSON-like format (actually, it's a Dart code).
+// (RNG) to create lists of numbers. Those numbers are written into text files
 //
 // The data can be used for testing of alternate implementations
 // of the same RNGs (to match the reference numbers to the newly generated)
@@ -34,13 +33,7 @@ FILE* open_ref_outfile(char* alg_name, char* sample_id, char* seed, char* type_s
 	return result;
 }
 
-	
-
-
-
 ////////////////////////////////////////////////////////////////////////////////	
-
-
 
 // "in C99 a 64-bit unsigned integer x should be converted to a 64-bit 
 // double using the expression"
@@ -102,6 +95,38 @@ void print32(uint32_t seed)
     printf("],\n\n");
 }
 
+void write32(char* name, uint64_t seed) {
+
+    struct xorshift32_state state;
+    state.a = seed;
+
+	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "%u", state.a);
+
+	char* alg_name = "xorshift32";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+
+		uint32_t x1 = xorshift32(&state);
+		fprintf(ints_file, "%08x\n", x1);
+
+		uint32_t x2 = xorshift32(&state);
+		fprintf(ints_file, "%08x\n", x2);
+
+		uint64_t combined = (((uint64_t)x2)<<32)|x1;
+
+		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(combined));
+	}	
+
+	fclose(doubles_cast_file);
+	fclose(doubles_file);
+	fclose(ints_file);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // XORSHIFT64
 //
@@ -152,18 +177,13 @@ void write64(uint64_t seed, char* name) {
     struct xorshift64_state state;
     state.a = seed;
 
-	char* alg_name = "xorshift64";
-
 	char seed_str[256];
 	snprintf(seed_str, sizeof seed_str, "%llu", state.a);
 
-	//#char ints_fn[256];
-	//snprintf(ints_fn, sizeof ints_fn, "generated/%s_%s%s", alg_name, name, "_int.txt");
-	//FILE *ints_file = fopen(ints_fn, "w");
-
-	FILE *ints_file = open_ref_outfile("xorshift64", name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile("xorshift64", name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile("xorshift64", name, seed_str, "double_cast");
+	char* alg_name = "xorshift64";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint64_t x = xorshift64(&state);
@@ -173,7 +193,7 @@ void write64(uint64_t seed, char* name) {
 		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(x));
 	}	
 
-
+	fclose(doubles_cast_file);
 	fclose(doubles_file);
 	fclose(ints_file);
 }
@@ -326,6 +346,34 @@ void print128plus(uint64_t a, uint64_t b)
     printf("],\n\n");
 }
 
+void write128p(char* name, uint64_t a, uint64_t b) {
+
+	uint64_t s[2];
+
+    s[0] = a;
+    s[1] = b;
+
+ 	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "%llu %llu", a, b);
+
+	char* alg_name = "xorshift128p";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+		uint64_t x = xorshift128plus_int(s);
+		fprintf(ints_file, "%016llx\n", x);
+
+		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(x));
+		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(x));
+	}
+
+	fclose(doubles_cast_file);
+	fclose(doubles_file);
+	fclose(ints_file);
+}
+
 // It it commented out because it was not needed for testing
 // the dart xorshift.
 // void print128plus_double(uint64_t a, uint64_t b)
@@ -414,11 +462,22 @@ int main()
 
 	printf("const referenceData = {\n\n");
 
+	write32("a", 1);
+	write32("b", 42);
+	write32("c", PI32);
+
+
 	// print32(1);
 	// print32(42);
 	// print32(PI32);
 
 	write64(1, "a");
+	write64(42, "b");
+	write64(PI64, "c");
+
+	write128p("a", 1, 2);
+	write128p("b", 42, 777);
+	write128p("c", 8378522730901710845llu, 1653112583875186020llu);
 
 	// print64(1);
 	// print64(42);

@@ -29,13 +29,13 @@ void main() {
 
   test("reference data", () {
     expect(
-        referenceSignature("xorshift64 (seed 1)"),
+        referenceSignature('xorshift64 (seed 1)'),
         ['0000000040822041', '100041060c011441', '9b1e842f6e862629', '1a79f717c30cd499']);
     expect(
-        referenceSignature("xorshift64 (seed 42)"),
+        referenceSignature('xorshift64 (seed 42)'),
         ['0000000a95514aaa', 'a00aaafdf80202bf', '8b13399cd1d1497a', '19534e6bc7e4c934']);
     expect(
-        referenceSignature("xorshift64 (seed 3141592653589793238)"),
+        referenceSignature('xorshift64 (seed 3141592653589793238)'),
         ['366b2d97e95498c5', '9546626d41d0a0b4', 'e23e2b18a287acf5', 'd81ada3db94a4ee1']);
 
   });
@@ -64,6 +64,8 @@ void main() {
   });
 
   checkReferenceFiles(()=>Xorshift64(1), 'a');
+  checkReferenceFiles(()=>Xorshift64(42), 'b');
+  checkReferenceFiles(()=>Xorshift64(3141592653589793238), 'c');
 
 
     // test("doubles", () {

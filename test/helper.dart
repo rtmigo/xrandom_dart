@@ -52,11 +52,11 @@ Iterable<double> loadDoubles(File file) sync* {
   }
 }
 
-void checkReferenceFiles(RandomBase64 Function() createRandom, String seedId) {
+void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 
   group('Checking reference files ${createRandom().runtimeType}', () {
 
-    late RandomBase64 random;
+    late RandomBase32 random;
     late String filePrefix;
 
     setUp(() {
