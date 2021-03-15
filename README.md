@@ -17,7 +17,7 @@ Namely, the [Xoshiro](https://prng.di.unimi.it/) for **quality** and
 
 # Speed
 
-Generating 100 million of random numbers with AOT-compiled binary. 
+Generating 50 million of random numbers with AOT-compiled binary. 
 
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
