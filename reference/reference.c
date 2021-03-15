@@ -473,6 +473,47 @@ void printXoshiro128pp(uint32_t a, uint32_t b, uint32_t c, uint32_t d)
     printf("],\n\n");
 }
 
+void write_xoshiro128pp(char* name, uint32_t a, uint32_t b, uint32_t c, uint32_t d) {
+
+	uint32_t s[4];
+	s[0]=a;
+	s[1]=b;
+	s[2]=c;
+	s[3]=d;
+
+ 	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "%u %u %u %u", a, b, c, d);
+
+	char* alg_name = "xoshiro128pp";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+
+		uint32_t x1 = xoshiro128pp(s);
+		fprintf(ints_file, "%08x\n", x1);
+
+		uint32_t x2 = xoshiro128pp(s);
+		fprintf(ints_file, "%08x\n", x2);
+
+		uint64_t combined = (((uint64_t)x1)<<32)|x2;
+
+		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(combined));
+
+		// uint64_t x = xorshift128plus_int(s);
+		// fprintf(ints_file, "%016llx\n", x);
+
+		// fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(x));
+		// fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(x));
+	}
+
+	fclose(doubles_cast_file);
+	fclose(doubles_file);
+	fclose(ints_file);
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -517,6 +558,10 @@ int main()
 	write128("a", 1, 2, 3, 4);
 	write128("b", 5, 23, 42, 777);
 	write128("c", 1081037251u, 1975530394u, 2959134556u, 1579461830u);	
+
+	write_xoshiro128pp("a", 1, 2, 3, 4);
+	write_xoshiro128pp("b", 5, 23, 42, 777);
+	write_xoshiro128pp("c", 1081037251u, 1975530394u, 2959134556u, 1579461830u);
 
 	// print64(1);
 	// print64(42);
