@@ -100,11 +100,10 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 The `nextInt32()` and `nextInt64()` return the raw output of the generator. 
 They do not accept any arguments.
 
-``` dart 
-var xrandom = Xorshift128p(); 
-xrandom.nextInt32();  // 32-bit unsigned 
-xrandom.nextInt64();  // 64-bit signed
-```
+| Method | Returns | Equivalent of | 
+|--------|---------|-----------|
+| nextInt32() | 32-bit unsigned | nextInt(0xFFFFFFFE)+1 |
+| nextInt64() | 64-bit signed | nextInt(0xFFFFFFFFFFFFFFFE)+1 |
 
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
