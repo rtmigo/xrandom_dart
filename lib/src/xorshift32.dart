@@ -46,19 +46,19 @@ class Xorshift32 extends RandomBase32
     return _state = x;
   }
 
-  @override
-  bool nextBool() {
-    // xorshift32 is so fast, that even returning particular
-    // bits is not faster than nextInt32()
-
-    var x = _state;
-
-    x ^= (x << 13);
-    x &= 0xFFFFFFFF; // added
-    x ^= (x >> 17);
-    x ^= (x << 5);
-    x &= 0xFFFFFFFF; // added
-
-    return (_state = x) >= 0x80000000;
-  }
+  // @override
+  // bool nextBool() {
+  //   // xorshift32 is so fast, that even returning particular
+  //   // bits is not faster than nextInt32()
+  //
+  //   var x = _state;
+  //
+  //   x ^= (x << 13);
+  //   x &= 0xFFFFFFFF; // added
+  //   x ^= (x >> 17);
+  //   x ^= (x << 5);
+  //   x &= 0xFFFFFFFF; // added
+  //
+  //   return (_state = x) >= 0x80000000;
+  // }
 }
