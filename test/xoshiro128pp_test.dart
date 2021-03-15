@@ -11,7 +11,7 @@ import 'package:xrandom/src/xoshiro128pp.dart';
 // 'xorshift128 (seed 1 2 3 4)'
 
 import 'helper.dart';
-import 'reference.dart';
+import '../labuda/2021-03-15/reference.dart';
 
 void main() {
 
@@ -35,20 +35,20 @@ void main() {
   //
   // });
 
-  test("seed A", () {
-    final random = Xoshiro128pp(1, 2, 3, 4);
-    compareWithReference32(random, "xoshiro128++ (seed 00000001 00000002 00000003 00000004)");
-  });
-
-  test("seed B", () {
-    final random = Xoshiro128pp(5, 23, 42, 777);
-    compareWithReference32(random, "xoshiro128++ (seed 00000005 00000017 0000002a 00000309)");
-  });
+  // test("seed A", () {
+  //   final random = Xoshiro128pp(1, 2, 3, 4);
+  //   compareWithReference32(random, "xoshiro128++ (seed 00000001 00000002 00000003 00000004)");
+  // });
   //
-  test("seed C", () {
-    final random = Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830);
-    compareWithReference32(random, "xoshiro128++ (seed 406f51c3 75c0339a b060cf5c 5e24acc6)");
-  });
+  // test("seed B", () {
+  //   final random = Xoshiro128pp(5, 23, 42, 777);
+  //   compareWithReference32(random, "xoshiro128++ (seed 00000005 00000017 0000002a 00000309)");
+  // });
+  // //
+  // test("seed C", () {
+  //   final random = Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830);
+  //   compareWithReference32(random, "xoshiro128++ (seed 406f51c3 75c0339a b060cf5c 5e24acc6)");
+  // });
 
 
 

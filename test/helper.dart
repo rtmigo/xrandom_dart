@@ -13,7 +13,7 @@ import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/00_ints.dart';
 
-import 'reference.dart';
+//import '../labuda/2021-03-15/reference.dart';
 
 File fileInData(String localName) {
   return File(path.join(Directory.current.path, "test/data/" + localName));
@@ -101,32 +101,32 @@ String trimLeadingZeros(String s) {
   return s.replaceAll(new RegExp(r'^0+(?=.)'), '');
 }
 
-void compareWithReference32(RandomBase32 random, referenceKey) {
-  final refList = referenceData[referenceKey]!;
-  for (final value in refList) {
-    final x = random.nextInt32();
-    expect(trimLeadingZeros(x.toHexUint64()), trimLeadingZeros(value.toUpperCase()));
-  }
-}
+// void compareWithReference32(RandomBase32 random, referenceKey) {
+//   final refList = referenceData[referenceKey]!;
+//   for (final value in refList) {
+//     final x = random.nextInt32();
+//     expect(trimLeadingZeros(x.toHexUint64()), trimLeadingZeros(value.toUpperCase()));
+//   }
+// }
+//
+// void compareWithReference64(RandomBase64 random, referenceKey) {
+//   final refList = referenceData[referenceKey]!;
+//   for (final value in refList) {
+//     final x = random.nextInt64();
+//     expect(trimLeadingZeros(x.toHexUint64()), trimLeadingZeros(value.toUpperCase()));
+//   }
+// }
 
-void compareWithReference64(RandomBase64 random, referenceKey) {
-  final refList = referenceData[referenceKey]!;
-  for (final value in refList) {
-    final x = random.nextInt64();
-    expect(trimLeadingZeros(x.toHexUint64()), trimLeadingZeros(value.toUpperCase()));
-  }
-}
 
-
-/// We just take a big list from our reference data, and return
-/// a few values from it.
-///
-/// Reference data in "always ok" except if we messed up data on update.
-/// This signature helps to make sure, that the reference is ok
-List<String> referenceSignature(String referenceKey) {
-  List<String> list = referenceData[referenceKey]!;
-  return [list[0], list[1], list[2], list[500]];
-}
+// /// We just take a big list from our reference data, and return
+// /// a few values from it.
+// ///
+// /// Reference data in "always ok" except if we messed up data on update.
+// /// This signature helps to make sure, that the reference is ok
+// List<String> referenceSignature(String referenceKey) {
+//   List<String> list = referenceData[referenceKey]!;
+//   return [list[0], list[1], list[2], list[500]];
+// }
 
 
 void testCommonRandom(Random createRandom()) {

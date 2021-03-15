@@ -8,39 +8,39 @@ import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/xorshift32.dart';
 
 import 'helper.dart';
-import 'reference.dart';
+import '../labuda/2021-03-15/reference.dart';
 
 void main() {
 
   testCommonRandom(()=>Xorshift32());
 
-  test("reference data", () {
-    expect(
-        referenceSignature("xorshift32 (seed 1)"),
-        ['00042021', '04080601', '9dcca8c5', '7c43326e']);
-    expect(
-        referenceSignature("xorshift32 (seed 42)"),
-        ['00ad4528', 'a90a34ac', '1c67af03', '7478bd43']);
-    expect(
-        referenceSignature("xorshift32 (seed 314159265)"),
-        ['b11ddc17', '59781258', '3d54c7e1', '8d87618b']);
+  // test("reference data", () {
+  //   expect(
+  //       referenceSignature("xorshift32 (seed 1)"),
+  //       ['00042021', '04080601', '9dcca8c5', '7c43326e']);
+  //   expect(
+  //       referenceSignature("xorshift32 (seed 42)"),
+  //       ['00ad4528', 'a90a34ac', '1c67af03', '7478bd43']);
+  //   expect(
+  //       referenceSignature("xorshift32 (seed 314159265)"),
+  //       ['b11ddc17', '59781258', '3d54c7e1', '8d87618b']);
+  //
+  // });
 
-  });
-
-  test("seed 1", () {
-    final random = Xorshift32(1);
-    compareWithReference32(random, "xorshift32 (seed 1)");
-  });
-
-  test("seed 42", () {
-    final random = Xorshift32(42);
-    compareWithReference32(random, "xorshift32 (seed 42)");
-  });
-
-  test("seed 314159265", () {
-    final random = Xorshift32(314159265);
-    compareWithReference32(random, "xorshift32 (seed 314159265)");
-  });
+  // test("seed 1", () {
+  //   final random = Xorshift32(1);
+  //   compareWithReference32(random, "xorshift32 (seed 1)");
+  // });
+  //
+  // test("seed 42", () {
+  //   final random = Xorshift32(42);
+  //   compareWithReference32(random, "xorshift32 (seed 42)");
+  // });
+  //
+  // test("seed 314159265", () {
+  //   final random = Xorshift32(314159265);
+  //   compareWithReference32(random, "xorshift32 (seed 314159265)");
+  // });
 
   checkReferenceFiles(()=>Xorshift32(1), 'a');
   checkReferenceFiles(()=>Xorshift32(42), 'b');

@@ -10,7 +10,7 @@ import 'package:xrandom/src/xorshift32.dart';
 import 'package:xrandom/src/xorshift64.dart';
 
 import 'helper.dart';
-import 'reference.dart';
+import '../labuda/2021-03-15/reference.dart';
 
 // class MyObject {
 //

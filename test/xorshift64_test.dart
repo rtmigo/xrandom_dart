@@ -21,41 +21,41 @@ import 'package:xrandom/xrandom.dart';
 // 'xorshift128plus (seed 1081037251 1975530394)'
 
 import 'helper.dart';
-import 'reference.dart';
+import '../labuda/2021-03-15/reference.dart';
 
 void main() {
 
   testCommonRandom(()=>Xorshift64());
 
-  test("reference data", () {
-    expect(
-        referenceSignature('xorshift64 (seed 1)'),
-        ['0000000040822041', '100041060c011441', '9b1e842f6e862629', '1a79f717c30cd499']);
-    expect(
-        referenceSignature('xorshift64 (seed 42)'),
-        ['0000000a95514aaa', 'a00aaafdf80202bf', '8b13399cd1d1497a', '19534e6bc7e4c934']);
-    expect(
-        referenceSignature('xorshift64 (seed 3141592653589793238)'),
-        ['366b2d97e95498c5', '9546626d41d0a0b4', 'e23e2b18a287acf5', 'd81ada3db94a4ee1']);
+  // test("reference data", () {
+  //   expect(
+  //       referenceSignature('xorshift64 (seed 1)'),
+  //       ['0000000040822041', '100041060c011441', '9b1e842f6e862629', '1a79f717c30cd499']);
+  //   expect(
+  //       referenceSignature('xorshift64 (seed 42)'),
+  //       ['0000000a95514aaa', 'a00aaafdf80202bf', '8b13399cd1d1497a', '19534e6bc7e4c934']);
+  //   expect(
+  //       referenceSignature('xorshift64 (seed 3141592653589793238)'),
+  //       ['366b2d97e95498c5', '9546626d41d0a0b4', 'e23e2b18a287acf5', 'd81ada3db94a4ee1']);
+  //
+  // });
 
-  });
+  // test("seed 1", () {
+  //   final random = Xorshift64(1);
+  //   compareWithReference64(random, "xorshift64 (seed 1)");
+  // });
+  //
+  // test('seed 42', () {
+  //   final random = Xorshift64(42);
+  //   compareWithReference64(random, "xorshift64 (seed 42)");
+  // });
+  //
+  // test('seed 3141592653589793238', () {
+  //   final random = Xorshift64(BigInt.parse('3141592653589793238').toInt());
+  //   compareWithReference64(random, "xorshift64 (seed 3141592653589793238)");
+  // });
 
-  test("seed 1", () {
-    final random = Xorshift64(1);
-    compareWithReference64(random, "xorshift64 (seed 1)");
-  });
-
-  test("seed 42", () {
-    final random = Xorshift64(42);
-    compareWithReference64(random, "xorshift64 (seed 42)");
-  });
-
-  test("seed 3141592653589793238", () {
-    final random = Xorshift64(BigInt.parse('3141592653589793238').toInt());
-    compareWithReference64(random, "xorshift64 (seed 3141592653589793238)");
-  });
-
-  test("predefined next", () {
+  test('predefined next', () {
     final random = Xorshift64.deterministic();
     expect(
         skipAndTake(()=>random.nextInt64().toHexUint64(), 5000, 3),

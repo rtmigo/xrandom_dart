@@ -12,39 +12,39 @@ import 'package:xrandom/src/xorshift128.dart';
 // 'xorshift128 (seed 1 2 3 4)'
 
 import 'helper.dart';
-import 'reference.dart';
+import '../labuda/2021-03-15/reference.dart';
 
 void main() {
 
   testCommonRandom(()=>Xorshift128());
 
-  test("reference data", () {
-    expect(
-        referenceSignature("xorshift128 (seed 1 2 3 4)"),
-        ['00002025', '0000383e', '0000282c', '2ee0065b']);
-    expect(
-        referenceSignature("xorshift128 (seed 5 23 42 777)"),
-        ['00185347', '0019023e', '0019ba92', '91050530']);
-    expect(
-        referenceSignature("xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)"),
-        ['3b568794', '8dfab58d', 'f9d21b4b', '4b5d88e5']);
+  // test("reference data", () {
+  //   expect(
+  //       referenceSignature("xorshift128 (seed 1 2 3 4)"),
+  //       ['00002025', '0000383e', '0000282c', '2ee0065b']);
+  //   expect(
+  //       referenceSignature("xorshift128 (seed 5 23 42 777)"),
+  //       ['00185347', '0019023e', '0019ba92', '91050530']);
+  //   expect(
+  //       referenceSignature("xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)"),
+  //       ['3b568794', '8dfab58d', 'f9d21b4b', '4b5d88e5']);
+  //
+  // });
 
-  });
-
-  test("seed A", () {
-    final random = Xorshift128(1, 2, 3, 4);
-    compareWithReference32(random, "xorshift128 (seed 1 2 3 4)");
-  });
-
-  test("seed B", () {
-    final random = Xorshift128(5, 23, 42, 777);
-    compareWithReference32(random, "xorshift128 (seed 5 23 42 777)");
-  });
-
-  test("seed C", () {
-    final random = Xorshift128(1081037251, 1975530394, 2959134556, 1579461830);
-    compareWithReference32(random, "xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)");
-  });
+  // test("seed A", () {
+  //   final random = Xorshift128(1, 2, 3, 4);
+  //   compareWithReference32(random, "xorshift128 (seed 1 2 3 4)");
+  // });
+  //
+  // test("seed B", () {
+  //   final random = Xorshift128(5, 23, 42, 777);
+  //   compareWithReference32(random, "xorshift128 (seed 5 23 42 777)");
+  // });
+  //
+  // test("seed C", () {
+  //   final random = Xorshift128(1081037251, 1975530394, 2959134556, 1579461830);
+  //   compareWithReference32(random, "xorshift128 (seed 1081037251 1975530394 2959134556 1579461830)");
+  // });
 
   checkReferenceFiles(()=>Xorshift128(1, 2, 3, 4), 'a');
   checkReferenceFiles(()=>Xorshift128(5, 23, 42, 777), 'b');
