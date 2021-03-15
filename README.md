@@ -22,7 +22,7 @@ Generating 50 million of random numbers with AOT-compiled binary.
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
 | Random (dart:math)     |  1172   |    1541    |   1134   |
-| Xorshift32             |   732   |    1122    |   718    |
+| Xrandom             |   732   |    1122    |   718    |
 
 
 # Simplicity
