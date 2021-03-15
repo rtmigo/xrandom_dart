@@ -65,10 +65,10 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 # Aliases
 
-| Class        | Is the same as | Works on              |
-|--------------|----------------|-----------------------|
-| `Xrandom`    | `Xorshift32`   | Everywhere            |
-| `Xrandom64`  | `Xorshift128p` | All except JavaScript |
+| Class        | Is the same as | Works on                     |
+|--------------|----------------|------------------------------|
+| `Xrandom`    | `Xorshift32`   | Everywhere                   |
+| `Xrandom64`  | `Xorshift128p` | Everywhere except JavaScript |
 
 
 
