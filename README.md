@@ -98,7 +98,6 @@ Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu** and **mac
 ### Raw bits
 
 The `nextInt32()` and `nextInt64()` return the raw output of the generator. 
-They do not accept any arguments.
 
 | Method | Returns | Equivalent of | 
 |--------|---------|-----------|
