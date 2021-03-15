@@ -94,6 +94,7 @@ void main(List<String> arguments) {
         Xorshift128p.expected(),
         Xoshiro128pp.expected(),
         Xoshiro256pp.expected(),
+        Splitmix64.expected(),
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
