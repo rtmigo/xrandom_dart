@@ -43,7 +43,8 @@ var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 
 # Reproducibility
 
-Xrandom's classes can also be created with `expected` method. It is made specifically for testing.
+Xrandom's classes can also be created with `expected` method.
+It is made specifically for **testing**. 
 
 ``` dart
 test('my test', () {
