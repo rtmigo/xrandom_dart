@@ -5,21 +5,9 @@
 import 'dart:math';
 import '00_ints.dart';
 
-// /// Scales an integer from range `(1, MAX_UINT32]` to `[0.0, 1.0)` arithmetically.
-// double scaleUint32toDouble(int x)
-// {
-//   // kept here for reference. Not used for now
-//   if (x > 0xFFFFFFFF || x <= 0) {
-//     throw RangeError.value(x);
-//   }
-//   return (x - 1) / UINT32_MAX;
-// }
-
 abstract class RandomBase32 implements Random {
 
   // https://git.io/JqCbB
-
-  static const _POW2_32 = 1 << 32;
 
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 1 to 0xFFFFFFFF, both inclusive.
@@ -79,35 +67,6 @@ abstract class RandomBase32 implements Random {
     //     (  x >>> 11              ) * 0x1.0p-53
     return ( (x>>11)&~(-1<<(64-11)) ) * Z;
   }
-
-  // @override
-  // bool nextBool() {
-  //
-  //   // in dart:math it is return nextInt(2) == 0;
-  //   // which is an equivalent of
-  //   //   if ((2&-2)==2) return next()&(2-1);
-  //
-  //   // benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
-  //   //    Random      (from dart:math)            2424
-  //   //    XorShift32  return nextInt(2)==0        2136
-  //   //    XorShift32  this.next() % 2 == 0        1903
-  //   //    XorShift32  this.next() >= 0x80000000   1821
-  //
-  //   if (_boolCache_prevIdx==_MAX_BIT_INDEX) {
-  //     _boolCache = nextInt32();
-  //     _boolCache_prevIdx = 0;
-  //     return _boolCache&1 == 1;
-  //   } else {
-  //     assert(_boolCache_prevIdx<_MAX_BIT_INDEX);
-  //     _boolCache_prevIdx++;
-  //     final result = (_boolCache & (1<<_boolCache_prevIdx)) != 0;
-  //     return result;
-  //   }
-  // }
-  //
-  // static const _MAX_BIT_INDEX = 32-1;
-  // int _boolCache = 0;
-  // int _boolCache_prevIdx = _MAX_BIT_INDEX;
 
   @override
   bool nextBool() {
@@ -249,7 +208,7 @@ abstract class RandomBase64 extends RandomBase32 {
     const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
     //double a = 0x1.0p-53;
 
-    //     ( this.nextInt64() >>> 11                       ) * 0x1.0p-53
+    //     ( this.nextInt64() >>> 11                     ) * 0x1.0p-53
     return ((this.nextInt64() >> 11) & ~(-1 << (64 - 11))) * Z;
   }
 
@@ -268,4 +227,3 @@ abstract class RandomBase64 extends RandomBase32 {
     }
   }
 }
-

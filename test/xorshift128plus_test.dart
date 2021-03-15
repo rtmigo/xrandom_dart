@@ -9,7 +9,6 @@ import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/xorshift128plus.dart';
 
 import 'helper.dart';
-import '../labuda/2021-03-15/reference.dart';
 import 'madsen.dart';
 
 void main() {
@@ -27,16 +26,16 @@ void main() {
   //       ['8b37872b3d8a7561', '7d171d4b597b258d', '48b7d5d5301ad113', '5ee29237a2f00ae7']);
   // });
 
-  test("compare reference data to madsen", () {
-    // here we comparing the reference results from the
-    // https://github.com/AndreasMadsen/xorshift/blob/master/reference.json
-    // to our reference data. Just to be sure, that the reference data is ok
-
-    final madsen = madsenSample["integer"]!["1-2"]!;
-    final ours = referenceData['xorshift128plus (seed 1 2)']!;
-
-    for (int i = 0; i < madsen.length; ++i) expect(ours[i].toUpperCase(), madsen[i]);
-  });
+  // test("compare reference data to madsen", () {
+  //   // here we comparing the reference results from the
+  //   // https://github.com/AndreasMadsen/xorshift/blob/master/reference.json
+  //   // to our reference data. Just to be sure, that the reference data is ok
+  //
+  //   final madsen = madsenSample["integer"]!["1-2"]!;
+  //   final ours = referenceData['xorshift128plus (seed 1 2)']!;
+  //
+  //   for (int i = 0; i < madsen.length; ++i) expect(ours[i].toUpperCase(), madsen[i]);
+  // });
 
   // test("seed A", () {
   //   final random = Xorshift128p(1, 2);

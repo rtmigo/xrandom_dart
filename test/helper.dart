@@ -13,7 +13,7 @@ import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/00_ints.dart';
 
-//import '../labuda/2021-03-15/reference.dart';
+//import '../labuda/2021-03-15/reference.dart.txt';
 
 File fileInData(String localName) {
   return File(path.join(Directory.current.path, "test/data/" + localName));
