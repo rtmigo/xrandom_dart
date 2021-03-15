@@ -71,14 +71,26 @@ sequences can be relied upon. *(but not until the library reaches stable release
 You can use `Xrandom` on all platforms. You may prefer `Xrandom64` if you 
 target 64-bit platforms (any other than JavaScript). 
 
-# Compatibility
 
-Quick selection:
+# Classes
+
+| Class             | Algorithm    | Algorithm author | Published |
+|-------------------|--------------|------------------|------|
+| `Xorshift32`      | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift64`      | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift128`     | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
+| `Xorshift128p` | [xorshift128+](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
+| `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
+
+# What to choose
 
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
 | **Speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
+
+# Compatibility
 
 You can safely **use any classes on mobile and desktop** platforms. 
 
@@ -96,16 +108,6 @@ Full compatibility table:
 | `Xorshift128p`       | 64-bit         | yes              | no         |
 | `Xoshiro256pp`       | 64-bit         | yes              | no         |
 
-# Classes
-
-| Class             | Algorithm    | Algorithm author | Published |
-|-------------------|--------------|------------------|------|
-| `Xorshift32`      | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift64`      | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift128`     | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
-| `Xorshift128p` | [xorshift128+](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
-| `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
-| `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
 
 # Speed optimizations
 
