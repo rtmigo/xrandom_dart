@@ -66,7 +66,7 @@ sequences can be relied upon. *(but not until the library reaches stable release
 | Class        | Is the same as |
 |--------------|----------------|
 | `Xrandom`    | `Xorshift32`   |
-| `Xrandom64`  | `Xorshift128p` |
+| `Xrandom64`  | `Xorshift64` |
 
 Those are speedy algorithms. You can use `Xrandom` on all platforms.
 You may prefer `Xrandom64` if you don't target JavaScript. 
