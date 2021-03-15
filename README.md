@@ -65,6 +65,9 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 # Aliases
 
+In most cases, you can just use the Xrandom class. This is an easy-to-remember
+alias for a fast and consistent algorithm.
+
 | Class        | Is the same as | Works on                     |
 |--------------|----------------|------------------------------|
 | `Xrandom`    | `Xorshift32`   | Everywhere                   |

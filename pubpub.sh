@@ -23,6 +23,6 @@ new_readme=$(echo $old_readme | perl -p0e 's|^.*?\r# |# \1|' | tr '\r' '\n')
 echo "$new_readme" > "$temp_pub_dir/README.md"
 
 cd "$temp_pub_dir"
-dart pub publish --dry-run
-#№dart pub publish
-open "$temp_pub_dir"
+#dart pub publish --dry-run
+dart pub publish
+#open "$temp_pub_dir"
