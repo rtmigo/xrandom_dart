@@ -69,7 +69,7 @@ sequences can be relied upon. *(but not until the library reaches stable release
 | `Xrandom64`  | `Xorshift64` |
 
 You can use `Xrandom` on all platforms. You may prefer `Xrandom64` if you 
-target VM platforms (i.e. not JavaScript). 
+target 64-bit platforms (any other than JavaScript). 
 
 Reasons for choosing such defaults: if the user doesn't care, the algorithm 
 should be fast. If the user is interested in statistical nuances, he will 
