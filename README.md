@@ -70,8 +70,9 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 | `Xrandom`    | `Xorshift32`   |
 | `Xrandom64`  | `Xorshift128p` |
 
-You can use `Xrandom` on all platforms. You may prefer `Xrandom64` if you 
-target 64-bit platforms (any other than JavaScript). 
+`Xrandom` works on all platforms including JavaScript.
+
+`Xrandom64` is a better choice for desktop and mobile. 
 
 
 # Classes
