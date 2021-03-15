@@ -43,7 +43,7 @@ var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 
 # Determinism
 
-Xrandom's classes have a `expected` method. It is made specifically for testing.
+Xrandom's classes can be also created with `expected` method. It is made specifically for testing.
 
 ``` dart
 test('my test', () {
