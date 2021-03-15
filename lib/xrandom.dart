@@ -9,6 +9,16 @@ export 'src/xorshift32.dart' show Xorshift32;
 export 'src/xoshiro128pp.dart' show Xoshiro128pp;
 export 'src/xoshiro256pp.dart' show Xoshiro256pp;
 
+import 'src/xorshift32.dart';
+import 'src/xorshift128plus.dart';
+
+
+//mixin ToAlias{}
+
+mixin Xrandom on Xorshift32 {}
+mixin Xrandom64 on Xorshift128p {}
+
+
 
 
 
