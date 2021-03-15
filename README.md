@@ -32,11 +32,11 @@ It's compatible with the standard [`Random`](https://api.dart.dev/stable/2.12.1/
 ``` dart
 import 'package:xrandom/xrandom.dart';
 
-final xrandom = Xrandom();
+final random = Xrandom();
 
-var a = xrandom.nextBool(); 
-var b = xrandom.nextDouble();
-var c = xrandom.nextInt(n);
+var a = random.nextBool(); 
+var b = random.nextDouble();
+var c = random.nextInt(n);
 ```
 
 # Determinism
@@ -46,11 +46,11 @@ sequence of numbers every time.
 
 ``` dart
 test('my test', () {
-    final xrandom = Xrandom.deterministic();
+    final random = Xrandom.deterministic();
     // run this test twice ;)
-    expect(xrandom.nextInt(1000), 119);
-    expect(xrandom.nextInt(1000), 240);
-    expect(xrandom.nextInt(1000), 369);    
+    expect(random.nextInt(1000), 119);
+    expect(random.nextInt(1000), 240);
+    expect(random.nextInt(1000), 369);    
 });    
 ```
 
