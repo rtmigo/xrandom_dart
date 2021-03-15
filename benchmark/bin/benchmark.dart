@@ -91,7 +91,7 @@ void main(List<String> arguments) {
         Xorshift32.expected(),
         Xorshift64.expected(),
         Xorshift128.expected(),
-        Xorshift128p.deterministic(),
+        Xorshift128p.expected(),
         Xoshiro128pp.expected(),
         Xoshiro256pp.expected(),
       ];
