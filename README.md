@@ -68,6 +68,8 @@ sequences can be relied upon. *(but not until the library reaches stable release
 | `Xrandom`    | `Xorshift32`   |
 | `Xrandom64`  | `Xorshift128p` |
 
+Those are speedy algorithms. You can use `Xrandom` on all platforms.
+You may prefer `Xrandom64` if you don't target JavaScript. 
 
 # Compatibility
 
