@@ -30,18 +30,19 @@ void main() {
 
   test("hex", () {
 
-    expect(0xFF.toHexUint32(), "000000FF");
-    expect(0xFF.toHexUint64(), "00000000000000FF");
-    expect(0xFFFFFFFFFFFFFFFF.toHexUint64(), "FFFFFFFFFFFFFFFF");
-    expect(0x9FFFFFFFFFFFFFFF.toHexUint64(), "9FFFFFFFFFFFFFFF");
-
+    expect(0xFF.toHexUint32uc(), "000000FF");
+    expect(0xFF.toHexUint64uc(), "00000000000000FF");
+    expect(0xFFFFFFFFFFFFFFFF.toHexUint64uc(), "FFFFFFFFFFFFFFFF");
+    expect(0x9FFFFFFFFFFFFFFF.toHexUint64uc(), "9FFFFFFFFFFFFFFF");
+    expect((-1).toHexUint64uc(), "FFFFFFFFFFFFFFFF");
+    expect((-6917529027641081857).toHexUint64uc(), "9FFFFFFFFFFFFFFF");
   });
 
   test("signedRightShift", () {
 
     expect(0xFF.unsignedRightShift(4), 0xF);
-    expect(0x9FFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64(), "09FFFFFFFFFFFFFF");
-    expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64(), "0FFFFFFFFFFFFFFF");
+    expect(0x9FFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(), "09FFFFFFFFFFFFFF");
+    expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(), "0FFFFFFFFFFFFFFF");
 
   });
 }

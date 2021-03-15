@@ -8,6 +8,7 @@ import 'package:path/path.dart' as path;
 
 import 'package:test/test.dart';
 import 'package:xrandom/src/10_random_base.dart';
+import 'package:quiver/iterables.dart';
 
 //import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/10_random_base.dart';
@@ -84,21 +85,60 @@ Map dataMap(String algo, String seedId, ReferenceType type) {
 //   }
 // }
 
+
+
 Iterable<double> loadDoubles(Map m) sync* {
   for (var line in m['values']) {
-    if (line.trimLeft().startsWith('#') || line
-        .trim()
-        .isEmpty) {
-      continue;
-    }
+    // if (line.trimLeft().startsWith('#') || line.trim().isEmpty) {
+    //   continue;
+    // }
     yield double.parse(line);
   }
 }
 
+Iterable<String> rdIntsAsStrings(Map m) {
+  return m['values'];
+  // for (var line in m['values']) {
+  //   // if (line.trimLeft().startsWith('#') || line.trim().isEmpty) {
+  //   //   continue;
+  //   // }
+  //   return
+  //   //yield BigInt.parse(line, radix: 16).toInt();
+  // }
+}
+
+class Enumerated<T> {
+  Enumerated(this.index, this.value);
+  late int index;
+  late T value;
+}
+
+// Iterable<Enumerated<T>> enumerate<T>(Iterable<T> data) sync*
+// {
+//   late Enumerated<T> retval;
+//   int i=0;
+//   for (final t in data) {
+//     if (i == 0) {
+//       retval = Enumerated<T>(0, t);
+//     }
+//     else {
+//       retval.index = 0;
+//       retval.value = t;
+//     }
+//     yield retval;
+//     i++;
+//   }
+// }
+/*
+extension Itertools<T> on Iterable<T> {
+
+
+}*/
+
 
 void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 
-  group('Checking reference files ${createRandom().runtimeType}', () {
+  group('Reference data ${createRandom().runtimeType} seedId=$seedId', () {
 
     late RandomBase32 random;
     late String filePrefix;
@@ -122,12 +162,31 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
     });
 
     if (createRandom() is RandomBase64) {
-      test('double memory cast', () {
+      test('nextDoubleMemcast', () {
         final values = loadDoubles(dataMap(filePrefix, seedId, ReferenceType.double_cast));
         int idx = 0;
         for (final value in values) {
           expect((random as RandomBase64).nextDoubleMemcast(), value, reason: 'item ${idx++}');
         }
+      });
+    }
+    //final a = 0xfd7345d28bddd768;
+
+    if (createRandom() is RandomBase64) {
+      test('nextInt64', () {
+        final values = rdIntsAsStrings(dataMap(filePrefix, seedId, ReferenceType.ints));
+        //int idx = 0;
+        for (final item in enumerate(values)) {
+          expect((random as RandomBase64).nextInt64().toHexUint64uc().toLowerCase(), item.value, reason: 'item ${item.index}');
+        }
+      });
+    } else {
+      test('nextInt32', () {
+        // final values = loadInts(dataMap(filePrefix, seedId, ReferenceType.ints));
+        // //int idx = 0;
+        // for (final item in enumerate(values)) {
+        //   expect(random.nextInt32(), item.value, reason: 'item ${item.index}');
+        // }
       });
     }
 

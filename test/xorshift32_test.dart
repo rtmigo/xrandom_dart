@@ -53,7 +53,7 @@ void main() {
   test("predefined next", () {
     final random = Xorshift32.deterministic();
     expect(
-        skipAndTake(()=>random.nextInt32().toHexUint32(), 5000, 3),
+        skipAndTake(()=>random.nextInt32().toHexUint32uc(), 5000, 3),
         ['62982C53', '855D849A', '8C1511DD']
     );
   });

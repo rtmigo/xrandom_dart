@@ -57,7 +57,7 @@ void main() {
   test('predefined next', () {
     final random = Xorshift128p.deterministic();
     expect(
-        skipAndTake(()=>random.nextInt64().toHexUint64(), 5000, 3),
+        skipAndTake(()=>random.nextInt64().toHexUint64uc(), 5000, 3),
         ['1F1CCFAF5A83DC2A', 'AE8708051CB834DF', '897E4E4BA735BC15']
     );
   });

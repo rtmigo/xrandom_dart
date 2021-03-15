@@ -24,6 +24,10 @@ import 'helper.dart';
 
 void main() {
 
+  //print(0xFFFFFFFFFFFFFFFF);
+  //print(0x9FFFFFFFFFFFFFFF);
+  //return;
+
   testCommonRandom(()=>Xorshift64());
 
   // test("reference data", () {
@@ -57,7 +61,7 @@ void main() {
   test('predefined next', () {
     final random = Xorshift64.deterministic();
     expect(
-        skipAndTake(()=>random.nextInt64().toHexUint64(), 5000, 3),
+        skipAndTake(()=>random.nextInt64().toHexUint64uc(), 5000, 3),
         ['A78D8BFA5E7260CA', '5DB7D12B9759F68B', 'ABD3D730279787A6']
     );
   });

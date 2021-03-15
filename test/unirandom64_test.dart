@@ -39,8 +39,6 @@ void main() {
     }
   });
 
-  //if (!(r is Xorshift32))
-
   test('nextBool on 32-bit generator: must return all bits', () {
     final randomA = Xorshift128.deterministic();
     final randomB = Xorshift128.deterministic();

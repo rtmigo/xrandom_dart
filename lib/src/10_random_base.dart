@@ -61,8 +61,8 @@ abstract class RandomBase32 implements Random {
     // This method is a bit slower, than ((x>>>11)*0x1.0p-53),
     // but it works in Node.js
     //
-    // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
-    // conversion" of uint64_t to double like that:
+    // Vigna <https://prng.di.unimi.it/> suggests it like "аn alternative,
+    // multiplication-free conversion" of uint64_t to double like that:
     //
     // static inline double to_double(uint64_t x) {
     //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
