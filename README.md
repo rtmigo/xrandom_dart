@@ -65,6 +65,11 @@ sequences can be relied upon. *(but not until the library reaches stable release
 
 # Compatibility
 
+You can safely **use any classes on mobile platforms** and on the desktop. 
+
+However, if you also target **JavaScript** (Web, Node.js), you will have to 
+**limit the choice**.
+
 | Class                            | 64-bit platforms | JavaScript |
 |----------------------------------|------------------|------------|
 | **`Xorshift32`**      | **yes**              | **yes**        |
