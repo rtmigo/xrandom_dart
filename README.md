@@ -61,6 +61,12 @@ In contrast to `dart:math`, `xrandom` uses **xorshift32**, a very specific algor
 Xrandom's `deterministic`
 sequences can be relied upon. *(but not until the library reaches stable release status)*
 
+# Aliases
+
+| Class        | Is the same as |
+|--------------|----------------|
+| `Xrandom`    | `Xorshift32`   |
+| `Xrandom64`  | `Xorshift128p` |
 
 
 # Compatibility
