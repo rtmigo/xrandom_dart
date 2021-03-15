@@ -65,8 +65,8 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 # Aliases
 
-In most cases, you can just use the Xrandom class. This is an easy-to-remember
-alias for a fast and consistent algorithm.
+In most cases, you can just use the `Xrandom` class. This is an easy-to-remember
+alias for a fast and compatible algorithm.
 
 | Class        | Is the same as | Works on                     |
 |--------------|----------------|------------------------------|
@@ -74,7 +74,7 @@ alias for a fast and consistent algorithm.
 | `Xrandom64`  | `Xorshift128p` | Everywhere except JavaScript |
 
 `Xrandom64` is a more modern and advanced generator. 
-On the other hand, `Xrandom` is extremely compatible and lightning fast.
+On the other hand, `Xrandom` is lightning fast.
 
 
 # Classes
