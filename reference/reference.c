@@ -594,7 +594,7 @@ void write_xoshiro256pp(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// 
+// SPLITMIX64
 //
 // https://prng.di.unimi.it/splitmix64.c
 // Written in 2015 by Sebastiano Vigna (vigna@acm.org) CC-0
@@ -604,12 +604,45 @@ void write_xoshiro256pp(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t
 
 // static uint64_t x; /* The state can be seeded with any value. */
 
-// uint64_t next() {
-// 	uint64_t z = (x += 0x9e3779b97f4a7c15);
-// 	z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;
-// 	z = (z ^ (z >> 27)) * 0x94d049bb133111eb;
-// 	return z ^ (z >> 31);
-// }
+struct splitmix64_state {
+  uint64_t x;
+};
+
+uint64_t next_splitmix64(struct splitmix64_state *state) {
+	uint64_t z = (state->x += 0x9e3779b97f4a7c15);
+	z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;
+	z = (z ^ (z >> 27)) * 0x94d049bb133111eb;
+	return z ^ (z >> 31);
+}
+
+void write_splitmix64(char* name, uint64_t a) {
+
+	struct splitmix64_state state;
+	state.x = a;
+
+
+ 	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "0x%llx", a);
+
+	char* alg_name = "splitmix64";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+		uint64_t x = next_splitmix64(&state);
+		fprintf(ints_file, "'%016llx',\n", x);
+
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(x));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(x));
+	}
+
+
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -645,6 +678,10 @@ int main()
 	write_xoshiro256pp("b", 5, 23, 42, 777);
 	write_xoshiro256pp("c", 0x621b97ff9b08ce44ull, 0x92974ae633d5ee97ull, 0x9c7e491e8f081368ull, 0xf7d3b43bed078fa3ull);
 
+	write_splitmix64("a", 1);
+	write_splitmix64("b", 0);
+	write_splitmix64("c", 777);
+	write_splitmix64("d", 0xf7d3b43bed078fa3ull);
 
 	// print64(1);
 	// print64(42);

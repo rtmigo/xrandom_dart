@@ -1,3 +1,9 @@
+# 0.2.0
+
+- Added Splitmix64 algorithm
+
+- Better time-based seeds for 64-bit generators  
+
 # 0.1.1
 
 - Added Xrandom and Xrandom64 aliases
