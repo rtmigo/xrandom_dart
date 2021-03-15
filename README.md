@@ -70,7 +70,7 @@ You can safely **use any classes on mobile and desktop** platforms.
 However, if you also target **JavaScript** (Web, Node.js), you will have to 
 **limit the choice**.
 
-| Class                            | 64-bit platforms | JavaScript |
+| Class                            | Mobile & Desktop | JavaScript |
 |----------------------------------|------------------|------------|
 | **`Xorshift32`**      | **yes**              | **yes**        |
 | **`Xorshift128`**                    | **yes**              | **yes**        |
