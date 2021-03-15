@@ -2,29 +2,15 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 @TestOn('vm')
-import 'dart:io';
 
-import "package:test/test.dart";
+import 'package:test/test.dart';
 import 'package:xrandom/src/xorshift128.dart';
 
 import 'package:xrandom/src/00_ints.dart';
-import 'package:xrandom/src/xorshift32.dart';
 import 'package:xrandom/src/xorshift64.dart';
 
-import 'helper.dart';
-
-
-// class MyObject {
-//
-// }
 
 void main() {
-
-  //print((1<<63)&0x8000000000000000);
-  //print((1<<62));
-  //return;
-
-  //print(0x8000000000000000&0x8433434000000000);
 
   test('next32 returning parts of next64', () {
     final random1 = Xorshift64.deterministic();

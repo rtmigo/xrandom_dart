@@ -15,9 +15,11 @@ import 'package:xrandom/src/00_ints.dart';
 
 //import '../labuda/2021-03-15/reference.dart.txt';
 
-File fileInData(String localName) {
-  return File(path.join(Directory.current.path, "test/data/" + localName));
-}
+import 'data/generated.dart';
+
+// File fileInData(String localName) {
+//   return File(path.join(Directory.current.path, "test/data/" + localName));
+// }
 
 enum ReferenceType {
   ints,
@@ -25,7 +27,28 @@ enum ReferenceType {
   double_cast
 }
 
-File dataFile(String algo, String seedId, ReferenceType type) {
+// main() {
+//   for (var m in referenceData)
+//     print(m['seed id']);
+// }
+
+// File dataFile(String algo, String seedId, ReferenceType type) {
+//   String suffix;
+//   switch (type) {
+//     case ReferenceType.ints:
+//       suffix = 'int';
+//       break;
+//     case ReferenceType.double_mult:
+//       suffix = 'double_mult';
+//       break;
+//     case ReferenceType.double_cast:
+//       suffix = 'double_cast';
+//       break;
+//   }
+//   return fileInData('${algo}_${seedId}_$suffix.txt');
+// }
+
+Map dataMap(String algo, String seedId, ReferenceType type) {
   String suffix;
   switch (type) {
     case ReferenceType.ints:
@@ -38,11 +61,31 @@ File dataFile(String algo, String seedId, ReferenceType type) {
       suffix = 'double_cast';
       break;
   }
-  return fileInData('${algo}_${seedId}_$suffix.txt');
+
+  for (final m in referenceData)
+    {
+      if (m['algorithm']==algo && m['seed id']==seedId && m['type']==suffix) {
+        return m;
+      }
+    }
+  throw Exception('Not found [$algo] [$seedId] [$suffix]');
+
+//  return fileInData('${algo}_${seedId}_$suffix.txt');
 }
 
-Iterable<double> loadDoubles(File file) sync* {
-  for (var line in file.readAsLinesSync()) {
+// Iterable<double> loadDoubles(File file) sync* {
+//   for (var line in file.readAsLinesSync()) {
+//     if (line.trimLeft().startsWith('#') || line
+//         .trim()
+//         .isEmpty) {
+//       continue;
+//     }
+//     yield double.parse(line);
+//   }
+// }
+
+Iterable<double> loadDoubles(Map m) sync* {
+  for (var line in m['values']) {
     if (line.trimLeft().startsWith('#') || line
         .trim()
         .isEmpty) {
@@ -51,6 +94,7 @@ Iterable<double> loadDoubles(File file) sync* {
     yield double.parse(line);
   }
 }
+
 
 void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 
@@ -64,21 +108,28 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
       filePrefix = random.runtimeType.toString().toLowerCase();
     });
 
-    test('double multiplied', () {
-      final values = loadDoubles(dataFile(filePrefix, seedId, ReferenceType.double_mult));
+    test('toDouble', () {
+
+      final reftype = (random is RandomBase64) ? ReferenceType.double_mult : ReferenceType.double_cast;
+
+      //if (random is RandomBase64)
+
+      final values = loadDoubles(dataMap(filePrefix, seedId, reftype));
       int idx = 0;
       for (final value in values) {
         expect(random.nextDouble(), value, reason: 'item ${idx++}');
       }
     });
 
-    test('double memory cast', () {
-      final values = loadDoubles(dataFile(filePrefix, seedId, ReferenceType.double_cast));
-      int idx = 0;
-      for (final value in values) {
-        expect(random.nextDoubleMemcast(), value, reason: 'item ${idx++}');
-      }
-    });
+    if (createRandom() is RandomBase64) {
+      test('double memory cast', () {
+        final values = loadDoubles(dataMap(filePrefix, seedId, ReferenceType.double_cast));
+        int idx = 0;
+        for (final value in values) {
+          expect((random as RandomBase64).nextDoubleMemcast(), value, reason: 'item ${idx++}');
+        }
+      });
+    }
 
 
     // test('double memory cast', () {

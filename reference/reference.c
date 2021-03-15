@@ -11,26 +11,31 @@
 //#include <math.h>
 #include <stdint.h>
 
-#define VALUES_PER_SAMPLE 4096
+#define VALUES_PER_SAMPLE 100 
+//4096
 
 ////////////////////////////////////////////////////////////////////////////////
 
-FILE* open_ref_outfile(char* alg_name, char* sample_id, char* seed, char* type_suffix)
+FILE* open_ref_outfile(char* alg_name, char* seed_id, char* seed, char* type_suffix)
 {
 	char filename[256];	
-	snprintf(filename, sizeof filename, "../test/data/%s_%s_%s.txt", alg_name, sample_id, type_suffix);
+	snprintf(filename, sizeof filename, "generated/%s_%s_%s.dart.txt", alg_name, seed_id, type_suffix);
 	FILE *result = fopen(filename, "w");
 
-	fprintf(result, "# reference data for github.com/rtmigo/xrandom\n");
-	fprintf(result, "# SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>\n");
-	fprintf(result, "# SPDX-License-Identifier: CC-BY-4.0\n");
-	fprintf(result, "\n");
-
-	fprintf(result, "# algo %s\n", alg_name);
-	fprintf(result, "# seed %s\n", seed);
+	fprintf(result, "{\n");
+	fprintf(result, "'algorithm': '%s',\n", alg_name);
+	fprintf(result, "'seed': '%s',\n", seed);
+	fprintf(result, "'seed id': '%s',\n", seed_id);
+	fprintf(result, "'type': '%s',\n", type_suffix);
+	fprintf(result, "'values': [\n", seed);
 	fprintf(result, "\n");
 
 	return result;
+}
+
+void close_ref_outfile(FILE* f) {
+	fprintf(f, "]},\n\n");
+	fclose(f);
 }
 
 ////////////////////////////////////////////////////////////////////////////////	
@@ -111,20 +116,20 @@ void write32(char* name, uint64_t seed) {
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
 		uint32_t x1 = xorshift32(&state);
-		fprintf(ints_file, "%08x\n", x1);
+		fprintf(ints_file, "'%08x',\n", x1);
 
 		uint32_t x2 = xorshift32(&state);
-		fprintf(ints_file, "%08x\n", x2);
+		fprintf(ints_file, "'%08x',\n", x2);
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
-		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(combined));
-		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(combined));
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
 	}	
 
-	fclose(doubles_cast_file);
-	fclose(doubles_file);
-	fclose(ints_file);
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -187,15 +192,15 @@ void write64(uint64_t seed, char* name) {
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint64_t x = xorshift64(&state);
-		fprintf(ints_file, "%016llx\n", x);
+		fprintf(ints_file, "'%016llx',\n", x);
 
-		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(x));
-		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(x));
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(x));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(x));
 	}	
 
-	fclose(doubles_cast_file);
-	fclose(doubles_file);
-	fclose(ints_file);
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -270,20 +275,20 @@ void write128(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t d) {
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
 		uint32_t x1 = xorshift128(&state);
-		fprintf(ints_file, "%08x\n", x1);
+		fprintf(ints_file, "'%08x',\n", x1);
 
 		uint32_t x2 = xorshift128(&state);
-		fprintf(ints_file, "%08x\n", x2);
+		fprintf(ints_file, "'%08x',\n", x2);
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
-		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(combined));
-		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(combined));
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
 	}	
 
-	fclose(doubles_cast_file);
-	fclose(doubles_file);
-	fclose(ints_file);
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -398,15 +403,15 @@ void write128p(char* name, uint64_t a, uint64_t b) {
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint64_t x = xorshift128plus_int(s);
-		fprintf(ints_file, "%016llx\n", x);
+		fprintf(ints_file, "'%016llx',\n", x);
 
-		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(x));
-		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(x));
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(x));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(x));
 	}
 
-	fclose(doubles_cast_file);
-	fclose(doubles_file);
-	fclose(ints_file);
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
 }
 
 // It it commented out because it was not needed for testing
@@ -492,15 +497,15 @@ void write_xoshiro128pp(char* name, uint32_t a, uint32_t b, uint32_t c, uint32_t
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
 		uint32_t x1 = xoshiro128pp(s);
-		fprintf(ints_file, "%08x\n", x1);
+		fprintf(ints_file, "'%08x',\n", x1);
 
 		uint32_t x2 = xoshiro128pp(s);
-		fprintf(ints_file, "%08x\n", x2);
+		fprintf(ints_file, "'%08x',\n", x2);
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
-		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(combined));
-		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(combined));
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
 
 		// uint64_t x = xorshift128plus_int(s);
 		// fprintf(ints_file, "%016llx\n", x);
@@ -509,9 +514,9 @@ void write_xoshiro128pp(char* name, uint32_t a, uint32_t b, uint32_t c, uint32_t
 		// fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(x));
 	}
 
-	fclose(doubles_cast_file);
-	fclose(doubles_file);
-	fclose(ints_file);
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
 }
 
 
@@ -543,9 +548,6 @@ int main()
 	write32("c", PI32);
 
 
-	// print32(1);
-	// print32(42);
-	// print32(PI32);
 
 	write64(1, "a");
 	write64(42, "b");
