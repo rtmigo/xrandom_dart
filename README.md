@@ -43,13 +43,12 @@ var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 
 # Determinism
 
-Xrandom's classes have a `deterministic` method. By creating the object like that, you'll get same 
-sequence of numbers every time.
+Xrandom's classes have a `expected` method. It is made specifically for testing.
 
 ``` dart
 test('my test', () {
     final random = Xrandom.expected();
-    // run this test twice ;)
+    // you'll get same sequence of numbers every time
     expect(random.nextInt(1000), 119);
     expect(random.nextInt(1000), 240);
     expect(random.nextInt(1000), 369);    
