@@ -66,14 +66,13 @@ sequences can be relied upon. *(but not until the library reaches stable release
 | Class        | Is the same as |
 |--------------|----------------|
 | `Xrandom`    | `Xorshift32`   |
-| `Xrandom64`  | `Xorshift64` |
+| `Xrandom64`  | `Xorshift64`   |
 
 You can use `Xrandom` on all platforms. You may prefer `Xrandom64` if you 
 target 64-bit platforms (any other than JavaScript). 
 
 Reasons for choosing such defaults: if the user doesn't care, the algorithm 
-should be fast. If the user is interested in statistical nuances, he will 
-choose a specific algorithm, not the default one.
+should be fast, not statistically perfect. 
 
 # Compatibility
 
