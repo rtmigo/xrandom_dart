@@ -75,6 +75,7 @@ However, if you also target **JavaScript** (Web, Node.js), you will have to
 | Speed       | `Xorshift64`              | `Xorshift32`        |
 | Quality     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
+Full compatibility table:
 
 | Class                            | Mobile and Desktop | JavaScript |
 |----------------------------------|------------------|------------|
