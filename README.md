@@ -65,14 +65,11 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 # Aliases
 
-| Class        | Is the same as |
-|--------------|----------------|
-| `Xrandom`    | `Xorshift32`   |
-| `Xrandom64`  | `Xorshift128p` |
+| Class        | Is the same as | Works on              |
+|--------------|----------------|-----------------------|
+| `Xrandom`    | `Xorshift32`   | Everywhere            |
+| `Xrandom64`  | `Xorshift128p` | All except JavaScript |
 
-`Xrandom` works on all platforms.
-
-`Xrandom64` is a better choice for both desktop and mobile, but not JavaScript. 
 
 
 # Classes
