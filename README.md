@@ -71,20 +71,17 @@ sequences can be relied upon. *(but not until the library reaches stable release
 You can use `Xrandom` on all platforms. You may prefer `Xrandom64` if you 
 target 64-bit platforms (any other than JavaScript). 
 
-Reasons for choosing such defaults: if the user doesn't care, the algorithm 
-should be fast, not statistically perfect. 
-
 # Compatibility
-
-You can safely **use any classes on mobile and desktop** platforms. 
-
-However, if you also target **JavaScript** (Web, Node.js), you will have to 
-**limit the choice**.
 
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
 | **Speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
+
+You can safely **use any classes on mobile and desktop** platforms. 
+
+However, if you also target **JavaScript** (Web, Node.js), you will have to 
+**limit the choice**.
 
 Full compatibility table:
 
