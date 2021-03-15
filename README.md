@@ -50,9 +50,9 @@ It is made specifically for testing.
 test('my test', () {
     final random = Xrandom.expected();
     // you'll get same sequence of numbers every time
-    expect(random.nextInt(1000), 119);
-    expect(random.nextInt(1000), 240);
-    expect(random.nextInt(1000), 369);    
+    expect(random.nextInt(1000), 925);
+    expect(random.nextInt(1000), 686);
+    expect(random.nextInt(1000), 509);  
 });    
 ```
 
