@@ -7,8 +7,6 @@ import '00_ints.dart';
 
 abstract class RandomBase32 implements Random {
 
-  // https://git.io/JqCbB
-
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 1 to 0xFFFFFFFF, both inclusive.
   ///
@@ -21,15 +19,15 @@ abstract class RandomBase32 implements Random {
 
     RangeError.checkValueInInterval(max, 1, 0xFFFFFFFF);
 
-    if ((max & -max) == max) {
-      // fast case for powers of two
-      // like in dart:math https://git.io/JqCbB
-      final rnd32 = this.nextInt32();
-      assert(0<=rnd32 && rnd32<=UINT32_MAX);
-      final result = rnd32 & (max - 1);
-      assert(0<=result);
-      assert(result<max);
-    }
+    // if ((max & -max) == max) {
+    //   // fast case for powers of two
+    //   // like in dart:math https://git.io/JqCbB
+    //   final rnd32 = this.nextInt32();
+    //   assert(0<=rnd32 && rnd32<=UINT32_MAX);
+    //   final result = rnd32 & (max - 1);
+    //   assert(0<=result);
+    //   assert(result<max);
+    // }
 
     final rnd32 = nextInt32();
     assert(0<=rnd32 && rnd32<=UINT32_MAX);
@@ -60,21 +58,29 @@ abstract class RandomBase32 implements Random {
 
   @override
   double nextDouble() {
+    // This method is a bit slower, than ((x>>>11)*0x1.0p-53),
+    // but it works in Node.js
+    //
+    // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
+    // conversion" of uint64_t to double like that:
+    //
+    // static inline double to_double(uint64_t x) {
+    //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
+    //   return u.d - 1.0;
+    // }
+    //
+    // Dart does not support typecasting of this kind.
+    //
+    // But here is how Madsen <https://git.io/JqWCP> does it in JavaScript:
+    //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
+    // or
+    //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
 
     return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
-
-
-    // // creating int64 from two uint32s
-    // final x = (nextInt32()<<32)|nextInt32();
-    // // doing the (x >>> 11) * 0x1.0p-53
-    // const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
-    // //     (  x >>> 11              ) * 0x1.0p-53
-    // return ( (x>>11)&~(-1<<(64-11)) ) * Z;
   }
 
   @override
   bool nextBool() {
-
     // in dart:math it is return nextInt(2) == 0;
     // which is an equivalent of
     //   if ((2&-2)==2) return next()&(2-1);
@@ -99,48 +105,8 @@ abstract class RandomBase32 implements Random {
     }
   }
 
-  //static const _MAX_BIT_INDEX = 32-1;
   int _boolCache = 0;
   int _boolCache_prevShift = 0;
-
-  // /// Generates a non-negative random floating point value uniformly distributed
-  // /// in the range from 0.0, inclusive, to 1.0, exclusive.
-  // ///
-  // /// This method is slower than [nextDouble] and has no advantages over [nextDouble].
-  // ///
-  // /// The results of this method yield values that are similar to the values obtained
-  // /// with the unsafe typecasting described by Sebastiano Vigna:
-  // ///
-  // /// ```
-  // /// static inline double to_double(uint64_t x) {
-  // ///   const union { uint64_t i; double d; } u = {
-  // ///     .i = UINT64_C(0x3FF) << 52 | x >> 12
-  // ///   };
-  // ///   return u.d - 1.0;
-  // /// }
-  // /// ```
-  // double nextDoubleMemcast() {
-  //
-  //   // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
-  //   // conversion" of Uint64 to double like that:
-  //   //
-  //   // static inline double to_double(uint64_t x) {
-  //   //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
-  //   //   return u.d - 1.0;
-  //   // }
-  //   //
-  //   // Dart does not support typecasting of this kind.
-  //   //
-  //   // But here is how Madsen <https://git.io/JqWCP> does it in JavaScript:
-  //   //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
-  //   // or
-  //   //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
-  //   //
-  //   // Since there is no Int64 in JavaScript, simple multiplication would not work there.
-  //   // In Dart we have better options.
-  //
-  //
-  // }
 }
 
 abstract class RandomBase64 extends RandomBase32 {
@@ -210,9 +176,8 @@ abstract class RandomBase64 extends RandomBase32 {
 
     // the result of printf("%.60e", 0x1.0p-53):
     const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
-    //double a = 0x1.0p-53;
 
-    //     ( this.nextInt64() >>> 11                     ) * 0x1.0p-53
+    //_____(this.nextInt64()_>>>_11______________________)_*_0x1.0p-53
     return ((this.nextInt64() >> 11) & ~(-1 << (64 - 11))) * Z;
   }
 
@@ -248,25 +213,7 @@ abstract class RandomBase64 extends RandomBase32 {
   /// }
   /// ```
   double nextDoubleMemcast() {
-
-    // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
-    // conversion" of Uint64 to double like that:
-    //
-    // static inline double to_double(uint64_t x) {
-    //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
-    //   return u.d - 1.0;
-    // }
-    //
-    // Dart does not support typecasting of this kind.
-    //
-    // But here is how Madsen <https://git.io/JqWCP> does it in JavaScript:
-    //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
-    // or
-    //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
-    //
-    // Since there is no Int64 in JavaScript, simple multiplication would not work there.
-    // In Dart we have better options.
-
+    // this is the same as RandomBase32.nextDouble()
     return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
   }
 }
