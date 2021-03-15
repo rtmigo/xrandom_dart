@@ -76,7 +76,6 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
         }
       });
     }
-    //final a = 0xfd7345d28bddd768;
 
     if (createRandom() is RandomBase64) {
       test('nextInt64', () {
@@ -113,8 +112,8 @@ String trimLeadingZeros(String s) {
 void testCommonRandom(Random Function() createRandom) {
   group('Common random ${createRandom().runtimeType}', () {
     test('doubles', () => checkDoubles(createRandom()));
-    test('bools', () => checkBools(createRandom()));
-    test('ints', () => checkInts(createRandom()));
+    test('bools', () => checkBooleans(createRandom()));
+    test('ints', () => checkIntegers(createRandom()));
 
     test('Seed is different each time', () {
       // even with different seeds, we can get rare matches of results.
@@ -152,11 +151,11 @@ void checkDoubles(Random r) {
     expect(d, greaterThanOrEqualTo(0.0));
     expect(d, lessThan(1.0));
 
-    if (d > 0.99)
+    if (d > 0.99) {
       countBig++;
-    else if (d < 0.01)
+    } else if (d < 0.01) {
       countSmall++;
-    else if (d >= 0.495 && d < 0.505) countMiddle++;
+    } else if (d >= 0.495 && d < 0.505) countMiddle++;
   }
 
   expect(countBig, greaterThan(N / 1000));
@@ -164,7 +163,7 @@ void checkDoubles(Random r) {
   expect(countMiddle, greaterThan(N / 1000));
 }
 
-void checkBools(Random r) {
+void checkBooleans(Random r) {
   int countTrue = 0;
 
   const N = 10000000;
@@ -176,7 +175,7 @@ void checkBools(Random r) {
   expect(countTrue, lessThan(N * 0.6));
 }
 
-void checkInts(Random r) {
+void checkIntegers(Random r) {
   int countMin = 0;
   int countMax = 0;
   const N = 10000000;

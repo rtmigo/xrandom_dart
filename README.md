@@ -8,7 +8,7 @@
 Classes that implement all-purpose, rock-solid random number generators.
 
 Library priorities:
-- perfect match of generated numbers on all platforms
+- perfect match of the numbers on all platforms
 - performance
 - quality of the numbers produced
 
