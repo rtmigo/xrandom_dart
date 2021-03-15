@@ -5,6 +5,8 @@
 import 'dart:io';
 
 import "package:test/test.dart";
+import 'package:xrandom/src/xorshift128.dart';
+
 import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/xorshift32.dart';
 import 'package:xrandom/src/xorshift64.dart';
@@ -51,9 +53,11 @@ void main() {
     }
   });
 
+  //if (!(r is Xorshift32))
+
   test('nextBool on 32-bit generator: must return all bits', () {
-    final randomA = Xorshift32.deterministic();
-    final randomB = Xorshift32.deterministic();
+    final randomA = Xorshift128.deterministic();
+    final randomB = Xorshift128.deterministic();
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextInt32();
