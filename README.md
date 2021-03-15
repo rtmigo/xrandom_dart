@@ -5,10 +5,15 @@
 
 # [xrandom](https://github.com/rtmigo/xrandom)
 
-Fast random number generators in Dart.
+Classes that implement all-purpose, rock-solid random number generators.
 
-[Xorshift](https://en.wikipedia.org/wiki/Xorshift) algorithms are known among the **fastest random number generators**, requiring very small
-code and state.
+Library priorities:
+- perfect match of generated numbers on all platforms
+- performance
+- quality of the numbers produced
+
+Namely, the [Xorshift](https://en.wikipedia.org/wiki/Xorshift) for **speed** 
+and [Xoshiro](https://prng.di.unimi.it/) for **quality**.
 
 # Speed
 
