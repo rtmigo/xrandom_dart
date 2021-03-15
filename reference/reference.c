@@ -19,7 +19,7 @@
 FILE* open_ref_outfile(char* alg_name, char* sample_id, char* seed, char* type_suffix)
 {
 	char filename[256];	
-	snprintf(filename, sizeof filename, "generated/%s_%s_%s.txt", alg_name, sample_id, type_suffix);
+	snprintf(filename, sizeof filename, "../test/data/%s_%s_%s.txt", alg_name, sample_id, type_suffix);
 	FILE *result = fopen(filename, "w");
 
 	fprintf(result, "# reference data for github.com/rtmigo/xrandom\n");
