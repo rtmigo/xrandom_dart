@@ -38,7 +38,7 @@ var a = random.nextBool();
 var b = random.nextDouble();
 var c = random.nextInt(n);
 
-var shuffled = [1, 2, 3, 4, 5]..shuffle(random);
+var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 ```
 
 # Determinism
