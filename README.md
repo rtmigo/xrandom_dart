@@ -76,14 +76,14 @@ target 64-bit platforms (any other than JavaScript).
 
 # Classes
 
-| Class             | Is a | Algorithm  |   Algorithm author | Published |
+| Class             | Arch | Algorithm  |   Algorithm author | Published |
 |-------------------|------|--------------|-------------|------|
-| `Xorshift32`      | 32-bit |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift64`      | 64-bit | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift128`     | 32-bit | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
-| `Xorshift128p` | 64-bit | [xorshift128+](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
-| `Xoshiro128pp` | 32-bit | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
-| `Xoshiro256pp` | 64-bit | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Xorshift32`      | 32 |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift64`      | 64 | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift128`     | 32 | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
+| `Xorshift128p` | 64 | [xorshift128+](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
+| `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
 
 # What to choose
 
