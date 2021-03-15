@@ -116,7 +116,7 @@ void write32(char* name, uint64_t seed) {
 		uint32_t x2 = xorshift32(&state);
 		fprintf(ints_file, "%08x\n", x2);
 
-		uint64_t combined = (((uint64_t)x2)<<32)|x1;
+		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
 		fprintf(doubles_file, "%.20e\n", vigna_uint64_to_double_mult(combined));
 		fprintf(doubles_cast_file, "%.20e\n", vigna_uint64_to_double_alt(combined));

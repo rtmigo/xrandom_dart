@@ -74,33 +74,43 @@ abstract class RandomBase32 implements Random {
     return one;
   }
 
-
   @override
   double nextDouble() {
+    // doing the (x >>> 11) * 0x1.0p-53
 
-    return nextInt32()*2.3283064365386963e-10 + (nextInt32()>>12)*2.220446049250313e-16;
-
-    // This method generates results that are similar to:
-    // http://rcs.bu.edu/examples/random_numbers/xoroshiro128_plus/C/xoroshiro128_plus.c
-    //
-    // double next_double(uint64_t seed[]) {
-    //    const union { uint64_t i; double d; }
-    //    u = { .i = UINT64_C(0x3FF) << 52 | next(seed) >> 12 };
-    //    return u.d - 1.0;
-    // }
-    //
-    // A JavaScript snippet for the same results is found here (https://git.io/JqWCP).
-    // The similarity of results is also tested there
-    //
-    // ...
-    //
-    // dart:math (https://git.io/JqCbB) converts two 32-bit integers to double like that:
-    //    static const _POW2_53_D = 1.0 * (1 << 53);
-    //    static const _POW2_27_D = 1.0 * (1 << 27);
-    //    return ((nextInt(1<<26)*_POW2_27_D) + nextInt(1<<27))/_POW2_53_D;
-    // but their code fails on JS (2021-03) for reasons beyond my comprehension.
-    // And it's also a way more inefficient: the nextInt itself a way slower than next32
+    final x = (nextInt32()<<32)|nextInt32();
+    const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
+    //     (  x >>> 11              ) * 0x1.0p-53
+    return ( (x>>11)&~(-1<<(64-11)) ) * Z;
   }
+
+
+  // @override
+  // double nextDoubleMC() {
+  //
+  //   return nextInt32()*2.3283064365386963e-10 + (nextInt32()>>12)*2.220446049250313e-16;
+  //
+  //   // This method generates results that are similar to:
+  //   // http://rcs.bu.edu/examples/random_numbers/xoroshiro128_plus/C/xoroshiro128_plus.c
+  //   //
+  //   // double next_double(uint64_t seed[]) {
+  //   //    const union { uint64_t i; double d; }
+  //   //    u = { .i = UINT64_C(0x3FF) << 52 | next(seed) >> 12 };
+  //   //    return u.d - 1.0;
+  //   // }
+  //   //
+  //   // A JavaScript snippet for the same results is found here (https://git.io/JqWCP).
+  //   // The similarity of results is also tested there
+  //   //
+  //   // ...
+  //   //
+  //   // dart:math (https://git.io/JqCbB) converts two 32-bit integers to double like that:
+  //   //    static const _POW2_53_D = 1.0 * (1 << 53);
+  //   //    static const _POW2_27_D = 1.0 * (1 << 27);
+  //   //    return ((nextInt(1<<26)*_POW2_27_D) + nextInt(1<<27))/_POW2_53_D;
+  //   // but their code fails on JS (2021-03) for reasons beyond my comprehension.
+  //   // And it's also a way more inefficient: the nextInt itself a way slower than next32
+  // }
 
   @override
   bool nextBool() {
@@ -131,52 +141,52 @@ abstract class RandomBase32 implements Random {
   int _boolCache = 0;
   int _boolCache_prevIdx = _MAX_BIT_INDEX;
 
-/// Generates a non-negative random floating point value uniformly distributed
-/// in the range from 0.0, inclusive, to 1.0, exclusive.
-///
-/// This method is slower than [nextDouble] and has no advantages over [nextDouble].
-///
-/// The results of this method yield values that are similar to the values obtained
-/// with the unsafe typecasting described by Sebastiano Vigna:
-///
-/// ```
-/// static inline double to_double(uint64_t x) {
-///   const union { uint64_t i; double d; } u = {
-///     .i = UINT64_C(0x3FF) << 52 | x >> 12
-///   };
-///   return u.d - 1.0;
-/// }
-/// ```
-double nextDoubleMemcast() {
-  //var x = nextInt64();
+  /// Generates a non-negative random floating point value uniformly distributed
+  /// in the range from 0.0, inclusive, to 1.0, exclusive.
+  ///
+  /// This method is slower than [nextDouble] and has no advantages over [nextDouble].
+  ///
+  /// The results of this method yield values that are similar to the values obtained
+  /// with the unsafe typecasting described by Sebastiano Vigna:
+  ///
+  /// ```
+  /// static inline double to_double(uint64_t x) {
+  ///   const union { uint64_t i; double d; } u = {
+  ///     .i = UINT64_C(0x3FF) << 52 | x >> 12
+  ///   };
+  ///   return u.d - 1.0;
+  /// }
+  /// ```
+  double nextDoubleMemcast() {
+    //var x = nextInt64();
 
-  // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
-  // conversion" of Uint64 to double like that:
-  //
-  // static inline double to_double(uint64_t x) {
-  //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
-  //   return u.d - 1.0;
-  // }
-  //
-  // Dart does not support typecasting of this kind.
-  //
-  // But here is how Madsen <https://git.io/JqWCP> does it in JavaScript:
-  //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
-  // or
-  //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
-  //
-  // Since there is no Int64 in JavaScript, simple multiplication would not work there.
+    // Vigna suggests <https://prng.di.unimi.it/> "аn alternative, multiplication-free
+    // conversion" of Uint64 to double like that:
+    //
+    // static inline double to_double(uint64_t x) {
+    //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
+    //   return u.d - 1.0;
+    // }
+    //
+    // Dart does not support typecasting of this kind.
+    //
+    // But here is how Madsen <https://git.io/JqWCP> does it in JavaScript:
+    //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
+    // or
+    //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
+    //
+    // Since there is no Int64 in JavaScript, simple multiplication would not work there.
 
-  //final resL = x & 0xffffffff;
-  //int resU = x.unsignedRightShift(32);
-  //final resU = x >= 0 ? x >> 32 : ((x & INT64_MAX_POSITIVE) >> 32) | (1 << (63 - 32));
+    //final resL = x & 0xffffffff;
+    //int resU = x.unsignedRightShift(32);
+    //final resU = x >= 0 ? x >> 32 : ((x & INT64_MAX_POSITIVE) >> 32) | (1 << (63 - 32));
 
-  //final resL = this.nextInt32();
-  //final resU = this.nextInt32();
+    //final resL = this.nextInt32();
+    //final resU = this.nextInt32();
 
-  //return resU * 2.3283064365386963e-10 + (resL >> 12) * 2.220446049250313e-16;
-  return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
-}
+    //return resU * 2.3283064365386963e-10 + (resL >> 12) * 2.220446049250313e-16;
+    return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
+  }
 }
 
 abstract class RandomBase64 extends RandomBase32 {
@@ -195,8 +205,10 @@ abstract class RandomBase64 extends RandomBase32 {
   @override
   int nextInt32() {
 
-    // In 32-bit generators, to get an int64, we use the FIRST four bytes as
-    // the HIGHER, and the NEXT as the LOWER
+    // In 32-bit generators, to get an int64, we use te FIRST four bytes as
+    // the HIGHER, and the NEXT as the LOWER parts of int64. It's just because
+    // most suggestions on the internet look like rnd32()<<32)|rnd32().
+    // That is, we have a conveyor like this:
     //
     // F1( FFFF, LLLL, FFFF, LLLL ) -> FFFFLLLL, FFFFLLLL
     //
@@ -205,7 +217,7 @@ abstract class RandomBase64 extends RandomBase32 {
     //
     // F2 ( FFFFLLLL, FFFFLLLL ) -> FFFF, LLLL, FFFF, LLLL
     //
-    // So F1(F2(X))=X, F2(F1(X))=X.
+    // So F1(F2(X))=X, F2(F1(Y))=Y.
     //
     // That's why we return highest bytes first, lowest bytes second
 
