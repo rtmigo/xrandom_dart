@@ -77,11 +77,11 @@ However, if you also target **JavaScript** (Web, Node.js), you will have to
 
 Full compatibility table:
 
-| Class                | Is a | Mobile and Desktop | JavaScript |
-|----------------------------------|------------------|------------|
+| Class                | Is a    | Mobile and Desktop | JavaScript |
+|----------------------|---------|------------------|------------|
 | **`Xorshift32`**     | 32-bit | **yes**              | **yes**        |
-| **`Xorshift128`**    | 32-bit                | **yes**              | **yes**        |
-| **`Xoshiro128pp`**   | 32-bit                | **yes**              | **yes**         |
+| **`Xorshift128`**    | 32-bit | **yes**              | **yes**        |
+| **`Xoshiro128pp`**   | 32-bit   | **yes**              | **yes**         |
 | `Xorshift64`         | 64-bit            | yes              | no         |
 | `Xorshift128p`       | 64-bit         | yes              | no         |
 | `Xoshiro256pp`       | 64-bit         | yes              | no         |
