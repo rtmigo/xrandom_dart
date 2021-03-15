@@ -17,6 +17,13 @@ import '../labuda/2021-03-15/reference.dart';
 // }
 
 void main() {
+
+  //print((1<<63)&0x8000000000000000);
+  //print((1<<62));
+  //return;
+
+  //print(0x8000000000000000&0x8433434000000000);
+
   test('next32 returning parts of next64', () {
     final random1 = Xorshift64.deterministic();
     int a64 = random1.nextInt64();
@@ -35,7 +42,7 @@ void main() {
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextInt64();
-      for (var bit = 0; bit < 64; ++bit) {
+      for (var bit = 63; bit >=0; --bit) {
         expect(
             randomB.nextBool(),
             (intA & (1 << bit)) != 0,
@@ -50,7 +57,7 @@ void main() {
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextInt32();
-      for (var bit = 0; bit < 32; ++bit) {
+      for (var bit = 31; bit >=0; --bit) {
         expect(
             randomB.nextBool(),
             (intA & (1 << bit)) != 0,

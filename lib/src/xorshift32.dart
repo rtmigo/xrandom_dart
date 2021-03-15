@@ -25,6 +25,7 @@ class Xorshift32 extends RandomBase32
 
   static Xorshift32 deterministic() => Xorshift32(314159265);
 
+  @override
   int nextInt32() {
 
     // algorithm from p.4 of "Xorshift RNGs" 

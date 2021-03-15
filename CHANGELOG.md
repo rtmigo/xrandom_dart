@@ -1,5 +1,7 @@
 # 0.0.3
 
+- Changed the order of nextBool() results
+
 - Improved the accuracy of nextDouble() in Xorshift64 and 
   Xorshift120p for exact matching of reference values
     

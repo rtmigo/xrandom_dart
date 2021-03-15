@@ -129,13 +129,13 @@ String trimLeadingZeros(String s) {
 // }
 
 
-void testCommonRandom(Random createRandom()) {
-  group("Common random ${createRandom().runtimeType}", () {
-    test("doubles", () => checkDoubles(createRandom()));
-    test("bools", () => checkBools(createRandom()));
-    test("ints", () => checkInts(createRandom()));
+void testCommonRandom(Random Function() createRandom) {
+  group('Common random ${createRandom().runtimeType}', () {
+    test('doubles', () => checkDoubles(createRandom()));
+    test('bools', () => checkBools(createRandom()));
+    test('ints', () => checkInts(createRandom()));
 
-    test("Seed is different each time", () {
+    test('Seed is different each time', () {
       // even with different seeds, we can get rare matches of results.
       // But most of the the results should be unique
       expect(
@@ -145,6 +145,22 @@ void testCommonRandom(Random createRandom()) {
               .length,
           greaterThan(90));
     });
+
+    test('Huge ints: 0xFFFFFFFF', ()=>checkHugeInts(createRandom(), 0xFFFFFFFF));
+    // "the fast case for powers of two"
+    test('Huge ints: 0x80000000', ()=>checkHugeInts(createRandom(), 0x80000000));
+
+    test('nextIntCheckRange', () {
+      final r = createRandom();
+      expect(()=>r.nextInt(-1), throwsRangeError);
+      expect(()=>r.nextInt(0), throwsRangeError);
+      expect(()=>r.nextInt(0xFFFFFFFF+1), throwsRangeError);
+      // no errors
+      r.nextInt(1);
+      r.nextInt(0xFFFFFFFF);
+    });
+
+    //test("Huge int32")
   });
 }
 
@@ -187,17 +203,20 @@ void checkBools(Random r) {
 }
 
 void checkInts(Random r) {
+
   int countMin = 0;
   int countMax = 0;
   const N = 10000000;
+
   for (int i = 0; i < N; ++i) {
     var x = r.nextInt(10);
     expect(x, greaterThanOrEqualTo(0));
     expect(x, lessThan(10));
-    if (x == 0)
+    if (x == 0) {
       countMin++;
-    else if (x == 9)
+    } else if (x == 9) {
       countMax++;
+    }
   }
 
   expect(countMin, greaterThan(N * 0.08));
@@ -206,6 +225,28 @@ void checkInts(Random r) {
   expect(countMax, greaterThan(N * 0.08));
   expect(countMax, lessThan(N * 0.12));
 }
+
+void checkHugeInts(Random r, final int upper) {
+
+  // check that when we choose a large value of upper,
+  // - we're never cross the margins
+  // - we're are getting values close the margin
+
+  int countAlmostTop = 0;
+  const N = 10000000;
+
+  for (int i = 0; i < N; ++i) {
+    var x = r.nextInt(upper);
+    expect(x, greaterThanOrEqualTo(0));
+    expect(x, lessThan(upper));
+    if (x >= upper*0.9) {
+      countAlmostTop++;
+    }
+  }
+
+  expect(countAlmostTop, greaterThan(N * 0.05));
+}
+
 
 List<T> skipAndTake<T>(T func(), int skip, int take) {
   for (var i = 0; i < skip; ++i)

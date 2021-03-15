@@ -31,6 +31,7 @@ class Xorshift64 extends RandomBase64 {
 
   late int _state;
 
+  @override
   int nextInt64() {
     // algorithm from p.4 of "Xorshift RNGs"
     // by George Marsaglia, 2003
