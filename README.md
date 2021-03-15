@@ -116,7 +116,7 @@ xrandom.nextInt64();  // 64-bit signed
 | Xoshiro128pp           |  1203   |    902    |     -     |
 | Xoshiro256pp           |  1691   |   1405    |   1890    |
 
-### Rough d˚ouble
+### Rough double
 
 `nextFloat`, unlike `nextDouble`, prefers speed to accuracy. It transforms 
 a single 32-bit integer into a `double`. Therefore, the result is limited 
