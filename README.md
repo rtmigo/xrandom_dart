@@ -86,9 +86,6 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 `Xrandom` is actually an alias to `Xorshift32`.  `Xrandom64` is an alias to `Xorshift128p`.
 
-JavaScript-enabled classes are always some trade-offs in favor of compatibility.
-
-
 
 # Compatibility
 
@@ -108,6 +105,9 @@ Full compatibility table:
 | `Xorshift128p`       | 64-bit         | yes              | no         |
 | `Xoshiro256pp`       | 64-bit         | yes              | no         |
 | `Splitmix64`       | 64-bit         | yes              | no         |
+
+If you try to create a JavaScript-incompatible object in JavaScripts-compiled 
+code, an `UnsupportedError` will be thrown.
 
 
 # Speed optimizations
