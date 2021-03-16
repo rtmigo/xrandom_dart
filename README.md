@@ -89,7 +89,6 @@ final random = XrandomHqJs();  // works on all platforms
 
 monteCarloSimulation(random);
 ```
-
 | Class         | The same as       | Mobile | Desktop | JS |
 |---------------|-------------------|--------|---------|----|
 | `Xrandom`     | `Xorshift32`      | +      | +       | +  |
