@@ -4,6 +4,7 @@
 import 'dart:math';
 
 import 'package:xrandom/src/seeding.dart';
+import 'package:xrandom/src/splitmix64.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
@@ -12,30 +13,29 @@ import 'package:xrandom/src/10_random_base.dart';
 /// Random number generator based on `xorshift128+` algorithm by S.Vigna (2015).
 /// The reference implementation in C can be found in <https://arxiv.org/abs/1404.0390> (V3).
 class Xorshift128p extends RandomBase64 {
-  Xorshift128p([int? a, int? b]) {
+  Xorshift128p([int? seedA, int? seedB]) {
     if (!INT64_SUPPORTED) {
       throw Unsupported64Error();
     }
-    if (a != null || b != null) {
+    if (seedA != null || seedB != null) {
 
-      if (a==null) {
+      if (seedA==null) {
         throw ArgumentError.notNull('a');
       }
-      if (b==null) {
+      if (seedB==null) {
         throw ArgumentError.notNull('b');
       }
 
-      _S0 = a;
-      _S1 = b;
+      _S0 = seedA;
+      _S1 = seedB;
 
-      if (a == 0 && b == 0) {
+      if (seedA == 0 && seedB == 0) {
         throw ArgumentError('The seed should not consist of only zeros..');
       }
     } else {
-      final now = DateTime.now().microsecondsSinceEpoch;
       // just creating a mess
-      _S0 = mess2to64A(now, hashCode);
-      _S1 = mess2to64B(now, hashCode);
+      _S0 = Splitmix64.instance.nextInt64();
+      _S1 = Splitmix64.instance.nextInt64();
     }
   }
 

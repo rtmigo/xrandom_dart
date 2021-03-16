@@ -30,7 +30,7 @@ FILE* open_ref_outfile(
 	fprintf(result, "'seed': '%s',\n", seed);
 	fprintf(result, "'seed id': '%s',\n", seed_id);
 	fprintf(result, "'type': '%s',\n", type_suffix);
-	fprintf(result, "'values': [\n", seed);
+	fprintf(result, "'values': [\n");
 	fprintf(result, "\n");
 
 	return result;
@@ -122,6 +122,51 @@ void write32(char* name, uint64_t seed) {
 		fprintf(ints_file, "'%08x',\n", x1);
 
 		uint32_t x2 = xorshift32(&state);
+		fprintf(ints_file, "'%08x',\n", x2);
+
+		uint64_t combined = (((uint64_t)x1)<<32)|x2;
+
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
+	}	
+
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// AMX
+
+uint32_t xorshift32amx(struct xorshift32_state* state) {
+	// https://stackoverflow.com/a/52056161
+	// https://gist.github.com/Marc-B-Reynolds/82bcd9bd016246787c95
+    int s = __builtin_bswap32(state->a * 1597334677);
+    state->a ^= state->a << 13;
+    state->a ^= state->a >> 17;
+    state->a ^= state->a << 5;
+    return state->a + s;
+}
+
+void write_xorshift32amx(char* name, uint64_t seed) {
+
+    struct xorshift32_state state;
+    state.a = seed;
+
+	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "0x%x", state.a);
+
+	char* alg_name = "xorshift32amx";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+
+		uint32_t x1 = xorshift32amx(&state);
+		fprintf(ints_file, "'%08x',\n", x1);
+
+		uint32_t x2 = xorshift32amx(&state);
 		fprintf(ints_file, "'%08x',\n", x2);
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
@@ -637,12 +682,47 @@ void write_splitmix64(char* name, uint64_t a) {
 		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(x));
 	}
 
-
 	close_ref_outfile(doubles_cast_file);
 	close_ref_outfile(doubles_file);
 	close_ref_outfile(ints_file);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// SPLITMIX32
+// Written in 2016 by Kaito Udagawa
+// Released under CC0 <http://creativecommons.org/publicdomain/zero/1.0/>
+// https://github.com/umireon/my-random-stuff/blob/master/xorshift/splitmix32.c
+
+uint32_t next_splitmix32(uint32_t *x) {
+  uint32_t z = (*x += 0x9e3779b9);
+  z = (z ^ (z >> 16)) * 0x85ebca6b;
+  z = (z ^ (z >> 13)) * 0xc2b2ae35;
+  return z ^ (z >> 16);
+}
+
+void write_splitmix32(char* name, uint32_t a) {
+
+
+ 	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "0x%x", a);
+
+	char* alg_name = "splitmix32";
+	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+
+    for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+		uint32_t x = next_splitmix32(&a);
+		fprintf(ints_file, "'%08x',\n", x);
+
+		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(x));
+		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(x));
+	}
+
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -651,12 +731,24 @@ void write_splitmix64(char* name, uint64_t a) {
 
 int main()
 {
+	// uint32_t a = 0x90000000;
+	// uint32_t b = 3;
+
+	// printf("\n\n%d\n\n", a*b);
+	// exit(1);
+
+
     #define PI32 314159265
     #define PI64 3141592653589793238ll
 
 	write32("a", 1);
 	write32("b", 42);
 	write32("c", PI32);
+
+	write_xorshift32amx("a", 1);
+	write_xorshift32amx("b", 42);
+	write_xorshift32amx("c", PI32);
+
 
 	write64(1, "a");
 	write64(42, "b");
@@ -683,6 +775,11 @@ int main()
 	write_splitmix64("c", 777);
 	write_splitmix64("d", 0xf7d3b43bed078fa3ull);
 
+	write_splitmix32("a", 1);
+	write_splitmix32("b", 0);
+	write_splitmix32("c", 777);
+	write_splitmix32("d", 1081037251u);	
+
 	// print64(1);
 	// print64(42);
 	// print64(PI64);
@@ -699,6 +796,8 @@ int main()
 	// printXoshiro128pp(5, 23, 42, 777);
 	// printXoshiro128pp(1081037251u, 1975530394u, 2959134556u, 1579461830u);
 
+
+	// https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
 
 	//printf("};");
 }

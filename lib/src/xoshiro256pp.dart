@@ -4,6 +4,7 @@
 import 'dart:math';
 
 import 'package:xrandom/src/seeding.dart';
+import 'package:xrandom/src/splitmix64.dart';
 
 import '00_ints.dart';
 import 'package:xrandom/src/10_random_base.dart';
@@ -27,11 +28,11 @@ class Xoshiro256pp extends RandomBase64 {
 
 
     } else {
-      final now = DateTime.now().microsecondsSinceEpoch;
-      _S0 = mess2to64A(now, hashCode) & 0xFFFFFFFF;
-      _S1 = mess2to64B(now, hashCode) & 0xFFFFFFFF;
-      _S2 = mess2to64C(now, hashCode) & 0xFFFFFFFF;
-      _S3 = mess2to64D(now, hashCode) & 0xFFFFFFFF;
+
+      _S0 = Splitmix64.instance.nextInt64();
+      _S1 = Splitmix64.instance.nextInt64();
+      _S2 = Splitmix64.instance.nextInt64();
+      _S3 = Splitmix64.instance.nextInt64();
     }
   }
 

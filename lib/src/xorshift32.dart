@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: BSD-3-Clause
 
-import 'dart:math';
 
 import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/seeding.dart';
@@ -18,7 +17,7 @@ class Xorshift32 extends RandomBase32
       _state = seed;
     }
     else {
-      _state = mess2to64A(DateTime.now().millisecondsSinceEpoch, hashCode) & 0xFFFFFFFF;
+      _state = (DateTime.now().millisecondsSinceEpoch^hashCode) & 0xFFFFFFFF;
     }
   }
   late int _state;
@@ -45,20 +44,4 @@ class Xorshift32 extends RandomBase32
 
     return _state = x;
   }
-
-  // @override
-  // bool nextBool() {
-  //   // xorshift32 is so fast, that even returning particular
-  //   // bits is not faster than nextInt32()
-  //
-  //   var x = _state;
-  //
-  //   x ^= (x << 13);
-  //   x &= 0xFFFFFFFF; // added
-  //   x ^= (x >> 17);
-  //   x ^= (x << 5);
-  //   x &= 0xFFFFFFFF; // added
-  //
-  //   return (_state = x) >= 0x80000000;
-  // }
 }

@@ -22,7 +22,7 @@ class Splitmix64 extends RandomBase64 {
     if (seed != null) {
       _x = seed;
     } else {
-      _x = DateTime.now().millisecondsSinceEpoch ^ this.hashCode;
+      _x = DateTime.now().microsecondsSinceEpoch ^ this.hashCode;
     }
   }
 
@@ -46,4 +46,6 @@ class Splitmix64 extends RandomBase64 {
   static Splitmix64 expected() {
     return Splitmix64(_defaultSeed);
   }
+
+  static final Splitmix64 instance = Splitmix64();
 }

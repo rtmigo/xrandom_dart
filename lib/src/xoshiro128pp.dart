@@ -58,7 +58,6 @@ class Xoshiro128pp extends RandomBase32 {
     // https://prng.di.unimi.it/xoshiro128plusplus.c
 
     final rotlX1 = (_S0 + _S3) & 0xFFFFFFFF;
-    //const rotlK1 = 7;
     final rotl1 = ((rotlX1 << 7) & 0xFFFFFFFF) |
         ( // same as (x) >>> (32-k)
                 (rotlX1) >> (32 - 7)) &

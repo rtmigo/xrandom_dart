@@ -4,6 +4,7 @@
 import 'dart:math';
 
 import 'package:xrandom/src/seeding.dart';
+import 'package:xrandom/src/splitmix64.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
@@ -25,7 +26,7 @@ class Xorshift64 extends RandomBase64 {
       }
       _state = seed;
     } else {
-      _state = mess2to64A(DateTime.now().millisecondsSinceEpoch, hashCode);
+      _state = Splitmix64.instance.nextInt64();
     }
   }
 
