@@ -168,7 +168,12 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
       final r = createRandom();
       expect(() => r.nextInt(-1), throwsRangeError);
       expect(() => r.nextInt(0), throwsRangeError);
-      expect(() => r.nextInt(0xFFFFFFFF + 1), throwsRangeError);
+      if (INT64_SUPPORTED) {
+        r.nextInt(0xFFFFFFFF + 1); // no errors
+      } else {
+        expect(() => r.nextInt(0xFFFFFFFF + 1), throwsRangeError);
+      }
+
       // no errors
       r.nextInt(1);
       r.nextInt(0xFFFFFFFF);
