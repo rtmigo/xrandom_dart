@@ -129,13 +129,14 @@ The `nextInt32()` and `nextInt64()` return the raw output of the generator.
 
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
-| Random (dart:math)     |  1172   |     -     |     -     |
-| Xorshift32             |   732   |    411    |     -     |
-| Xorshift64             |  1046   |    776    |    746    |
-| Xorshift128            |   886   |    606    |     -     |
-| Xorshift128p           |  1081   |    802    |    857    |
-| Xoshiro128pp           |  1203   |    902    |     -     |
-| Xoshiro256pp           |  1691   |   1405    |   1890    |
+| Random (dart:math)     |  1206   |     -     |     -     |
+| Xorshift32             |   727   |    411    |     -     |
+| Xorshift64             |  1089   |    806    |    739    |
+| Xorshift128            |   907   |    621    |     -     |
+| Xorshift128p           |  1144   |    839    |    854    |
+| Xoshiro128pp           |  1268   |    994    |     -     |
+| Xoshiro256pp           |  1738   |   1463    |   2004    |
+| Splitmix64             |  1065   |    761    |    458    |
 
 ### Rough double
 
@@ -145,25 +146,27 @@ to a maximum of 2^32-1 values. But it's still a double with four billion shades.
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|-----------|
-| Random (dart:math)     |    1541    |     -     |
-| Xorshift32             |    1122    |    405    |
-| Xorshift64             |    994     |    777    |
-| Xorshift128            |    1443    |    588    |
-| Xorshift128p           |    1073    |    803    |
-| Xoshiro128pp           |    2015    |    904    |
-| Xoshiro256pp           |    2152    |   1386    |
+| Random (dart:math)     |    1616    |     -     |
+| Xorshift32             |    1144    |    415    |
+| Xorshift64             |    1001    |    799    |
+| Xorshift128            |    1457    |    629    |
+| Xorshift128p           |    1105    |    850    |
+| Xoshiro128pp           |    2154    |   1018    |
+| Xoshiro256pp           |    2206    |   1446    |
+| Splitmix64             |    792     |    764    |
 
 # More benchmarks
 
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
-| Random (dart:math)     |  1172   |    1541    |   1134   |
-| Xorshift32             |   732   |    1122    |   718    |
-| Xorshift64             |  1046   |    994     |   703    |
-| Xorshift128            |   886   |    1443    |   729    |
-| Xorshift128p           |  1081   |    1073    |   715    |
-| Xoshiro128pp           |  1203   |    2015    |   736    |
-| Xoshiro256pp           |  1691   |    2152    |   744    |
+| Random (dart:math)     |  1206   |    1616    |   1184   |
+| Xorshift32             |   727   |    1144    |   740    |
+| Xorshift64             |  1089   |    1001    |   712    |
+| Xorshift128            |   907   |    1457    |   750    |
+| Xorshift128p           |  1144   |    1105    |   719    |
+| Xoshiro128pp           |  1268   |    2154    |   759    |
+| Xoshiro256pp           |  1738   |    2206    |   748    |
+| Splitmix64             |  1065   |    792     |   708    |
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 
