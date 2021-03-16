@@ -89,20 +89,25 @@ If you do not want to bother, use `Xrandom`. It works fast and everywhere.
 
 `Xrandom` is actually an alias to `Xorshift128p`.  `XrandomJs` is an alias to `Xorshift32`.
 
+You want top quality results in mobile app:
 ``` dart
-// you want top quality results in mobile app
-final random_q = Xoshiro256pp();
-print('${random_q.nextDouble()}'); 
-
-// you want many integers fast
-final random_f = Xorshift64();
-print('${random_f.nextDouble()}');
-
-// you don't care
-final random = Xrandom();
-print('${random.nextDouble()}');
+final random = Xoshiro256pp();
+```
+You want integers fast:
+``` dart
+final random = Xorshift64();
 ```
 
+You don't care:
+``` dart
+final random = Xrandom();
+``` 
+
+Oops, it thrown `UnsupportedError` on Node.js:
+
+``` dart
+final random = XrandomJs();
+``` 
 
 # Compatibility
 
