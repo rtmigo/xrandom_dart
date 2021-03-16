@@ -98,7 +98,7 @@ final random = Xorshift64();
 
 You don't care:
 ``` dart
-final random = Xrandom();
+final random = Xrandom();  // it's nice
 ``` 
 
 Oops, it throws `UnsupportedError` on Node.js:
