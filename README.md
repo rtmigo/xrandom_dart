@@ -93,9 +93,9 @@ for (var i=0; i<BILLIONS; i++)
 ```
 | Class         | The same as       | Mobile | Desktop | JS |
 |---------------|-------------------|--------|---------|----|
-| `Xrandom`     | `Xorshift32`      | [x]      | **✓**       | :v:  |
-| `XrandomHq`   | `Xoshiro256pp`    | [x]      | +       | ✗   |
-| `XrandomHqJs` | `Xoshiro128pp`    | [x]      | +       | +  |
+| `Xrandom`     | `Xorshift32`      | ✓      | ✓       | ✓  |
+| `XrandomHq`   | `Xoshiro256pp`    | ✓      | ✓       | ✗  |
+| `XrandomHqJs` | `Xoshiro128pp`    | ✓      | ✓       | ✓  |
 
 `Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
 
