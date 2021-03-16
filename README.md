@@ -101,7 +101,7 @@ You don't care:
 final random = Xrandom();
 ``` 
 
-Oops, it thrown `UnsupportedError` on Node.js:
+Oops, it throws `UnsupportedError` on Node.js:
 
 ``` dart
 final random = XrandomJs();
