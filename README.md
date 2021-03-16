@@ -144,7 +144,7 @@ The `nextInt32()` and `nextInt64()` return the raw output of the generator.
 | `nextInt64()` | 64-bit signed | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
 
 <details>
-  <summary>Benchmarks</summary>
+  <summary>Raw bits benchmarks</summary>
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
 | Random (dart:math)     |  1208   |     -     |     -     |
@@ -164,7 +164,7 @@ a single 32-bit integer into a `double`. Therefore, the result is limited
 to a maximum of 2^32-1 values. But it's still a double with four billion shades.
 
 <details>
-  <summary>Benchmarks</summary>
+  <summary>Rough double benchmarks</summary>
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|-----------|
