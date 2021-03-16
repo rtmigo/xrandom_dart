@@ -79,7 +79,7 @@ You need billions and billions of randoms in a non-recurring sequence:
 ``` dart
 final random = XrandomHq();  // works on mobile and desktop
 
-for (var i=0; i<BILLIONS; ++i)
+for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation(random.nextDouble());
 ```
 
@@ -88,7 +88,7 @@ You tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
 ``` dart
 final random = XrandomHqJs();  // works on all platforms
 
-for (var i=0; i<BILLIONS; ++i)
+for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation(random.nextDouble());
 ```
 | Class         | The same as       | Mobile | Desktop | JS |
