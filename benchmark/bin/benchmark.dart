@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'dart:math';
 
 import 'package:xrandom/xrandom.dart';
@@ -50,7 +49,8 @@ int measureTime(Random r, DoWhat dbl) {
   return sw.elapsed.inMilliseconds;
 }
 
-int mean(List<int> values) => (values.reduce((a, b) => a + b) / values.length).round();
+int mean(List<int> values) =>
+    (values.reduce((a, b) => a + b) / values.length).round();
 
 class Bench implements Comparable {
   Bench(this.className, this.doWhat);
@@ -102,7 +102,8 @@ void main(List<String> arguments) {
       for (var random in listGenerators()..shuffle()) {
         final time = measureTime(random, doingWhat);
         results
-            .putIfAbsent(random.runtimeType.toString(), () => <DoWhat, List<int>>{})
+            .putIfAbsent(
+                random.runtimeType.toString(), () => <DoWhat, List<int>>{})
             .putIfAbsent(doingWhat, () => <int>[])
             .add(time);
       }
@@ -143,11 +144,7 @@ void main(List<String> arguments) {
     print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
   }
 
-  printColumns([
-    DoWhat.nextInt,
-    DoWhat.nextDouble,
-    DoWhat.nextBool
-  ]);
+  printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
 
   print('');
 

@@ -1,19 +1,14 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'dart:math';
 
-enum Align {
-  left,
-  right,
-  center
-}
+enum Align { left, right, center }
 
-int maxCellLength(List<String> row) => row.map((cell)=>cell.length).reduce(max);
+int maxCellLength(List<String> row) =>
+    row.map((cell) => cell.length).reduce(max);
 
-String alignCell(String text, int targetWidth, Align align)
-{
+String alignCell(String text, int targetWidth, Align align) {
   switch (align) {
     case Align.left:
       return text.padRight(targetWidth);
@@ -25,14 +20,14 @@ String alignCell(String text, int targetWidth, Align align)
 }
 
 String alignCenter(String text, int targetWidth) {
-  final half = (targetWidth-text.length)>>1;
-  text = text.padLeft(text.length+half);
+  final half = (targetWidth - text.length) >> 1;
+  text = text.padLeft(text.length + half);
   text = text.padRight(targetWidth);
   return text;
 }
 
-String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>? rowAlign}) {
-
+String tabulate(List<List<String>> rows,
+    {List<Align>? headerAlign, List<Align>? rowAlign}) {
   final columnsCount = rows.map((r) => r.length).reduce(max);
 
   for (final row in rows) {
@@ -42,14 +37,14 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
   }
 
   final columnsWidths = <int>[];
-  for (var iCol=0; iCol<columnsCount; iCol++) {
+  for (var iCol = 0; iCol < columnsCount; iCol++) {
     columnsWidths.add(
-      rows.map((row) => row[iCol]).map((cell) => cell.length).reduce(max)
-    );
+        rows.map((row) => row[iCol]).map((cell) => cell.length).reduce(max));
   }
 
-  var bar = List.generate(columnsCount, (i) => '-' * (columnsWidths[i]+2)).join('|');
-  bar = '|'+bar+'|';
+  var bar = List.generate(columnsCount, (i) => '-' * (columnsWidths[i] + 2))
+      .join('|');
+  bar = '|' + bar + '|';
 
   final formattedRows = <String>[];
 
@@ -57,7 +52,7 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
   for (var row in rows) {
     iRow++;
 
-    if (iRow==1) {
+    if (iRow == 1) {
       formattedRows.add(bar);
     }
 
@@ -74,8 +69,7 @@ String tabulate(List<List<String>> rows, {List<Align>? headerAlign, List<Align>?
         if (headerAlign != null && headerAlign.length > iCol) {
           align = headerAlign[iCol];
         }
-      }
-      else {
+      } else {
         // not header
         if (rowAlign != null && rowAlign.length > iCol) {
           align = rowAlign[iCol];

@@ -1,13 +1,11 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'dart:math';
 
 import '00_ints.dart';
 
 abstract class RandomBase32 implements Random {
-
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 1 to 0xFFFFFFFF, both inclusive.
   ///
@@ -31,11 +29,11 @@ abstract class RandomBase32 implements Random {
     // }
 
     final rnd32 = nextInt32();
-    assert(0<=rnd32 && rnd32<=UINT32_MAX);
+    assert(0 <= rnd32 && rnd32 <= UINT32_MAX);
 
     final result = rnd32 % max;
 
-    assert(0<=result && result<max);
+    assert(0 <= result && result < max);
 
     return result;
   }
@@ -48,12 +46,11 @@ abstract class RandomBase32 implements Random {
   /// Therefore, the variability is limited by the number of possible values
   /// of such integer: 2^32-1 (= 4 294 967 295).
   double nextFloat() {
-
-    const FACTOR = 1/UINT32_MAX;
+    const FACTOR = 1 / UINT32_MAX;
     final rnd32 = nextInt32();
-    assert(0.0<rnd32 && rnd32 <= UINT32_MAX);
-    final double one = (rnd32-1)*FACTOR;
-    assert(0.0<=one && one<1.0);
+    assert(0.0 < rnd32 && rnd32 <= UINT32_MAX);
+    final double one = (rnd32 - 1) * FACTOR;
+    assert(0.0 <= one && one < 1.0);
     return one;
   }
 
@@ -77,7 +74,8 @@ abstract class RandomBase32 implements Random {
     // or
     //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
 
-    return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
+    return nextInt32() * 2.3283064365386963e-10 +
+        (nextInt32() >> 12) * 2.220446049250313e-16;
   }
 
   @override
@@ -94,14 +92,14 @@ abstract class RandomBase32 implements Random {
     //    XorShift32  returning bits              1423
 
     // we're returning bits from higher to lower: like uint32s from int64s
-    if (_boolCache_prevShift==0) {
+    if (_boolCache_prevShift == 0) {
       _boolCache = nextInt32();
       _boolCache_prevShift = 31;
-      return _boolCache&0x80000000 != 0;
+      return _boolCache & 0x80000000 != 0;
     } else {
-      assert(_boolCache_prevShift>0);
+      assert(_boolCache_prevShift > 0);
       _boolCache_prevShift--;
-      final result = (_boolCache & (1<<_boolCache_prevShift)) != 0;
+      final result = (_boolCache & (1 << _boolCache_prevShift)) != 0;
       return result;
     }
   }
@@ -111,7 +109,6 @@ abstract class RandomBase32 implements Random {
 }
 
 abstract class RandomBase64 extends RandomBase32 {
-
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 1 to 2^64-1, both inclusive.
   ///
@@ -163,7 +160,6 @@ abstract class RandomBase64 extends RandomBase32 {
 
   int _forNext32 = 0;
 
-
   @override
   double nextDouble() {
     // we have a 64-bit integer to be converted to a float with only 53 significant bits.
@@ -176,7 +172,8 @@ abstract class RandomBase64 extends RandomBase32 {
     //
 
     // the result of printf("%.60e", 0x1.0p-53):
-    const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
+    const double Z =
+        1.110223024625156540423631668090820312500000000000000000000000e-16;
 
     //_____(this.nextInt64()_>>>_11______________________)_*_0x1.0p-53
     return ((this.nextInt64() >> 11) & ~(-1 << (64 - 11))) * Z;
@@ -188,7 +185,8 @@ abstract class RandomBase64 extends RandomBase32 {
     if (_boolCache_prevShift == 0) {
       _boolCache = nextInt64();
       _boolCache_prevShift = 63;
-      return _boolCache < 0; // for the signed integer negative = highest bit set
+      return _boolCache <
+          0; // for the signed integer negative = highest bit set
     } else {
       assert(_boolCache_prevShift > 0);
       _boolCache_prevShift--;
@@ -215,6 +213,7 @@ abstract class RandomBase64 extends RandomBase32 {
   /// ```
   double nextDoubleMemcast() {
     // this is the same as RandomBase32.nextDouble()
-    return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
+    return nextInt32() * 2.3283064365386963e-10 +
+        (nextInt32() >> 12) * 2.220446049250313e-16;
   }
 }

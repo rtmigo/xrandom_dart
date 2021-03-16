@@ -1,16 +1,14 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 // declaring int64 as BigInt to avoid JavaScript compilation errors
 final int INT64_LOWER_7_BYTES = int.parse('0x00FFFFFFFFFFFFFF');
 final int INT64_MAX_POSITIVE = int.parse('0x7FFFFFFFFFFFFFFF');
 const UINT32_MAX = 0xFFFFFFFF;
-const INT64_SUPPORTED = (1<<62) > (1<<61); // true for 64-bit systems (not for JS)
-
+const INT64_SUPPORTED =
+    (1 << 62) > (1 << 61); // true for 64-bit systems (not for JS)
 
 extension BitInt on int {
-
   int unsetHighestBit64() {
     return this & INT64_MAX_POSITIVE;
   }
@@ -25,7 +23,6 @@ extension BitInt on int {
 
   /// Simulates result of `x >> shift` as if `x` were `uint64_t` in C.
   int unsignedRightShift(int shift) {
-
     // as of 2021 Dart does not have neither unsigned 64-bit integers or the ">>>"
     // unsigned right shift that can be found in Java or JavaScript
     //
@@ -35,8 +32,7 @@ extension BitInt on int {
 
     if (this >= 0) {
       return this >> shift;
-    }
-    else {
+    } else {
       var x = this;
       // setting highest bit to zero
       x &= INT64_MAX_POSITIVE;
@@ -61,16 +57,12 @@ extension BitInt on int {
     //   this >= 0 ? this >> shift : ((this & INT64_MAX_POSITIVE) >> shift) | (1 << (63 - shift))
   }
 
-
-
-
   String toHexUint32() {
     return this.toRadixString(16).padLeft(8, '0');
   }
 
-
   String toHexUint64() {
-    if (this>=0) {
+    if (this >= 0) {
       return this.toRadixString(16).padLeft(16, '0');
     }
 
@@ -83,14 +75,14 @@ extension BitInt on int {
     assert(x >= 0);
 
     // making it the lowest byte
-    int upperByte = (x>>56)&0xFF;
+    int upperByte = (x >> 56) & 0xFF;
 
     // adding the highest bit to the byte
-    upperByte|=(1<<7);
+    upperByte |= (1 << 7);
 
     String strHigh = upperByte.toRadixString(16).padLeft(2, '0');
 
-    return strHigh+strLow;
+    return strHigh + strLow;
   }
 
   String toHexUint32uc() => this.toHexUint32().toUpperCase(); // todo remove

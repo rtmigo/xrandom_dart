@@ -17,12 +17,11 @@ import 'src/xorshift128plus.dart';
 // https://github.com/dart-lang/language/issues/65
 
 class XrandomJs extends Xorshift32 {
-  XrandomJs([seed]): super(seed);
+  XrandomJs([seed]) : super(seed);
   static Xorshift32 expected() => Xorshift32.expected();
 }
 
 class Xrandom extends Xorshift128p {
-  Xrandom([a,b]): super(a,b);
+  Xrandom([a, b]) : super(a, b);
   static Xorshift128p expected() => Xorshift128p.expected();
 }
-

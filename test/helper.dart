@@ -10,6 +10,8 @@ import 'package:xrandom/src/10_random_base.dart';
 
 import 'data/generated.dart';
 
+const FAST = INT64_SUPPORTED;
+
 enum ReferenceType { ints, double_mult, double_cast }
 
 Map dataMap(String algo, String seedId, ReferenceType type) {
@@ -27,7 +29,9 @@ Map dataMap(String algo, String seedId, ReferenceType type) {
   }
 
   for (final m in referenceData) {
-    if (m['algorithm'] == algo && m['seed id'] == seedId && m['type'] == suffix) {
+    if (m['algorithm'] == algo &&
+        m['seed id'] == seedId &&
+        m['type'] == suffix) {
       return m;
     }
   }
@@ -55,8 +59,9 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
     });
 
     test('toDouble', () {
-      final reftype =
-          (random is RandomBase64) ? ReferenceType.double_mult : ReferenceType.double_cast;
+      final reftype = (random is RandomBase64)
+          ? ReferenceType.double_mult
+          : ReferenceType.double_cast;
 
       //if (random is RandomBase64)
 
@@ -69,17 +74,20 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 
     if (createRandom() is RandomBase64) {
       test('nextDoubleMemcast', () {
-        final values = loadDoubles(dataMap(filePrefix, seedId, ReferenceType.double_cast));
+        final values =
+            loadDoubles(dataMap(filePrefix, seedId, ReferenceType.double_cast));
         int idx = 0;
         for (final value in values) {
-          expect((random as RandomBase64).nextDoubleMemcast(), value, reason: 'item ${idx++}');
+          expect((random as RandomBase64).nextDoubleMemcast(), value,
+              reason: 'item ${idx++}');
         }
       });
     }
 
     if (createRandom() is RandomBase64) {
       test('nextInt64', () {
-        final values = rdIntsAsStrings(dataMap(filePrefix, seedId, ReferenceType.ints));
+        final values =
+            rdIntsAsStrings(dataMap(filePrefix, seedId, ReferenceType.ints));
         for (final item in enumerate(values)) {
           expect((random as RandomBase64).nextInt64().toHexUint64(), item.value,
               reason: 'item ${item.index}');
@@ -87,9 +95,11 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
       });
     } else {
       test('nextInt32', () {
-        final values = rdIntsAsStrings(dataMap(filePrefix, seedId, ReferenceType.ints));
+        final values =
+            rdIntsAsStrings(dataMap(filePrefix, seedId, ReferenceType.ints));
         for (final item in enumerate(values)) {
-          expect(random.nextInt32().toHexUint32(), item.value, reason: 'item ${item.index}');
+          expect(random.nextInt32().toHexUint32(), item.value,
+              reason: 'item ${item.index}');
         }
       });
     }
@@ -118,13 +128,18 @@ void testCommonRandom(Random Function() createRandom) {
     test('Seed is different each time', () {
       // even with different seeds, we can get rare matches of results.
       // But most of the the results should be unique
-      expect(List.generate(100, (index) => createRandom().nextDouble()).toSet().length,
+      expect(
+          List.generate(100, (index) => createRandom().nextDouble())
+              .toSet()
+              .length,
           greaterThan(90));
     });
 
-    test('Huge ints: 0xFFFFFFFF', () => checkHugeInts(createRandom(), 0xFFFFFFFF));
+    test('Huge ints: 0xFFFFFFFF',
+        () => checkHugeInts(createRandom(), 0xFFFFFFFF));
     // "the fast case for powers of two"
-    test('Huge ints: 0x80000000', () => checkHugeInts(createRandom(), 0x80000000));
+    test('Huge ints: 0x80000000',
+        () => checkHugeInts(createRandom(), 0x80000000));
 
     test('nextIntCheckRange', () {
       final r = createRandom();
@@ -137,45 +152,40 @@ void testCommonRandom(Random Function() createRandom) {
     });
 
     test('nextInt(2) works almost like next bool', () {
-
       final r = createRandom();
 
       int countZeroes = 0;
       int countOnes = 0;
 
-      const N = 10000000;
+      const N = 100000 * (FAST ? 10 : 1);
       for (int i = 0; i < N; ++i) {
         var x = r.nextInt(2);
         expect(x, greaterThanOrEqualTo(0.0));
         expect(x, lessThan(2.0));
 
-        if (x==0) {
+        if (x == 0) {
           countZeroes++;
-        } else if (x==1) {
+        } else if (x == 1) {
           countOnes++;
         } else {
           throw AssertionError();
-        };
+        }
+        ;
       }
 
-      expect(countZeroes, greaterThan(N*0.3));
-      expect(countOnes, greaterThan(N*0.3));
+      expect(countZeroes, greaterThan(N * 0.3));
+      expect(countOnes, greaterThan(N * 0.3));
     });
 
     test('nextInt(1) returns all zeros', () {
-
       final r = createRandom();
 
       const N = 1000;
       for (int i = 0; i < N; ++i) {
         var x = r.nextInt(1);
-        expect(x,0);
+        expect(x, 0);
       }
     });
-
-
-
-
   });
 }
 
@@ -184,7 +194,8 @@ void checkDoubles(Random r) {
   int countBig = 0;
   int countMiddle = 0;
 
-  const N = 10000000;
+  const N = 1000000 * (FAST ? 10 : 1);
+
   for (int i = 0; i < N; ++i) {
     var d = r.nextDouble();
     expect(d, greaterThanOrEqualTo(0.0));
@@ -205,7 +216,8 @@ void checkDoubles(Random r) {
 void checkBooleans(Random r) {
   int countTrue = 0;
 
-  const N = 10000000;
+  const N = 1000000 * (FAST ? 10 : 1);
+
   for (int i = 0; i < N; ++i) {
     if (r.nextBool()) countTrue++;
   }
@@ -217,7 +229,8 @@ void checkBooleans(Random r) {
 void checkIntegers(Random r) {
   int countMin = 0;
   int countMax = 0;
-  const N = 10000000;
+
+  const N = 1000000 * (FAST ? 10 : 1);
 
   for (int i = 0; i < N; ++i) {
     var x = r.nextInt(10);
@@ -243,7 +256,7 @@ void checkHugeInts(Random r, final int upper) {
   // - we're are getting values close the margin
 
   int countAlmostTop = 0;
-  const N = 10000000;
+  const N = 1000000 * (FAST ? 10 : 1);
 
   for (int i = 0; i < N; ++i) {
     var x = r.nextInt(upper);

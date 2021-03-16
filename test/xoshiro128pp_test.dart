@@ -10,7 +10,8 @@ void main() {
   testCommonRandom(() => Xoshiro128pp());
   checkReferenceFiles(() => Xoshiro128pp(1, 2, 3, 4), 'a');
   checkReferenceFiles(() => Xoshiro128pp(5, 23, 42, 777), 'b');
-  checkReferenceFiles(() => Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830), 'c');
+  checkReferenceFiles(
+      () => Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830), 'c');
 
   test('expected values', () {
     expect(expectedList(Xoshiro128pp.expected()),

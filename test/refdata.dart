@@ -1,7 +1,2 @@
-void addReferenceData({
-String? algorithm,
-String? seed,
-String? type,
-List? values}) {
-
-}
+void addReferenceData(
+    {String? algorithm, String? seed, String? type, List? values}) {}

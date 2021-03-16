@@ -9,18 +9,15 @@ import '00_ints.dart';
 /// Random number generator based on `xorshift128` algorithm by G. Marsaglia (2003).
 /// The reference implementation in C can be found in
 /// <https://www.jstatsoft.org/article/view/v008i14>.
-class Xorshift128 extends RandomBase32
-{
-  Xorshift128([int? a, int? b, int? c, int? d])
-  {
-    if (a!=null || b!=null || c!=null || d!=null) {
-
+class Xorshift128 extends RandomBase32 {
+  Xorshift128([int? a, int? b, int? c, int? d]) {
+    if (a != null || b != null || c != null || d != null) {
       RangeError.checkValueInInterval(a!, 0, UINT32_MAX);
       RangeError.checkValueInInterval(b!, 0, UINT32_MAX);
       RangeError.checkValueInInterval(c!, 0, UINT32_MAX);
       RangeError.checkValueInInterval(d!, 0, UINT32_MAX);
 
-      if (a==0 && b==0 && c==0 && d==0) {
+      if (a == 0 && b == 0 && c == 0 && d == 0) {
         throw ArgumentError('The seed should not consist of only zeros..');
       }
 
@@ -28,8 +25,7 @@ class Xorshift128 extends RandomBase32
       _b = b;
       _c = c;
       _d = d;
-    }
-    else {
+    } else {
       final now = DateTime.now().microsecondsSinceEpoch;
       // just creating a mess
 
@@ -43,7 +39,6 @@ class Xorshift128 extends RandomBase32
 
   @override
   int nextInt32() {
-
     // algorithm from p.5 of "Xorshift RNGs"
     // by George Marsaglia, 2003
     // https://www.jstatsoft.org/article/view/v008i14
@@ -61,7 +56,7 @@ class Xorshift128 extends RandomBase32
     t &= 0xFFFFFFFF;
 
     // rewritten `t ^= t.unsignedRightShift(8); //t ^= t >> 8;`
-    t^=(t >> 8) & ~(-1 << (64 - 8));
+    t ^= (t >> 8) & ~(-1 << (64 - 8));
 
     _a = t ^ s ^ (s >> 19);
     _a &= 0xFFFFFFFF;
@@ -69,8 +64,7 @@ class Xorshift128 extends RandomBase32
     return _a;
   }
 
-  static Xorshift128 expected()
-  {
+  static Xorshift128 expected() {
     return Xorshift128(0xd5dcc73b, 0x39398022, 0x91537a66, 0x6cb3accc);
   }
 }

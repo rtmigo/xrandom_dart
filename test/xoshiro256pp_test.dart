@@ -12,12 +12,21 @@ void main() {
   checkReferenceFiles(() => Xoshiro256pp(1, 2, 3, 4), 'a');
   checkReferenceFiles(() => Xoshiro256pp(5, 23, 42, 777), 'b');
   checkReferenceFiles(
-      () => Xoshiro256pp(int.parse('0x621b97ff9b08ce44'), int.parse('0x92974ae633d5ee97'),
-          int.parse('0x9c7e491e8f081368'), int.parse('0xf7d3b43bed078fa3')),
+      () => Xoshiro256pp(
+          int.parse('0x621b97ff9b08ce44'),
+          int.parse('0x92974ae633d5ee97'),
+          int.parse('0x9c7e491e8f081368'),
+          int.parse('0xf7d3b43bed078fa3')),
       'c');
 
   test('expected values', () {
-    expect(expectedList(Xoshiro256pp.expected()),
-        [int.parse('9214259484446541290'), 3031, 0.9835800298090491, false, false, false]);
+    expect(expectedList(Xoshiro256pp.expected()), [
+      int.parse('9214259484446541290'),
+      3031,
+      0.9835800298090491,
+      false,
+      false,
+      false
+    ]);
   });
 }

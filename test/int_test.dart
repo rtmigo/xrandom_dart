@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 @TestOn('vm')
 
 import "package:test/test.dart";
@@ -9,14 +8,11 @@ import "package:test/test.dart";
 import 'package:xrandom/src/00_ints.dart';
 
 void main() {
-
-
   test('string to int', () {
     // the problem with BigInt.toInt():
     expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(),
         '7fffffffffffffff');
   });
-
 
   test("are we", () {
     expect(INT64_SUPPORTED, true);
@@ -33,7 +29,6 @@ void main() {
   });
 
   test("hex", () {
-
     expect(0xFF.toHexUint32uc(), "000000FF");
     expect(0xFF.toHexUint64uc(), "00000000000000FF");
     expect(0xFFFFFFFFFFFFFFFF.toHexUint64uc(), "FFFFFFFFFFFFFFFF");
@@ -43,10 +38,10 @@ void main() {
   });
 
   test("signedRightShift", () {
-
     expect(0xFF.unsignedRightShift(4), 0xF);
-    expect(0x9FFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(), "09FFFFFFFFFFFFFF");
-    expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(), "0FFFFFFFFFFFFFFF");
-
+    expect(0x9FFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(),
+        "09FFFFFFFFFFFFFF");
+    expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(),
+        "0FFFFFFFFFFFFFFF");
   });
 }

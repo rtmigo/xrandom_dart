@@ -9,9 +9,7 @@ import 'package:xrandom/src/xorshift128.dart';
 import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/xorshift64.dart';
 
-
 void main() {
-
   test('next32 returning parts of next64', () {
     final random1 = Xorshift64.expected();
     int a64 = random1.nextInt64();
@@ -30,10 +28,8 @@ void main() {
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextInt64();
-      for (var bit = 63; bit >=0; --bit) {
-        expect(
-            randomB.nextBool(),
-            (intA & (1 << bit)) != 0,
+      for (var bit = 63; bit >= 0; --bit) {
+        expect(randomB.nextBool(), (intA & (1 << bit)) != 0,
             reason: 'Experiment $experiment, bit $bit');
       }
     }
@@ -45,13 +41,10 @@ void main() {
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextInt32();
-      for (var bit = 31; bit >=0; --bit) {
-        expect(
-            randomB.nextBool(),
-            (intA & (1 << bit)) != 0,
+      for (var bit = 31; bit >= 0; --bit) {
+        expect(randomB.nextBool(), (intA & (1 << bit)) != 0,
             reason: 'Experiment $experiment, bit $bit');
       }
     }
   });
-
 }

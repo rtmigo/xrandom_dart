@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'package:xrandom/src/10_random_base.dart';
 
 import '00_errors.dart';
@@ -25,7 +24,7 @@ class Splitmix64 extends RandomBase64 {
   }
 
   late int _x;
-  
+
   static final _c9E3 = int.parse('0x9e3779b97f4a7c15');
   static final _cBF5 = int.parse('0xbf58476d1ce4e5b9');
   static final _c94D = int.parse('0x94d049bb133111eb');

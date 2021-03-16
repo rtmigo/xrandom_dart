@@ -24,9 +24,14 @@ void main() {
   // checkReferenceFiles(() => Splitmix64(3141592653589793238), 'c');
 
   test('expected values', () {
-    expect(expectedList(Splitmix64.expected()),
-        [int.parse('-1280933994267506231'), 75710, 0.9449949262451789, false, false, false]
-        );
+    expect(expectedList(Splitmix64.expected()), [
+      int.parse('-1280933994267506231'),
+      75710,
+      0.9449949262451789,
+      false,
+      false,
+      false
+    ]);
   });
 
   test('create without args', () async {

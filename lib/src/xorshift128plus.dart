@@ -15,11 +15,10 @@ class Xorshift128p extends RandomBase64 {
       throw Unsupported64Error();
     }
     if (seedA != null || seedB != null) {
-
-      if (seedA==null) {
+      if (seedA == null) {
         throw ArgumentError.notNull('a');
       }
-      if (seedB==null) {
+      if (seedB == null) {
         throw ArgumentError.notNull('b');
       }
 

@@ -1,22 +1,18 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'package:xrandom/src/10_random_base.dart';
 
 /// Random number generator based on `xorshift32` algorithm by G. Marsaglia (2003).
 /// The reference implementation in C can be found in
 /// <https://www.jstatsoft.org/article/view/v008i14>.
-class Xorshift32 extends RandomBase32
-{
-  Xorshift32([seed])
-  {
-    if (seed!=null) {
+class Xorshift32 extends RandomBase32 {
+  Xorshift32([seed]) {
+    if (seed != null) {
       RangeError.checkValueInInterval(seed, 1, 0xFFFFFFFF);
       _state = seed;
-    }
-    else {
-      _state = (DateTime.now().millisecondsSinceEpoch^hashCode) & 0xFFFFFFFF;
+    } else {
+      _state = (DateTime.now().millisecondsSinceEpoch ^ hashCode) & 0xFFFFFFFF;
     }
   }
   late int _state;
@@ -25,9 +21,8 @@ class Xorshift32 extends RandomBase32
 
   @override
   int nextInt32() {
-
-    // algorithm from p.4 of "Xorshift RNGs" 
-    // by George Marsaglia, 2003 
+    // algorithm from p.4 of "Xorshift RNGs"
+    // by George Marsaglia, 2003
     // https://www.jstatsoft.org/article/view/v008i14
     //
     // rewritten for Dart from snippet

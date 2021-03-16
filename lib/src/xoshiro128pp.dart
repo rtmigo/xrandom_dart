@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/seeding.dart';
 
@@ -36,7 +35,6 @@ class Xoshiro128pp extends RandomBase32 {
   }
 
   late int _S0, _S1, _S2, _S3;
-
 
   @override
   int nextInt32() {
