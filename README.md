@@ -82,7 +82,7 @@ final random = XrandomHq();  // works on mobile and desktop
 monteCarloSimulation(random);
 ```
 
-You tried to run this on Node.js but got `UnsupportedError`:
+You tried to create `XrandomHq` this on Node.js but got `UnsupportedError`:
 
 ``` dart
 final random = XrandomHqJs();  // works on all platforms
