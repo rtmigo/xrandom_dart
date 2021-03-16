@@ -94,7 +94,7 @@ for (var i=0; i<BILLIONS; i++)
 | Class         | The same as       | Mobile | Desktop | JS |
 |---------------|-------------------|--------|---------|----|
 | `Xrandom`     | `Xorshift32`      | [x]      | +       | +  |
-| `XrandomHq`   | `Xoshiro256pp`    | [x]      | +       | [ ]   |
+| `XrandomHq`   | `Xoshiro256pp`    | [x]      | +       | :x:   |
 | `XrandomHqJs` | `Xoshiro128pp`    | [x]      | +       | +  |
 
 `Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
