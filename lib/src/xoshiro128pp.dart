@@ -26,7 +26,7 @@ class Xoshiro128pp extends RandomBase32 {
       _S2 = c;
       _S3 = d;
     } else {
-      final now = DateTime.now().microsecondsSinceEpoch;
+      final now = DateTime.now().millisecondsSinceEpoch;
       _S0 = mess2to64A(now, hashCode) & 0xFFFFFFFF;
       _S1 = mess2to64B(now, hashCode) & 0xFFFFFFFF;
       _S2 = mess2to64C(now, hashCode) & 0xFFFFFFFF;
@@ -67,7 +67,12 @@ class Xoshiro128pp extends RandomBase32 {
     return result & 0xFFFFFFFF;
   }
 
+  static const defaultSeedA = 0x17f235fb;
+  static const defaultSeedB = 0x53985f9c;
+  static const defaultSeedC = 0xbc8d40f6;
+  static const defaultSeedD = 0xc7b9d576;
+
   static Xoshiro128pp expected() {
-    return Xoshiro128pp(0x17f235fb, 0x53985f9c, 0xbc8d40f6, 0xc7b9d576);
+    return Xoshiro128pp(defaultSeedA, defaultSeedB, defaultSeedC, defaultSeedD);
   }
 }

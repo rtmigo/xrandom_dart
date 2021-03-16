@@ -7,17 +7,19 @@ import 'package:xrandom/src/10_random_base.dart';
 /// The reference implementation in C can be found in
 /// <https://www.jstatsoft.org/article/view/v008i14>.
 class Xorshift32 extends RandomBase32 {
-  Xorshift32([seed]) {
-    if (seed != null) {
-      RangeError.checkValueInInterval(seed, 1, 0xFFFFFFFF);
-      _state = seed;
+  Xorshift32([int? seed32]) {
+    if (seed32 != null) {
+      RangeError.checkValueInInterval(seed32, 1, 0xFFFFFFFF);
+      _state = seed32;
     } else {
       _state = (DateTime.now().millisecondsSinceEpoch ^ hashCode) & 0xFFFFFFFF;
     }
   }
   late int _state;
 
-  static Xorshift32 expected() => Xorshift32(0xd9e2fcc8);
+  static const defaultSeed = 0xd9e2fcc8;
+
+  static Xorshift32 expected() => Xorshift32(defaultSeed);
 
   @override
   int nextInt32() {
