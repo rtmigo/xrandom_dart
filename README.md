@@ -88,7 +88,8 @@ You tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
 ``` dart
 final random = XrandomHqJs();  // works on all platforms
 
-monteCarloSimulation(random);
+for (var i=0; i<BILLIONS; ++i)
+    feedMonteCarloSimulation(random.nextDouble());
 ```
 | Class         | The same as       | Mobile | Desktop | JS |
 |---------------|-------------------|--------|---------|----|
