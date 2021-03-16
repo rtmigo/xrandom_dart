@@ -64,7 +64,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 *(but not until the library reaches stable release status)*
 
-# Classes
+# Algorithms
 
 | Class             | Arch | Algorithm  |   Algorithm author | Published |
 |-------------------|------|--------------|-------------|------|
