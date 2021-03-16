@@ -5,7 +5,7 @@
 
 # [xrandom](https://github.com/rtmigo/xrandom)
 
-Classes that implement all-purpose, rock-solid **random number generators**.
+Classes implementing all-purpose, rock-solid **random number generators**.
 
 Library priorities:
 - generation of identical bit-accurate numbers regardless of the platform
