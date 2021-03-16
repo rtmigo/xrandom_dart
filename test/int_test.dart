@@ -44,4 +44,20 @@ void main() {
     expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(),
         "0FFFFFFFFFFFFFFF");
   });
+
+  test("uint32 to int32", () {
+    // 0x7ffffffd 2147483645 -> 2147483645
+    // 0x7ffffffe 2147483646 -> 2147483646
+    // 0x7fffffff 2147483647 -> 2147483647
+    // 0x80000000 2147483648 -> -2147483648
+    // 0x80000001 2147483649 -> -2147483647
+    // 0x80000002 2147483650 -> -2147483646
+
+    expect(0x7ffffffd.uint32_to_int32(), 2147483645);
+    expect(0x7ffffffe.uint32_to_int32(), 2147483646);
+    expect(0x7fffffff.uint32_to_int32(), 2147483647);
+    expect(0x80000000.uint32_to_int32(), -2147483648);
+    expect(0x80000001.uint32_to_int32(), -2147483647);
+    expect(0x80000002.uint32_to_int32(), -2147483646);
+  });
 }

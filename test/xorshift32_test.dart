@@ -14,6 +14,8 @@ void main() {
   checkReferenceFiles(() => Xorshift32(42), 'b');
   checkReferenceFiles(() => Xorshift32(314159265), 'c');
 
+  checkDoornikRandbl32(() => Xorshift32(42), 'b');
+
   test('expected values', () {
     expect(expectedList(Xorshift32.expected()),
         [1225539925, 51686, 0.40665327328483225, false, true, false]);

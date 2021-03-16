@@ -60,6 +60,26 @@ static inline double vigna_uint64_to_double_alt(uint64_t x) {
 	return u.d - 1.0;
 }
 
+////////////////////////////////////////////////////////////////////////////////	
+// Jurgen A. Doornik. 2007. Conversion of high-period random numbers to 
+// floating point. ACM Trans. Model. Comput. Simul. 17, 1, Article 3 
+// (January 2007). DOI=10.1145/1189756.1189759 
+// http://doi.acm.org/10.1145/1189756.118975
+
+#define M_RAN_INVM32 2.32830643653869628906e-010
+#define M_RAN_INVM52 2.22044604925031308085e-016
+
+#define RANDBL_32(iRan1) \
+    ((int)(iRan1)*M_RAN_INVM32 + 0.5)
+
+#define RANDBL_32_NO_ZERO(iRan1) \
+    ((int)(iRan1)*M_RAN_INVM32 + (0.5 + M_RAN_INVM32 / 2))
+
+//float number with 52bits
+#define RANDBL_52_NO_ZERO(iRan1, iRan2) \
+    ((int)(iRan1)*M_RAN_INVM32 + (0.5 + M_RAN_INVM52 / 2) + (int)((iRan2)&0x000FFFFF) * M_RAN_INVM52)
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // XORSHIFT32
 //
@@ -115,24 +135,29 @@ void write32(char* name, uint64_t seed) {
 	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
 	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
 	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *doornik_file = open_ref_outfile(alg_name, name, seed_str, "doornik_randbl_32");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
 		uint32_t x1 = xorshift32(&state);
 		fprintf(ints_file, "'%08x',\n", x1);
+		fprintf(doornik_file, "'%.20e',\n", RANDBL_32(x1));
 
 		uint32_t x2 = xorshift32(&state);
 		fprintf(ints_file, "'%08x',\n", x2);
+		fprintf(doornik_file, "'%.20e',\n", RANDBL_32(x2));
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
 		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
 		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
+		
 	}	
 
 	close_ref_outfile(doubles_cast_file);
 	close_ref_outfile(doubles_file);
 	close_ref_outfile(ints_file);
+	close_ref_outfile(doornik_file);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -731,12 +756,10 @@ void write_splitmix32(char* name, uint32_t a) {
 
 int main()
 {
-	// uint32_t a = 0x90000000;
-	// uint32_t b = 3;
-
-	// printf("\n\n%d\n\n", a*b);
-	// exit(1);
-
+	// printf("\n\n");
+	// for (uint32_t i=0x80000000-3; i<0x80000000+3; ++i)
+	// 	printf("0x%x %u -> %d\n", i, i, (int32_t)i);
+	// exit(1);	
 
     #define PI32 314159265
     #define PI64 3141592653589793238ll

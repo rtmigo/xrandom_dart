@@ -88,4 +88,15 @@ extension BitInt on int {
   String toHexUint32uc() => this.toHexUint32().toUpperCase(); // todo remove
   String toHexUint64uc() => this.toHexUint64().toUpperCase(); // todo remove
 
+  /// Simulates result of of C99 typecasting like `(int32_t)x` for `uint32_t x`.
+  @pragma('vm:prefer-inline')
+  int uint32_to_int32() {
+    if (this<=0x7fffffff) {
+      return this;
+    }
+    else {
+      return this-0x100000000;
+    }
+  }
+
 }

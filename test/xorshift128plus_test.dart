@@ -34,7 +34,7 @@ void main() {
     final random = Xorshift128p(1, 2);
 
     for (String expectedStr in madsen) {
-      expect(random.nextDoubleMemcast(), double.parse(expectedStr));
+      expect(random.nextDoubleBitcast(), double.parse(expectedStr));
     }
   });
 

@@ -12,21 +12,15 @@ abstract class RandomBase32 implements Random {
   /// For 32-bit algorithms it is the raw output of the generator.
   int nextInt32();
 
+  /// Generates a non-negative random integer uniformly distributed in the range
+  /// from 0, inclusive, to [max], exclusive.
+  ///
+  /// @param max The upper bound of the return value. Must be between 1 and (1<<32) inclusive.
   @override
   int nextInt(int max) {
     // todo support larger integers
 
     RangeError.checkValueInInterval(max, 1, 0xFFFFFFFF);
-
-    // if ((max & -max) == max) {
-    //   // fast case for powers of two
-    //   // like in dart:math https://git.io/JqCbB
-    //   final rnd32 = this.nextInt32();
-    //   assert(0<=rnd32 && rnd32<=UINT32_MAX);
-    //   final result = rnd32 & (max - 1);
-    //   assert(0<=result);
-    //   assert(result<max);
-    // }
 
     final rnd32 = nextInt32();
     assert(0 <= rnd32 && rnd32 <= UINT32_MAX);
@@ -45,7 +39,7 @@ abstract class RandomBase32 implements Random {
   /// The result is mapped from a single unsigned 32-bit non-zero integer to [double].
   /// Therefore, the variability is limited by the number of possible values
   /// of such integer: 2^32-1 (= 4 294 967 295).
-  double nextFloat() {
+  double nextFloatUint() {
     const FACTOR = 1 / UINT32_MAX;
     final rnd32 = nextInt32();
     assert(0.0 < rnd32 && rnd32 <= UINT32_MAX);
@@ -54,43 +48,63 @@ abstract class RandomBase32 implements Random {
     return one;
   }
 
+  /// Generates a non-negative random floating point value uniformly distributed
+  /// in the range from 0.0, inclusive, to 1.0, exclusive.
+  ///
+  /// This method works twice as fast as [nextDouble] due to loss of precision.
+  /// The result is mapped from a single unsigned 32-bit non-zero integer to [double].
+  /// Therefore, the variability is limited by the number of possible values
+  /// of such integer: 2^32-1 (= 4 294 967 295).
+  double nextFloat() {
+    // Jurgen A. Doornik (2005)
+    // Conversion of high-period random numbers to floating point.
+    // https://www.doornik.com/research/randomdouble.pdf
+
+    const M_RAN_INVM32 = 2.32830643653869628906e-010;
+    return nextInt32().uint32_to_int32()*M_RAN_INVM32 + 0.5;
+  }
+
+
   @override
   double nextDouble() {
-    // This method is a bit slower, than ((x>>>11)*0x1.0p-53),
-    // but it works in Node.js
-    //
-    // Vigna <https://prng.di.unimi.it/> suggests it like "аn alternative,
-    // multiplication-free conversion" of uint64_t to double like that:
-    //
-    // static inline double to_double(uint64_t x) {
-    //   const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
-    //   return u.d - 1.0;
-    // }
-    //
-    // Dart does not support typecasting of this kind.
-    //
-    // But here is how Madsen <https://git.io/JqWCP> does it in JavaScript:
-    //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
-    // or
-    //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
-
-    return nextInt32() * 2.3283064365386963e-10 +
-        (nextInt32() >> 12) * 2.220446049250313e-16;
+    return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
   }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // REMARKS to nextDouble():
+  //
+  // This method is a bit slower, than ((x>>>11)*0x1.0p-53),
+  // but it works in Node.js
+  //
+  // Vigna <https://prng.di.unimi.it/> suggests it like "аn alternative,
+  // multiplication-free conversion" of uint64_t to double like that:
+  //
+  // static inline double to_double(uint64_t x) {
+  //   const union { uint64_t i; double d; } u
+  //    = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };
+  //   return u.d - 1.0;
+  // }
+  //
+  // The same technique used in Chrome's JavaScript V8 <https://git.io/Jqpma>:
+  //
+  // static inline double ToDouble(uint64_t state0) {
+  //    // Exponent for double values for [1.0 .. 2.0)
+  //    static const uint64_t kExponentBits = uint64_t{0x3FF0000000000000};
+  //    uint64_t random = (state0 >> 12) | kExponentBits;
+  //    return bit_cast<double>(random) - 1;
+  // }
+  //
+  // Dart does not support typecasting of this kind.
+  //
+  // But here is how Madsen <https://git.io/JqWCP> does it in JavaScript:
+  //   t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
+  // or
+  //   t2[0] * Math.pow(2, -32) + (t2[1] >>> 12) * Math.pow(2, -52);
+  //
+  //////////////////////////////////////////////////////////////////////////////
 
   @override
   bool nextBool() {
-    // in dart:math it is return nextInt(2) == 0;
-    // which is an equivalent of
-    //   if ((2&-2)==2) return next()&(2-1);
-
-    // benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
-    //    Random      (from dart:math)            2424
-    //    XorShift32  return nextInt(2)==0        2136
-    //    XorShift32  this.next() % 2 == 0        1903
-    //    XorShift32  this.next() >= 0x80000000   1821
-    //    XorShift32  returning bits              1423
-
     // we're returning bits from higher to lower: like uint32s from int64s
     if (_boolCache_prevShift == 0) {
       _boolCache = nextInt32();
@@ -106,6 +120,22 @@ abstract class RandomBase32 implements Random {
 
   int _boolCache = 0;
   int _boolCache_prevShift = 0;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // REMARKS to nextBool():
+  //
+  // in dart:math it is return nextInt(2) == 0;
+  // which is an equivalent of
+  //   if ((2&-2)==2) return next()&(2-1);
+  //
+  // benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
+  //    Random      (from dart:math)            2424
+  //    XorShift32  return nextInt(2)==0        2136
+  //    XorShift32  this.next() % 2 == 0        1903
+  //    XorShift32  this.next() >= 0x80000000   1821
+  //    XorShift32  returning bits              1423
+  //
+  //////////////////////////////////////////////////////////////////////////////
 }
 
 abstract class RandomBase64 extends RandomBase32 {
@@ -118,26 +148,10 @@ abstract class RandomBase64 extends RandomBase32 {
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 1 to 0xFFFFFFFF, both inclusive.
   ///
-  /// For 64-bit algorithms it sequentially returns the lower and higher bytes
-  /// of the raw output of the generator.
+  /// Since the raw numbers generated by the algorithm are 64-bit, this method returns
+  /// the highest 32 bits, and then the lowest 32 bits of the generated numbers.
   @override
   int nextInt32() {
-    // In 32-bit generators, to get an int64, we use te FIRST four bytes as
-    // the HIGHER, and the NEXT as the LOWER parts of int64. It's just because
-    // most suggestions on the internet look like rnd32()<<32)|rnd32().
-    // That is, we have a conveyor like this:
-    //
-    // F1( FFFF, LLLL, FFFF, LLLL ) -> FFFFLLLL, FFFFLLLL
-    //
-    // In 64-bit generators, to split an int64 to two 32-bit integers, we want
-    // the opposite, i.e.
-    //
-    // F2 ( FFFFLLLL, FFFFLLLL ) -> FFFF, LLLL, FFFF, LLLL
-    //
-    // So F1(F2(X))=X, F2(F1(Y))=Y.
-    //
-    // That's why we return highest bytes first, lowest bytes second
-
     // we assume that the random generator never returns 0,
     // so 0 means "not initialized".
     if (_forNext32 == 0) {
@@ -160,24 +174,51 @@ abstract class RandomBase64 extends RandomBase32 {
 
   int _forNext32 = 0;
 
+  //////////////////////////////////////////////////////////////////////////////
+  // REMARKS to nextInt32:
+  //
+  // In 32-bit generators, to get an int64, we use te FIRST four bytes as
+  // the HIGHER, and the NEXT as the LOWER parts of int64. It's just because
+  // most suggestions on the internet look like (rnd32()<<32)|rnd32().
+  // That is, we have a conveyor like this:
+  //
+  // F1( FFFF, LLLL, FFFF, LLLL ) -> FFFFLLLL, FFFFLLLL
+  //
+  // In 64-bit generators, to split an int64 to two 32-bit integers, we want
+  // the opposite, i.e.
+  //
+  // F2 ( FFFFLLLL, FFFFLLLL ) -> FFFF, LLLL, FFFF, LLLL
+  //
+  // So F1(F2(X))=X, F2(F1(Y))=Y.
+  //
+  // That's why we return highest bytes first, lowest bytes second
+  //
+  //////////////////////////////////////////////////////////////////////////////
+
   @override
   double nextDouble() {
-    // we have a 64-bit integer to be converted to a float with only 53 significant bits.
-
-    // Sebastiano Vigna (https://prng.di.unimi.it/):
-    //  64-bit unsigned integer x should be converted to a 64-bit double using the expression
-    //    (x >> 11) * 0x1.0p-53
-    //  In Java you can use almost the same expression for a (signed) 64-bit integer:
-    //    (x >>> 11) * 0x1.0p-53
-    //
-
     // the result of printf("%.60e", 0x1.0p-53):
-    const double Z =
-        1.110223024625156540423631668090820312500000000000000000000000e-16;
+    const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
 
     //_____(this.nextInt64()_>>>_11______________________)_*_0x1.0p-53
     return ((this.nextInt64() >> 11) & ~(-1 << (64 - 11))) * Z;
   }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // REMARKS to nextDouble:
+  //
+  // we have a 64-bit integer to be converted to a float with only 53
+  // significant bits.
+  //
+  // Vigna (https://prng.di.unimi.it/):
+  //  64-bit unsigned integer x should be converted to a 64-bit double using
+  //  the expression
+  //    (x >> 11) * 0x1.0p-53
+  //  In Java you can use almost the same expression for a (signed)
+  //  64-bit integer:
+  //    (x >>> 11) * 0x1.0p-53
+  //
+  //////////////////////////////////////////////////////////////////////////////
 
   @override
   bool nextBool() {
@@ -198,10 +239,14 @@ abstract class RandomBase64 extends RandomBase32 {
   /// Generates a non-negative random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
   ///
-  /// This method is slower than [nextDouble] and has no advantages over [nextDouble].
+  /// For the Dart language this method is slower than [nextDouble] and has no
+  /// advantages over [nextDouble].
   ///
-  /// The results of this method yield values that are similar to the values obtained
-  /// with the unsafe typecasting described by Sebastiano Vigna:
+  /// The results of this method exactly repeat the numbers usually generated
+  /// by algorithms in C99 or C++. For example, this allows you to accurately
+  /// reproduce the values of the generator used in the Chrome browser.
+  ///
+  /// In C99, the type conversion is described by S. Vigna as follows:
   ///
   /// ```
   /// static inline double to_double(uint64_t x) {
@@ -211,7 +256,7 @@ abstract class RandomBase64 extends RandomBase32 {
   ///   return u.d - 1.0;
   /// }
   /// ```
-  double nextDoubleMemcast() {
+  double nextDoubleBitcast() {
     // this is the same as RandomBase32.nextDouble()
     return nextInt32() * 2.3283064365386963e-10 +
         (nextInt32() >> 12) * 2.220446049250313e-16;

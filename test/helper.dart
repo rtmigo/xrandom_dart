@@ -12,7 +12,7 @@ import 'data/generated.dart';
 
 const FAST = INT64_SUPPORTED;
 
-enum ReferenceType { ints, double_mult, double_cast }
+enum ReferenceType { ints, double_mult, double_cast, doornik_randbl_32 }
 
 Map dataMap(String algo, String seedId, ReferenceType type) {
   String suffix;
@@ -25,6 +25,9 @@ Map dataMap(String algo, String seedId, ReferenceType type) {
       break;
     case ReferenceType.double_cast:
       suffix = 'double_cast';
+      break;
+    case ReferenceType.doornik_randbl_32:
+      suffix = 'doornik_randbl_32';
       break;
   }
 
@@ -47,6 +50,22 @@ Iterable<double> loadDoubles(Map m) sync* {
 Iterable<String> rdIntsAsStrings(Map m) {
   return m['values'];
 }
+
+void checkDoornikRandbl32(RandomBase32 Function() createRandom, String seedId) {
+  test('doornik_randbl_32 ${createRandom().runtimeType} seedId=$seedId', ()
+  {
+    final random = createRandom();
+    final filePrefix = random.runtimeType.toString().toLowerCase();
+    final values = loadDoubles(dataMap(filePrefix, seedId, ReferenceType.doornik_randbl_32));
+    for (final refItem in enumerate(values)) {
+      assert(0<=refItem.value);
+      assert(refItem.value<1.0);
+      expect(random.nextFloat(), refItem.value,
+          reason: 'refitem ${refItem.index}');
+    }
+  });
+}
+
 
 void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
   group('Reference data ${createRandom().runtimeType} seedId=$seedId', () {
@@ -78,7 +97,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
             loadDoubles(dataMap(filePrefix, seedId, ReferenceType.double_cast));
         int idx = 0;
         for (final value in values) {
-          expect((random as RandomBase64).nextDoubleMemcast(), value,
+          expect((random as RandomBase64).nextDoubleBitcast(), value,
               reason: 'item ${idx++}');
         }
       });
@@ -119,9 +138,12 @@ String trimLeadingZeros(String s) {
   return s.replaceAll(RegExp(r'^0+(?=.)'), '');
 }
 
-void testCommonRandom(Random Function() createRandom) {
+void testCommonRandom(RandomBase32 Function() createRandom) {
   group('Common random ${createRandom().runtimeType}', () {
-    test('doubles', () => checkDoubles(createRandom()));
+
+    test('nextDouble', () => checkDoubles(createRandom(), true));
+    test('nextFloat', () => checkDoubles(createRandom(), false));
+
     test('bools', () => checkBooleans(createRandom()));
     test('ints', () => checkIntegers(createRandom()));
 
@@ -186,10 +208,22 @@ void testCommonRandom(Random Function() createRandom) {
         expect(x, 0);
       }
     });
+
+    // test('nextFloat roughly compares to nextDouble', () {
+    //   final r1 = createRandom();
+    //   final r2 = createRandom();
+    //
+    //   const N = 1000;
+    //   for (int i = 0; i < N; ++i) {
+    //     final d = r1.nextDouble();
+    //     var x = r.nextInt(1);
+    //     expect(x, 0);
+    //   }
+    // });
   });
 }
 
-void checkDoubles(Random r) {
+void checkDoubles(RandomBase32 r, bool dbl) {
   int countSmall = 0;
   int countBig = 0;
   int countMiddle = 0;
@@ -197,7 +231,7 @@ void checkDoubles(Random r) {
   const N = 1000000 * (FAST ? 10 : 1);
 
   for (int i = 0; i < N; ++i) {
-    var d = r.nextDouble();
+    var d = (dbl) ? r.nextDouble() : r.nextFloat();
     expect(d, greaterThanOrEqualTo(0.0));
     expect(d, lessThan(1.0));
 
@@ -205,7 +239,9 @@ void checkDoubles(Random r) {
       countBig++;
     } else if (d < 0.01) {
       countSmall++;
-    } else if (d >= 0.495 && d < 0.505) countMiddle++;
+    } else {
+      if (d >= 0.495 && d < 0.505) countMiddle++;
+    }
   }
 
   expect(countBig, greaterThan(N / 1000));

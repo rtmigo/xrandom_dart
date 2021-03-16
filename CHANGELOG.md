@@ -1,3 +1,5 @@
+- nextDoubleMemcast to nextDoubleBitcast
+
 # 0.3.2
 
 - Alias names changed
