@@ -96,6 +96,7 @@ On the other hand, `Xrandom` is lightning fast.
 |----------------------------------|------------------|------------|
 | **Speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
+| **I don't care**  | `Xrandom64`              | `Xrandom`        |
 
 JavaScript-enabled classes are always some trade-offs in favor of compatibility.
 
