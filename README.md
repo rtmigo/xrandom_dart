@@ -103,7 +103,7 @@ JavaScript-enabled classes are always some trade-offs in favor of compatibility.
 You can safely **use any classes on mobile and desktop** platforms. 
 
 However, if you also target **JavaScript** (Web, Node.js), you will have to 
-**limit the choice**.
+**limit your choice**.
 
 Full compatibility table:
 
