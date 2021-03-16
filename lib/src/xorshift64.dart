@@ -7,7 +7,7 @@ import 'package:xrandom/src/splitmix64.dart';
 import '00_errors.dart';
 import '00_ints.dart';
 
-/// Random number generator based on `xorshift64` algorithm by G. Marsaglia (2003).
+/// Random number generator based on **xorshift64** algorithm by G. Marsaglia (2003).
 /// The reference implementation in C can be found in
 /// <https://www.jstatsoft.org/article/view/v008i14>.
 class Xorshift64 extends RandomBase64 {

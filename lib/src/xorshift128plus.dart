@@ -11,7 +11,7 @@ enum Xorshift128pConstants {
   c23_18_5
 }
 
-/// Random number generator based on `xorshift128+` algorithm by S.Vigna (2015).
+/// Random number generator based on **xorshift128+** algorithm by S.Vigna (2015).
 /// The reference implementation in C can be found in <https://arxiv.org/abs/1404.0390> (V3).
 ///
 /// There were at least two versions of the constants used in xorshift128+: `[23, 17, 26]` and

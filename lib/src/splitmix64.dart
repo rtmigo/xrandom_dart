@@ -6,7 +6,7 @@ import 'package:xrandom/src/10_random_base.dart';
 import '00_errors.dart';
 import '00_ints.dart';
 
-/// Random number generator based on `splitmix64` algorithm by S. Vigna (2015).
+/// Random number generator based on **splitmix64** algorithm by S. Vigna (2015).
 /// The reference implementation in C can be found in
 /// <https://prng.di.unimi.it/splitmix64.c>.
 class Splitmix64 extends RandomBase64 {

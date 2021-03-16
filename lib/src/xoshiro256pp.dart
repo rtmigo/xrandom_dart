@@ -4,7 +4,7 @@
 import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/splitmix64.dart';
 
-/// Random number generator based on `xoshiro256++ 1.0` algorithm by D. Blackman and
+/// Random number generator based on **xoshiro256++ 1.0** algorithm by D. Blackman and
 /// S. Vigna (2019). The reference implementation in C can be found in
 /// <https://prng.di.unimi.it/xoshiro256plusplus.c>.
 class Xoshiro256pp extends RandomBase64 {
@@ -31,10 +31,8 @@ class Xoshiro256pp extends RandomBase64 {
   int nextInt64() {
     // https://prng.di.unimi.it/xoshiro256plusplus.c
 
-    // rotl(s[0] + s[3], 23) + s[0]
-    final result = (((_S0 + _S3) << 23) |
-            (((_S0 + _S3) >> (64 - 23)) & ~((-1 << (64 - (64 - 23)))))) +
-        _S0;
+    final result =
+        (((_S0 + _S3) << 23) | (((_S0 + _S3) >> (64 - 23)) & ~((-1 << (64 - (64 - 23)))))) + _S0;
 
     final t = _S1 << 17;
 
@@ -45,7 +43,6 @@ class Xoshiro256pp extends RandomBase64 {
 
     _S2 ^= t;
 
-    //_S3 = rotl(_S3, 45);
     _S3 = ((_S3 << 45) | ((_S3 >> (64 - 45)) & ~((-1 << (64 - (64 - 45))))));
 
     return result;
