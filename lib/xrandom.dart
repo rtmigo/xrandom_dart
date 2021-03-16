@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: MIT
 
 export 'src/10_random_base.dart' show RandomBase32, RandomBase64;
 export 'src/xorshift128plus.dart' show Xorshift128p;
