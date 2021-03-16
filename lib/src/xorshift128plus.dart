@@ -13,6 +13,10 @@ enum Xorshift128pConstants {
 
 /// Random number generator based on `xorshift128+` algorithm by S.Vigna (2015).
 /// The reference implementation in C can be found in <https://arxiv.org/abs/1404.0390> (V3).
+///
+/// There were at least two versions of the constants used in xorshift128+: `[23, 17, 26]` and
+/// `[23, 18, 5]`. This class uses `[23, 18, 5]` as it's the most recent set of constants by
+/// the author.
 class Xorshift128p extends RandomBase64 {
   Xorshift128p([int? seedA, int? seedB]) {
     if (!INT64_SUPPORTED) {
@@ -49,7 +53,7 @@ class Xorshift128p extends RandomBase64 {
     // https://arxiv.org/abs/1404.0390 [v2] Mon, 14 Dec 2015 - page 6
     // https://arxiv.org/abs/1404.0390 [v3] Mon, 23 May 2016 - page 6
 
-    // There was at least two versions of the constants used in algorithm.
+    // There were at least two versions of the constants used in algorithm.
     // 23, 17, 26
     //  - in paper by Vigna https://arxiv.org/pdf/1404.0390v1.pdf - Apr 2014
     //  - in JavaScript V8 engine https://git.io/Jqpma
