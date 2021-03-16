@@ -125,10 +125,10 @@ Full compatibility table:
 | **`Xorshift32`**     | 32-bit | **✓**              | **✓**        |
 | **`Xorshift128`**    | 32-bit | **✓**              | **✓**        |
 | **`Xoshiro128pp`**   | 32-bit   | **✓**              | **✓**         |
-| `Xorshift64`         | 64-bit            | ✓              | ✗         |
-| `Xorshift128p`       | 64-bit         | ✓              | ✗         |
-| `Xoshiro256pp`       | 64-bit         | ✓              | ✗         |
-| `Splitmix64`       | 64-bit         | ✓              | ✗         |
+| `Xorshift64`         | 64-bit    | **✓**              | **✗**         |
+| `Xorshift128p`       | 64-bit         | **✓**              | **✗**         |
+| `Xoshiro256pp`       | 64-bit         | **✓**              | **✗**         |
+| `Splitmix64`       | 64-bit         | **✓**              | **✗**         |
 
 If you try to create a JavaScript-incompatible object in JavaScripts-compiled 
 code, an `UnsupportedError` will be thrown.
