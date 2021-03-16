@@ -3,6 +3,7 @@
 
 
 import 'dart:math';
+
 import '00_ints.dart';
 
 abstract class RandomBase32 implements Random {

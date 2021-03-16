@@ -1,14 +1,12 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'dart:math';
 
-import 'package:xrandom/src/seeding.dart';
+import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/splitmix64.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
-import 'package:xrandom/src/10_random_base.dart';
 
 /// Random number generator based on `xorshift64` algorithm by G. Marsaglia (2003).
 /// The reference implementation in C can be found in
@@ -22,7 +20,7 @@ class Xorshift64 extends RandomBase64 {
     }
     if (seed != null) {
       if (seed == 0) {
-        throw RangeError("The seed must be greater than 0.");
+        throw RangeError('The seed must be greater than 0.');
       }
       _state = seed;
     } else {

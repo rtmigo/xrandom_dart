@@ -1,12 +1,11 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'dart:math';
 
+import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/seeding.dart';
 
 import '00_ints.dart';
-import 'package:xrandom/src/10_random_base.dart';
 
 /// Random number generator based on `xoshiro128++ 1.0` algorithm by D. Blackman and
 /// S. Vigna (2019). The reference implementation in C can be found in
@@ -19,8 +18,9 @@ class Xoshiro128pp extends RandomBase32 {
       RangeError.checkValueInInterval(c!, 0, UINT32_MAX);
       RangeError.checkValueInInterval(d!, 0, UINT32_MAX);
 
-      if (a == 0 && b == 0 && c == 0 && d == 0)
-        throw ArgumentError("The seed should not consist of only zeros..");
+      if (a == 0 && b == 0 && c == 0 && d == 0) {
+        throw ArgumentError('The seed should not consist of only zeros.');
+      }
 
       _S0 = a;
       _S1 = b;
@@ -37,23 +37,8 @@ class Xoshiro128pp extends RandomBase32 {
 
   late int _S0, _S1, _S2, _S3;
 
-  //Uint64
 
-  // static rotl(int x, int k) {
-  //   //return (x << k) | (x >> (32 - k));
-  //   return ((x << k)& 0xFFFFFFFF) |
-  //
-  //   ( // same as (x) >>> (32-k)
-  //       (x) >> (32-k)) & ~(-1 << (64 - (32-k))  )
-  //
-  //   //x.unsignedRightShift(32-k)
-  //
-  //   //(x >> (32 - k)) & ~(-1 << (64 - (32 - k)))
-  //   //(x >> (32 - k))
-  //
-  //   ;
-  // }
-
+  @override
   int nextInt32() {
     // https://prng.di.unimi.it/xoshiro128plusplus.c
 

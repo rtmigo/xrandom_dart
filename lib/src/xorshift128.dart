@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
+import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/seeding.dart';
 
 import '00_ints.dart';
-import 'package:xrandom/src/10_random_base.dart';
 
 /// Random number generator based on `xorshift128` algorithm by G. Marsaglia (2003).
 /// The reference implementation in C can be found in
@@ -21,7 +21,7 @@ class Xorshift128 extends RandomBase32
       RangeError.checkValueInInterval(d!, 0, UINT32_MAX);
 
       if (a==0 && b==0 && c==0 && d==0) {
-        throw ArgumentError("The seed should not consist of only zeros..");
+        throw ArgumentError('The seed should not consist of only zeros..');
       }
 
       _a = a;
@@ -41,6 +41,7 @@ class Xorshift128 extends RandomBase32
   }
   late int _a, _b, _c, _d;
 
+  @override
   int nextInt32() {
 
     // algorithm from p.5 of "Xorshift RNGs"

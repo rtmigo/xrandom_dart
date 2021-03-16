@@ -1,12 +1,11 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:xrandom/src/seeding.dart';
+import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/splitmix64.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
-import 'package:xrandom/src/10_random_base.dart';
 
 /// Random number generator based on `xorshift128+` algorithm by S.Vigna (2015).
 /// The reference implementation in C can be found in <https://arxiv.org/abs/1404.0390> (V3).
@@ -39,6 +38,7 @@ class Xorshift128p extends RandomBase64 {
 
   late int _S0, _S1;
 
+  @override
   int nextInt64() {
     // algorithm from "Further scramblings of Marsaglia’s xorshift generators"
     // by Sebastiano Vigna

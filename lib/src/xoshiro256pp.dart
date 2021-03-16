@@ -1,13 +1,9 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'dart:math';
 
-import 'package:xrandom/src/seeding.dart';
-import 'package:xrandom/src/splitmix64.dart';
-
-import '00_ints.dart';
 import 'package:xrandom/src/10_random_base.dart';
+import 'package:xrandom/src/splitmix64.dart';
 
 /// Random number generator based on `xoshiro256++ 1.0` algorithm by D. Blackman and
 /// S. Vigna (2019). The reference implementation in C can be found in
@@ -69,8 +65,4 @@ class Xoshiro256pp extends RandomBase64 {
   static final _defaultSeedC = int.parse('0x9c7e491e8f081368');
   static final _defaultSeedD = int.parse('0xf7d3b43bed078fa3');
 
-
-  // static Xoshiro128pp deterministic() {
-  //   return Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830);
-  // }
 }
