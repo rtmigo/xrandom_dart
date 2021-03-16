@@ -87,6 +87,7 @@ On the other hand, `Xrandom` is lightning fast.
 | `Xorshift128p` | 64 | [xorshift128+](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
 | `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
 
 # What to choose
 
@@ -114,6 +115,7 @@ Full compatibility table:
 | `Xorshift64`         | 64-bit            | yes              | no         |
 | `Xorshift128p`       | 64-bit         | yes              | no         |
 | `Xoshiro256pp`       | 64-bit         | yes              | no         |
+| `Splitmix64`       | 64-bit         | yes              | no         |
 
 
 # Speed optimizations
