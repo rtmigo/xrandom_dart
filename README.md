@@ -74,7 +74,7 @@ final random = Xrandom();  // works on all platforms
 quoteOfTheDay = quotes[random.nextInt(quotes.length)];
 ``` 
 
-You need billions and billions of randoms in a non-recurring sequence:
+You need billions and billions of randoms in a non-repeating sequence:
 
 ``` dart
 final random = XrandomHq();  // works on mobile and desktop
