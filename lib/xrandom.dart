@@ -16,15 +16,13 @@ import 'src/xorshift128plus.dart';
 // TODO Replace with type aliases when feature will be available
 // https://github.com/dart-lang/language/issues/65
 
-class Xrandom extends Xorshift32 {
-  Xrandom([seed]): super(seed);
+class XrandomJs extends Xorshift32 {
+  XrandomJs([seed]): super(seed);
   static Xorshift32 expected() => Xorshift32.expected();
 }
 
-class Xrandom64 extends Xorshift128p {
-  Xrandom64([a,b]): super(a,b);
+class Xrandom extends Xorshift128p {
+  Xrandom([a,b]): super(a,b);
   static Xorshift128p expected() => Xorshift128p.expected();
 }
-
-
 

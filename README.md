@@ -82,11 +82,11 @@ If you do not want to bother, use `Xrandom`. It works fast and everywhere.
 
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
-| **Just a generator**  | `Xrandom64`              | `Xrandom`        |
+| **Just a generator**  | `Xrandom`              | `XrandomJs`        |
 | **High speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality randomness**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
-`Xrandom` is actually an alias to `Xorshift32`.  `Xrandom64` is an alias to `Xorshift128p`.
+`Xrandom` is actually an alias to `Xorshift128p`.  `XrandomJs` is an alias to `Xorshift32`.
 
 
 # Compatibility

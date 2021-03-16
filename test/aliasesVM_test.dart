@@ -10,9 +10,9 @@ void main() {
 
   test('Xrandom64', () {
 
-    expect(Xrandom64() is Xorshift128p, true);
-    expect(Xrandom64(1,2) is Xorshift128p, true);
-    expect(Xrandom64.expected() is Xorshift128p, true);
+    expect(Xrandom() is Xorshift128p, true);
+    expect(Xrandom(1,2) is Xorshift128p, true);
+    expect(Xrandom.expected() is Xorshift128p, true);
 
   });
 }

@@ -9,9 +9,9 @@ void main() {
 
   test('Xrandom', () {
 
-    expect(Xrandom() is Xorshift32, true);
-    expect(Xrandom(1) is Xorshift32, true);
-    expect(Xrandom.expected() is Xorshift32, true);
+    expect(XrandomJs() is Xorshift32, true);
+    expect(XrandomJs(1) is Xorshift32, true);
+    expect(XrandomJs.expected() is Xorshift32, true);
 
   });
 
