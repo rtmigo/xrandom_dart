@@ -78,6 +78,8 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 # Which to choose
 
+If you do not want to bother, take `Xrandom`. It works fast and everywhere.
+
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
 | **Just a generator**  | `Xrandom64`              | `Xrandom`        |
