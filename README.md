@@ -82,7 +82,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
 | **Just a generator**  | `Xrandom`              | `XrandomJs`        |
-| **High speed**       | `Xorshift64`              | `Xorshift32`        |
+| **High speed**       | `Xorshift32`              | `Xorshift32`        |
 | **Quality randomness**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
 Their APIs are the same.
@@ -91,9 +91,9 @@ You want top quality randomness in your mobile app:
 ``` dart
 final random = Xoshiro256pp();
 ```
-You want a trillion integers in a non-repeating sequence fast:
+You want million of integers fast:
 ``` dart
-final random = Xorshift64();
+final random = Xorshift32();
 ```
 
 You don't care:
