@@ -1,3 +1,9 @@
+# 0.3.0
+
+- Alias names changed
+
+- Alias constructors are unified
+
 # 0.2.2
 
 - Added Splitmix64 algorithm
