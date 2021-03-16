@@ -158,7 +158,7 @@ void main(List<String> arguments) {
     print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
   }
 
-  printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
+  //printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
 
   print('');
 
