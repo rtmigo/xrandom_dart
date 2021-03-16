@@ -97,8 +97,7 @@ for (var i=0; i<BILLIONS; ++i)
 | `XrandomHq`   | `Xoshiro256pp`    | +      | +       |    |
 | `XrandomHqJs` | `Xoshiro128pp`    | +      | +       | +  |
 
-`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases. They also have simplified 
-constructors that take a single argument `int seed`.
+`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
 
 # Algorithms
 
