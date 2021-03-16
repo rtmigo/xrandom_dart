@@ -7,7 +7,7 @@ import 'package:xrandom/xrandom.dart';
 
 import 'nullsafe_tabulate.dart';
 
-enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat }
+enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat, nextFloatInline, nextFloatUint }
 
 const NUM_EXPERIMENTS = 10;
 const NUM_ITEMS_PER_EXPERIMENT = 50000000;
@@ -44,6 +44,17 @@ int measureTime(Random r, DoWhat dbl) {
         for (var i = 0; i < N; ++i) r.nextFloat();
       }
       break;
+    case DoWhat.nextFloatInline:
+      if (r is RandomBase32) {
+        for (var i = 0; i < N; ++i) r.nextFloatInline();
+      }
+      break;
+    case DoWhat.nextFloatUint:
+      if (r is RandomBase32) {
+        for (var i = 0; i < N; ++i) r.nextFloatUint();
+      }
+      break;
+
   }
 
   return sw.elapsed.inMilliseconds;
@@ -78,23 +89,26 @@ void main(List<String> arguments) {
   // git stash && git pull origin master && dart pub get && ./run.sh
 
   final dowhatz = [
-    DoWhat.nextInt,
-    DoWhat.nextDouble,
-    DoWhat.nextBool,
-    DoWhat.nextInt32,
-    DoWhat.nextInt64,
-    DoWhat.nextFloat
+    // DoWhat.nextInt,
+    // DoWhat.nextDouble,
+    // DoWhat.nextBool,
+    // DoWhat.nextInt32,
+    // DoWhat.nextInt64,
+    // DoWhat.nextFloat,
+    DoWhat.nextFloat,
+    DoWhat.nextFloatUint,
+    DoWhat.nextFloatInline,
   ];
 
   List<Random> listGenerators() => [
-        Random(777),
+        //Random(777),
         Xorshift32.expected(),
-        Xorshift64.expected(),
-        Xorshift128.expected(),
-        Xorshift128p.expected(),
-        Xoshiro128pp.expected(),
-        Xoshiro256pp.expected(),
-        Splitmix64.expected(),
+        // Xorshift64.expected(),
+        // Xorshift128.expected(),
+        // Xorshift128p.expected(),
+        // Xoshiro128pp.expected(),
+        // Xoshiro256pp.expected(),
+        // Splitmix64.expected(),
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
@@ -149,15 +163,22 @@ void main(List<String> arguments) {
   print('');
 
   printColumns([
-    DoWhat.nextInt,
-    DoWhat.nextInt32,
-    DoWhat.nextInt64,
-  ]);
-
-  print('');
-
-  printColumns([
-    DoWhat.nextDouble,
     DoWhat.nextFloat,
+    DoWhat.nextFloatUint,
+    DoWhat.nextFloatInline,
   ]);
+
+
+  // printColumns([
+  //   DoWhat.nextInt,
+  //   DoWhat.nextInt32,
+  //   DoWhat.nextInt64,
+  // ]);
+  //
+  // print('');
+  //
+  // printColumns([
+  //   DoWhat.nextDouble,
+  //   DoWhat.nextFloat,
+  // ]);
 }

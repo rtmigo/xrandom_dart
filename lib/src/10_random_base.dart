@@ -51,10 +51,10 @@ abstract class RandomBase32 implements Random {
   /// Generates a non-negative random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
   ///
-  /// This method works twice as fast as [nextDouble] due to loss of precision.
-  /// The result is mapped from a single unsigned 32-bit non-zero integer to [double].
-  /// Therefore, the variability is limited by the number of possible values
-  /// of such integer: 2^32-1 (= 4 294 967 295).
+  /// This method works faster than [nextDouble]. It sacrifices accuracy for speed.
+  /// The result is mapped from a single 32-bit non-zero integer to [double].
+  /// Therefore, the variability is limited by the number of possible values of
+  /// such integer: 2^32-1 (= 4 294 967 295).
   double nextFloat() {
     // Jurgen A. Doornik (2005)
     // Conversion of high-period random numbers to floating point.
@@ -62,6 +62,17 @@ abstract class RandomBase32 implements Random {
 
     const M_RAN_INVM32 = 2.32830643653869628906e-010;
     return nextInt32().uint32_to_int32()*M_RAN_INVM32 + 0.5;
+  }
+
+  double nextFloatInline() {
+    // Jurgen A. Doornik (2005)
+    // Conversion of high-period random numbers to floating point.
+    // https://www.doornik.com/research/randomdouble.pdf
+
+    final x = nextInt32();
+
+    const M_RAN_INVM32 = 2.32830643653869628906e-010;
+    return ( (x<=0x7fffffff)?x:(x-0x100000000) )*M_RAN_INVM32 + 0.5;
   }
 
 
