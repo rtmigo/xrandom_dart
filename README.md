@@ -140,10 +140,9 @@ The `xrandom` classes has several additions to the system `Random` class.
 
 ### nextInt
 
-For the `Random.nextInt(int max)` from `dart:math`, the maximum value `max` 
-is limited by the value `(1<<32)`.
-
-Xrandom does not have this limitation: `max` can be any positive integer.
+For the `nextInt(int max)` the `max` parameter can be any positive integer.
+ 
+(for `dart:math`, the `max` is limited by the value `(1<<32)`)
 
 *(true for VM, not for JS yet)*
 
