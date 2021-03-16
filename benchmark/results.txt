@@ -151,3 +151,42 @@ Double from two uint32s like in JS xorshift (?!)
 | Xorshift128            |    3043    |      1299      |
 | Xorshift128p           |    2049    |      1756      |
 | Xoshiro128pp           |    4394    |      2014      |
+
+===
+
+doornik not inlined
+int does not support >= 0xFFFFFFFF
+
+
+| Time (lower is better) | nextInt | nextDouble | nextBool |
+|------------------------|---------|------------|----------|
+| Random (dart:math)     |  1194   |    1645    |   1170   |
+| Xorshift32             |   712   |    1136    |   704    |
+| Xorshift64             |  1059   |    1015    |   710    |
+| Xorshift128            |   919   |    1446    |   703    |
+| Xorshift128p           |  1113   |    1113    |   719    |
+| Xoshiro128pp           |  1183   |    2048    |   715    |
+| Xoshiro256pp           |  1677   |    2140    |   746    |
+| Splitmix64             |  1254   |    1138    |   717    |
+
+| Time (lower is better) | nextInt | nextInt32 | nextInt64 |
+|------------------------|---------|-----------|-----------|
+| Random (dart:math)     |  1194   |     -     |     -     |
+| Xorshift32             |   712   |    405    |    948    |
+| Xorshift64             |  1059   |    783    |    897    |
+| Xorshift128            |   919   |    624    |   1386    |
+| Xorshift128p           |  1113   |    806    |    954    |
+| Xoshiro128pp           |  1183   |    885    |   1982    |
+| Xoshiro256pp           |  1677   |   1424    |   1911    |
+| Splitmix64             |  1254   |    942    |    912    |
+
+| Time (lower is better) | nextDouble | nextFloat |
+|------------------------|------------|-----------|
+| Random (dart:math)     |    1645    |     -     |
+| Xorshift32             |    1136    |    398    |
+| Xorshift64             |    1015    |    812    |
+| Xorshift128            |    1446    |    593    |
+| Xorshift128p           |    1113    |    838    |
+| Xoshiro128pp           |    2048    |    889    |
+| Xoshiro256pp           |    2140    |   1463    |
+| Splitmix64             |    1138    |    955    |

@@ -48,16 +48,25 @@ abstract class RandomBase32 implements Random {
   int nextInt(int max) {
     // todo support larger integers
 
-    RangeError.checkValueInInterval(max, 1, 0xFFFFFFFF);
+    //RangeError.checkValueInInterval(max, 1, 0xFFFFFFFF);
 
-    final rnd32 = nextInt32();
-    assert(0 <= rnd32 && rnd32 <= UINT32_MAX);
-
-    final result = rnd32 % max;
-
-    assert(0 <= result && result < max);
-
-    return result;
+    if (max<1) {
+      throw RangeError.range(max, 1, int.parse('0x7FFFFFFFFFFFFFFF'));
+    }
+    else if (max<=0xFFFFFFFF) {
+      final rnd32 = nextInt32();
+      assert(0 <= rnd32 && rnd32 <= UINT32_MAX);
+      final result = rnd32 % max;
+      assert(0 <= result && result < max);
+      return result;
+    }
+    else {
+      assert(max>=0x80000000);
+      final rnd64 = nextInt64();
+      final result = rnd64 % max;
+      assert(0 <= result && result < max);
+      return result;
+    }
   }
 
   /// Generates a non-negative random floating point value uniformly distributed
@@ -72,10 +81,11 @@ abstract class RandomBase32 implements Random {
   /// high-period random numbers to floating point" (2005).
   double nextFloat() {
     // https://www.doornik.com/research/randomdouble.pdf
-    return doornikNextFloat(nextInt32());
+    // return doornikNextFloat(nextInt32());
     //
-    // const M_RAN_INVM32 = 2.32830643653869628906e-010;
-    // return nextInt32().uint32_to_int32()*M_RAN_INVM32 + 0.5;
+
+    const M_RAN_INVM32 = 2.32830643653869628906e-010;
+    return nextInt32().uint32_to_int32()*M_RAN_INVM32 + 0.5;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -281,7 +291,7 @@ abstract class RandomBase64 extends RandomBase32 {
   /// Generates a non-negative random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
   ///
-  /// For the Dart language this method is slower than [nextDouble] and has no
+  /// For the Dart this method is slower than [nextDouble] and has no
   /// advantages over [nextDouble].
   ///
   /// The results of this method exactly repeat the numbers usually generated
