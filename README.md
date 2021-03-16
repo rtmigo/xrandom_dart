@@ -93,7 +93,7 @@ final random = Xoshiro256pp();
 ```
 You want many integers fast:
 ``` dart
-final random = Xorshift64();
+final random = Xorshift32();
 ```
 
 You don't care:
