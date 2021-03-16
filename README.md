@@ -23,8 +23,7 @@ Generating 50 million random numbers with AOT-compiled binary.
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
 | Random (dart:math)     |  1172   |    1541    |   1134   |
-| Xrandom           |  1162   |    1141    |   694    |
-| XrandomJs             |   719   |    1126    |   710    |
+| Xrandom             |   719   |    1126    |   710    |
 
 
 # Simplicity
@@ -65,6 +64,40 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 *(but not until the library reaches stable release status)*
 
+# Which to choose
+
+You just want a random number:
+
+``` dart
+final random = Xrandom();  // works on all platforms
+
+quoteOfTheDay = quotes[random.nextInt(quotes.length)];
+``` 
+
+You need billions and billions of randoms in non-repeating sequence:
+
+``` dart
+final random = XrandomHq();  // works on mobile and desktop
+
+monteCarloSimulation(random);
+```
+
+You tried to run this on Node.js but got `UnsupportedError`:
+
+``` dart
+final random = XrandomHqJs();  // works on all platforms
+
+monteCarloSimulation(random);
+```
+
+| Class         | The same as       | Mobile | Desktop | JS |
+|---------------|-------------------|--------|---------|----|
+| `Xrandom`     | `Xorshift32`      | +      | +       | +  |
+| `XrandomHq`   | `Xoshiro256pp`    | +      | +       |    |
+| `XrandomHqJs` | `Xoshiro128pp`    | +      | +       | +  |
+
+`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
+
 # Algorithms
 
 | Class             | Arch | Algorithm  |   Algorithm author | Published |
@@ -76,38 +109,6 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 | `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
-
-# Which to choose
-
-| Target                            | Mobile and Desktop | and JavaScript |
-|----------------------------------|------------------|------------|
-| **Just a generator**  | `Xrandom`              | `XrandomJs`        |
-| **High speed**       | `Xorshift32`              | `Xorshift32`        |
-| **Quality randomness**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
-
-Their APIs are the same.
-
-You want top quality randomness in your mobile app:
-``` dart
-final random = Xoshiro256pp();
-```
-You want million of integers fast:
-``` dart
-final random = Xorshift32();
-```
-
-You don't care:
-``` dart
-final random = Xrandom();  // it's ok
-``` 
-
-Oops, it throws `UnsupportedError` on Node.js:
-
-``` dart
-final random = XrandomJs();
-```
-
-`Xrandom` is actually an easy-to-remember alias to `Xorshift128p`.  `XrandomJs` is an alias to `Xorshift32`. 
 
 # Compatibility
 

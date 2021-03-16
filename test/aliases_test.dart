@@ -24,6 +24,15 @@ void main() {
         isNot(List.generate(3, (_) => r2.nextInt32())));
   });
 
+  test('Xrandom readme expected', () {
+    final random = Xrandom.expected();
+    // you'll get same sequence of numbers every time
+    expect(random.nextInt(1000), 925);
+    expect(random.nextInt(1000), 686);
+    expect(random.nextInt(1000), 509);
+  });
+
+
   test('XrandomHqJs', () {
     expect(XrandomHqJs() is Xoshiro128pp, true);
     expect(XrandomHqJs(1) is Xoshiro128pp, true);

@@ -19,14 +19,6 @@ void main() {
         [1225539925, 51686, 0.40665327328483225, false, true, false]);
   });
 
-  test('my test', () {
-    final random = Xorshift32.expected();
-    // you'll get same sequence of numbers every time
-    expect(random.nextInt(1000), 925);
-    expect(random.nextInt(1000), 686);
-    expect(random.nextInt(1000), 509);
-  });
-
   test('Create without args', () async {
     final random1 = Xorshift32();
     await Future.delayed(Duration(milliseconds: 2));
