@@ -106,7 +106,7 @@ for (var i=0; i<BILLIONS; i++)
 | `Xorshift32`      | 32 |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift64`      | 64 | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | `Xorshift128`     | 32 | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
-| `Xorshift128p` | 64 | [xorshift128+ 23 18 5](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
+| `Xorshift128p` | 64 | [xorshift128+ v2](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
 | `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
