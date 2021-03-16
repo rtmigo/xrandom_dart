@@ -134,16 +134,31 @@ If you try to create a JavaScript-incompatible object in JavaScripts-compiled
 code, an `UnsupportedError` will be thrown.
 
 
-# Speed optimizations
+# Extensions
 
-### Raw bits
+The `xrandom` classes has several additions to the system `Random` class.
 
-The `nextInt32()` and `nextInt64()` return the raw output of the generator. 
+### nextInt
 
-| Method | Returns | Equivalent of | 
-|--------|---------|-----------|
-| `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1` |
-| `nextInt64()` | 64-bit signed | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
+For the `Random.nextInt(int max)` from `dart:math`, the maximum value `max` 
+is limited by the value `(1<<32)`.
+
+Xrandom does not have this limitation: `max` can be any positive integer.
+
+*(true for VM, not for JS yet)*
+
+### nextIntXX
+
+The `nextInt32()` and `nextInt64()` return raw output 
+of the generator. 
+
+| Method        | Returns         | Equivalent of                   | 
+|---------------|-----------------|---------------------------------|
+| `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1`         |
+| `nextInt64()` | 64-bit signed   | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
+
+It either does not require conversion or requires minimal. In general, 
+this is much faster than `nextInt`.
 
 <details>
   <summary>Raw bits benchmarks</summary>

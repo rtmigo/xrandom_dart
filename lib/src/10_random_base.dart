@@ -43,12 +43,13 @@ abstract class RandomBase32 implements Random {
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 0, inclusive, to [max], exclusive.
   ///
-  /// @param max The upper bound of the return value. Must be between 1 and (1<<32) inclusive.
+  /// @param max The upper bound of the return value. For VM it can be any positive integer
+  /// value greater than 0. For JS it must be 1 and (1<<32) inclusive.
   @override
   int nextInt(int max) {
-    // todo support larger integers
+    // 0x7FFFFFFFFFFFFFFF = 9223372036854775807 = (1<<63)-1 = 2^63-1,
 
-    //RangeError.checkValueInInterval(max, 1, 0xFFFFFFFF);
+    // todo support larger integers in JS
 
     if (max<1) {
       throw RangeError.range(max, 1, int.parse('0x7FFFFFFFFFFFFFFF'));

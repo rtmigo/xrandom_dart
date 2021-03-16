@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
+import 'dart:math';
+
 @TestOn('vm')
 
 import "package:test/test.dart";
@@ -8,6 +10,13 @@ import "package:test/test.dart";
 import 'package:xrandom/src/00_ints.dart';
 
 void main() {
+
+
+
+  // print(0x7FFFFFFFFFFFFFFF);
+  // print(pow(2, 63));
+  // print(1<<63);
+
   test('string to int', () {
     // the problem with BigInt.toInt():
     expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(),

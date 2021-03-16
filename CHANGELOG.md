@@ -1,3 +1,5 @@
+- nextInt(max) now supports [max] values up to 0x7FFFFFFFFFFFFFFF on VM
+
 - nextFloat() method now uses more accurate type of conversion
 
 - added RandomBase32.nextInt64()

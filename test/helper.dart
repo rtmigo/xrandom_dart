@@ -164,6 +164,12 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
     test('Huge ints: 0x80000000',
         () => checkHugeInts(createRandom(), 0x80000000));
 
+
+    if (INT64_SUPPORTED) {
+      test('Huge ints: 0x7FFFFFFFFFFFFFFF',
+              () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
+    }
+
     test('nextIntCheckRange', () {
       final r = createRandom();
       expect(() => r.nextInt(-1), throwsRangeError);

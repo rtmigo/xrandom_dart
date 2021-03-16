@@ -191,39 +191,39 @@ int does not support >= 0xFFFFFFFF
 | Xoshiro256pp           |    2140    |   1463    |
 | Splitmix64             |    1138    |    955    |
 
-doornik not inlined
-int does supports > 0xFFFFFFFF
+doornik inlined
+int supports > 0xFFFFFFFF
 
 
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
-| Random (dart:math)     |  1432   |    1982    |   1393   |
-| Xorshift32             |   863   |    1327    |   835    |
-| Xorshift64             |  1265   |    1205    |   853    |
-| Xorshift128            |  1210   |    1857    |   863    |
-| Xorshift128p           |  1327   |    1316    |   874    |
-| Xoshiro128pp           |  1440   |    2441    |   859    |
-| Xoshiro256pp           |  1998   |    2550    |   897    |
-| Splitmix64             |  1502   |    1352    |   861    |
+| Random (dart:math)     |  1238   |    1813    |   1214   |
+| Xorshift32             |   744   |    1161    |   728    |
+| Xorshift64             |  1088   |    1058    |   739    |
+| Xorshift128            |   930   |    1509    |   743    |
+| Xorshift128p           |  1149   |    1163    |   752    |
+| Xoshiro128pp           |  1223   |    2134    |   751    |
+| Xoshiro256pp           |  1729   |    2236    |   778    |
+| Splitmix64             |  1292   |    1183    |   743    |
 
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
-| Random (dart:math)     |  1432   |     -     |     -     |
-| Xorshift32             |   863   |    493    |   1158    |
-| Xorshift64             |  1265   |    936    |   1069    |
-| Xorshift128            |  1210   |    720    |   1656    |
-| Xorshift128p           |  1327   |    969    |   1141    |
-| Xoshiro128pp           |  1440   |   1095    |   2431    |
-| Xoshiro256pp           |  1998   |   1710    |   2266    |
-| Splitmix64             |  1502   |   1135    |   1060    |
+| Random (dart:math)     |  1238   |     -     |     -     |
+| Xorshift32             |   744   |    430    |    995    |
+| Xorshift64             |  1088   |    820    |    944    |
+| Xorshift128            |   930   |    645    |   1477    |
+| Xorshift128p           |  1149   |    843    |    998    |
+| Xoshiro128pp           |  1223   |    961    |   2067    |
+| Xoshiro256pp           |  1729   |   1487    |   2020    |
+| Splitmix64             |  1292   |    988    |    934    |
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|-----------|
-| Random (dart:math)     |    1982    |     -     |
-| Xorshift32             |    1327    |    494    |
-| Xorshift64             |    1205    |    968    |
-| Xorshift128            |    1857    |    867    |
-| Xorshift128p           |    1316    |   1001    |
-| Xoshiro128pp           |    2441    |   1118    |
-| Xoshiro256pp           |    2550    |   1744    |
-| Splitmix64             |    1352    |   1157    |
+| Random (dart:math)     |    1813    |     -     |
+| Xorshift32             |    1161    |    421    |
+| Xorshift64             |    1058    |    843    |
+| Xorshift128            |    1509    |    631    |
+| Xorshift128p           |    1163    |    872    |
+| Xoshiro128pp           |    2134    |    944    |
+| Xoshiro256pp           |    2236    |   1522    |
+| Splitmix64             |    1183    |   1007    |
