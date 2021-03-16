@@ -1,4 +1,11 @@
-- nextDoubleMemcast to nextDoubleBitcast
+- nextFloat() method now uses more accurate type of conversion
+
+- added RandomBase32.nextInt64()
+
+- nextDoubleMemcast renamed to nextDoubleBitcast
+
+- fixed: RandomBase64.nextInt32() can return 0 (this should 
+  be reflected in the documentation) 
 
 # 0.3.2
 

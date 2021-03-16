@@ -8,7 +8,7 @@ import 'package:xrandom/src/xorshift32.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Xorshift32());
+  testCommonRandom(() => Xorshift32(), ()=>Xorshift32.expected());
 
   checkReferenceFiles(() => Xorshift32(1), 'a');
   checkReferenceFiles(() => Xorshift32(42), 'b');

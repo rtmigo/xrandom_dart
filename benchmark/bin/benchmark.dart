@@ -44,16 +44,16 @@ int measureTime(Random r, DoWhat dbl) {
         for (var i = 0; i < N; ++i) r.nextFloat();
       }
       break;
-    case DoWhat.nextFloatInline:
-      if (r is RandomBase32) {
-        for (var i = 0; i < N; ++i) r.nextFloatInline();
-      }
-      break;
-    case DoWhat.nextFloatUint:
-      if (r is RandomBase32) {
-        for (var i = 0; i < N; ++i) r.nextFloatUint();
-      }
-      break;
+    // case DoWhat.nextFloatInline:
+    //   if (r is RandomBase32) {
+    //     for (var i = 0; i < N; ++i) r.nextFloatInline();
+    //   }
+    //   break;
+    // case DoWhat.nextFloatUint:
+    //   if (r is RandomBase32) {
+    //     for (var i = 0; i < N; ++i) r.nextFloatUint();
+    //   }
+    //   break;
 
   }
 
@@ -89,26 +89,26 @@ void main(List<String> arguments) {
   // git stash && git pull origin master && dart pub get && ./run.sh
 
   final dowhatz = [
-    // DoWhat.nextInt,
-    // DoWhat.nextDouble,
-    // DoWhat.nextBool,
-    // DoWhat.nextInt32,
-    // DoWhat.nextInt64,
-    // DoWhat.nextFloat,
+    DoWhat.nextInt,
+    DoWhat.nextDouble,
+    DoWhat.nextBool,
+    DoWhat.nextInt32,
+    DoWhat.nextInt64,
     DoWhat.nextFloat,
-    DoWhat.nextFloatUint,
-    DoWhat.nextFloatInline,
+    DoWhat.nextFloat,
+    // DoWhat.nextFloatUint,
+    // DoWhat.nextFloatInline,
   ];
 
   List<Random> listGenerators() => [
-        //Random(777),
+        Random(777),
         Xorshift32.expected(),
-        // Xorshift64.expected(),
-        // Xorshift128.expected(),
-        // Xorshift128p.expected(),
-        // Xoshiro128pp.expected(),
-        // Xoshiro256pp.expected(),
-        // Splitmix64.expected(),
+        Xorshift64.expected(),
+        Xorshift128.expected(),
+        Xorshift128p.expected(),
+        Xoshiro128pp.expected(),
+        Xoshiro256pp.expected(),
+        Splitmix64.expected(),
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
@@ -158,27 +158,27 @@ void main(List<String> arguments) {
     print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
   }
 
-  //printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
+  printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
+
+  print('');
+
+  // printColumns([
+  //   DoWhat.nextFloat,
+  //   DoWhat.nextFloatUint,
+  //   DoWhat.nextFloatInline,
+  // ]);
+
+
+  printColumns([
+    DoWhat.nextInt,
+    DoWhat.nextInt32,
+    DoWhat.nextInt64,
+  ]);
 
   print('');
 
   printColumns([
+    DoWhat.nextDouble,
     DoWhat.nextFloat,
-    DoWhat.nextFloatUint,
-    DoWhat.nextFloatInline,
   ]);
-
-
-  // printColumns([
-  //   DoWhat.nextInt,
-  //   DoWhat.nextInt32,
-  //   DoWhat.nextInt64,
-  // ]);
-  //
-  // print('');
-  //
-  // printColumns([
-  //   DoWhat.nextDouble,
-  //   DoWhat.nextFloat,
-  // ]);
 }

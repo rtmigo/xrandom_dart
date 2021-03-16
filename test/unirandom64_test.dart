@@ -4,22 +4,19 @@
 @TestOn('vm')
 
 import 'package:test/test.dart';
+import 'package:xrandom/src/10_random_base.dart';
 import 'package:xrandom/src/xorshift128.dart';
 
 import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/xorshift64.dart';
 
 void main() {
-  test('next32 returning parts of next64', () {
-    final random1 = Xorshift64.expected();
-    int a64 = random1.nextInt64();
-    int b64 = random1.nextInt64();
 
-    final random2 = Xorshift64.expected();
-    expect(random2.nextInt32(), a64.higher32());
-    expect(random2.nextInt32(), a64.lower32());
-    expect(random2.nextInt32(), b64.higher32());
-    expect(random2.nextInt32(), b64.lower32());
+  test('doornik', () {
+    // test that the uint32->double conversion by J.Doornik will
+    // not cause troubles even if we apply it to higher four bytes
+    // of uint64 (that can be zero);
+    expect(doornikNextFloat(0),0.5);
   });
 
   test('nextBool on 64-bit generator: must return all bits', () {

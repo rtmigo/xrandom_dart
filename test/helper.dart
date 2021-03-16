@@ -138,7 +138,7 @@ String trimLeadingZeros(String s) {
   return s.replaceAll(RegExp(r'^0+(?=.)'), '');
 }
 
-void testCommonRandom(RandomBase32 Function() createRandom) {
+void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Function() createExpectedRandom) {
   group('Common random ${createRandom().runtimeType}', () {
 
     test('nextDouble', () => checkDoubles(createRandom(), true));
@@ -207,6 +207,25 @@ void testCommonRandom(RandomBase32 Function() createRandom) {
         var x = r.nextInt(1);
         expect(x, 0);
       }
+    });
+
+    test('next32 <-> next64', () {
+
+      // we don't specify, whether the generator 64 bit or 32 bit,
+      // so which method returns the generator output and which
+      // returns the split or combined value
+
+      // It must work both ways equally
+
+      final random1 = createExpectedRandom();
+      int a64 = random1.nextInt64();
+      int b64 = random1.nextInt64();
+
+      final random2 = createExpectedRandom();
+      expect(random2.nextInt32(), a64.higher32());
+      expect(random2.nextInt32(), a64.lower32());
+      expect(random2.nextInt32(), b64.higher32());
+      expect(random2.nextInt32(), b64.lower32());
     });
 
     // test('nextFloat roughly compares to nextDouble', () {

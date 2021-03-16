@@ -9,7 +9,7 @@ import 'helper.dart';
 import 'madsen.dart';
 
 void main() {
-  testCommonRandom(() => Xorshift128p());
+  testCommonRandom(() => Xorshift128p(), () => Xorshift128p.expected());
 
   checkReferenceFiles(() => Xorshift128p(1, 2), 'a');
   checkReferenceFiles(() => Xorshift128p(42, 777), 'b');

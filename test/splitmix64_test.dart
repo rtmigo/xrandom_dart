@@ -12,7 +12,7 @@ import 'package:xrandom/xrandom.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Splitmix64());
+  testCommonRandom(() => Splitmix64(), ()=>Splitmix64.expected());
 
   //print(-6562126107>>1);
   //return;

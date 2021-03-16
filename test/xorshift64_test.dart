@@ -11,7 +11,7 @@ import 'package:xrandom/xrandom.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Xorshift64());
+  testCommonRandom(() => Xorshift64(), ()=>Xorshift64.expected());
 
   checkReferenceFiles(() => Xorshift64(1), 'a');
   checkReferenceFiles(() => Xorshift64(42), 'b');

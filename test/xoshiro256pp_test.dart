@@ -8,7 +8,11 @@ import 'package:xrandom/src/xoshiro256pp.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Xoshiro256pp());
+
+  // print('');
+  // return;
+
+  testCommonRandom(() => Xoshiro256pp(), ()=>Xoshiro256pp.expected());
   checkReferenceFiles(() => Xoshiro256pp(1, 2, 3, 4), 'a');
   checkReferenceFiles(() => Xoshiro256pp(5, 23, 42, 777), 'b');
   checkReferenceFiles(
