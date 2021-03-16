@@ -136,7 +136,46 @@ void testCommonRandom(Random Function() createRandom) {
       r.nextInt(0xFFFFFFFF);
     });
 
-    //test("Huge int32")
+    test('nextInt(2) works almost like next bool', () {
+
+      final r = createRandom();
+
+      int countZeroes = 0;
+      int countOnes = 0;
+
+      const N = 10000000;
+      for (int i = 0; i < N; ++i) {
+        var x = r.nextInt(2);
+        expect(x, greaterThanOrEqualTo(0.0));
+        expect(x, lessThan(2.0));
+
+        if (x==0) {
+          countZeroes++;
+        } else if (x==1) {
+          countOnes++;
+        } else {
+          throw AssertionError();
+        };
+      }
+
+      expect(countZeroes, greaterThan(N*0.3));
+      expect(countOnes, greaterThan(N*0.3));
+    });
+
+    test('nextInt(1) returns all zeros', () {
+
+      final r = createRandom();
+
+      const N = 1000;
+      for (int i = 0; i < N; ++i) {
+        var x = r.nextInt(1);
+        expect(x,0);
+      }
+    });
+
+
+
+
   });
 }
 
