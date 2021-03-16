@@ -122,13 +122,13 @@ Full compatibility table:
 
 | Class                | Is a    | Mobile and Desktop | JavaScript |
 |----------------------|---------|------------------|------------|
-| **`Xorshift32`**     | 32-bit | **yes**              | **yes**        |
-| **`Xorshift128`**    | 32-bit | **yes**              | **yes**        |
-| **`Xoshiro128pp`**   | 32-bit   | **yes**              | **yes**         |
-| `Xorshift64`         | 64-bit            | yes              | no         |
-| `Xorshift128p`       | 64-bit         | yes              | no         |
-| `Xoshiro256pp`       | 64-bit         | yes              | no         |
-| `Splitmix64`       | 64-bit         | yes              | no         |
+| **`Xorshift32`**     | 32-bit | **✓**              | **✓**        |
+| **`Xorshift128`**    | 32-bit | **✓**              | **✓**        |
+| **`Xoshiro128pp`**   | 32-bit   | **✓**              | **✓**         |
+| `Xorshift64`         | 64-bit            | ✓              | ✗         |
+| `Xorshift128p`       | 64-bit         | ✓              | ✗         |
+| `Xoshiro256pp`       | 64-bit         | ✓              | ✗         |
+| `Splitmix64`       | 64-bit         | ✓              | ✗         |
 
 If you try to create a JavaScript-incompatible object in JavaScripts-compiled 
 code, an `UnsupportedError` will be thrown.
