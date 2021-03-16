@@ -86,6 +86,8 @@ If you do not want to bother, use `Xrandom`. It works fast and everywhere.
 | **High speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality randomness**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
+JavaScript is weird. If you create mobile apps in Flutter, there is no point in suffering. Just choose the best algorithms.
+
 `Xrandom` is actually an alias to `Xorshift32`.  `Xrandom64` is an alias to `Xorshift128p`.
 
 
