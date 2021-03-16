@@ -12,7 +12,7 @@ enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat, ne
 const NUM_EXPERIMENTS = 10;
 const NUM_ITEMS_PER_EXPERIMENT = 50000000;
 
-int measureTime(Random r, DoWhat dbl) {
+int measureTime(RandomBase32 r, DoWhat dbl) {
   print('Benchmarking ${r.runtimeType}');
 
   final sw = Stopwatch()..start();
@@ -30,19 +30,17 @@ int measureTime(Random r, DoWhat dbl) {
       for (var i = 0; i < N; ++i) r.nextInt(100);
       break;
     case DoWhat.nextInt32:
-      if (r is RandomBase32) {
-        for (var i = 0; i < N; ++i) r.nextInt32();
-      }
+      for (var i = 0; i < N; ++i) r.nextInt32();
       break;
     case DoWhat.nextInt64:
-      if (r is RandomBase64) {
+      //if (r is RandomBase64) {
         for (var i = 0; i < N; ++i) r.nextInt64();
-      }
+      //}
       break;
     case DoWhat.nextFloat:
-      if (r is RandomBase32) {
+      //if (r is RandomBase32) {
         for (var i = 0; i < N; ++i) r.nextFloat();
-      }
+      //}
       break;
     // case DoWhat.nextFloatInline:
     //   if (r is RandomBase32) {
