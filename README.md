@@ -64,20 +64,6 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 *(but not until the library reaches stable release status)*
 
-# Aliases
-
-In most cases, you can just use the `Xrandom` class. This is an easy-to-remember
-alias for a fast and compatible algorithm.
-
-| Class        | Is the same as | Works on                     |
-|--------------|----------------|------------------------------|
-| `Xrandom`    | `Xorshift32`   | Everywhere                   |
-| `Xrandom64`  | `Xorshift128p` | Everywhere except JavaScript |
-
-`Xrandom64` is a more modern and advanced generator. 
-On the other hand, `Xrandom` is lightning fast.
-
-
 # Classes
 
 | Class             | Arch | Algorithm  |   Algorithm author | Published |
@@ -98,8 +84,9 @@ On the other hand, `Xrandom` is lightning fast.
 | **High speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality randomness**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
-
 JavaScript-enabled classes are always some trade-offs in favor of compatibility.
+
+`Xrandom` is actually an alias to `Xorshift32`.  `Xrandom64` is an alias to `Xorshift128p`.
 
 # Compatibility
 
