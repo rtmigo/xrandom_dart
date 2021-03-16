@@ -63,9 +63,6 @@ class Xorshift128p extends RandomBase64 {
     // 23, 18, and 5. Apparently it doesn't matter too much, but those are theoretically
     // better than the initial set of numbers" <https://stackoverflow.com/a/34432126>
 
-
-    // https://stackoverflow.com/questions/34426499/what-is-the-real-definition-of-the-xorshift128-algorithm
-
     var s1 = _S0;
     final s0 = _S1;
     final result = s0 + s1;
