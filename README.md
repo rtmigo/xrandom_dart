@@ -145,6 +145,7 @@ The `nextInt32()` and `nextInt64()` return the raw output of the generator.
 
 <details>
   <summary>Raw bits benchmarks</summary>
+  
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
 | Random (dart:math)     |  1208   |     -     |     -     |
