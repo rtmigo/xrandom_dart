@@ -1,8 +1,10 @@
-# 0.3.0
+# 0.3.1
 
 - Alias names changed
 
 - Alias constructors are unified
+
+- Example updated
 
 # 0.2.2
 

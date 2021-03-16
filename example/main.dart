@@ -1,7 +1,7 @@
 import 'package:xrandom/xrandom.dart';
 
 void main() {
-  final xrandom = Xorshift128();
+  final xrandom = Xrandom();
 
   print('Random number: ${xrandom.nextInt(100)}');
 
