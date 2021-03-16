@@ -91,7 +91,7 @@ You want top quality randomness in your mobile app:
 ``` dart
 final random = Xoshiro256pp();
 ```
-You want trillion integers fast:
+You want a trillion integers in a non-repeating sequence quickly:
 ``` dart
 final random = Xorshift64();
 ```
