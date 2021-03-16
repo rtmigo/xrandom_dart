@@ -3,11 +3,10 @@
 
 import 'package:xrandom/src/seeding.dart';
 
+import 'splitmix64.dart';
 import 'xorshift32.dart';
 import 'xoshiro128pp.dart';
 import 'xoshiro256pp.dart';
-
-import 'splitmix64.dart';
 
 class Xrandom extends Xorshift32 {
   Xrandom([seed32]) : super(seed32);
