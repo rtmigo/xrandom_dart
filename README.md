@@ -87,7 +87,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 Their APIs are the same.
 
-You want top quality results in mobile app:
+You want top quality results in your mobile app:
 ``` dart
 final random = Xoshiro256pp();
 ```
