@@ -93,7 +93,7 @@ for (var i=0; i<BILLIONS; i++)
 ```
 | Class         | The same as       | Mobile | Desktop | JS |
 |---------------|-------------------|--------|---------|----|
-| `Xrandom`     | `Xorshift32`      | [x]      | +       | :v:  |
+| `Xrandom`     | `Xorshift32`      | [x]      | :heavy_check_mark:       | :v:  |
 | `XrandomHq`   | `Xoshiro256pp`    | [x]      | +       | :x:   |
 | `XrandomHqJs` | `Xoshiro128pp`    | [x]      | +       | +  |
 
