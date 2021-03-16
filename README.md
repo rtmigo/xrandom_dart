@@ -84,9 +84,11 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 | **High speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality randomness**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
+`Xrandom` is actually an alias to `Xorshift32`.  `Xrandom64` is an alias to `Xorshift128p`.
+
 JavaScript-enabled classes are always some trade-offs in favor of compatibility.
 
-`Xrandom` is actually an alias to `Xorshift32`.  `Xrandom64` is an alias to `Xorshift128p`.
+
 
 # Compatibility
 
