@@ -2,7 +2,7 @@
 
 - Added Splitmix64 algorithm
 
-- Better time-based seeds for 64-bit generators  
+- Better time-based seeds for all generators  
 
 # 0.1.1
 

@@ -18,11 +18,11 @@ int mess2to64B(int b, int a) {
 }
 
 int mess2to64C(int a, int b) {
-  return mess2to64A(a+12345, b*54321);
+  return mess2to64A(a+0xb35a6012, b*0xdcde19b9);
 }
 
 int mess2to64D(int a, int b) {
-  return mess2to64B(a+12345, b*54321);
+  return mess2to64B(a+0x93999086, b*0x87b4f97a);
 }
 
 
