@@ -76,7 +76,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 | `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
 
-# What to choose
+# Which to choose
 
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
