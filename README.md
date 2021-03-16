@@ -143,6 +143,8 @@ The `nextInt32()` and `nextInt64()` return the raw output of the generator.
 | `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1` |
 | `nextInt64()` | 64-bit signed | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
 
+<details>
+  <summary>Benchmarks</summary>
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
 | Random (dart:math)     |  1208   |     -     |     -     |
@@ -153,12 +155,16 @@ The `nextInt32()` and `nextInt64()` return the raw output of the generator.
 | Xoshiro128pp           |  1228   |    912    |     -     |
 | Xoshiro256pp           |  1746   |   1498    |   2039    |
 | Splitmix64             |  1248   |    931    |    782    |
+</details>
 
 ### Rough double
 
 `nextFloat`, unlike `nextDouble`, prefers speed to accuracy. It transforms 
 a single 32-bit integer into a `double`. Therefore, the result is limited 
 to a maximum of 2^32-1 values. But it's still a double with four billion shades.
+
+<details>
+  <summary>Benchmarks</summary>
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|-----------|
@@ -170,6 +176,7 @@ to a maximum of 2^32-1 values. But it's still a double with four billion shades.
 | Xoshiro128pp           |    2095    |    923    |
 | Xoshiro256pp           |    2294    |   1488    |
 | Splitmix64             |    1098    |    932    |
+</details>
 
 # More benchmarks
 
