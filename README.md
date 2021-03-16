@@ -138,7 +138,7 @@ code, an `UnsupportedError` will be thrown.
 
 The `xrandom` classes has several additions to the system `Random` class.
 
-### nextInt
+### nextInt(max)
 
 For the `nextInt(int max)` the `max` parameter can be any positive integer.
  
@@ -146,7 +146,7 @@ For the `nextInt(int max)` the `max` parameter can be any positive integer.
 
 *(true for VM, not for JS yet)*
 
-### nextIntXX
+### nextIntXX()
 
 The `nextInt32()` and `nextInt64()` return raw output 
 of the generator. 
@@ -174,7 +174,7 @@ this is much faster than `nextInt`.
 | Splitmix64             |  1248   |    931    |    782    |
 </details>
 
-### Rough double
+### nextFloat()
 
 `nextFloat`, unlike `nextDouble`, prefers speed to accuracy. It transforms 
 a single 32-bit integer into a `double`. Therefore, the result is limited 
