@@ -94,9 +94,9 @@ On the other hand, `Xrandom` is lightning fast.
 
 | Target                            | Mobile and Desktop | and JavaScript |
 |----------------------------------|------------------|------------|
-| **Simplicity**  | `Xrandom64`              | `Xrandom`        |
-| **Speed**       | `Xorshift64`              | `Xorshift32`        |
-| **Quality**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
+| **Just a generator**  | `Xrandom64`              | `Xrandom`        |
+| **Fast generator**       | `Xorshift64`              | `Xorshift32`        |
+| **High-quality generator**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
 
 JavaScript-enabled classes are always some trade-offs in favor of compatibility.
