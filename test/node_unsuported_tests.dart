@@ -9,9 +9,11 @@ import 'package:xrandom/src/splitmix64.dart';
 import 'package:xrandom/src/xorshift64.dart';
 import 'package:xrandom/src/xorshift128plus.dart';
 import 'package:xrandom/src/xoshiro256pp.dart';
+import 'package:xrandom/xrandom.dart';
 
 void main() {
   test('64', () {
+    expect(() => Xorshift32().nextInt64(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xorshift64.expected(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xorshift128p.expected(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xoshiro256pp.expected(), throwsA(isA<Unsupported64Error>()));

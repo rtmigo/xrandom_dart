@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:quiver/iterables.dart';
 import 'package:test/test.dart';
+import 'package:xrandom/src/00_errors.dart';
 import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/10_random_base.dart';
 
@@ -214,6 +215,11 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
       // we don't specify, whether the generator 64 bit or 32 bit,
       // so which method returns the generator output and which
       // returns the split or combined value
+
+      if (!INT64_SUPPORTED) {
+         expect(()=>createExpectedRandom().nextInt64(), throwsA(isA<Unsupported64Error>()));
+         return;
+      }
 
       // It must work both ways equally
 
