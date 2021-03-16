@@ -107,7 +107,7 @@ Oops, it thrown `UnsupportedError` on Node.js:
 final random = XrandomJs();
 ```
 
-`Xrandom` is actually an alias to `Xorshift128p`.  `XrandomJs` is an alias to `Xorshift32`. 
+`Xrandom` is actually an easy-to-remember alias to `Xorshift128p`.  `XrandomJs` is an alias to `Xorshift32`. 
 
 # Compatibility
 
