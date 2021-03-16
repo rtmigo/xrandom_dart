@@ -91,9 +91,9 @@ You want top quality randomness in your mobile app:
 ``` dart
 final random = Xoshiro256pp();
 ```
-You want many integers fast:
+You want trillion integers fast:
 ``` dart
-final random = Xorshift32();
+final random = Xorshift64();
 ```
 
 You don't care:
