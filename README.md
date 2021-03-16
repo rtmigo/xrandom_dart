@@ -85,7 +85,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 | **High speed**       | `Xorshift64`              | `Xorshift32`        |
 | **Quality randomness**     | `Xoshiro256pp`              | `Xoshiro128pp`        |
 
-`Xrandom` is actually an alias to `Xorshift128p`.  `XrandomJs` is an alias to `Xorshift32`.
+Their APIs are the same.
 
 You want top quality results in mobile app:
 ``` dart
@@ -105,7 +105,9 @@ Oops, it thrown `UnsupportedError` on Node.js:
 
 ``` dart
 final random = XrandomJs();
-``` 
+```
+
+`Xrandom` is actually an alias to `Xorshift128p`.  `XrandomJs` is an alias to `Xorshift32`. 
 
 # Compatibility
 
