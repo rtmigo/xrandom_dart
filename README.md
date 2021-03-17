@@ -103,7 +103,8 @@ for (var i=0; i<BILLIONS; i++)
 
 **`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
 
-<sub>In truth, JavaScript is very much a thing in itself. It doesn't really occur to us why you might need Xrandom if your target platform is exclusively JavaScript.</sub>
+<sub>In truth, JavaScript is very much a thing in itself. If your target 
+platform is exclusively JavaScript, most likely Xrandom will not bring much joy.</sub>
 
 -------
 
