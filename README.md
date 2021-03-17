@@ -98,7 +98,7 @@ If you tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
 final random = XrandomHqJs();  // works on all platforms
 
 for (var i=0; i<BILLIONS; i++)
-    feedMonteCarloSimulation(random.nextDouble());
+    feedMonteCarloSimulation( random.nextDouble() );  // on JS? O_O
 ```
 
 **`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
