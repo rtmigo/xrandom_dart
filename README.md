@@ -138,13 +138,13 @@ code, an `UnsupportedError` will be thrown.
 
 The `xrandom` classes has several additions to the system `Random` class.
 
-### nextInt(max)
+### `nextInt(max)`
 
 For the `nextInt(int max)` the `max` parameter can be any positive `int`.
  
 It is not limited by `(1<<32)` like in `dart:math`.
 
-### nextInt32 and nextInt64
+### `nextInt32()` and `nextInt64()`
 
 These methods return raw output of the generator. Depending on the algorithm, 
 this is a number consisting of either 32 random bits or 64 random bits. 
@@ -176,7 +176,7 @@ In general, this is much faster than `nextInt`.
 | Splitmix64             |  1248   |    931    |    782    |
 </details>
 
-### nextFloat()
+### `nextFloat()`
 
 `nextFloat`, unlike `nextDouble`, prefers speed to accuracy.
 But it's still a double with four billion shades from range [0,1).
