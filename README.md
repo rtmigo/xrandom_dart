@@ -101,7 +101,7 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation( random.nextDouble() ); // on JS? O_O  
 ```
 
-**`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
+**`XrandomHqJs`** is slightly less **high quality**, but works **everywhere**.
 
 
 # Features
