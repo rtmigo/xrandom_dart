@@ -167,14 +167,10 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
     test('Huge ints: JS_MAX_SAFE_INTEGER',
             () => checkHugeInts(createRandom(), JS_MAX_SAFE_INTEGER));
 
-
-    // if (INT64_SUPPORTED) {
-    //   test('Huge ints: 0x7FFFFFFFFFFFFFFF',
-    //           () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
-    // }
-    // else {
-    //
-    // }
+    if (INT64_SUPPORTED) {
+      test('Huge ints: 0x7FFFFFFFFFFFFFFF',
+              () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
+    }
 
 
 

@@ -45,26 +45,29 @@ abstract class RandomBase32 implements Random {
   /// from 0, inclusive, to [max], exclusive.
   ///
   /// @param max The upper bound of the return value. For VM it can be any positive integer
-  /// value greater than 0. For JS it must be 1 and (1<<32) inclusive.
+  /// value greater than 0.
   @override
   int nextInt(int max) {
-    // 0x7FFFFFFFFFFFFFFF = 9223372036854775807 = (1<<63)-1 = 2^63-1,
-
     // constant represents the maximum safe integer in JavaScript (2^53)-1
     const JS_MAX_SAFE_INTEGER=9007199254740991;
 
-    // todo support larger integers in JS
-
     if (max<1) {
-      throw RangeError.range(max, 1, int.parse('0x7FFFFFFFFFFFFFFF'));
+      final maxmax = INT64_SUPPORTED ? INT64_MAX_POSITIVE : JS_MAX_SAFE_INTEGER;
+      throw RangeError.range(max, 1, maxmax);
     }
     else if (max<=0xFFFFFFFF) {
+
+      // UINT32 //////////////////////////////////////////////////////////////////////
+
       final rnd32 = nextInt32();
       assert(0 <= rnd32 && rnd32 <= UINT32_MAX);
       final result = rnd32 % max;
       assert(0 <= result && result < max);
       return result;
+
     } else if (max <= JS_MAX_SAFE_INTEGER) {
+
+      // UINT53 //////////////////////////////////////////////////////////////////////
       // at least it fits into 53 bits. We can process it in JS without BigInt
 
       // https://en.wikipedia.org/wiki/Xoroshiro128%2B
@@ -84,8 +87,21 @@ abstract class RandomBase32 implements Random {
       assert(0 <= result && result < max);
       return result;
     } else {
+
+      // UINT63 //////////////////////////////////////////////////////////////////////
+
       assert(max > JS_MAX_SAFE_INTEGER);
-      throw RangeError.range(max, 1, JS_MAX_SAFE_INTEGER);
+      if (!INT64_SUPPORTED) {
+        // we're running JS and the value is too high
+        throw RangeError.range(max, 1, JS_MAX_SAFE_INTEGER);
+      }
+      assert(max > 0);
+      assert(max <= INT64_MAX_POSITIVE);
+
+      int rnd64 = nextInt64().unsetHighestBit64();
+      final result = rnd64 % max;
+      assert(0 <= result && result < max);
+      return result;
     }
 
 //

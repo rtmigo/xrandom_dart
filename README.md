@@ -140,24 +140,26 @@ The `xrandom` classes has several additions to the system `Random` class.
 
 ### nextInt(max)
 
-For the `nextInt(int max)` the `max` parameter can be any positive integer.
+For the `nextInt(int max)` the `max` parameter can be any positive `int`.
  
-(for `dart:math`, the `max` is limited by the value `(1<<32)`)
+It is not limited by `(1<<32)` like in `dart:math`.
 
-*(true for VM, not for JS yet)*
+### nextInt32 and nextInt64
 
-### nextIntXX()
+These methods return raw output of the generator. Depending on the algorithm, 
+this is a number consisting of either 32 random bits or 64 random bits. 
 
-The `nextInt32()` and `nextInt64()` return raw output 
-of the generator. 
+Xrandom automatically concatenates 32-bit numbers into 64-bit ones, 
+and vice versa. Therefore, both methods work for all algorithms.
+In general, this is much faster than `nextInt`.
 
 | Method        | Returns         | Equivalent of                   | 
 |---------------|-----------------|---------------------------------|
 | `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1`         |
 | `nextInt64()` | 64-bit signed   | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
 
-It either does not require conversion or requires minimal. In general, 
-this is much faster than `nextInt`.
+
+
 
 <details>
   <summary>Raw bits benchmarks</summary>
@@ -176,9 +178,8 @@ this is much faster than `nextInt`.
 
 ### nextFloat()
 
-`nextFloat`, unlike `nextDouble`, prefers speed to accuracy. It transforms 
-a single 32-bit integer into a `double`. Therefore, the result is limited 
-to a maximum of 2^32-1 values. But it's still a double with four billion shades.
+`nextFloat`, unlike `nextDouble`, prefers speed to accuracy.
+But it's still a double with four billion shades from range [0,1).
 
 <details>
   <summary>Rough double benchmarks</summary>
