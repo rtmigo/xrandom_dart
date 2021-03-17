@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:xrandom/src/10_random_base.dart';
+import 'package:xrandom/src/20_random_base.dart';
 
 /// Random number generator based on **xorshift32** algorithm by G. Marsaglia (2003).
 /// The reference implementation in C can be found in

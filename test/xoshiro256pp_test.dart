@@ -3,7 +3,7 @@
 
 @TestOn('vm')
 import "package:test/test.dart";
-import 'package:xrandom/src/xoshiro256pp.dart';
+import 'package:xrandom/src/60_xoshiro256pp.dart';
 
 import 'helper.dart';
 

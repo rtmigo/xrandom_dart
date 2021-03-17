@@ -3,7 +3,7 @@
 
 @TestOn('vm')
 import "package:test/test.dart";
-import 'package:xrandom/src/xorshift128plus.dart';
+import 'package:xrandom/src/60_xorshift128plus.dart';
 
 import 'helper.dart';
 import 'madsen.dart';

@@ -3,7 +3,7 @@
 
 import "package:test/test.dart";
 import 'package:xrandom/src/00_ints.dart';
-import 'package:xrandom/src/xorshift32.dart';
+import 'package:xrandom/src/60_xorshift32.dart';
 
 import 'helper.dart';
 

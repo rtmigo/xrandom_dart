@@ -5,7 +5,7 @@ import 'dart:math';
 
 import 'package:test/test.dart';
 import 'package:xrandom/src/00_ints.dart';
-import 'package:xrandom/src/jsnumbers.dart';
+import 'package:xrandom/src/00_jsnumbers.dart';
 
 void main() {
   if (INT64_SUPPORTED) {

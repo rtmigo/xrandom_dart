@@ -2,18 +2,13 @@
 // SPDX-License-Identifier: MIT
 
 @TestOn('vm')
-
 import "package:test/test.dart";
-
 import 'package:xrandom/src/00_ints.dart';
 
 void main() {
-
-
   test('string to int', () {
     // the problem with BigInt.toInt():
-    expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(),
-        '7fffffffffffffff');
+    expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(), '7fffffffffffffff');
   });
 
   test('are we', () {
@@ -41,10 +36,8 @@ void main() {
 
   test('signedRightShift', () {
     expect(0xFF.unsignedRightShift(4), 0xF);
-    expect(0x9FFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(),
-        '09FFFFFFFFFFFFFF');
-    expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(),
-        '0FFFFFFFFFFFFFFF');
+    expect(0x9FFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(), '09FFFFFFFFFFFFFF');
+    expect(0xFFFFFFFFFFFFFFFF.unsignedRightShift(4).toHexUint64uc(), '0FFFFFFFFFFFFFFF');
   });
 
   test("uint32 to int32", () {
@@ -62,6 +55,4 @@ void main() {
     expect(0x80000001.uint32_to_int32(), -2147483647);
     expect(0x80000002.uint32_to_int32(), -2147483646);
   });
-
-
 }

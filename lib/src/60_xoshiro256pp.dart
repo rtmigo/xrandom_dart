@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:xrandom/src/10_random_base.dart';
-import 'package:xrandom/src/splitmix64.dart';
+import 'package:xrandom/src/20_random_base.dart';
+import 'package:xrandom/src/50_splitmix64.dart';
 
 /// Random number generator based on **xoshiro256++ 1.0** algorithm by D. Blackman and
 /// S. Vigna (2019). The reference implementation in C can be found in

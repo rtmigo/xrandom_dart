@@ -4,9 +4,9 @@
 @TestOn('vm')
 
 import 'package:test/test.dart';
-import 'package:xrandom/src/splitmix64.dart';
+import 'package:xrandom/src/50_splitmix64.dart';
 
-import 'package:xrandom/src/xorshift64.dart';
+import 'package:xrandom/src/60_xorshift64.dart';
 import 'package:xrandom/xrandom.dart';
 
 import 'helper.dart';

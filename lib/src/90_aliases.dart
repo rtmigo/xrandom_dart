@@ -1,12 +1,12 @@
 // TODO Replace with type aliases when feature will be available
 // https://github.com/dart-lang/language/issues/65
 
-import 'package:xrandom/src/seeding.dart';
+import 'package:xrandom/src/20_seeding.dart';
 
-import 'splitmix64.dart';
-import 'xorshift32.dart';
-import 'xoshiro128pp.dart';
-import 'xoshiro256pp.dart';
+import '50_splitmix64.dart';
+import '60_xorshift32.dart';
+import '60_xoshiro128pp.dart';
+import '60_xoshiro256pp.dart';
 
 class Xrandom extends Xorshift32 {
   Xrandom([seed32]) : super(seed32);

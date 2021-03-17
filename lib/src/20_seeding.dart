@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
+// SPDX-License-Identifier: MIT
+
 @pragma('vm:prefer-inline')
 int mess2to64A(int a, int b) {
   // "The mix method was inspired by the mixing step of the lcg64_shift random engine"

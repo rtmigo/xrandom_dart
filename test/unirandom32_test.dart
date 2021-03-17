@@ -1,24 +1,17 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'package:test/test.dart';
-import 'package:xrandom/src/10_random_base.dart';
-import 'package:xrandom/src/xorshift128.dart';
-
 import 'package:xrandom/src/00_ints.dart';
-import 'package:xrandom/src/xorshift32.dart';
-import 'package:xrandom/src/xorshift64.dart';
+import 'package:xrandom/src/60_xorshift32.dart';
 
 void main() {
-
   test('large ints are the same', () {
-
     // for integers larger than 32 bit, we're using hacks to handle them in JS.
     // But the results must be the same on VM and JS
 
     final r = Xorshift32.expected();
-    expect(List.generate(20, (_) => r.nextInt(JS_MAX_SAFE_INTEGER)),  [
+    expect(List.generate(20, (_) => r.nextInt(JS_MAX_SAFE_INTEGER)), [
       2570143506677463,
       3662807060069127,
       3349799934066103,
@@ -40,7 +33,5 @@ void main() {
       4840697624481462,
       7601393353604849
     ]);
-
   });
-
 }

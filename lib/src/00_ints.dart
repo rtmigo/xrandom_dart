@@ -36,20 +36,6 @@ extension BitInt on int {
 
     return (this >> shift) & ~(-1 << (64 - shift));
 
-    // if (this >= 0) {
-    //   return this >> shift;
-    // } else {
-    //   var x = this;
-    //   // setting highest bit to zero
-    //   x &= INT64_MAX_POSITIVE;
-    //   assert(x >= 0);
-    //   // shifting all except the highest
-    //   x >>= shift;
-    //   // restoring the highest bit at proper position
-    //   x |= 1 << (63 - shift);
-    //   return x;
-    // }
-
     // Here is a discussion about implementing >>> in Dart
     // https://github.com/dart-lang/language/issues/478
     //

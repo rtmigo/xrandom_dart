@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import "package:test/test.dart";
-import 'package:xrandom/src/xoshiro128pp.dart';
+import 'package:xrandom/src/60_xoshiro128pp.dart';
 
 import 'helper.dart';
 

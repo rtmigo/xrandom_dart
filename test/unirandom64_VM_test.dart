@@ -4,11 +4,11 @@
 @TestOn('vm')
 
 import 'package:test/test.dart';
-import 'package:xrandom/src/10_random_base.dart';
-import 'package:xrandom/src/xorshift128.dart';
+import 'package:xrandom/src/20_random_base.dart';
+import 'package:xrandom/src/60_xorshift128.dart';
 
 import 'package:xrandom/src/00_ints.dart';
-import 'package:xrandom/src/xorshift64.dart';
+import 'package:xrandom/src/60_xorshift64.dart';
 
 void main() {
 

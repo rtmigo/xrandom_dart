@@ -4,20 +4,10 @@
 import 'dart:math';
 
 import "package:test/test.dart";
-import 'package:xrandom/src/00_ints.dart';
 
 import 'helper.dart';
 
 void main() {
-
-
-
-  final random = Random(100);
-  // print(random.nextInt(1000));
-  // print(random.nextInt(1000));
-  // print(random.nextInt(1000));
-  // return;
-
   test("test", () {
     expect(trimLeadingZeros(""), "");
     expect(trimLeadingZeros("1"), "1");

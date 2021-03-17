@@ -7,7 +7,7 @@ import 'package:quiver/iterables.dart';
 import 'package:test/test.dart';
 import 'package:xrandom/src/00_errors.dart';
 import 'package:xrandom/src/00_ints.dart';
-import 'package:xrandom/src/10_random_base.dart';
+import 'package:xrandom/src/20_random_base.dart';
 
 import 'data/generated.dart';
 
