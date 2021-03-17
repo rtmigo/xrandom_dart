@@ -104,15 +104,9 @@ for (var i=0; i<BILLIONS; i++)
 **`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
 
 
--------
 
-| Class         | The same as       | Mobile | Desktop | JS |
-|---------------|-------------------|--------|---------|----|
-| `Xrandom`     | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
-| `XrandomHq`   | `Xoshiro256pp`    | **✓**      | **✓**       | **✗**  |
-| `XrandomHqJs` | `Xoshiro128pp`    | **✓**      | **✓**       | **✓**  |
 
-`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
+
 
 # Algorithms
 
@@ -125,6 +119,14 @@ for (var i=0; i<BILLIONS; i++)
 | `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
 | `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
+
+| Class         | The same as       | Mobile | Desktop | JS |
+|---------------|-------------------|--------|---------|----|
+| `Xrandom`     | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
+| `XrandomHq`   | `Xoshiro256pp`    | **✓**      | **✓**       | **✗**  |
+| `XrandomHqJs` | `Xoshiro128pp`    | **✓**      | **✓**       | **✓**  |
+
+`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
 
 # Compatibility
 
