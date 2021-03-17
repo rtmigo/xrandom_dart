@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <github.com/rtmigo>
-// SPDX-License-Identifier: CC-BY-4.0
+// SPDX-License-Identifier: MIT
 
 // runs reference implementations of random number generators.
 // The generated numbers are written to multiple JSON files
@@ -84,7 +84,8 @@ static inline double vigna_uint64_to_double_alt(uint64_t x) {
 
 //float number with 52bits
 #define RANDBL_52_NO_ZERO(iRan1, iRan2) \
-    ((int)(iRan1)*M_RAN_INVM32 + (0.5 + M_RAN_INVM52 / 2) + (int)((iRan2)&0x000FFFFF) * M_RAN_INVM52)
+    ((int)(iRan1)*M_RAN_INVM32 + (0.5 + M_RAN_INVM52 / 2) + \
+	 (int)((iRan2)&0x000FFFFF) * M_RAN_INVM52)
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -140,9 +141,12 @@ void write32(char* name, uint64_t seed) {
 
 	char* alg_name = "xorshift32";
 	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
-	FILE *doornik_file = open_ref_outfile(alg_name, name, seed_str, "doornik_randbl_32");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, 
+		"double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, 
+		"double_cast");
+	FILE *doornik_file = open_ref_outfile(alg_name, name, seed_str, 
+		"doornik_randbl_32");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
@@ -156,8 +160,10 @@ void write32(char* name, uint64_t seed) {
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
-		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
-		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
+		fprintf(doubles_file, "'%.20e',\n", 
+			vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", 
+			vigna_uint64_to_double_alt(combined));
 		
 	}	
 
@@ -190,8 +196,10 @@ void write_xorshift32amx(char* name, uint64_t seed) {
 
 	char* alg_name = "xorshift32amx";
 	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, 
+		"double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, 
+		"double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
@@ -203,8 +211,10 @@ void write_xorshift32amx(char* name, uint64_t seed) {
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
-		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
-		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
+		fprintf(doubles_file, "'%.20e',\n", 
+				vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", 
+				vigna_uint64_to_double_alt(combined));
 	}	
 
 	close_ref_outfile(doubles_cast_file);
@@ -266,9 +276,12 @@ void write64(uint64_t seed, char* name) {
 	snprintf(seed_str, sizeof seed_str, "%llu", state.a);
 
 	char* alg_name = "xorshift64";
-	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *ints_file = open_ref_outfile(
+			alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint64_t x = xorshift64(&state);
@@ -328,7 +341,8 @@ void print128(uint64_t a, uint64_t b, uint64_t c, uint64_t d)
     state.c = c;
     state.d = d;
 
-    printf("'xorshift128 (seed %u %u %u %u)': [\n", state.a, state.b, state.c, state.d);
+    printf("'xorshift128 (seed %u %u %u %u)': [\n", 
+		state.a, state.b, state.c, state.d);
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i)
         printf("  \"%08x\",\n", xorshift128(&state)); // 08jx for long
@@ -345,12 +359,16 @@ void write128(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t d) {
     state.d = d;
 
 	char seed_str[256];
-	snprintf(seed_str, sizeof seed_str, "%u %u %u %u", state.a, state.b, state.c, state.d);
+	snprintf(seed_str, sizeof seed_str, "%u %u %u %u", 
+		state.a, state.b, state.c, state.d);
 
 	char* alg_name = "xorshift128";
-	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *ints_file = open_ref_outfile(
+			alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
@@ -362,8 +380,10 @@ void write128(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t d) {
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
-		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
-		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
+		fprintf(doubles_file, "'%.20e',\n", 
+				vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", 
+				vigna_uint64_to_double_alt(combined));
 	}	
 
 	close_ref_outfile(doubles_cast_file);
@@ -477,9 +497,12 @@ void write128p(char* name, uint64_t a, uint64_t b) {
 	snprintf(seed_str, sizeof seed_str, "%llu %llu", a, b);
 
 	char* alg_name = "xorshift128p";
-	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *ints_file = open_ref_outfile(
+			alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint64_t x = xorshift128plus_int(s);
@@ -558,7 +581,9 @@ void printXoshiro128pp(uint32_t a, uint32_t b, uint32_t c, uint32_t d)
     printf("],\n\n");
 }
 
-void write_xoshiro128pp(char* name, uint32_t a, uint32_t b, uint32_t c, uint32_t d) {
+void write_xoshiro128pp(
+	char* name, 
+	uint32_t a, uint32_t b, uint32_t c, uint32_t d) {
 
 	uint32_t s[4];
 	s[0]=a;
@@ -570,9 +595,12 @@ void write_xoshiro128pp(char* name, uint32_t a, uint32_t b, uint32_t c, uint32_t
 	snprintf(seed_str, sizeof seed_str, "%u %u %u %u", a, b, c, d);
 
 	char* alg_name = "xoshiro128pp";
-	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *ints_file = open_ref_outfile(
+			alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 
@@ -584,8 +612,10 @@ void write_xoshiro128pp(char* name, uint32_t a, uint32_t b, uint32_t c, uint32_t
 
 		uint64_t combined = (((uint64_t)x1)<<32)|x2;
 
-		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(combined));
-		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(combined));
+		fprintf(doubles_file, "'%.20e',\n", 
+				vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", 
+				vigna_uint64_to_double_alt(combined));
 
 		// uint64_t x = xorshift128plus_int(s);
 		// fprintf(ints_file, "%016llx\n", x);
@@ -640,7 +670,9 @@ uint64_t xoshiro256pp_next(uint64_t* s) {
 	return result;
 }
 
-void write_xoshiro256pp(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t d) {
+void write_xoshiro256pp(
+	char* name, 
+	uint64_t a, uint64_t b, uint64_t c, uint64_t d) {
 
 	uint64_t s[4];
 
@@ -650,12 +682,16 @@ void write_xoshiro256pp(char* name, uint64_t a, uint64_t b, uint64_t c, uint64_t
 	s[3] = d;
 
  	char seed_str[256];
-	snprintf(seed_str, sizeof seed_str, "0x%llx 0x%llx 0x%llx 0x%llx", a, b, c, d);
+	snprintf(seed_str, sizeof seed_str, 
+			 "0x%llx 0x%llx 0x%llx 0x%llx", a, b, c, d);
 
 	char* alg_name = "xoshiro256pp";
-	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *ints_file = open_ref_outfile(
+			alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint64_t x = xoshiro256pp_next(s);
@@ -703,8 +739,10 @@ void write_splitmix64(char* name, uint64_t a) {
 
 	char* alg_name = "splitmix64";
 	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *doubles_file = open_ref_outfile(alg_name, name, 
+		seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, 
+		seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint64_t x = next_splitmix64(&state);
@@ -739,9 +777,12 @@ void write_splitmix32(char* name, uint32_t a) {
 	snprintf(seed_str, sizeof seed_str, "0x%x", a);
 
 	char* alg_name = "splitmix32";
-	FILE *ints_file = open_ref_outfile(alg_name, name, seed_str, "int");
-	FILE *doubles_file = open_ref_outfile(alg_name, name, seed_str, "double_mult");
-	FILE *doubles_cast_file = open_ref_outfile(alg_name, name, seed_str, "double_cast");
+	FILE *ints_file = open_ref_outfile(
+			alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(
+			alg_name, name, seed_str, "double_cast");
 
     for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
 		uint32_t x = next_splitmix32(&a);
@@ -786,11 +827,13 @@ int main()
 
 	write_xoshiro128pp("a", 1, 2, 3, 4);
 	write_xoshiro128pp("b", 5, 23, 42, 777);
-	write_xoshiro128pp("c", 1081037251u, 1975530394u, 2959134556u, 1579461830u);
+	write_xoshiro128pp("c", 1081037251u, 1975530394u, 
+							2959134556u, 1579461830u);
 
 	write_xoshiro256pp("a", 1, 2, 3, 4);
 	write_xoshiro256pp("b", 5, 23, 42, 777);
-	write_xoshiro256pp("c", 0x621b97ff9b08ce44ull, 0x92974ae633d5ee97ull, 0x9c7e491e8f081368ull, 0xf7d3b43bed078fa3ull);
+	write_xoshiro256pp("c", 0x621b97ff9b08ce44ull, 0x92974ae633d5ee97ull, 
+							0x9c7e491e8f081368ull, 0xf7d3b43bed078fa3ull);
 
 	write_splitmix64("a", 1);
 	write_splitmix64("b", 0);
