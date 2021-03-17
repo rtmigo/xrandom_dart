@@ -66,7 +66,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 # Which to choose
 
-You just want a random number:
+If you just want a random number:
 
 ``` dart
 final random = Xrandom();  // works on all platforms
@@ -74,7 +74,7 @@ final random = Xrandom();  // works on all platforms
 quoteOfTheDay = quotes[random.nextInt(quotes.length)];
 ``` 
 
-You need billions and billions of randoms in a non-repeating sequence:
+If you need billions and billions of randoms in a non-repeating sequence:
 
 ``` dart
 final random = XrandomHq();  // works on mobile and desktop
@@ -83,7 +83,7 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation(random.nextDouble());
 ```
 
-You tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
+If you tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
 
 ``` dart
 final random = XrandomHqJs();  // works on all platforms
