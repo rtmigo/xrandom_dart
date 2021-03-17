@@ -87,7 +87,7 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation(random.nextDouble());
 ```
 
-**`XrandomHq`** is **high quality** expected to be run on **high quality platforms**.
+**`XrandomHq`** is **high quality** expected to be run on **64-bit platforms**.
 
 -------
 
