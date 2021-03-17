@@ -58,7 +58,7 @@ test('my test', () {
 ```
 
 You can achieve the same determinism by creating the `Random` with a `seed` argument. However, this does
-not protect you from `dart:math` implementation updates.
+not protect you from the dart:math implementation updates.
 
 The sequences produced by the `expected()` generators are intended to be reproducible.
 
