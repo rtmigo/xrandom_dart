@@ -145,7 +145,7 @@ The Xrandom classes has several additions to the system `Random` class.
 The dart:math severely limits the range for its `Random`: the `max` argument should 
 not exceed 4294967296.
 
-`Xrandom` does not have this limitation. The `max` can be any positive `int`. Therefore, it 
+Xrandom does not have this limitation. The `max` can be any positive `int`. Therefore, it 
 **is possible to generate as huge numbers as needed**. This is true for any of the Xrandom library 
 classes on any platform.
 
