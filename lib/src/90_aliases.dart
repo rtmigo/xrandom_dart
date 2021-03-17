@@ -39,6 +39,37 @@ class XrandomHq extends Xoshiro256pp {
 
 class _Hashmaker {}
 
+class XrandomJs extends Xoshiro128pp {
+
+  XrandomJs._fullSeed(int a32, int b32, int c32, d32): super(a32, b32, c32, d32);
+  XrandomJs._noSeed(): super();
+
+  factory XrandomJs([int? seed64])
+  {
+    if (seed64==null) {
+      return XrandomJs._noSeed();
+    }
+
+    final nx = DateTime.now().microsecondsSinceEpoch;
+    // todo is there a way to avoid constructing object just for hash?
+    final ny = _Hashmaker().hashCode;
+
+    return XrandomJs._fullSeed(
+        mess2to64A(nx, ny) & 0xFFFFFFFF,
+        mess2to64B(nx, ny) & 0xFFFFFFFF,
+        mess2to64D(nx, ny) & 0xFFFFFFFF,
+        mess2to64C(nx, ny) & 0xFFFFFFFF);
+  }
+
+  static XrandomJs expected() => XrandomJs._fullSeed(
+    Xoshiro128pp.defaultSeedA,
+    Xoshiro128pp.defaultSeedB,
+    Xoshiro128pp.defaultSeedC,
+    Xoshiro128pp.defaultSeedD,
+  );
+}
+
+@Deprecated('Renamed to XrandomJs')
 class XrandomHqJs extends Xoshiro128pp {
 
   XrandomHqJs._fullSeed(int a32, int b32, int c32, d32): super(a32, b32, c32, d32);
@@ -51,7 +82,6 @@ class XrandomHqJs extends Xoshiro128pp {
     }
 
     final nx = DateTime.now().microsecondsSinceEpoch;
-    // todo is there a way to avoid constructing object just for hash?
     final ny = _Hashmaker().hashCode;
 
     return XrandomHqJs._fullSeed(

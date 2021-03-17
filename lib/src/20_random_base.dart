@@ -40,10 +40,41 @@ abstract class RandomBase32 implements Random {
     }
     return (this.nextInt32() << 32) | this.nextInt32();
   }
+  @override
+  int nextInt(int range) {
+    // returns uint32
+    // https://www.pcg-random.org/posts/bounded-rands.html
+    if (range<=0 || range>=(1<<32)) {
+      throw RangeError.range(range, 0, (1<<32));
+    }
+
+    int x = nextInt32();
+
+    int m = x * range;
+    int l = m & 0xFFFFFFFF;
+
+    if (l < range) {
+      int t = (-range & 0x80000000ffffffff).int32_to_uint32();
+      if (t >= range) {
+        t -= range;
+        if (t >= range) {
+          t %= range;
+        }
+        }
+        while (l < t) {
+          x = nextInt32();
+          m = x * range;
+          l = m & 0xFFFFFFFF;
+      }
+    }
+    return m.unsignedRightShift(32);// >> 32;
+  }
 
 
   @override
-  int nextInt(int max) {
+  int nextIntJ(int max) {
+
+    // https://stackoverflow.com/a/17560604
 
     // based on dart:math https://git.io/JqCbB
     // (BSD) 2012, the Dart project authors
@@ -61,6 +92,10 @@ abstract class RandomBase32 implements Random {
     do {
       rnd32 = this.nextInt32();
       remainder = rnd32 % max;
+
+      // max*factor + remainder = rnd32
+      // rnd32-remainder = max*factor
+
     } while (rnd32 - remainder > cmp);
     return remainder;
   }
@@ -69,9 +104,10 @@ abstract class RandomBase32 implements Random {
   //////////////////////////////////////////////////////////////////////////////
   // REMARKS to nextInt():
   //
-  // In fact, we could climb a step higher: into the full range of UINT64.
-  // The max argument allows you to set this. But the documentation
-  // for the method will become somewhat perverse: what is nextInt(-2) ?!
+  // math:dath <https://git.io/JqCbB> used "Java Method" described here:
+  //    https://www.pcg-random.org/posts/bounded-rands.html
+  //    https://habr.com/ru/post/455702/
+
   //
   //////////////////////////////////////////////////////////////////////////////
 

@@ -42,28 +42,6 @@ var c = random.nextInt(n);
 var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 ```
 
-# Reproducibility
-
-Xrandom's classes can also be created with `expected` method.
-It is made specifically for testing. 
-
-``` dart
-test('my test', () {
-  final random = Xrandom.expected();
-  // you'll get same sequence of numbers every time
-  expect(random.nextInt(1000), 925);
-  expect(random.nextInt(1000), 686);
-  expect(random.nextInt(1000), 509);  
-});    
-```
-
-You can achieve the same determinism by creating the `Random` with a `seed` argument. However, this does
-not protect you from the dart:math implementation updates.
-
-The sequences produced by the `expected()` generators are intended to be reproducible.
-
-*(but not until the library reaches stable release status)*
-
 # Which to choose
 
 If you just want a random number:
@@ -95,13 +73,13 @@ That is, on desktops, phones and tablets. But not JavaScript.
 If you tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
 
 ``` dart
-final random = XrandomHqJs();  // works on all platforms
+final random = XrandomJs();  // works on all platforms
 
 for (var i=0; i<BILLIONS; i++)  
     feedMonteCarloSimulation( random.nextDouble() ); // on JS? O_O  
 ```
 
-**`XrandomHqJs`** is slightly less **high quality**, but works **everywhere**.
+**`XrandomJs`** is slightly less **high quality**, but works **everywhere**.
 
 
 # Features
@@ -170,23 +148,23 @@ However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` w
 
 # Algorithms
 
-| Class             | Arch | Algorithm  |   Algorithm author | Published |
+| Class             | JS | Algorithm  |   Algorithm author | Published |
 |-------------------|------|--------------|-------------|------|
-| `Xorshift32`      | 32 |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift64`      | 64 | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift128`     | 32 | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
-| `Xorshift128p` | 64 | [xorshift128+ v2](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
-| `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
-| `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
-| `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
+| `Xorshift32`      | **✓** |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift64`      | **✗** | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift128`     | **✓** | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
+| `Xorshift128p` | **✗** | [xorshift128+ v2](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
+| `Xoshiro128pp` | **✓** | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Xoshiro256pp` | **✗** | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Splitmix64` | **✗** | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
 
-| Class         | The same as       | Mobile | Desktop | JS |
-|---------------|-------------------|--------|---------|----|
-| `Xrandom`     | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
-| `XrandomHq`   | `Xoshiro256pp`    | **✓**      | **✓**       | **✗**  |
-| `XrandomHqJs` | `Xoshiro128pp`    | **✓**      | **✓**       | **✓**  |
+| Class       | The same as       | Mobile | Desktop | JS |
+|-------------|-------------------|--------|---------|----|
+| `Xrandom`   | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
+| `XrandomHq` | `Xoshiro256pp`    | **✓**      | **✓**       | **✗**  |
+| `XrandomJs` | `Xoshiro128pp`    | **✓**      | **✓**       | **✓**  |
 
-`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
+`Xrandom`, `XrandomHq`, `XrandomJs` are easy-to-remember aliases.
 
 # Compatibility
 

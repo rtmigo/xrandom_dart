@@ -4,6 +4,7 @@
 labuda/
 reference/generated
 experiments
+draft
 
 # Files and directories created by pub
 .dart_tool/

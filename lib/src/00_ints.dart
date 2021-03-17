@@ -80,15 +80,79 @@ extension BitInt on int {
   String toHexUint32uc() => this.toHexUint32().toUpperCase(); // todo remove
   String toHexUint64uc() => this.toHexUint64().toUpperCase(); // todo remove
 
-  /// Simulates result of of C99 typecasting like `(int32_t)x` for `uint32_t x`.
+  /// ??? C-like conversion from value typed `uint32_t` to `int32_t`.
+  ///
+  /// ``` C
+  ///   uint32_t x = ...;
+  ///   return (int32_t)x;
+  /// ```
   @pragma('vm:prefer-inline')
   int uint32_to_int32() {
+    assert(this>=0);
+    assert(this<=0xFFFFFFFF);
     if (this<=0x7fffffff) {
       return this;
     }
     else {
-      return this-0x100000000;
+      return this-(1<<32);//0x100000000;
+    }
+  } //
+
+  /// ??? C-like conversion from value typed `int32_t` to `uint32_t`.
+  ///
+  ///
+  /// ``` C
+  /// for (int i=3; i>=-3; --i)
+  ///    printf("%d -> %u\n", i, i);
+  /// for (int i=-0x80000000+2; i>=-0x80000000-3; --i)
+  ///    printf("%d -> %u\n", i, i);
+  /// }
+  ///
+  /// 3 -> 3
+  /// 2 -> 2
+  /// 1 -> 1
+  /// 0 -> 0
+  /// -1 -> 4294967295
+  /// -2 -> 4294967294
+  /// -3 -> 4294967293
+  /// -2147483646 -> 2147483650
+  /// -2147483647 -> 2147483649
+  /// -2147483648 -> 2147483648
+  /// 2147483647 -> 2147483647
+  /// 2147483646 -> 2147483646
+  /// 2147483645 -> 2147483645
+  @pragma('vm:prefer-inline')
+  int int32_as_uint32() {
+    assert(this>=-0x80000000);
+    assert(this<=0x7FFFFFFF);
+    if (this>=0) {
+      return this;
+    }
+    else {
+      return (1<<32)+this;
     }
   }
+
+
+
+
+  /// ??? C-like conversion from value typed `int32_t` to `uint32_t`.
+  ///
+  /// ``` C
+  ///   int32_t x = ...;
+  ///   return (uint32_t)x;
+  /// ```
+  @pragma('vm:prefer-inline')
+  int int32_to_uint32() {
+    assert(this>=-0x80000000);
+    assert(this<=0x7FFFFFFF);
+    if (this>=0) {
+      return this;
+    }
+    else {
+      return (1<<32)+this;
+    }
+  }
+
 
 }
