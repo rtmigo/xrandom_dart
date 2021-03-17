@@ -7,8 +7,11 @@ final int INT64_MAX_POSITIVE = int.parse('0x7FFFFFFFFFFFFFFF');
 const UINT32_MAX = 0xFFFFFFFF;
 const INT64_SUPPORTED =
     (1 << 62) > (1 << 61); // true for 64-bit systems (not for JS)
+const JS_MAX_SAFE_INTEGER = 9007199254740991;
 
 extension BitInt on int {
+
+  @pragma('vm:prefer-inline')
   int unsetHighestBit64() {
     return this & INT64_MAX_POSITIVE;
   }
@@ -22,6 +25,7 @@ extension BitInt on int {
   }
 
   /// Simulates result of `x >> shift` as if `x` were `uint64_t` in C.
+  @pragma('vm:prefer-inline')
   int unsignedRightShift(int shift) {
     // as of 2021 Dart does not have neither unsigned 64-bit integers or the ">>>"
     // unsigned right shift that can be found in Java or JavaScript
@@ -30,19 +34,21 @@ extension BitInt on int {
     // uint64 will shift all 64 of its bits,
     // but int64 will shift lower 63 and preserve the highest bit
 
-    if (this >= 0) {
-      return this >> shift;
-    } else {
-      var x = this;
-      // setting highest bit to zero
-      x &= INT64_MAX_POSITIVE;
-      assert(x >= 0);
-      // shifting all except the highest
-      x >>= shift;
-      // restoring the highest bit at proper position
-      x |= 1 << (63 - shift);
-      return x;
-    }
+    return (this >> shift) & ~(-1 << (64 - shift));
+
+    // if (this >= 0) {
+    //   return this >> shift;
+    // } else {
+    //   var x = this;
+    //   // setting highest bit to zero
+    //   x &= INT64_MAX_POSITIVE;
+    //   assert(x >= 0);
+    //   // shifting all except the highest
+    //   x >>= shift;
+    //   // restoring the highest bit at proper position
+    //   x |= 1 << (63 - shift);
+    //   return x;
+    // }
 
     // Here is a discussion about implementing >>> in Dart
     // https://github.com/dart-lang/language/issues/478

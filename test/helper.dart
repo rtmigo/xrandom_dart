@@ -164,21 +164,29 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
     test('Huge ints: 0x80000000',
         () => checkHugeInts(createRandom(), 0x80000000));
 
+    test('Huge ints: JS_MAX_SAFE_INTEGER',
+            () => checkHugeInts(createRandom(), JS_MAX_SAFE_INTEGER));
 
-    if (INT64_SUPPORTED) {
-      test('Huge ints: 0x7FFFFFFFFFFFFFFF',
-              () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
-    }
+
+    // if (INT64_SUPPORTED) {
+    //   test('Huge ints: 0x7FFFFFFFFFFFFFFF',
+    //           () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
+    // }
+    // else {
+    //
+    // }
+
+
 
     test('nextIntCheckRange', () {
       final r = createRandom();
       expect(() => r.nextInt(-1), throwsRangeError);
       expect(() => r.nextInt(0), throwsRangeError);
-      if (INT64_SUPPORTED) {
-        r.nextInt(0xFFFFFFFF + 1); // no errors
-      } else {
-        expect(() => r.nextInt(0xFFFFFFFF + 1), throwsRangeError);
-      }
+      // if (INT64_SUPPORTED) {
+      //   r.nextInt(0xFFFFFFFF + 1); // no errors
+      // } else {
+      //   expect(() => r.nextInt(0xFFFFFFFF + 1), throwsRangeError);
+      // }
 
       // no errors
       r.nextInt(1);
