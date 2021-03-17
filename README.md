@@ -71,7 +71,7 @@ If you just want a random number:
 ``` dart
 final random = Xrandom();  // works on all platforms
 
-quoteOfTheDay = quotes[random.nextInt(quotes.length)];
+quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 ``` 
 
 **`Xrandom`** is **fast** and works **everywhere**.
@@ -84,7 +84,7 @@ If you need billions and billions of randoms in a non-repeating sequence:
 final random = XrandomHq();  // works on mobile and desktop
 
 for (var i=0; i<BILLIONS; i++)
-    feedMonteCarloSimulation(random.nextDouble());
+    feedMonteCarloSimulation( random.nextDouble() );
 ```
 
 **`XrandomHq`** is **high quality** and expected to be run on **modern platforms**.
@@ -97,8 +97,8 @@ If you tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
 ``` dart
 final random = XrandomHqJs();  // works on all platforms
 
-for (var i=0; i<BILLIONS; i++)  // on JS? O_O
-    feedMonteCarloSimulation( random.nextDouble() );  
+for (var i=0; i<BILLIONS; i++)  
+    feedMonteCarloSimulation( random.nextDouble() ); // on JS? O_O  
 ```
 
 **`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
