@@ -88,7 +88,7 @@ for (var i=0; i<BILLIONS; i++)
 ```
 
 **`XrandomHq`** is **high quality** and expected to be run on **modern platforms**.
-That is, except JavaScript.
+That is, on desktops, phones and tablets. But not JavaScript.
 
 -------
 
