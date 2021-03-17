@@ -1,16 +1,17 @@
 // SPDX-FileCopyrightText: Copyright (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: CC-BY-4.0
 
-// this file runs reference implementations of random number generators
-// (RNG) to create lists of numbers. Those numbers are written into text files
-//
-// The data can be used for testing of alternate implementations
-// of the same RNGs (to match the reference numbers to the newly generated)
+// runs reference implementations of random number generators.
+// The generated numbers are written to multiple JSON files
+// in the current directory
 
 #include <stdio.h>
 #include <stdint.h>
 
 #define VALUES_PER_SAMPLE 1024
+
+int opened_files = 0;
+int closed_files = 0;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -19,10 +20,15 @@ FILE* open_ref_outfile(
 	char* seed_id,
 	char* seed, 
 	char* type_suffix)
-{
+    {
+
 	char filename[256];	
-	snprintf(filename, sizeof filename, "generated/%s_%s_%s.dart.txt", 
+	snprintf(filename, sizeof filename, "%s_%s_%s.json",
 		alg_name, seed_id, type_suffix);
+	printf("+ %s\n", filename);
+
+	opened_files++;
+
 	FILE *result = fopen(filename, "w");
 
 	fprintf(result, "{\n");
@@ -37,6 +43,7 @@ FILE* open_ref_outfile(
 }
 
 void close_ref_outfile(FILE* f) {
+    closed_files++;
 	fprintf(f, "]},\n\n");
 	fclose(f);
 }
@@ -752,15 +759,8 @@ void write_splitmix32(char* name, uint32_t a) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 int main()
 {
-	// printf("\n\n");
-	// for (uint32_t i=0x80000000-3; i<0x80000000+3; ++i)
-	// 	printf("0x%x %u -> %d\n", i, i, (int32_t)i);
-	// exit(1);	
-
     #define PI32 314159265
     #define PI64 3141592653589793238ll
 
@@ -771,7 +771,6 @@ int main()
 	write_xorshift32amx("a", 1);
 	write_xorshift32amx("b", 42);
 	write_xorshift32amx("c", PI32);
-
 
 	write64(1, "a");
 	write64(42, "b");
@@ -801,26 +800,7 @@ int main()
 	write_splitmix32("a", 1);
 	write_splitmix32("b", 0);
 	write_splitmix32("c", 777);
-	write_splitmix32("d", 1081037251u);	
+	write_splitmix32("d", 1081037251u);
 
-	// print64(1);
-	// print64(42);
-	// print64(PI64);
-
-	// print128(1, 2, 3, 4);
-	// print128(5, 23, 42, 777);
-	// print128(1081037251u, 1975530394u, 2959134556u, 1579461830u);
-
-	// print128plus(1, 2);
-	// print128plus(42, 777);
-	// print128plus(8378522730901710845llu, 1653112583875186020llu);
-
-	// printXoshiro128pp(1, 2, 3, 4);
-	// printXoshiro128pp(5, 23, 42, 777);
-	// printXoshiro128pp(1081037251u, 1975530394u, 2959134556u, 1579461830u);
-
-
-	// https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
-
-	//printf("};");
+	printf("Created %d files.\n", opened_files);
 }
