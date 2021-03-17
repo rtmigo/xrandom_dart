@@ -4,9 +4,9 @@
 
 - added RandomBase32.nextInt64()
 
-- nextDoubleMemcast renamed to nextDoubleBitcast
+- nextDoubleMemcast() renamed to nextDoubleBitcast()
 
-- fixed: nextInt results were not uniform  
+- fixed: nextInt() results were not uniform  
 
 - fixed: RandomBase64.nextInt32() can return 0 (this should 
   be reflected in the documentation) 
