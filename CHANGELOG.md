@@ -1,10 +1,12 @@
-- nextInt(max) now supports any positive [max] values 
+# 0.4.0
 
 - nextFloat() method now uses more accurate type of conversion
 
 - added RandomBase32.nextInt64()
 
 - nextDoubleMemcast renamed to nextDoubleBitcast
+
+- fixed: nextInt results were not uniform  
 
 - fixed: RandomBase64.nextInt32() can return 0 (this should 
   be reflected in the documentation) 

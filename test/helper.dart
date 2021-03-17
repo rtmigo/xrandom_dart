@@ -148,6 +148,22 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
     test('bools', () => checkBooleans(createRandom()));
     test('ints', () => checkIntegers(createRandom()));
 
+    test('ints when power of two', () {
+      final r = createExpectedRandom();
+      bool zeroFound = false;
+      for (int i=0; i<1000; ++i)
+        {
+          int x = r.nextInt(128);
+          expect(x, greaterThanOrEqualTo(0));
+          expect(x, lessThan(128));
+          if (x==0) {
+            zeroFound = true;
+          }
+        }
+      expect(zeroFound, isTrue);
+    });
+
+
     test('Seed is different each time', () {
       // even with different seeds, we can get rare matches of results.
       // But most of the the results should be unique
