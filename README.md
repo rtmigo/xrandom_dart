@@ -167,7 +167,7 @@ In general, this is **much faster** than `nextInt`.
 
 
 <details>
-  <summary>Raw bits benchmarks</summary>
+  <summary>Benchmarks</summary>
   
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
@@ -189,7 +189,7 @@ Unlike the `nextDouble`, `nextFloat` prefers speed to precision. It is still a `
 billion shades, but it's much faster.
 
 <details>
-  <summary>Rough double benchmarks</summary>
+  <summary>Benchmarks</summary>
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|-----------|
