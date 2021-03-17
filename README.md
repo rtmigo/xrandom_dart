@@ -183,7 +183,7 @@ In general, this is **much faster** than `nextInt`.
 
 ### `nextFloat()`
 
-`nextFloat` a floating-point value in range from 0.0, inclusive, to 1.0, exclusive.
+`nextFloat` generates a floating-point value in range 0.0 .. 1.0.
 
 Unlike the `nextDouble`, `nextFloat` prefers speed to precision. It is still a `double` four 
 billion shades, but it's much faster.
