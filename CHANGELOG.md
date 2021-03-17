@@ -1,4 +1,4 @@
-- nextInt(max) now supports [max] values up to 0x7FFFFFFFFFFFFFFF on VM
+- nextInt(max) now supports any positive [max] values 
 
 - nextFloat() method now uses more accurate type of conversion
 
