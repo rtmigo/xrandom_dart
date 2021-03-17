@@ -100,6 +100,12 @@ final random = XrandomHqJs();  // works on all platforms
 for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation(random.nextDouble());
 ```
+
+**`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
+
+
+-------
+
 | Class         | The same as       | Mobile | Desktop | JS |
 |---------------|-------------------|--------|---------|----|
 | `Xrandom`     | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
