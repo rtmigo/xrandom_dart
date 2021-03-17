@@ -106,7 +106,7 @@ for (var i=0; i<BILLIONS; i++)
 
 # Features
 
-The Xrandom classes has additions to the system `Random` class.
+The Xrandom classes has additions compared to the system `Random`.
 
 ### `nextInt(max)`
 
