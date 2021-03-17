@@ -34,6 +34,7 @@ abstract class RandomBase32 implements Random {
   ///
   /// Since the 32-bit generator never returns zero, after combining, neither
   /// the lowest 4 nor the highest 4 bytes of the number will be zero.
+  @pragma('vm:prefer-inline')
   int nextInt64() {
     if (!INT64_SUPPORTED) {
       throw Unsupported64Error();
