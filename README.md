@@ -140,9 +140,12 @@ The `xrandom` classes has several additions to the system `Random` class.
 
 ### `nextInt(max)`
 
-For the `nextInt` the `max` argument can be any positive `int`.
- 
-It is not limited by `(1<<32)` like in `dart:math`.
+`nextInt` generates a non-negative random integer uniformly distributed in the range
+from 0, inclusive, to `max`, exclusive.
+
+In `dart:math` the `max` argument should not exceed 4294967296.
+
+Xrandom does not have this limitation. The `max` can be any positive `int`.
 
 ### `nextInt32()` and `nextInt64()`
 
