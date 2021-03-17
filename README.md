@@ -156,7 +156,7 @@ this is a number consisting of either 32 random bits or 64 random bits.
 
 Xrandom automatically concatenates 32-bit numbers into 64-bit ones, 
 and vice versa. Therefore, both methods work for all algorithms.
-In general, this is much faster than `nextInt`.
+In general, this is **much faster** than `nextInt`.
 
 | Method        | Returns         | Equivalent of                   | 
 |---------------|-----------------|---------------------------------|
