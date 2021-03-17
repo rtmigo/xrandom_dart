@@ -183,8 +183,10 @@ In general, this is **much faster** than `nextInt`.
 
 ### `nextFloat()`
 
-`nextFloat`, unlike `nextDouble`, prefers speed to accuracy.
-But it's still a double with four billion shades from range [0,1).
+`nextFloat` a floating-point value in range from 0.0, inclusive, to 1.0, exclusive.
+
+Unlike the `nextDouble`, `nextFloat` prefers speed to precision. It is still a `double` four 
+billion shades, but it's much faster.
 
 <details>
   <summary>Rough double benchmarks</summary>
