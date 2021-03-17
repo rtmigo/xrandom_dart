@@ -155,7 +155,7 @@ However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` w
 | Splitmix64             |  1248   |    931    |    782    |
 </details>
 
-## `Xrandom.nextFloat()`
+## Xrandom.nextFloat()
 
 `nextFloat` generates a floating-point value in range 0.0≤x<1.0.
 
