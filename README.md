@@ -121,6 +121,27 @@ Xrandom does not limit the `max` argument: it can be any positive `int`. Therefo
 **is possible to generate as huge numbers as needed**. This is true for any of the Xrandom library 
 classes on all platforms.
 
+## Xrandom.nextFloat()
+
+`nextFloat` generates a floating-point value in range 0.0≤x<1.0.
+
+Unlike the `nextDouble`, `nextFloat` prefers speed to precision. It is still a `double` four 
+billion shades, but it's much faster.
+
+<details>
+  <summary>Benchmarks</summary>
+
+| Time (lower is better) | nextDouble | nextFloat |
+|------------------------|------------|-----------|
+| Random (dart:math)     |    1653    |     -     |
+| Xorshift32             |    1126    |    407    |
+| Xorshift64             |    1011    |    825    |
+| Xorshift128            |    1461    |    622    |
+| Xorshift128p           |    1141    |    860    |
+| Xoshiro128pp           |    2095    |    923    |
+| Xoshiro256pp           |    2294    |   1488    |
+| Splitmix64             |    1098    |    932    |
+</details>
 
 
 ## Xrandom.nextInt32() and Xrandom.nextInt64()
@@ -155,27 +176,7 @@ However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` w
 | Splitmix64             |  1248   |    931    |    782    |
 </details>
 
-## Xrandom.nextFloat()
 
-`nextFloat` generates a floating-point value in range 0.0≤x<1.0.
-
-Unlike the `nextDouble`, `nextFloat` prefers speed to precision. It is still a `double` four 
-billion shades, but it's much faster.
-
-<details>
-  <summary>Benchmarks</summary>
-
-| Time (lower is better) | nextDouble | nextFloat |
-|------------------------|------------|-----------|
-| Random (dart:math)     |    1653    |     -     |
-| Xorshift32             |    1126    |    407    |
-| Xorshift64             |    1011    |    825    |
-| Xorshift128            |    1461    |    622    |
-| Xorshift128p           |    1141    |    860    |
-| Xoshiro128pp           |    2095    |    923    |
-| Xoshiro256pp           |    2294    |   1488    |
-| Splitmix64             |    1098    |    932    |
-</details>
 
 
 
