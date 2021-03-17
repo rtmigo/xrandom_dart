@@ -138,9 +138,9 @@ code, an `UnsupportedError` will be thrown.
 
 The `xrandom` classes has several additions to the system `Random` class.
 
-### `nextInt(max)`
+### `nextInt`
 
-For the `nextInt(int max)` the `max` parameter can be any positive `int`.
+For the `nextInt(max)` the `max` parameter can be any positive `int`.
  
 It is not limited by `(1<<32)` like in `dart:math`.
 
