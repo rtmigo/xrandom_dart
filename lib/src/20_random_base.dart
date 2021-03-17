@@ -249,9 +249,6 @@ abstract class RandomBase64 extends RandomBase32 {
       // returning HIGHER four bytes
       const unsignedRightShift = 32;
       return (_split64 >> unsignedRightShift) & ~(-1 << (64 - unsignedRightShift)); // >>>
-      // return _split64 >= 0
-      //     ? _split64 >> shift
-      //     : ((_split64 & INT64_MAX_POSITIVE) >> shift) | (1 << (63 - shift)); // ">>>"
 
     } else {
       // we have a value: that means, we're already returned
