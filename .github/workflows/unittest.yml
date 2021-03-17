@@ -19,7 +19,7 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 9
+    timeout-minutes: 15
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
