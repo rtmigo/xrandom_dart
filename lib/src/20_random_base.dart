@@ -41,20 +41,6 @@ abstract class RandomBase32 implements Random {
     return (this.nextInt32() << 32) | this.nextInt32();
   }
 
-  // @override
-  // int nextInt(int max) {
-  //
-  //   const _POW2_32 = 1 << 32; // 0x100000000
-  //   var rnd32;
-  //   var result;
-  //   do {
-  //     //_nextState();
-  //     rnd32 = nextInt32();
-  //     result = rnd32 % max;
-  //   } while ((rnd32 - result + max) > _POW2_32);
-  //   return result;
-  //
-  // }
 
   @override
   int nextInt(int max) {
@@ -70,13 +56,13 @@ abstract class RandomBase32 implements Random {
     }
 
     var rnd32;
-    var result;
+    var remainder;
     final cmp = NUMRAND - max;
     do {
       rnd32 = this.nextInt32();
-      result = rnd32 % max;
-    } while (rnd32 - result > cmp);
-    return result;
+      remainder = rnd32 % max;
+    } while (rnd32 - remainder > cmp);
+    return remainder;
   }
 
 
