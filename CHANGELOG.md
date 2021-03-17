@@ -15,7 +15,7 @@
 
 - Alias names changed
 
-- Alias constructors are unified
+- Alias constructors unified
 
 - Example updated
 
