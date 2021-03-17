@@ -1,3 +1,7 @@
+# 0.5.0
+
+- Renamed XrandomHqJs to XrandomJs 
+
 # 0.4.0
 
 - nextFloat() method now uses more accurate type of conversion
