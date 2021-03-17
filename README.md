@@ -119,10 +119,10 @@ Xrandom automatically concatenates 32-bit numbers into 64-bit ones,
 and vice versa. Therefore, both methods work for all classes.
 In general, this is **much faster** than `nextInt`.
 
-| Method        | Returns         | Equivalent of                   | 
+| JS | Method        | Returns         | Equivalent of                   | 
 |---------------|-----------------|---------------------------------|
-| `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1`         |
-| `nextInt64()` | 64-bit signed   | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
+| **✓** | `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1`         |
+| **✗** | `nextInt64()` | 64-bit signed   | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
 
 However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` works there.
 
