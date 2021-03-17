@@ -103,6 +103,8 @@ for (var i=0; i<BILLIONS; i++)
 
 **`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
 
+<sub><sup>In truth, JavaScript is very much a thing in itself. It is unlikely that you 
+will need any special generator there.</sip></sub>
 
 -------
 
