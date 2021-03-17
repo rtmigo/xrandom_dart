@@ -119,7 +119,7 @@ Random().nextInt(9999999999);  // throws exception: value is too large
 
 Xrandom does not limit the `max` argument: it can be any positive `int`. Therefore, it 
 **is possible to generate as huge numbers as needed**. This is true for any of the Xrandom library 
-classes on all platforms including JS.
+classes on all platforms.
 
 
 
