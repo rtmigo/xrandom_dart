@@ -155,7 +155,7 @@ These methods return raw output of the generator. Depending on the algorithm,
 this is a number consisting of either 32 random bits or 64 random bits. 
 
 Xrandom automatically concatenates 32-bit numbers into 64-bit ones, 
-and vice versa. Therefore, both methods work for all algorithms.
+and vice versa. Therefore, both methods work for all classes.
 In general, this is **much faster** than `nextInt`.
 
 | Method        | Returns         | Equivalent of                   | 
