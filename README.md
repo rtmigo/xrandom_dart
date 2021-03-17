@@ -104,54 +104,7 @@ for (var i=0; i<BILLIONS; i++)
 **`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
 
 
-
-
-
-
-# Algorithms
-
-| Class             | Arch | Algorithm  |   Algorithm author | Published |
-|-------------------|------|--------------|-------------|------|
-| `Xorshift32`      | 32 |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift64`      | 64 | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
-| `Xorshift128`     | 32 | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
-| `Xorshift128p` | 64 | [xorshift128+ v2](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
-| `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
-| `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
-| `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
-
-| Class         | The same as       | Mobile | Desktop | JS |
-|---------------|-------------------|--------|---------|----|
-| `Xrandom`     | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
-| `XrandomHq`   | `Xoshiro256pp`    | **✓**      | **✓**       | **✗**  |
-| `XrandomHqJs` | `Xoshiro128pp`    | **✓**      | **✓**       | **✓**  |
-
-`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
-
-# Compatibility
-
-You can safely **use any classes on mobile and desktop** platforms. 
-
-However, if you also target **JavaScript** (Web, Node.js), you will have to 
-**limit your choice**.
-
-Full compatibility table:
-
-| Class                | Is a    | Mobile | Desktop | JavaScript |
-|----------------------|---------|--------|---------|------------|
-| **`Xorshift32`**     | 32-bit  | **✓**  | **✓**  | **✓**      |
-| **`Xorshift128`**    | 32-bit  | **✓**  | **✓**  | **✓**      |
-| **`Xoshiro128pp`**   | 32-bit  | **✓**  | **✓**  | **✓**      |
-| `Xorshift64`         | 64-bit  | **✓**  | **✓**  | **✗**      |
-| `Xorshift128p`       | 64-bit  | **✓**  | **✓**  | **✗**      |
-| `Xoshiro256pp`       | 64-bit  | **✓**  | **✓**  | **✗**      |
-| `Splitmix64`       | 64-bit    | **✓**  | **✓**  | **✗**      |
-
-If you try to create a JavaScript-incompatible object in JavaScripts-compiled 
-code, an `UnsupportedError` will be thrown.
-
-
-# Extensions
+# Features
 
 The Xrandom classes has several additions to the system `Random` class.
 
@@ -219,6 +172,53 @@ billion shades, but it's much faster.
 | Xoshiro256pp           |    2294    |   1488    |
 | Splitmix64             |    1098    |    932    |
 </details>
+
+
+
+# Algorithms
+
+| Class             | Arch | Algorithm  |   Algorithm author | Published |
+|-------------------|------|--------------|-------------|------|
+| `Xorshift32`      | 32 |  [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift64`      | 64 | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
+| `Xorshift128`     | 32 | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  | G. Marsaglia | 2003 |
+| `Xorshift128p` | 64 | [xorshift128+ v2](https://arxiv.org/abs/1404.0390) | S. Vigna | 2015 |
+| `Xoshiro128pp` | 32 | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Xoshiro256pp` | 64 | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) | D. Blackman and S. Vigna | 2019 |
+| `Splitmix64` | 64 | [splitmix64](https://prng.di.unimi.it/splitmix64.c) | S. Vigna | 2015 |
+
+| Class         | The same as       | Mobile | Desktop | JS |
+|---------------|-------------------|--------|---------|----|
+| `Xrandom`     | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
+| `XrandomHq`   | `Xoshiro256pp`    | **✓**      | **✓**       | **✗**  |
+| `XrandomHqJs` | `Xoshiro128pp`    | **✓**      | **✓**       | **✓**  |
+
+`Xrandom`, `XrandomHq`, `XrandomHqJs` are easy-to-remember aliases.
+
+# Compatibility
+
+You can safely **use any classes on mobile and desktop** platforms. 
+
+However, if you also target **JavaScript** (Web, Node.js), you will have to 
+**limit your choice**.
+
+Full compatibility table:
+
+| Class                | Is a    | Mobile | Desktop | JavaScript |
+|----------------------|---------|--------|---------|------------|
+| **`Xorshift32`**     | 32-bit  | **✓**  | **✓**  | **✓**      |
+| **`Xorshift128`**    | 32-bit  | **✓**  | **✓**  | **✓**      |
+| **`Xoshiro128pp`**   | 32-bit  | **✓**  | **✓**  | **✓**      |
+| `Xorshift64`         | 64-bit  | **✓**  | **✓**  | **✗**      |
+| `Xorshift128p`       | 64-bit  | **✓**  | **✓**  | **✗**      |
+| `Xoshiro256pp`       | 64-bit  | **✓**  | **✓**  | **✗**      |
+| `Splitmix64`       | 64-bit    | **✓**  | **✓**  | **✗**      |
+
+If you try to create a JavaScript-incompatible object in JavaScripts-compiled 
+code, an `UnsupportedError` will be thrown.
+
+
+
 
 # More benchmarks
 
