@@ -119,6 +119,12 @@ Xrandom does not have this limitation. The `max` can be any positive `int`. Ther
 **is possible to generate as huge numbers as needed**. This is true for any of the Xrandom library 
 classes on any platform.
 
+``` dart
+Random().nextInt(9999999999);  // throws exception
+Xrandom().nextInt(9999999999);  // no problem
+```
+
+
 ### `nextInt32()` and `nextInt64()`
 
 These methods return raw output of the generator. Depending on the algorithm, 
