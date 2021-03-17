@@ -112,17 +112,15 @@ The Xrandom classes has several additions to the system `Random` class.
 
 `nextInt` generates an integer in range 0.0≤x<max.
 
-The dart:math severely limits the range for its `Random`: the `max` argument should 
-not exceed 4294967296.
-
-Xrandom does not have this limitation. The `max` can be any positive `int`. Therefore, it 
-**is possible to generate as huge numbers as needed**. This is true for any of the Xrandom library 
-classes on any platform.
-
 ``` dart
 Xrandom().nextInt(9999999999);  // no problem
 Random().nextInt(9999999999);  // throws exception: value is too large
 ```
+
+Xrandom does not limit the `max` argument: it can be any positive `int`. Therefore, it 
+**is possible to generate as huge numbers as needed**. This is true for any of the Xrandom library 
+classes on any platform.
+
 
 
 ### `nextInt32()` and `nextInt64()`
