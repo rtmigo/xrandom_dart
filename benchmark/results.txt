@@ -227,3 +227,40 @@ int supports > 0xFFFFFFFF
 | Xoshiro128pp           |    2134    |    944    |
 | Xoshiro256pp           |    2236    |   1522    |
 | Splitmix64             |    1183    |   1007    |
+
+===
+
+non-uniform
+
+| Time (lower is better) | nextInt | nextDouble | nextBool |
+|------------------------|---------|------------|----------|
+| Random (dart:math)     |  1217   |    1673    |   1198   |
+| Xorshift32             |   723   |    1145    |   722    |
+| Xorshift64             |   906   |    998     |   716    |
+| Xorshift128            |   930   |    1447    |   721    |
+| Xorshift128p           |  1011   |    1108    |   720    |
+| Xoshiro128pp           |  1248   |    2182    |   728    |
+| Xoshiro256pp           |  1524   |    2092    |   755    |
+| Splitmix64             |  1102   |    1155    |   728    |
+
+| Time (lower is better) | nextInt | nextInt32 | nextInt64 |
+|------------------------|---------|-----------|-----------|
+| Random (dart:math)     |  1217   |     -     |     -     |
+| Xorshift32             |   723   |    459    |    942    |
+| Xorshift64             |   906   |    639    |    882    |
+| Xorshift128            |   930   |    609    |   1436    |
+| Xorshift128p           |  1011   |    685    |    930    |
+| Xoshiro128pp           |  1248   |    950    |   2039    |
+| Xoshiro256pp           |  1524   |   1315    |   2007    |
+| Splitmix64             |  1102   |    714    |    900    |
+
+| Time (lower is better) | nextDouble | nextFloat |
+|------------------------|------------|-----------|
+| Random (dart:math)     |    1673    |     -     |
+| Xorshift32             |    1145    |    413    |
+| Xorshift64             |    998     |    638    |
+| Xorshift128            |    1447    |    606    |
+| Xorshift128p           |    1108    |    687    |
+| Xoshiro128pp           |    2182    |    928    |
+| Xoshiro256pp           |    2092    |   1321    |
+| Splitmix64             |    1155    |    716    |

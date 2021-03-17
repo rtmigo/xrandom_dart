@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-// declaring int64 as BigInt to avoid JavaScript compilation errors
+// declaring int64 as int.parse to avoid JavaScript compilation errors
 final int INT64_LOWER_7_BYTES = int.parse('0x00FFFFFFFFFFFFFF');
 final int INT64_MAX_POSITIVE = int.parse('0x7FFFFFFFFFFFFFFF');
 const UINT32_MAX = 0xFFFFFFFF;

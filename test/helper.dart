@@ -158,19 +158,19 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
           greaterThan(90));
     });
 
-    test('Huge ints: 0xFFFFFFFF',
-        () => checkHugeInts(createRandom(), 0xFFFFFFFF));
-    // "the fast case for powers of two"
-    test('Huge ints: 0x80000000',
-        () => checkHugeInts(createRandom(), 0x80000000));
-
-    test('Huge ints: JS_MAX_SAFE_INTEGER',
-            () => checkHugeInts(createRandom(), JS_MAX_SAFE_INTEGER));
-
-    if (INT64_SUPPORTED) {
-      test('Huge ints: 0x7FFFFFFFFFFFFFFF',
-              () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
-    }
+    test('Huge ints: (1<<32)',
+        () => checkHugeInts(createRandom(), 4294967296));
+    // // "the fast case for powers of two"
+    // test('Huge ints: 0x80000000',
+    //     () => checkHugeInts(createRandom(), 0x80000000));
+    //
+    // test('Huge ints: JS_MAX_SAFE_INTEGER',
+    //         () => checkHugeInts(createRandom(), JS_MAX_SAFE_INTEGER));
+    //
+    // if (INT64_SUPPORTED) {
+    //   test('Huge ints: 0x7FFFFFFFFFFFFFFF',
+    //           () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
+    // }
 
 
 

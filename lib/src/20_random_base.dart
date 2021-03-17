@@ -42,13 +42,62 @@ abstract class RandomBase32 implements Random {
     return (this.nextInt32() << 32) | this.nextInt32();
   }
 
-  /// Generates a non-negative random integer uniformly distributed in the range
+  // @override
+  // int nextInt(int max) {
+  //
+  //   const _POW2_32 = 1 << 32; // 0x100000000
+  //   var rnd32;
+  //   var result;
+  //   do {
+  //     //_nextState();
+  //     rnd32 = nextInt32();
+  //     result = rnd32 % max;
+  //   } while ((rnd32 - result + max) > _POW2_32);
+  //   return result;
+  //
+  // }
+
+  @override
+  int nextInt(int max) {
+
+    // based on dart:math https://git.io/JqCbB
+    // (BSD) 2012, the Dart project authors
+
+    const RANDMAX = 1 << 32; // 0x100000000
+    const limit = 0x3FFFFFFF;
+    if ((max <= 0) || ((max > limit) && (max > RANDMAX))) {
+      throw RangeError.range(
+          max, 1, RANDMAX,
+          'max', 'Must be positive and <= 2^32');
+    }
+
+    if ((max & -max) == max) {
+      // https://stackoverflow.com/a/1006999
+      // so max is a power of two (works for max!=0)
+      // Applying a bit mask
+      return this.nextInt32() & (max - 1);
+    }
+
+    // https://stackoverflow.com/a/17554531
+
+    var rnd32;
+    var result;
+    do {
+      rnd32 = this.nextInt32();
+      result = rnd32 % max;
+    } while ((rnd32 - result + max) > RANDMAX); // rnd32 > RANDMAX-max
+    return result;
+  }
+  /*
+
+
+  /// Generates a non-negative random integer in the range
   /// from 0, inclusive, to [max], exclusive.
   ///
   /// @param max The upper bound of the return value. It can be any positive
   /// integer.
   @override
-  int nextInt(int max) {
+  int _nextInt_nonUniform(int max) {
     const JS_MAX_SAFE_INTEGER = 9007199254740991; // (2^53)-1
 
     if (max < 1) {
@@ -74,12 +123,31 @@ abstract class RandomBase32 implements Random {
       //    the low bits"
       // Okay, we'll use only the higher 53 bits.
 
+      // Dart math
+      // https://github.com/dart-lang/sdk/blob/b11d057572599d001dd766c441e85ad06ce1b943/sdk/lib/_internal/vm/lib/math_patch.dart
+
       int rnd64 = INT64_SUPPORTED
           ? nextInt64().unsignedRightShift(11)
           : combineUpper53bitsJS(nextInt32(), nextInt32());
 
       assert(rnd64 > 0);
       assert(rnd64 <= JS_MAX_SAFE_INTEGER);
+
+      // https://stackoverflow.com/a/6852396
+      //    Returning rand() % N does not uniformly give a number in the range [0, N)
+      //    unless N divides the length of the interval into which rand() returns
+      //    (i.e. is a power of 2)
+
+      // dart:math:
+      // const _POW2_32 = 1 << 32; // 0x100000000
+      // var rnd32;
+      // var result;
+      // do {
+      //   //_nextState();
+      //   rnd32 = nextInt32();
+      //   result = rnd32 % max;
+      // } while ((rnd32 - result + max) > _POW2_32);
+      // return result;
 
       final result = rnd64 % max;
       assert(0 <= result && result < max);
@@ -105,6 +173,8 @@ abstract class RandomBase32 implements Random {
     }
 
   }
+  */
+
 
   //////////////////////////////////////////////////////////////////////////////
   // REMARKS to nextInt():

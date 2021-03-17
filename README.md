@@ -108,18 +108,6 @@ for (var i=0; i<BILLIONS; i++)
 
 The Xrandom classes has additions compared to the system `Random`.
 
-## Xrandom.nextInt(max)
-
-`nextInt` generates an integer in range 0.0≤x<max.
-
-``` dart
-Xrandom().nextInt(9999999999);  // no problem
-Random().nextInt(9999999999);  // throws exception: value is too large
-```
-
-Xrandom does not limit the `max` argument: it can be any positive `int`. Therefore, it 
-**is possible to generate as huge numbers as needed**. This is true for all of 
-the Xrandom classes on all platforms.
 
 ## Xrandom.nextFloat()
 

@@ -3,6 +3,7 @@
 .idea
 labuda/
 reference/generated
+experiments
 
 # Files and directories created by pub
 .dart_tool/

@@ -6,6 +6,16 @@ import "package:test/test.dart";
 import 'package:xrandom/src/00_ints.dart';
 
 void main() {
+
+
+
+  // print(0x7fffffffffffffff % 5);
+  // print(-0x8000000000000000 % 5);
+  // print(-0x7fffffffffffffff % 5);
+  //print(0xFFFFFFFFFFFFFFFE);
+  //print(0x7FFFFFFFFFFFFFFF);
+  // return;
+
   test('string to int', () {
     // the problem with BigInt.toInt():
     expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(), '7fffffffffffffff');
