@@ -104,7 +104,7 @@ for (var i=0; i<BILLIONS; i++)
 **`XrandomHqJs`** is slightly less **high quality**, but runs on **all platforms**.
 
 <sub>In truth, JavaScript is very much a thing in itself. It is unlikely that you 
-will need any special generator there. But maybe you will create a library that needs full compatibility.</sub>
+will need any special generator there. This class is designed to leave the possibility of obtaining high-quality random numbers with full compatibility.</sub>
 
 -------
 
