@@ -125,7 +125,7 @@ classes on all platforms including JS.
 
 ### `nextInt32()` and `nextInt64()`
 
-These methods return raw output of the generator. Depending on the algorithm, 
+These methods return the raw output of the generator. Depending on the algorithm, 
 this is a number consisting of either 32 random bits or 64 random bits. 
 
 Xrandom automatically concatenates 32-bit numbers into 64-bit ones, 
