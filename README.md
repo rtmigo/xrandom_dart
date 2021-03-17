@@ -140,7 +140,7 @@ The Xrandom classes has several additions to the system `Random` class.
 
 ### `nextInt(max)`
 
-`nextInt` generates an integer in range from in range 0.0≤x<max.
+`nextInt` generates an integer in range 0.0≤x<max.
 
 The dart:math severely limits the range for its `Random`: the `max` argument should 
 not exceed 4294967296.
