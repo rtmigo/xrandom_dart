@@ -74,7 +74,7 @@ final random = Xrandom();  // works on all platforms
 quoteOfTheDay = quotes[random.nextInt(quotes.length)];
 ``` 
 
-`Xrandom` is **fast** and works **everywhere**.
+**`Xrandom`** is **fast** and works **everywhere**.
 
 -------
 
@@ -87,7 +87,7 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation(random.nextDouble());
 ```
 
-`XrandomHq` is **high quality** expected to be run on **high quality platforms**.
+**`XrandomHq`** is **high quality** expected to be run on **high quality platforms**.
 
 -------
 
