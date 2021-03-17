@@ -148,7 +148,7 @@ However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` w
 
 # Algorithms
 
-| Class             | JS | Algorithm  |   Algorithm author | Published |
+| JS    | Class  | Algorithm  |   Algorithm author | Published |
 |-------------------|------|--------------|-------------|------|
 | **✓** | `Xorshift32` |   [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
 | **✗** | `Xorshift64`      | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   | G. Marsaglia | 2003 |
