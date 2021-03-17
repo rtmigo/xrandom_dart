@@ -5,7 +5,6 @@ import 'dart:math';
 
 import '00_errors.dart';
 import '00_ints.dart';
-import '00_jsnumbers.dart';
 
 @pragma('vm:prefer-inline')
 double doornikNextFloat(int u32) {
@@ -60,54 +59,19 @@ abstract class RandomBase32 implements Random {
   @override
   int nextInt(int max) {
 
-    // https://stackoverflow.com/a/6852396
-
-    // const RAND_MAX = 0xFFFFFFFF+1;
-    // int min = 0;
-    // int r;
-    // int range = 1 + max - min;
-    // int buckets = RAND_MAX ~/ range;
-    // int limit = buckets * range;
-    //
-    // /* Create equal size buckets all in a row, then fire randomly towards
-    //  * the buckets until you land in one of them. All buckets are equally
-    //  * likely. If you land off the end of the line of buckets, try again. */
-    // do
-    // {
-    //   r = nextInt32();
-    // } while (r >= limit);
-    //
-    // return min + (r ~/ buckets);
-
-
     // based on dart:math https://git.io/JqCbB
     // (BSD) 2012, the Dart project authors
 
     const RANDMAX = 0xFFFFFFFF;
-    const NUMRAND = RANDMAX+1; //1 << 32; // 0x100000000
+    const NUMRAND = RANDMAX + 1; //1 << 32; // 0x100000000
     const limit = 0x3FFFFFFF;
     if ((max <= 0) || ((max > limit) && (max > NUMRAND))) {
-      throw RangeError.range(
-          max, 1, NUMRAND,
-          'max', 'Must be positive and <= 2^32');
+      throw RangeError.range(max, 1, NUMRAND, 'max');
     }
-
-    // if ((max & -max) == max) {
-    //   // https://stackoverflow.com/a/1006999
-    //   // so max is a power of two (works for max!=0)
-    //   // applying a bit mask
-    //   return this.nextInt32() & (max - 1);
-    // }
-
-    // https://stackoverflow.com/a/17554531
-
-    // (num_rand - defect <= (unsigned long)x)
-
-    // NUMRAND < (rnd32 - result + max)
 
     var rnd32;
     var result;
-    final cmp = NUMRAND-max;
+    final cmp = NUMRAND - max;
     do {
       rnd32 = this.nextInt32();
       result = rnd32 % max;
