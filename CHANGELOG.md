@@ -8,8 +8,8 @@
 
 - fixed: nextInt() results were not uniform  
 
-- fixed: RandomBase64.nextInt32() can return 0 (this should 
-  be reflected in the documentation) 
+- fixed: RandomBase64.nextInt32() can return 0 (reflected 
+  in the documentation) 
 
 # 0.3.2
 
