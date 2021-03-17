@@ -120,8 +120,8 @@ Xrandom does not have this limitation. The `max` can be any positive `int`. Ther
 classes on any platform.
 
 ``` dart
-Random().nextInt(9999999999);  // throws exception
 Xrandom().nextInt(9999999999);  // no problem
+Random().nextInt(9999999999);  // throws exception: value is too large
 ```
 
 
