@@ -108,7 +108,7 @@ for (var i=0; i<BILLIONS; i++)
 
 The Xrandom classes has additions compared to the system `Random`.
 
-### `Xrandom.nextInt(max)`
+## `Xrandom.nextInt(max)`
 
 `nextInt` generates an integer in range 0.0≤x<max.
 
@@ -123,7 +123,7 @@ classes on all platforms.
 
 
 
-### `Xrandom.nextInt32()` and `Xrandom.nextInt64()`
+## `Xrandom.nextInt32()` and `Xrandom.nextInt64()`
 
 These methods return the raw output of the generator. Depending on the algorithm, 
 the output is a number consisting of either 32 random bits or 64 random bits. 
@@ -155,7 +155,7 @@ However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` w
 | Splitmix64             |  1248   |    931    |    782    |
 </details>
 
-### `Xrandom.nextFloat()`
+## `Xrandom.nextFloat()`
 
 `nextFloat` generates a floating-point value in range 0.0≤x<1.0.
 
