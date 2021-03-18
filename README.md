@@ -141,6 +141,9 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 |    | Splitmix64             |    1084 |       418 |       514 |
 |    | Xoshiro256pp           |    1535 |       761 |      1129 |
 
+Since `nextInt`'s return range is always limited to 32 bits, 
+only comparison to `nextRaw32` is "apples-to-apples".
+
 </details>
 
 
