@@ -67,11 +67,12 @@ for (var i=0; i<BILLIONS; i++)
 ```
 
 **`XrandomHq`** is **high quality** and expected to be run on **64-bit platforms**.
-That is, on desktops, phones and tablets. But not JavaScript.
+That is, on desktops, phones and tablets.
 
 -------
 
-If you tried to create `XrandomHq` on Node.js but got `UnsupportedError`:
+If you compile your code to JavaScript (Flutter Web, Node.js) and still 
+want XrandomHq:
 
 ``` dart
 final random = XrandomJs();  // works on all platforms
