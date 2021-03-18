@@ -157,14 +157,6 @@ However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` w
 | **✗**  | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 | `XrandomHq` |
 | **✗** | `Splitmix64` | [splitmix64](https://prng.di.unimi.it/splitmix64.c) |  2015 |
 
-| Class       | The same as       | Mobile | Desktop | JS |
-|-------------|-------------------|--------|---------|----|
-| `Xrandom`   | `Xorshift32`      | **✓**      | **✓**       | **✓**  |
-| `XrandomHq` | `Xoshiro256pp`    | **✓**      | **✓**       | **✗**  |
-| `XrandomJs` | `Xoshiro128pp`    | **✓**      | **✓**       | **✓**  |
-
-`Xrandom`, `XrandomHq`, `XrandomJs` are easy-to-remember aliases.
-
 # Compatibility
 
 You can safely **use any classes on mobile and desktop** platforms. 
