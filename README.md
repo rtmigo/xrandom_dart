@@ -57,7 +57,7 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 
 -------
 
-If you need billions and billions of randoms in a non-repeating sequence:
+If you need billions and billions of randoms without statistical artifacts:
 
 ``` dart
 final random = XrandomHq();  // works on mobile and desktop
