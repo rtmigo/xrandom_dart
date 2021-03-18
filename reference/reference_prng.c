@@ -807,6 +807,31 @@ void write_splitmix32(char* name, uint32_t a) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+struct xorwow_state {
+	uint32_t a, b, c, d, e;
+	uint32_t counter;
+};
+
+/* The state array must be initialized to not be all zero in the first four words */
+uint32_t xorwow(struct xorwow_state *state)
+{
+	/* Algorithm "xorwow" from p. 5 of Marsaglia, "Xorshift RNGs" */
+	uint32_t t = state->e;
+	uint32_t s = state->a;
+	state->e = state->d;
+	state->d = state->c;
+	state->c = state->b;
+	state->b = s;
+	t ^= t >> 2;
+	t ^= t << 1;
+	t ^= s ^ (s << 4);
+	state->a = t;
+	state->counter += 362437;
+	return t + state->counter;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // The "Lemire Method" <https://arxiv.org/abs/1805.10941> implemented 
 // by D. Lemire for Python (License: Apache):
 // <https://github.com/lemire/fastrand/blob/master/fastrandmodule.c>
