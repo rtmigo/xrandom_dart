@@ -111,7 +111,7 @@ It's still a `double` that has four billion shades, but it's much faster.
 </details>
 
 
-## nextIntNN
+## nextRaw
 
 These methods return the raw output of the generator. Depending on the algorithm, 
 the output is a number consisting of either 32 random bits or 64 random bits. 
@@ -122,8 +122,8 @@ In general, this is **much faster** than `nextInt`.
 
 | JS    | Method        | Returns         | Equivalent of                   | 
 |-------|--------|-----------------|---------------------------------|
-| **✓** | `nextInt32()` | 32-bit unsigned | `nextInt(0xffffffff)+1`         |
-| **✗** | `nextInt64()` | 64-bit signed   | `nextInt(0xffffffffffffffff)+1` |
+| **✓** | `nextRaw32()` | 32-bit unsigned | `nextInt(0xffffffff)+1`         |
+| **✗** | `nextRaw64()` | 64-bit signed   | `nextInt(0xffffffffffffffff)+1` |
 
 However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` works there.
 
