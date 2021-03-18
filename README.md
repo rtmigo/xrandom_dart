@@ -116,7 +116,7 @@ It's still a `double` that has four billion shades, but it's much faster.
 These methods return the raw output of the generator. Depending on the algorithm, 
 the output is a number consisting of either 32 random bits or 64 random bits. 
 
-Xrandom automatically concatenates 32-bit numbers into 64-bit ones, 
+Xrandom concatenates 32-bit numbers into 64-bit ones, 
 and vice versa. Therefore, both methods work for all classes.
 In general, this is **much faster** than `nextInt`.
 
