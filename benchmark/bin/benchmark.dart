@@ -12,8 +12,10 @@ enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
 const NUM_EXPERIMENTS = 3;
 const NUM_ITEMS_PER_EXPERIMENT = 5000000;
 
+int measureTimeRuns = 0;
+
 int measureTime(Random r, DoWhat dbl) {
-  print('Benchmarking ${r.runtimeType} $dbl');
+  print('${++measureTimeRuns} benchmarking ${r.runtimeType} $dbl');
 
   final sw = Stopwatch()..start();
 
@@ -158,6 +160,8 @@ void main(List<String> arguments) {
 
     print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
   }
+
+  print('');
 
   printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
 
