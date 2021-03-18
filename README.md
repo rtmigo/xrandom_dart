@@ -169,15 +169,6 @@ narrowed down to the options marked with [✓] checkmark in the JS column.
 
 Trying to create a JavaScript-incompatible object in JavaScripts-compiled will lead to `UnsupportedError`.
 
-You can safely **use any classes on mobile and desktop** platforms. 
-
-If you target **JavaScript** (Web, Node.js), you will have to **limit your choice**  
-
-
-
-
-
-
 # More benchmarks
 
 | Time (lower is better) | nextInt | nextDouble | nextBool |
