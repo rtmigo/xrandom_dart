@@ -88,7 +88,7 @@ for (var i=0; i<BILLIONS; i++)
 The Xrandom classes has additions compared to the system `Random`.
 
 
-## Xrandom.nextFloat()
+## nextFloat
 
 `nextFloat` generates a floating-point value in range 0.0≤x<1.0.
 
@@ -111,7 +111,7 @@ It's still a `double` that has four billion shades, but it's much faster.
 </details>
 
 
-## Xrandom.nextIntNN()
+## nextIntNN
 
 These methods return the raw output of the generator. Depending on the algorithm, 
 the output is a number consisting of either 32 random bits or 64 random bits. 
