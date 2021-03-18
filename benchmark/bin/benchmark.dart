@@ -147,7 +147,7 @@ void main(List<String> arguments) {
       final row = <dynamic>[];
 
       //if (random is RandomBase32)
-        row.add(( (random is RandomBase64) | !(random is RandomBase32) ) ? '+' : '-' );
+        row.add(( !(random is RandomBase64) | !(random is RandomBase32) ) ? '+' : '-' );
 
       otherRows.add(row);
 
