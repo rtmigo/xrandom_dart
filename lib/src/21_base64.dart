@@ -68,37 +68,37 @@ abstract class RandomBase64 extends RandomBase32 {
   // That's why we return highest bytes first, lowest bytes second
   //
 
-  // @override
-  // int nextInt(int range) {
-  //
-  //   // D. Lemire's "nearly divisionless" algorithm <https://arxiv.org/pdf/1805.10941.pdf>
-  //   // TODO add modulo hacks by O'Neil <https://git.io/Jm0D7>
-  //   // It also have Java implementations:
-  //   // <https://git.io/Jm8en> <https://git.io/JmBI0>
-  //
-  //   if (range<1 || range>0xFFFFFFFF) {
-  //     throw RangeError.range(range, 1, 0xFFFFFFFF);
-  //   }
-  //
-  //   int multiresult = nextRaw32() * range;
-  //
-  //   int leftover = multiresult & 0xffffffff;
-  //   if (leftover < range) {
-  //     final int threshold = (1<<32) % range; // 2^32 % n
-  //     while (leftover<threshold) {
-  //       multiresult = nextRaw32() * range;
-  //       leftover = multiresult & 0xffffffff;
-  //     }
-  //   }
-  //
-  //   const urs = 32;
-  //   final result = (multiresult >> urs) & ~(-1 << (64 - urs)); // (m >>> 32)
-  //
-  //   assert(0<=result);
-  //   assert(result<range);
-  //
-  //   return result;
-  // }
+  @override
+  int nextInt(int range) {
+
+    // D. Lemire's "nearly divisionless" algorithm <https://arxiv.org/pdf/1805.10941.pdf>
+    // TODO add modulo hacks by O'Neil <https://git.io/Jm0D7>
+    // It also have Java implementations:
+    // <https://git.io/Jm8en> <https://git.io/JmBI0>
+
+    if (range<1 || range>0xFFFFFFFF) {
+      throw RangeError.range(range, 1, 0xFFFFFFFF);
+    }
+
+    int multiresult = nextRaw32() * range;
+
+    int leftover = multiresult & 0xffffffff;
+    if (leftover < range) {
+      final int threshold = (1<<32) % range; // 2^32 % n
+      while (leftover<threshold) {
+        multiresult = nextRaw32() * range;
+        leftover = multiresult & 0xffffffff;
+      }
+    }
+
+    const urs = 32;
+    final result = (multiresult >> urs) & ~(-1 << (64 - urs)); // (m >>> 32)
+
+    assert(0<=result);
+    assert(result<range);
+
+    return result;
+  }
 
   @override
   double nextDouble() {
