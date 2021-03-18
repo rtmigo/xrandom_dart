@@ -96,13 +96,13 @@ void main(List<String> arguments) {
 
   List<Random> listGenerators() => [
         Random(777),
-        Xorshift32.expected(),
+        //Xorshift32.expected(),
         Xorshift64.expected(),
-        Xorshift128.expected(),
-        Xorshift128p.expected(),
-        Xoshiro128pp.expected(),
-        Xoshiro256pp.expected(),
-        Splitmix64.expected(),
+        // Xorshift128.expected(),
+        // Xorshift128p.expected(),
+        // Xoshiro128pp.expected(),
+        // Xoshiro256pp.expected(),
+        // Splitmix64.expected(),
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
