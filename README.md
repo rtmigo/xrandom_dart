@@ -99,16 +99,18 @@ quadrillion.
 <details>
   <summary>Speed comparison</summary>
 
-| Time (lower is better) | nextDouble | nextFloat |
-|------------------------|------------|-----------|
-| Random (dart:math)     |    1653    |     -     |
-| Xorshift32             |    1126    |    407    |
-| Xorshift64             |    1011    |    825    |
-| Xorshift128            |    1461    |    622    |
-| Xorshift128p           |    1141    |    860    |
-| Xoshiro128pp           |    2095    |    923    |
-| Xoshiro256pp           |    2294    |   1488    |
-| Splitmix64             |    1098    |    932    |
+| JS | Time (lower is better) | nextDouble | nextFloat |
+|----|------------------------|-----------:|----------:|
+|    | Xorshift64             |        588 |       368 |
+| ✓  | Xorshift32             |        648 |       236 |
+|    | Xorshift128p           |        656 |       395 |
+|    | Splitmix64             |        691 |       414 |
+| ✓  | Xorshift128            |        850 |       360 |
+| ✓  | *Random (dart:math)*     |        *962* |          |
+|    | Xoshiro256pp           |       1201 |       756 |
+| ✓  | Xoshiro128pp           |       1258 |       556 |
+
+
 </details>
 
 
