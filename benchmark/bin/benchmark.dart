@@ -7,7 +7,6 @@ import 'package:cli/nullsafe_tabulate.dart';
 import 'package:xrandom/xrandom.dart';
 
 
-
 enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
 
 const NUM_EXPERIMENTS = 50;
