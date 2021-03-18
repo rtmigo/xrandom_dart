@@ -17,7 +17,7 @@ Algorithms are [Xoshiro](https://prng.di.unimi.it/) for **quality** and
 
 ----------
 
-It's compatible with the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
+It's has the same API as the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
 
 ``` dart
 import 'package:xrandom/xrandom.dart';
