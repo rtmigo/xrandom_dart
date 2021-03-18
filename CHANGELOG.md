@@ -4,7 +4,7 @@
 
 - Renamed nextIntNN methods to nextRawNN 
 
-- Renamed XrandomHqJs to XrandomJs 
+- Renamed XrandomHqJs to XrandomJq 
 
 # 0.4.0
 

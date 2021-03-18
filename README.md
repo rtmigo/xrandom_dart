@@ -147,7 +147,7 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 
 # Algorithms
 
-| JS | Class          | Algorithm                                                         |    Published | Alias |
+| JS | Class          | Algorithm                                                         |    Introduced | Alias |
 |----|----------------|-------------------------------------------------------------------|-------------------|------|
 | ✓  | `Xorshift32`   | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)      | 2003 | `Xrandom` |
 |    | `Xorshift64`   | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)      |  2003 |

@@ -71,7 +71,7 @@ abstract class RandomBase64 extends RandomBase32 {
   @override
   int nextInt(int range) {
 
-    // It's Lemire's Method <https://arxiv.org/pdf/1805.10941.pdf>
+    // D. Lemire's "nearly divisionless" algorithm <https://arxiv.org/pdf/1805.10941.pdf>
     // TODO add modulo hacks by O'Neil <https://git.io/Jm0D7>
     // It also have Java implementations:
     // <https://git.io/Jm8en> <https://git.io/JmBI0>
