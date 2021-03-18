@@ -7,7 +7,7 @@ import 'package:cli/nullsafe_tabulate.dart';
 import 'package:xrandom/xrandom.dart';
 
 
-enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
+enum DoWhat { nextDouble, nextInt, nextBool, nextRaw32, nextRaw64, nextFloat,  }
 
 const NUM_EXPERIMENTS = 50;
 const NUM_ITEMS_PER_EXPERIMENT = 1000000;
@@ -33,13 +33,13 @@ int measureTime(Random r, DoWhat dbl) {
     case DoWhat.nextInt:
       for (var i = 0; i < N; ++i) { r.nextInt(nextIntMax); }
       break;
-    case DoWhat.nextInt32:
+    case DoWhat.nextRaw32:
       if (r is RandomBase32) {
         for (var i = 0; i < N; ++i)
           r.nextRaw32();
       }
       break;
-    case DoWhat.nextInt64:
+    case DoWhat.nextRaw64:
       if (r is RandomBase32) {
         for (var i = 0; i < N; ++i) r.nextRaw64();
       }
@@ -86,8 +86,8 @@ void main(List<String> arguments) {
     DoWhat.nextInt,
     DoWhat.nextDouble,
     DoWhat.nextBool,
-    DoWhat.nextInt32,
-    DoWhat.nextInt64,
+    DoWhat.nextRaw32,
+    DoWhat.nextRaw64,
     DoWhat.nextFloat,
     DoWhat.nextFloat,
     // DoWhat.nextFloatUint,
@@ -172,8 +172,8 @@ void main(List<String> arguments) {
 
   printColumns([
     DoWhat.nextInt,
-    DoWhat.nextInt32,
-    DoWhat.nextInt64,
+    DoWhat.nextRaw32,
+    DoWhat.nextRaw64,
   ]);
 
   print('');

@@ -129,16 +129,17 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 <details>
   <summary>Speed comparison</summary>
   
-| Time (lower is better) | nextInt | nextInt32 | nextInt64 |
-|------------------------|---------|-----------|-----------|
-| Random (dart:math)     |  1208   |     -     |     -     |
-| Xorshift32             |   719   |    409    |     -     |
-| Xorshift64             |  1114   |    814    |    838    |
-| Xorshift128            |   907   |    618    |     -     |
-| Xorshift128p           |  1162   |    854    |    952    |
-| Xoshiro128pp           |  1228   |    912    |     -     |
-| Xoshiro256pp           |  1746   |   1498    |   2039    |
-| Splitmix64             |  1248   |    931    |    782    |
+| JS | Time (lower is better) | nextInt | nextRaw32 | nextRaw64 |
+|----|------------------------|--------:|----------:|----------:|
+| ✓  | Xorshift32             |     646 |       232 |       558 |
+| ✓  | Xorshift128            |     764 |       353 |       811 |
+| ✓  | Random (dart:math)     |     881 |         0 |         0 |
+|    | Xorshift64             |     948 |       368 |       529 |
+| ✓  | Xoshiro128pp           |     962 |       544 |      1221 |
+|    | Xorshift128p           |    1037 |       399 |       545 |
+|    | Splitmix64             |    1084 |       418 |       514 |
+|    | Xoshiro256pp           |    1535 |       761 |      1129 |
+
 </details>
 
 
