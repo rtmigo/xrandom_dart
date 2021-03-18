@@ -264,3 +264,40 @@ non-uniform
 | Xoshiro128pp           |    2182    |    928    |
 | Xoshiro256pp           |    2092    |   1321    |
 | Splitmix64             |    1155    |    716    |
+
+== 2021-03-19
+
+divisionless
+
+| JS | Time (lower is better) | nextInt | nextDouble | nextBool |
+|----|------------------------|--------:|-----------:|---------:|
+| ✓  | Xorshift32             |     646 |        648 |      424 |
+| ✓  | Xorshift128            |     764 |        850 |      427 |
+| ✓  | Random (dart:math)     |     881 |        962 |      692 |
+|    | Xorshift64             |     948 |        588 |      398 |
+| ✓  | Xoshiro128pp           |     962 |       1258 |      428 |
+|    | Xorshift128p           |    1037 |        656 |      407 |
+|    | Splitmix64             |    1084 |        691 |      404 |
+|    | Xoshiro256pp           |    1535 |       1201 |      415 |
+
+| JS | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
+|----|------------------------|--------:|----------:|----------:|
+| ✓  | Xorshift32             |     646 |       232 |       558 |
+| ✓  | Xorshift128            |     764 |       353 |       811 |
+| ✓  | Random (dart:math)     |     881 |         0 |         0 |
+|    | Xorshift64             |     948 |       368 |       529 |
+| ✓  | Xoshiro128pp           |     962 |       544 |      1221 |
+|    | Xorshift128p           |    1037 |       399 |       545 |
+|    | Splitmix64             |    1084 |       418 |       514 |
+|    | Xoshiro256pp           |    1535 |       761 |      1129 |
+
+| JS | Time (lower is better) | nextDouble | nextFloat |
+|----|------------------------|-----------:|----------:|
+|    | Xorshift64             |        588 |       368 |
+| ✓  | Xorshift32             |        648 |       236 |
+|    | Xorshift128p           |        656 |       395 |
+|    | Splitmix64             |        691 |       414 |
+| ✓  | Xorshift128            |        850 |       360 |
+| ✓  | Random (dart:math)     |        962 |         0 |
+|    | Xoshiro256pp           |       1201 |       756 |
+| ✓  | Xoshiro128pp           |       1258 |       556 |
