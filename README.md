@@ -165,7 +165,7 @@ The library is written in pure Dart. Therefore, it works wherever Dart works.
 But among the platforms supported by Dart, there is one with a big difference: 
 JavaScript. Numbers in JavaScript have only 53 significant bits instead of 64.
 If your target platform is JavaScript, then the selection will have to be 
-narrowed down to the options marked with ✓ checkmark in the JS column.
+narrowed down to the options marked with [✓] checkmark in the JS column.
 
 Trying to create a JavaScript-incompatible object in JavaScripts-compiled will lead to `UnsupportedError`.
 
