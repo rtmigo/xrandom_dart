@@ -15,7 +15,7 @@ const NUM_ITEMS_PER_EXPERIMENT = 1000000;
 int measureTimeRuns = 0;
 
 int measureTime(Random r, DoWhat dbl) {
-  print('${++measureTimeRuns} benchmarking ${r.runtimeType} $dbl');
+  //print('${++measureTimeRuns} benchmarking ${r.runtimeType} $dbl');
 
   final nextIntMax = Random().nextInt(0xFFFFFFFF)+1;
 
@@ -55,7 +55,7 @@ int measureTime(Random r, DoWhat dbl) {
 }
 
 int mean(List<int> values) =>
-    (values.reduce((a, b) => a + b)*10 / values.length).round();
+    (values.reduce((a, b) => a + b)*30 / values.length).round();
 
 class Bench implements Comparable {
   Bench(this.className, this.doWhat);
@@ -106,6 +106,7 @@ void main(List<String> arguments) {
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
+    print('Experiment ${experiment+1}/$NUM_EXPERIMENTS');
     for (final doingWhat in dowhatz) {
       for (var random in listGenerators()..shuffle()) {
         final time = measureTime(random, doingWhat);
