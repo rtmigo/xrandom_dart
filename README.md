@@ -71,8 +71,7 @@ for (var i=0; i<BILLIONS; i++)
 
 -------
 
-If you compile your code to JavaScript (Flutter Web, Node.js) and still 
-want XrandomHq:
+If you compile your code to JavaScript (Flutter Web, Node.js) and still want something more serious, than basic `Xrandom`:
 
 ``` dart
 final random = XrandomJs();  // works on all platforms
