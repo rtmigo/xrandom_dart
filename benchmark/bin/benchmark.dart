@@ -159,7 +159,7 @@ void main(List<String> arguments) {
 
 //    print('To be out not to be? ${random.nextBool() ? "yes" : "no"}');
 
-    print(tabulate(rows));
+    print(tabulate(rows, sorting: [Sort(1)]));
   }
 
   print('');
