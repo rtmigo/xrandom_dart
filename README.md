@@ -93,7 +93,7 @@ The Xrandom classes has additions compared to the system `Random`.
 `nextFloat` generates a floating-point value in range 0.0≤x<1.0.
 
 Unlike the `nextDouble`, `nextFloat` prefers speed to precision. 
-It's still a `double` that has four billion shades, but faster.
+It's still a `double` that has four billion shades, but generated faster.
 
 <details>
   <summary>Benchmarks</summary>
