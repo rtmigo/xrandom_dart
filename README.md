@@ -83,9 +83,7 @@ for (var i=0; i<BILLIONS; i++)
 **`XrandomJs`** class is **high quality** with compromises, and works **everywhere**.
 
 
-# Additions
-
-The Xrandom classes has additions compared to the system `Random`.
+# Additions to Random
 
 
 ## nextFloat
