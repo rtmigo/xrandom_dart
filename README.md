@@ -122,8 +122,8 @@ In general, this is **much faster** than `nextInt`.
 
 | JS    | Method        | Returns         | Equivalent of                   | 
 |-------|--------|-----------------|---------------------------------|
-| **✓** | `nextInt32()` | 32-bit unsigned | `nextInt(0xFFFFFFFE)+1`         |
-| **✗** | `nextInt64()` | 64-bit signed   | `nextInt(0xFFFFFFFFFFFFFFFE)+1` |
+| **✓** | `nextInt32()` | 32-bit unsigned | `nextInt(0xffffffff)+1`         |
+| **✗** | `nextInt64()` | 64-bit signed   | `nextInt(0xffffffffffffffff)+1` |
 
 However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` works there.
 
