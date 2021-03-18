@@ -3,9 +3,10 @@
 
 import 'dart:math';
 
+import 'package:cli/nullsafe_tabulate.dart';
 import 'package:xrandom/xrandom.dart';
 
-import 'nullsafe_tabulate.dart';
+
 
 enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
 
@@ -158,7 +159,7 @@ void main(List<String> arguments) {
 
 //    print('To be out not to be? ${random.nextBool() ? "yes" : "no"}');
 
-    print(tabulate(rows, rowAlign: [Align.left], headerAlign: [Align.left]));
+    print(tabulate(rows));
   }
 
   print('');
@@ -186,4 +187,6 @@ void main(List<String> arguments) {
     DoWhat.nextDouble,
     DoWhat.nextFloat,
   ]);
+
+  print('');
 }
