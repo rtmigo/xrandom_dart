@@ -49,24 +49,13 @@ int measureTime(Random r, DoWhat dbl) {
         for (var i = 0; i < N; ++i) r.nextFloat();
       }
       break;
-    // case DoWhat.nextFloatInline:
-    //   if (r is RandomBase32) {
-    //     for (var i = 0; i < N; ++i) r.nextFloatInline();
-    //   }
-    //   break;
-    // case DoWhat.nextFloatUint:
-    //   if (r is RandomBase32) {
-    //     for (var i = 0; i < N; ++i) r.nextFloatUint();
-    //   }
-    //   break;
-
   }
 
   return sw.elapsed.inMilliseconds;
 }
 
 int mean(List<int> values) =>
-    (values.reduce((a, b) => a + b) / values.length).round();
+    (values.reduce((a, b) => a + b)*10 / values.length).round();
 
 class Bench implements Comparable {
   Bench(this.className, this.doWhat);
