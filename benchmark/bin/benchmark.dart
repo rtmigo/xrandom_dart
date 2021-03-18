@@ -9,7 +9,7 @@ import 'nullsafe_tabulate.dart';
 
 enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
 
-const NUM_EXPERIMENTS = 10;
+const NUM_EXPERIMENTS = 3;
 const NUM_ITEMS_PER_EXPERIMENT = 5000000;
 
 int measureTime(Random r, DoWhat dbl) {
@@ -104,12 +104,12 @@ void main(List<String> arguments) {
   List<Random> listGenerators() => [
         Random(777),
         Xorshift32.expected(),
-        // Xorshift64.expected(),
+        //Xorshift64.expected(),
         // Xorshift128.expected(),
         // Xorshift128p.expected(),
         // Xoshiro128pp.expected(),
         // Xoshiro256pp.expected(),
-        // Splitmix64.expected(),
+        Splitmix64.expected(),
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
