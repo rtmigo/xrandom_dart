@@ -84,12 +84,12 @@ void main(List<String> arguments) {
 
   final dowhatz = [
     DoWhat.nextInt,
-    DoWhat.nextDouble,
-    DoWhat.nextBool,
-    DoWhat.nextRaw32,
-    DoWhat.nextRaw64,
-    DoWhat.nextFloat,
-    DoWhat.nextFloat,
+    // DoWhat.nextDouble,
+    // DoWhat.nextBool,
+    // DoWhat.nextRaw32,
+    // DoWhat.nextRaw64,
+    // DoWhat.nextFloat,
+    // DoWhat.nextFloat,
     // DoWhat.nextFloatUint,
     // DoWhat.nextFloatInline,
   ];
@@ -101,7 +101,7 @@ void main(List<String> arguments) {
         // Xorshift128.expected(),
         // Xorshift128p.expected(),
         // Xoshiro128pp.expected(),
-        // Xoshiro256pp.expected(),
+        Xoshiro256pp.expected(),
         // Splitmix64.expected(),
       ];
 
