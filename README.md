@@ -177,16 +177,16 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 
 # More benchmarks
 
-| Time (lower is better) | nextInt | nextDouble | nextBool |
-|------------------------|---------|------------|----------|
-| Random (dart:math)     |  1208   |    1653    |   1177   |
-| Xorshift32             |   719   |    1126    |   710    |
-| Xorshift64             |  1114   |    1011    |   685    |
-| Xorshift128            |   907   |    1461    |   719    |
-| Xorshift128p           |  1162   |    1141    |   694    |
-| Xoshiro128pp           |  1228   |    2095    |   726    |
-| Xoshiro256pp           |  1746   |    2294    |   721    |
-| Splitmix64             |  1248   |    1098    |   688    |
+| JS | Time (lower is better) | nextInt | nextDouble | nextBool |
+|----|------------------------|--------:|-----------:|---------:|
+| ✓  | Xorshift32             |     646 |        648 |      424 |
+| ✓  | Xorshift128            |     764 |        850 |      427 |
+| ✓  | Random (dart:math)     |     881 |        962 |      692 |
+|    | Xorshift64             |     948 |        588 |      398 |
+| ✓  | Xoshiro128pp           |     962 |       1258 |      428 |
+|    | Xorshift128p           |    1037 |        656 |      407 |
+|    | Splitmix64             |    1084 |        691 |      404 |
+|    | Xoshiro256pp           |    1535 |       1201 |      415 |
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 
