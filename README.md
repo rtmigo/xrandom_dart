@@ -73,9 +73,7 @@ for (var i=0; i<BILLIONS; i++)
 
 **`XrandomHq`** class is uncompromisingly  **high quality** and works on **64-bit platforms**: i.e on all desktops, phones and tablets.
 
--------
-
-If you compile your code to JavaScript (Flutter Web, Node.js):
+But if your target is JavaScript (Flutter Web, Node.js):
 
 ``` dart
 final random = XrandomJq();  // works on all platforms
