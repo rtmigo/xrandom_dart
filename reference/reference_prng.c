@@ -807,29 +807,106 @@ void write_splitmix32(char* name, uint32_t a) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+//	TYCHE-I
+//	https://www.researchgate.net/publication/233997772_Fast_and_Small_Nonlinear_Pseudorandom_Number_Generators_for_Computer_Simulation
+//	There is no C source in the paper. 
+//	This implementation found in https://git.io/JmVgq by D.Lemire
 
-struct xorwow_state {
-	uint32_t a, b, c, d, e;
-	uint32_t counter;
+struct tychei_state {
+  uint32_t a, b, c, d;
 };
 
-/* The state array must be initialized to not be all zero in the first four words */
-uint32_t xorwow(struct xorwow_state *state)
-{
-	/* Algorithm "xorwow" from p. 5 of Marsaglia, "Xorshift RNGs" */
-	uint32_t t = state->e;
-	uint32_t s = state->a;
-	state->e = state->d;
-	state->d = state->c;
-	state->c = state->b;
-	state->b = s;
-	t ^= t >> 2;
-	t ^= t << 1;
-	t ^= s ^ (s << 4);
-	state->a = t;
-	state->counter += 362437;
-	return t + state->counter;
+uint32_t next_tyche_i(struct tychei_state* state) {
+	#define TYCHEI_ROTL32(x, n) ((x << n) | (x >> (32 - n)))
+	state->b = TYCHEI_ROTL32(state->b, 25) ^ state->c;
+	state->d = TYCHEI_ROTL32(state->d, 24) ^ state->a;
+	state->c -= state->d;
+	state->a -= state->b;
+	state->b = TYCHEI_ROTL32(state->b, 20) ^ state->c;
+	state->d = TYCHEI_ROTL32(state->d, 16) ^ state->a;
+	state->c -= state->d;
+	state->a -= state->b;
+	#undef TYCHEI_ROTL32
+	return state->b;
 }
+
+
+
+
+void write_tyche_i(
+	char* name, 
+	uint32_t a, uint32_t b, uint32_t c, uint32_t d) {
+
+	struct tychei_state s;
+	s.a=a;
+	s.b=b;
+	s.c=c;
+	s.d=d;
+
+ 	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "%u %u %u %u", a, b, c, d);
+
+	char* descr = "Tyche-i by S. Neves and F. Araujo (rewritten from C++ implementation by D. Lemire)";
+	char* alg_name = "tychei";
+	FILE *ints_file = open_ref_outfile(
+		alg_name,
+		descr,
+			name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile(
+			alg_name, descr, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile(
+			alg_name, descr, name, seed_str, "double_cast");
+
+	for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+
+		uint32_t x1 = next_tyche_i(&s);
+		fprintf(ints_file, "'%08x',\n", x1);
+
+		uint32_t x2 = next_tyche_i(&s);
+		fprintf(ints_file, "'%08x',\n", x2);
+
+		uint64_t combined = (((uint64_t)x1)<<32)|x2;
+
+		fprintf(doubles_file, "'%.20e',\n", 
+				vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", 
+				vigna_uint64_to_double_alt(combined));
+	}
+
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
+}
+
+
+// void write_splitmix64(char* name, uint64_t a) {
+
+// 	struct splitmix64_state state;
+// 	state.x = a;
+
+// 	char seed_str[256];
+// 	snprintf(seed_str, sizeof seed_str, "0x%llx", a);
+
+// 	char* alg_name = "splitmix64";
+// 	FILE *ints_file = open_ref_outfile_old(alg_name, name, seed_str, "int");
+// 	FILE *doubles_file = open_ref_outfile_old(alg_name, name, 
+// 		seed_str, "double_mult");
+// 	FILE *doubles_cast_file = open_ref_outfile_old(alg_name, name, 
+// 		seed_str, "double_cast");
+
+// 	for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+// 		uint64_t x = next_splitmix64(&state);
+// 		fprintf(ints_file, "'%016llx',\n", x);
+
+// 		fprintf(doubles_file, "'%.20e',\n", vigna_uint64_to_double_mult(x));
+// 		fprintf(doubles_cast_file, "'%.20e',\n", vigna_uint64_to_double_alt(x));
+// 	}
+
+// 	close_ref_outfile(doubles_cast_file);
+// 	close_ref_outfile(doubles_file);
+// 	close_ref_outfile(ints_file);
+// }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // The "Lemire Method" <https://arxiv.org/abs/1805.10941> implemented 
@@ -1008,6 +1085,8 @@ int main()
 	write128("a", 1, 2, 3, 4);
 	write128("b", 5, 23, 42, 777);
 	write128("c", 1081037251u, 1975530394u, 2959134556u, 1579461830u);	
+
+	write_tyche_i("a", 1, 2, 3, 4);
 
 	write_xoshiro128pp("a", 1, 2, 3, 4);
 	write_xoshiro128pp("b", 5, 23, 42, 777);
