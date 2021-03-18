@@ -8,9 +8,11 @@ Classes implementing all-purpose, rock-solid **random number generators**.
 
 Library priorities:
 - generation of identical bit-accurate numbers regardless of the platform
-- performance
+- reproducibility of the random results in the future
 - high-quality randomness
-- reproducibility of the same random results in the future
+- performance
+
+
 
 
 
