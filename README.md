@@ -154,8 +154,8 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 |  | `Xorshift64`      | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   |  2003 |
 | ✓ | `Xorshift128`     | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  |  2003 |
 |  | `Xorshift128p` | [xorshift128+ v2](https://arxiv.org/abs/1404.0390) |  2015 |
-| ✓ | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `XrandomJq` |
-|   | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 | `XrandomHq` |
+| ✓ | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `XrandomJQ` |
+|   | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 | `XrandomHQ` |
 |  | `Splitmix64` | [splitmix64](https://prng.di.unimi.it/splitmix64.c) |  2015 |
 
 # Compatibility
