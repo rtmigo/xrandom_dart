@@ -11,7 +11,7 @@ import 'package:xrandom/xrandom.dart';
 enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
 
 const NUM_EXPERIMENTS = 3;
-const NUM_ITEMS_PER_EXPERIMENT = 10000000;
+const NUM_ITEMS_PER_EXPERIMENT = 1000000;
 
 int measureTimeRuns = 0;
 
@@ -133,7 +133,7 @@ void main(List<String> arguments) {
   void printColumns(List<DoWhat> whatz) {
     final rows = <List<dynamic>>[];
 
-    final header = ['Time (lower is better)'];
+    final header = ['JS', 'Time (lower is better)'];
     for (final x in whatz) {
       final str = x.toString();
       header.add(str.substring(str.lastIndexOf('.') + 1));
@@ -145,6 +145,10 @@ void main(List<String> arguments) {
 
     for (final random in listGenerators()) {
       final row = <dynamic>[];
+
+      //if (random is RandomBase32)
+        row.add(( (random is RandomBase64) | !(random is RandomBase32) ) ? '+' : '-' );
+
       otherRows.add(row);
 
       final type = random.runtimeType.toString();
