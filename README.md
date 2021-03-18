@@ -71,20 +71,20 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation( random.nextDouble() );
 ```
 
-**`XrandomHq`** class is **high quality** and works on **64-bit platforms**: desktops, phones and tablets.
+**`XrandomHq`** class is uncompromisingly  **high quality** and works on **64-bit platforms**: desktops, phones and tablets.
 
 -------
 
 If you compile your code to JavaScript (Flutter Web, Node.js) and still want something more serious, than simple `Xrandom`:
 
 ``` dart
-final random = XrandomJs();  // works on all platforms
+final random = XrandomJq();  // works on all platforms
 
 for (var i=0; i<BILLIONS; i++)  
     feedMonteCarloSimulation( random.nextDouble() ); // on JS? O_O  
 ```
 
-**`XrandomJs`** class is **high quality** with compromises, and works **everywhere**.
+**`XrandomJq`** class is **high quality**, and works **everywhere**.
 
 
 # Additions to Random
