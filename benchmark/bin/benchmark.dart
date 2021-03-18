@@ -158,8 +158,10 @@ void main(List<String> arguments) {
   }
 
   print('');
+//
+  //printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
+  printColumns([DoWhat.nextInt]);
 
-  printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
 
   print('');
 
@@ -170,18 +172,18 @@ void main(List<String> arguments) {
   // ]);
 
 
-  printColumns([
-    DoWhat.nextInt,
-    DoWhat.nextRaw32,
-    DoWhat.nextRaw64,
-  ]);
-
-  print('');
-
-  printColumns([
-    DoWhat.nextDouble,
-    DoWhat.nextFloat,
-  ]);
+  // printColumns([
+  //   DoWhat.nextInt,
+  //   DoWhat.nextRaw32,
+  //   DoWhat.nextRaw64,
+  // ]);
+  //
+  // print('');
+  //
+  // printColumns([
+  //   DoWhat.nextDouble,
+  //   DoWhat.nextFloat,
+  // ]);
 
   print('');
 }
