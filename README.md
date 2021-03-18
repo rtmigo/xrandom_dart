@@ -148,27 +148,32 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 
 # Algorithms
 
-| JS    | Class  | Algorithm  |    Published | Alias |
-|-------|--------|------------|-------------------|------|
-| ✓ | `Xorshift32` |   [xorshift32](https://www.jstatsoft.org/article/view/v008i14)   | 2003 | `Xrandom` |
-|  | `Xorshift64`      | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)   |  2003 |
-| ✓ | `Xorshift128`     | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)  |  2003 |
-|  | `Xorshift128p` | [xorshift128+ v2](https://arxiv.org/abs/1404.0390) |  2015 |
-| ✓ | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `XrandomJq` |
-|   | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 | `XrandomHq` |
-|  | `Splitmix64` | [splitmix64](https://prng.di.unimi.it/splitmix64.c) |  2015 |
+| JS | Class          | Algorithm                                                         |    Published | Alias |
+|----|----------------|-------------------------------------------------------------------|-------------------|------|
+| ✓  | `Xorshift32`   | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)      | 2003 | `Xrandom` |
+|    | `Xorshift64`   | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)      |  2003 |
+| ✓  | `Xorshift128`  | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)     |  2003 |
+|    | `Xorshift128p` | [xorshift128+ v2](https://arxiv.org/abs/1404.0390)                |  2015 |
+| ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `XrandomJq` |
+|    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 | `XrandomHq` |
+|    | `Splitmix64`   | [splitmix64](https://prng.di.unimi.it/splitmix64.c)               |  2015 |
 
 # Compatibility
 
-You can safely **use any classes on mobile and desktop** platforms. 
+The library is written in pure Dart. Therefore, it works wherever Dart works.
 
-But if you target **JavaScript** (Web, Node.js), you will have to 
-**limit your choice**. The reason is the lack of support for 64-bit numbers 
-in JavaScript.
-
-
+But among the platforms supported by Dart, there is one with a big difference: 
+JavaScript. Numbers in JavaScript have only 53 significant bits instead of 64.
+If your target platform is JavaScript, then the selection will have to be 
+narrowed down to the options marked with ✓ checkmark in the JS column.
 
 Trying to create a JavaScript-incompatible object in JavaScripts-compiled will lead to `UnsupportedError`.
+
+You can safely **use any classes on mobile and desktop** platforms. 
+
+If you target **JavaScript** (Web, Node.js), you will have to **limit your choice**  
+
+
 
 
 
