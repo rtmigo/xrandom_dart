@@ -11,7 +11,7 @@ import 'package:xrandom/xrandom.dart';
 enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
 
 const NUM_EXPERIMENTS = 50;
-const NUM_ITEMS_PER_EXPERIMENT = 10000000;
+const NUM_ITEMS_PER_EXPERIMENT = 1000000;
 
 int measureTimeRuns = 0;
 
