@@ -1,11 +1,12 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:xrandom/src/20_random_base.dart';
+import 'package:xrandom/src/21_base32.dart';
 import 'package:xrandom/src/50_splitmix64.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
+import '21_base64.dart';
 
 enum Xorshift128pConstants {
   c23_18_5

@@ -7,27 +7,28 @@ import 'package:quiver/iterables.dart';
 import 'package:test/test.dart';
 import 'package:xrandom/src/00_errors.dart';
 import 'package:xrandom/src/00_ints.dart';
-import 'package:xrandom/src/20_random_base.dart';
+import 'package:xrandom/src/21_base32.dart';
+import 'package:xrandom/src/21_base64.dart';
 
 import 'data/generated.dart';
 
 const FAST = INT64_SUPPORTED;
 
-enum ReferenceType { ints, double_mult, double_cast, doornik_randbl_32 }
+enum RefdataType { hexint, double_mult, double_cast, doornik_randbl_32 }
 
-Map dataMap(String algo, String seedId, ReferenceType type) {
+Map refData(String algo, String seedId, RefdataType type) {
   String suffix;
   switch (type) {
-    case ReferenceType.ints:
+    case RefdataType.hexint:
       suffix = 'int';
       break;
-    case ReferenceType.double_mult:
+    case RefdataType.double_mult:
       suffix = 'double_mult';
       break;
-    case ReferenceType.double_cast:
+    case RefdataType.double_cast:
       suffix = 'double_cast';
       break;
-    case ReferenceType.doornik_randbl_32:
+    case RefdataType.doornik_randbl_32:
       suffix = 'doornik_randbl_32';
       break;
   }
@@ -42,6 +43,15 @@ Map dataMap(String algo, String seedId, ReferenceType type) {
   throw Exception('Not found [$algo] [$seedId] [$suffix]');
 }
 
+extension RdataExt on Map {
+  Iterable<int> refdataInts() => (this['values'] as List<String>).map((s) => int.parse(s, radix: 16));
+  
+  //{
+  //   for (var line in m['values']) {
+  //     yield int.parse(line);
+  //   }  
+}
+
 Iterable<double> loadDoubles(Map m) sync* {
   for (var line in m['values']) {
     yield double.parse(line);
@@ -52,12 +62,13 @@ Iterable<String> rdIntsAsStrings(Map m) {
   return m['values'];
 }
 
+
 void checkDoornikRandbl32(RandomBase32 Function() createRandom, String seedId) {
   test('doornik_randbl_32 ${createRandom().runtimeType} seedId=$seedId', ()
   {
     final random = createRandom();
     final filePrefix = random.runtimeType.toString().toLowerCase();
-    final values = loadDoubles(dataMap(filePrefix, seedId, ReferenceType.doornik_randbl_32));
+    final values = loadDoubles(refData(filePrefix, seedId, RefdataType.doornik_randbl_32));
     for (final refItem in enumerate(values)) {
       assert(0<=refItem.value);
       assert(refItem.value<1.0);
@@ -80,12 +91,12 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 
     test('toDouble', () {
       final reftype = (random is RandomBase64)
-          ? ReferenceType.double_mult
-          : ReferenceType.double_cast;
+          ? RefdataType.double_mult
+          : RefdataType.double_cast;
 
       //if (random is RandomBase64)
 
-      final values = loadDoubles(dataMap(filePrefix, seedId, reftype));
+      final values = loadDoubles(refData(filePrefix, seedId, reftype));
       int idx = 0;
       for (final value in values) {
         expect(random.nextDouble(), value, reason: 'item ${idx++}');
@@ -95,7 +106,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
     if (createRandom() is RandomBase64) {
       test('nextDoubleMemcast', () {
         final values =
-            loadDoubles(dataMap(filePrefix, seedId, ReferenceType.double_cast));
+            loadDoubles(refData(filePrefix, seedId, RefdataType.double_cast));
         int idx = 0;
         for (final value in values) {
           expect((random as RandomBase64).nextDoubleBitcast(), value,
@@ -107,7 +118,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
     if (createRandom() is RandomBase64) {
       test('nextInt64', () {
         final values =
-            rdIntsAsStrings(dataMap(filePrefix, seedId, ReferenceType.ints));
+            rdIntsAsStrings(refData(filePrefix, seedId, RefdataType.hexint));
         for (final item in enumerate(values)) {
           expect((random as RandomBase64).nextInt64().toHexUint64(), item.value,
               reason: 'item ${item.index}');
@@ -116,7 +127,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
     } else {
       test('nextInt32', () {
         final values =
-            rdIntsAsStrings(dataMap(filePrefix, seedId, ReferenceType.ints));
+            rdIntsAsStrings(refData(filePrefix, seedId, RefdataType.hexint));
         for (final item in enumerate(values)) {
           expect(random.nextInt32().toHexUint32(), item.value,
               reason: 'item ${item.index}');
@@ -174,8 +185,8 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
           greaterThan(90));
     });
 
-    test('Huge ints: (1<<32)',
-        () => checkHugeInts(createRandom(), 4294967296));
+    // test('Huge ints: (1<<32)',
+    //     () => checkHugeInts(createRandom(), 4294967296));
     // // "the fast case for powers of two"
     // test('Huge ints: 0x80000000',
     //     () => checkHugeInts(createRandom(), 0x80000000));
@@ -194,6 +205,7 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
       final r = createRandom();
       expect(() => r.nextInt(-1), throwsRangeError);
       expect(() => r.nextInt(0), throwsRangeError);
+      expect(() => r.nextInt(0xFFFFFFFF+1), throwsRangeError);
       // if (INT64_SUPPORTED) {
       //   r.nextInt(0xFFFFFFFF + 1); // no errors
       // } else {

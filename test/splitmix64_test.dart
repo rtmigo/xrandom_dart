@@ -26,7 +26,7 @@ void main() {
   test('expected values', () {
     expect(expectedList(Splitmix64.expected()), [
       int.parse('-1280933994267506231'),
-      75710,
+      73951,
       0.9449949262451789,
       false,
       false,

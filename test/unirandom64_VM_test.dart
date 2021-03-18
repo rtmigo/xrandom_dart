@@ -4,7 +4,7 @@
 @TestOn('vm')
 
 import 'package:test/test.dart';
-import 'package:xrandom/src/20_random_base.dart';
+import 'package:xrandom/src/21_base32.dart';
 import 'package:xrandom/src/60_xorshift128.dart';
 
 import 'package:xrandom/src/00_ints.dart';

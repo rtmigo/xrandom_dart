@@ -17,16 +17,16 @@ void main() {
   checkReferenceFiles(() => Xorshift64(42), 'b');
   checkReferenceFiles(() => Xorshift64(3141592653589793238), 'c');
 
-  test('expected values', () {
-    expect(expectedList(Xorshift64.expected()), [
-      int.parse('-6926213550972868430'),
-      40031,
-      0.38167886102443327,
-      false,
-      true,
-      false
-    ]);
-  });
+  // test('expected values', () {
+  //   expect(expectedList(Xorshift64.expected()), [
+  //     int.parse('-6926213550972868430'),
+  //     40031,
+  //     0.38167886102443327,
+  //     false,
+  //     true,
+  //     false
+  //   ]);
+  // });
 
   test('create without args', () async {
     final random1 = Xorshift64();

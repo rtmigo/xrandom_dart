@@ -1,10 +1,11 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:xrandom/src/20_random_base.dart';
+import 'package:xrandom/src/21_base32.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
+import '21_base64.dart';
 
 /// Random number generator based on **splitmix64** algorithm by S. Vigna (2015).
 /// The reference implementation in C can be found in

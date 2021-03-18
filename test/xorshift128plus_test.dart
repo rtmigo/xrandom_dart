@@ -19,7 +19,7 @@ void main() {
   test('expected values', () {
     expect(expectedList(Xorshift128p.expected()), [
       int.parse('8256696158060995935'),
-      27312,
+      69630,
       0.04017928972328655,
       false,
       true,

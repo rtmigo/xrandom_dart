@@ -80,12 +80,7 @@ extension BitInt on int {
   String toHexUint32uc() => this.toHexUint32().toUpperCase(); // todo remove
   String toHexUint64uc() => this.toHexUint64().toUpperCase(); // todo remove
 
-  /// ??? C-like conversion from value typed `uint32_t` to `int32_t`.
-  ///
-  /// ``` C
-  ///   uint32_t x = ...;
-  ///   return (int32_t)x;
-  /// ```
+  /// C-like conversion from value typed `uint32_t` to `int32_t`.
   @pragma('vm:prefer-inline')
   int uint32_to_int32() {
     assert(this>=0);
@@ -94,7 +89,8 @@ extension BitInt on int {
       return this;
     }
     else {
-      return this-(1<<32);//0x100000000;
+      // (1<<32) will fail on JS, but constant is OK
+      return this-0x100000000;
     }
   } //
 

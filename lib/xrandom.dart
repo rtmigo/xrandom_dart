@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 
-export 'src/20_random_base.dart' show RandomBase32, RandomBase64;
+export 'src/21_base32.dart' show RandomBase32, RandomBase64;
 export 'src/50_splitmix64.dart' show Splitmix64;
 export 'src/60_xorshift128.dart' show Xorshift128;
 export 'src/60_xorshift128plus.dart' show Xorshift128p;
