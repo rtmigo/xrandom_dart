@@ -129,7 +129,7 @@ void main(List<String> arguments) {
   }
 
   void printColumns(List<DoWhat> whatz) {
-    final rows = <List<String>>[];
+    final rows = <List<dynamic>>[];
 
     final header = ['Time (lower is better)'];
     for (final x in whatz) {
@@ -139,10 +139,10 @@ void main(List<String> arguments) {
 
     rows.add(header);
 
-    final otherRows = <List<String>>[];
+    final otherRows = <List<dynamic>>[];
 
     for (final random in listGenerators()) {
-      final row = <String>[];
+      final row = <dynamic>[];
       otherRows.add(row);
 
       final type = random.runtimeType.toString();
@@ -151,7 +151,7 @@ void main(List<String> arguments) {
       for (final doWhat in whatz) {
         final times = results[type]![doWhat]!;
         final avg = mean(times);
-        row.add(avg == 0 ? '-' : avg.toString());
+        row.add(avg == 0 ? 0 : avg);
       }
     }
 
