@@ -61,7 +61,7 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 
 -------
 
-If you need billions and billions of randoms without statistical artifacts:
+If you are solving a math problem:
 
 
 ``` dart
