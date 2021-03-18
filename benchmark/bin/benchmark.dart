@@ -141,7 +141,7 @@ void main(List<String> arguments) {
       otherRows.add(row);
 
       final type = random.runtimeType.toString();
-      row.add(type == '_Random' ? 'Random (dart:math)' : type);
+      row.add(type == '_Random' ? '*Random (dart:math)*' : type);
 
       for (final doWhat in whatz) {
         final times = results[type]![doWhat]!;

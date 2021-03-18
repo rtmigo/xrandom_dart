@@ -181,7 +181,7 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 |----|------------------------|--------:|-----------:|---------:|
 | ✓  | Xorshift32             |     646 |        648 |      424 |
 | ✓  | Xorshift128            |     764 |        850 |      427 |
-| ✓  | Random (dart:math)     |     881 |        962 |      692 |
+| ✓  | *Random (dart:math)*     |     881 |        962 |      692 |
 |    | Xorshift64             |     948 |        588 |      398 |
 | ✓  | Xoshiro128pp           |     962 |       1258 |      428 |
 |    | Xorshift128p           |    1037 |        656 |      407 |
