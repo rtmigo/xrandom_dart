@@ -111,7 +111,7 @@ It's still a `double` that has four billion shades, but it's much faster.
 </details>
 
 
-## Xrandom.nextInt32() and Xrandom.nextInt64()
+## Xrandom.nextIntNN()
 
 These methods return the raw output of the generator. Depending on the algorithm, 
 the output is a number consisting of either 32 random bits or 64 random bits. 
