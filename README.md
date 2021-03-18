@@ -164,7 +164,8 @@ However, in JavaScript, integers are limited to 53 bits. So only `nextInt32()` w
 You can safely **use any classes on mobile and desktop** platforms. 
 
 However, if you also target **JavaScript** (Web, Node.js), you will have to 
-**limit your choice**.
+**limit your choice**. The reason is the lack of support for 64-bit numbers 
+in JavaScript.
 
 
 
