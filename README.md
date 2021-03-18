@@ -97,7 +97,7 @@ It's still a `double`, but it has four billion shades instead on eight
 quadrillion.
 
 <details>
-  <summary>Benchmarks</summary>
+  <summary>Speed comparison</summary>
 
 | Time (lower is better) | nextDouble | nextFloat |
 |------------------------|------------|-----------|
@@ -127,7 +127,7 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 
 
 <details>
-  <summary>Benchmarks</summary>
+  <summary>Speed comparison</summary>
   
 | Time (lower is better) | nextInt | nextInt32 | nextInt64 |
 |------------------------|---------|-----------|-----------|
