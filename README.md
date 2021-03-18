@@ -92,8 +92,9 @@ for (var i=0; i<BILLIONS; i++)
 
 `nextFloat` generates a floating-point value in range 0.0≤x<1.0.
 
-Unlike the `nextDouble`, `nextFloat` prefers speed to precision. 
-It's still a `double` that has four billion shades, but generated faster.
+Unlike the `nextDouble`, `nextFloat` prefers speed to precision.
+It's still a `double`, but it has four billion shades instead on eight 
+quadrillion.
 
 <details>
   <summary>Benchmarks</summary>
