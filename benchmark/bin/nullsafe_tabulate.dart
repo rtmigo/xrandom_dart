@@ -26,7 +26,9 @@ String alignCenter(String text, int targetWidth) {
   return text;
 }
 
-String tabulate(List<List<String>> rows,
+String cellToString(dynamic cell) => cell.toString();
+
+String tabulate(List<List<dynamic>> rows,
     {List<Align>? headerAlign, List<Align>? rowAlign}) {
   final columnsCount = rows.map((r) => r.length).reduce(max);
 
@@ -39,7 +41,7 @@ String tabulate(List<List<String>> rows,
   final columnsWidths = <int>[];
   for (var iCol = 0; iCol < columnsCount; iCol++) {
     columnsWidths.add(
-        rows.map((row) => row[iCol]).map((cell) => cell.length).reduce(max));
+        rows.map((row) => row[iCol]).map((cell) => cellToString(cell).length).reduce(max));
   }
 
   var bar = List.generate(columnsCount, (i) => '-' * (columnsWidths[i] + 2))
@@ -76,7 +78,7 @@ String tabulate(List<List<String>> rows,
         }
       }
 
-      formatted += alignCell(cell, columnsWidths[iCol], align);
+      formatted += alignCell(cellToString(cell), columnsWidths[iCol], align);
       formatted += ' |';
     }
     formattedRows.add(formatted);

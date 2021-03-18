@@ -13,7 +13,7 @@ const NUM_EXPERIMENTS = 10;
 const NUM_ITEMS_PER_EXPERIMENT = 5000000;
 
 int measureTime(Random r, DoWhat dbl) {
-  print('Benchmarking ${r.runtimeType}');
+  print('Benchmarking ${r.runtimeType} $dbl');
 
   final sw = Stopwatch()..start();
 
