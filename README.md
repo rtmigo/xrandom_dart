@@ -134,7 +134,7 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 |----|------------------------|--------:|----------:|----------:|
 | ✓  | Xorshift32             |     646 |       232 |       558 |
 | ✓  | Xorshift128            |     764 |       353 |       811 |
-| ✓  | Random (dart:math)     |     881 |         0 |         0 |
+| ✓  | *Random (dart:math)*     |     881 |         0 |         0 |
 |    | Xorshift64             |     948 |       368 |       529 |
 | ✓  | Xoshiro128pp           |     962 |       544 |      1221 |
 |    | Xorshift128p           |    1037 |       399 |       545 |
