@@ -71,7 +71,7 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation( random.nextDouble() );
 ```
 
-**`XrandomHq`** class is uncompromisingly  **high quality** and works on **64-bit platforms**: all desktops, phones and tablets.
+**`XrandomHq`** class is uncompromisingly  **high quality** and works on **64-bit platforms**: i.e on all desktops, phones and tablets.
 
 -------
 
