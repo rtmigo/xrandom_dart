@@ -117,7 +117,7 @@ These methods return the raw output of the generator. Depending on the algorithm
 the output is a number consisting of either 32 random bits or 64 random bits. 
 
 Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, both methods work for all classes regardless of the algorithm.
-In general, this is **much faster** than `nextInt`.
+In general, this is faster than `nextInt`.
 
 | JS    | Method        | Returns         | Equivalent of                   | 
 |-------|--------|-----------------|---------------------------------|
