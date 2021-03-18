@@ -79,33 +79,6 @@ abstract class RandomBase32 implements Random {
   // the code is possibly running in 53-bit JavaScript.
   //
 
-  int nextIntShorter(int max) {
-    // https://stackoverflow.com/a/17560604
-
-    // based on dart:math <https://git.io/JqCbB>
-    // (BSD) 2012, the Dart project authors
-
-    const RANDMAX = 0xFFFFFFFF;
-    const NUMRAND = RANDMAX + 1; //1 << 32; // 0x100000000
-    const limit = 0x3FFFFFFF;
-    if ((max <= 0) || ((max > limit) && (max > NUMRAND))) {
-      throw RangeError.range(max, 1, NUMRAND, 'max');
-    }
-
-    var rnd32;
-    var remainder;
-    final cmp = NUMRAND - max;
-    do {
-      rnd32 = this.nextInt32();
-      remainder = rnd32 % max;
-
-      // max*factor + remainder = rnd32
-      // rnd32-remainder = max*factor
-
-    } while (rnd32 - remainder > cmp);
-    return remainder;
-  }
-
   /// Generates a non-negative random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
   ///
