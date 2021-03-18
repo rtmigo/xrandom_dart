@@ -129,6 +129,7 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 <details>
   <summary>Speed comparison</summary>
   
+  
 | JS | Time (lower is better) | nextInt | nextRaw32 | nextRaw64 |
 |----|------------------------|--------:|----------:|----------:|
 | ✓  | Xorshift32             |     646 |       232 |       558 |
