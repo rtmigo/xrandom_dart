@@ -164,17 +164,7 @@ You can safely **use any classes on mobile and desktop** platforms.
 However, if you also target **JavaScript** (Web, Node.js), you will have to 
 **limit your choice**.
 
-Full compatibility table:
 
-| Class                | Is a    | Mobile | Desktop | JavaScript |
-|----------------------|---------|--------|---------|------------|
-| **`Xorshift32`**     | 32-bit  | **✓**  | **✓**  | **✓**      |
-| **`Xorshift128`**    | 32-bit  | **✓**  | **✓**  | **✓**      |
-| **`Xoshiro128pp`**   | 32-bit  | **✓**  | **✓**  | **✓**      |
-| `Xorshift64`         | 64-bit  | **✓**  | **✓**  | **✗**      |
-| `Xorshift128p`       | 64-bit  | **✓**  | **✓**  | **✗**      |
-| `Xoshiro256pp`       | 64-bit  | **✓**  | **✓**  | **✗**      |
-| `Splitmix64`       | 64-bit    | **✓**  | **✓**  | **✗**      |
 
 If you try to create a JavaScript-incompatible object in JavaScripts-compiled 
 code, an `UnsupportedError` will be thrown.
