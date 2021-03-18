@@ -8,9 +8,11 @@ Classes implementing all-purpose, rock-solid **random number generators**.
 
 Library priorities:
 - generation of identical bit-accurate numbers regardless of the platform
-- reproducibility of the same random results in the future
-- high-quality randomness
 - performance
+- high-quality randomness
+- reproducibility of the same random results in the future
+
+
 
 Algorithms are [Xoshiro](https://prng.di.unimi.it/) for **quality** and 
 [Xorshift](https://en.wikipedia.org/wiki/Xorshift) for **speed**.
