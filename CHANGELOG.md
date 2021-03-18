@@ -1,5 +1,7 @@
 # 0.5.0
 
+- nextInt() now uses Lemire's nearlydivisionless algorithm 
+
 - Renamed XrandomHqJs to XrandomJs 
 
 # 0.4.0

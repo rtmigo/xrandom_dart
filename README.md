@@ -15,17 +15,7 @@ Library priorities:
 Algorithms are [Xoshiro](https://prng.di.unimi.it/) for **quality** and 
 [Xorshift](https://en.wikipedia.org/wiki/Xorshift) for **speed**.
 
-# Speed
-
-Generating 50 million random numbers with AOT-compiled binary. 
-
-| Time (lower is better) | nextInt | nextDouble | nextBool |
-|------------------------|---------|------------|----------|
-| Random (dart:math)     |  1172   |    1541    |   1134   |
-| Xrandom             |   719   |    1126    |   710    |
-
-
-# Simplicity
+----------
 
 It's compatible with the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
 
@@ -40,6 +30,18 @@ var c = random.nextInt(n);
 
 var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 ```
+
+
+# Speed
+
+Generating 50 million random numbers with AOT-compiled binary. 
+
+| Time (lower is better) | nextInt | nextDouble | nextBool |
+|------------------------|---------|------------|----------|
+| Random (dart:math)     |  1172   |    1541    |   1134   |
+| Xrandom             |   719   |    1126    |   710    |
+
+
 
 # Which to choose
 
