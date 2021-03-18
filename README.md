@@ -168,7 +168,7 @@ in JavaScript.
 
 
 
-Trying to create a JavaScript-incompatible object in JavaScripts-compiled will lead the `UnsupportedError`.
+Trying to create a JavaScript-incompatible object in JavaScripts-compiled will lead to `UnsupportedError`.
 
 
 
