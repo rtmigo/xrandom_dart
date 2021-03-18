@@ -11,12 +11,14 @@ import 'package:xrandom/xrandom.dart';
 enum DoWhat { nextDouble, nextInt, nextBool, nextInt32, nextInt64, nextFloat,  }
 
 const NUM_EXPERIMENTS = 3;
-const NUM_ITEMS_PER_EXPERIMENT = 5000000;
+const NUM_ITEMS_PER_EXPERIMENT = 10000000;
 
 int measureTimeRuns = 0;
 
 int measureTime(Random r, DoWhat dbl) {
   print('${++measureTimeRuns} benchmarking ${r.runtimeType} $dbl');
+
+  final nextIntMax = Random().nextInt(0xFFFFFFFF)+1;
 
   final sw = Stopwatch()..start();
 
@@ -30,7 +32,7 @@ int measureTime(Random r, DoWhat dbl) {
       for (var i = 0; i < N; ++i) r.nextBool();
       break;
     case DoWhat.nextInt:
-      for (var i = 0; i < N; ++i) r.nextInt(100);
+      for (var i = 0; i < N; ++i) { r.nextInt(nextIntMax); }
       break;
     case DoWhat.nextInt32:
       if (r is RandomBase32) {
