@@ -53,7 +53,7 @@ final random = Xrandom();  // works on all platforms
 quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 ``` 
 
-**`Xrandom`** is **fast** and works **everywhere**.
+**`Xrandom`** class is **fast** and works **everywhere**.
 
 -------
 
@@ -66,7 +66,7 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation( random.nextDouble() );
 ```
 
-**`XrandomHq`** is **high quality** and expected to be run on 
+**`XrandomHq`** class is **high quality** and expected to be run on 
 **64-bit platforms**. That is, on desktops, phones and tablets.
 
 -------
@@ -81,7 +81,7 @@ for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation( random.nextDouble() ); // on JS? O_O  
 ```
 
-**`XrandomJs`** is **high quality** with compromises, and works **everywhere**.
+**`XrandomJs`** class is **high quality** with compromises, and works **everywhere**.
 
 
 # Features
