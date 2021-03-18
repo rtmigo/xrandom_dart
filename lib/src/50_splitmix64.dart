@@ -31,7 +31,7 @@ class Splitmix64 extends RandomBase64 {
   static final _c94D = int.parse('0x94d049bb133111eb');
 
   @override
-  int nextInt64() {
+  int nextRaw64() {
     // based on
     // https://prng.di.unimi.it/splitmix64.c
     // (c) 2015 by Sebastiano Vigna (CC-0)

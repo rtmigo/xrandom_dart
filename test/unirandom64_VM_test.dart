@@ -24,7 +24,7 @@ void main() {
     final randomB = Xorshift64.expected();
 
     for (var experiment = 0; experiment < 100; ++experiment) {
-      var intA = randomA.nextInt64();
+      var intA = randomA.nextRaw64();
       for (var bit = 63; bit >= 0; --bit) {
         expect(randomB.nextBool(), (intA & (1 << bit)) != 0,
             reason: 'Experiment $experiment, bit $bit');
@@ -37,7 +37,7 @@ void main() {
     final randomB = Xorshift128.expected();
 
     for (var experiment = 0; experiment < 100; ++experiment) {
-      var intA = randomA.nextInt32();
+      var intA = randomA.nextRaw32();
       for (var bit = 31; bit >= 0; --bit) {
         expect(randomB.nextBool(), (intA & (1 << bit)) != 0,
             reason: 'Experiment $experiment, bit $bit');

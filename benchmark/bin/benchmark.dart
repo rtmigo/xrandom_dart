@@ -32,12 +32,12 @@ int measureTime(Random r, DoWhat dbl) {
     case DoWhat.nextInt32:
       if (r is RandomBase32) {
         for (var i = 0; i < N; ++i)
-          r.nextInt32();
+          r.nextRaw32();
       }
       break;
     case DoWhat.nextInt64:
       if (r is RandomBase32) {
-        for (var i = 0; i < N; ++i) r.nextInt64();
+        for (var i = 0; i < N; ++i) r.nextRaw64();
       }
       break;
     case DoWhat.nextFloat:

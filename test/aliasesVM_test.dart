@@ -14,14 +14,14 @@ void main() {
     expect(XrandomHq.expected() is Xoshiro256pp, true);
     expect(XrandomHq.expected() is XrandomHq, true);
     expect(
-        List.generate(3, (_) => XrandomHq.expected().nextInt32()),
-        List.generate(3, (_) => Xoshiro256pp.expected().nextInt32()));
+        List.generate(3, (_) => XrandomHq.expected().nextRaw32()),
+        List.generate(3, (_) => Xoshiro256pp.expected().nextRaw32()));
 
     final r1 = XrandomHq();
     final r2 = XrandomHq();
     expect(
-        List.generate(3, (_) => r1.nextInt64()),
-        isNot(List.generate(3, (_) => r2.nextInt64())));
+        List.generate(3, (_) => r1.nextRaw64()),
+        isNot(List.generate(3, (_) => r2.nextRaw64())));
   });
 
 }

@@ -22,7 +22,7 @@ class Xorshift32 extends RandomBase32 {
   static Xorshift32 expected() => Xorshift32(defaultSeed);
 
   @override
-  int nextInt32() {
+  int nextRaw32() {
     // algorithm from p.4 of "Xorshift RNGs"
     // by George Marsaglia, 2003
     // https://www.jstatsoft.org/article/view/v008i14

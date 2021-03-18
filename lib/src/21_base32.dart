@@ -20,7 +20,7 @@ abstract class RandomBase32 implements Random {
   /// from 1 to 0xFFFFFFFF, both inclusive.
   ///
   /// It is the raw output of the generator.
-  int nextInt32();
+  int nextRaw32();
 
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 1 to 2^64-1, both inclusive.
@@ -35,11 +35,11 @@ abstract class RandomBase32 implements Random {
   /// Since the 32-bit generator never returns zero, after combining, neither
   /// the lowest 4 nor the highest 4 bytes of the number will be zero.
   @pragma('vm:prefer-inline')
-  int nextInt64() {
+  int nextRaw64() {
     if (!INT64_SUPPORTED) {
       throw Unsupported64Error();
     }
-    return (this.nextInt32() << 32) | this.nextInt32();
+    return (this.nextRaw32() << 32) | this.nextRaw32();
   }
 
   @override
@@ -48,10 +48,10 @@ abstract class RandomBase32 implements Random {
       throw RangeError.range(max, 1, 0xFFFFFFFF);
     }
 
-    int r = nextInt32();
+    int r = nextRaw32();
     int m = max - 1;
 
-    for (int u = r; u - (r = u % max) + m < 0; u = nextInt32()) {}
+    for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {}
 
     return r;
   }
@@ -92,7 +92,7 @@ abstract class RandomBase32 implements Random {
   double nextFloat() {
     // https://www.doornik.com/research/randomdouble.pdf
     const M_RAN_INVM32 = 2.32830643653869628906e-010;
-    return nextInt32().uint32_to_int32() * M_RAN_INVM32 + 0.5;
+    return nextRaw32().uint32_to_int32() * M_RAN_INVM32 + 0.5;
   }
 
   //
@@ -115,7 +115,7 @@ abstract class RandomBase32 implements Random {
 
   @override
   double nextDouble() {
-    return nextInt32() * 2.3283064365386963e-10 + (nextInt32() >> 12) * 2.220446049250313e-16;
+    return nextRaw32() * 2.3283064365386963e-10 + (nextRaw32() >> 12) * 2.220446049250313e-16;
   }
 
   //
@@ -154,7 +154,7 @@ abstract class RandomBase32 implements Random {
   bool nextBool() {
     // we're returning bits from higher to lower: like uint32s from int64s
     if (boolCache_prevShift == 0) {
-      boolCache = nextInt32();
+      boolCache = nextRaw32();
       boolCache_prevShift = 31;
       return boolCache & 0x80000000 != 0;
     } else {
@@ -171,19 +171,19 @@ abstract class RandomBase32 implements Random {
   @internal
   int boolCache_prevShift = 0;
 
-//
-// REMARKS to nextBool():
-//
-// in dart:math it is return nextInt(2) == 0;
-// which is an equivalent of
-//   if ((2&-2)==2) return next()&(2-1);
-//
-// benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
-//    Random      (from dart:math)            2424
-//    XorShift32  return nextInt(2)==0        2136
-//    XorShift32  this.next() % 2 == 0        1903
-//    XorShift32  this.next() >= 0x80000000   1821
-//    XorShift32  returning bits              1423
-//
-//////////////////////////////////////////////////////////////////////////////
+  //
+  // REMARKS to nextBool():
+  //
+  // in dart:math it is return nextInt(2) == 0;
+  // which is an equivalent of
+  //   if ((2&-2)==2) return next()&(2-1);
+  //
+  // benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
+  //    Random      (from dart:math)            2424
+  //    XorShift32  return nextInt(2)==0        2136
+  //    XorShift32  this.next() % 2 == 0        1903
+  //    XorShift32  this.next() >= 0x80000000   1821
+  //    XorShift32  returning bits              1423
+  //
+  //
 }

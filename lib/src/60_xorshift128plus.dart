@@ -39,15 +39,15 @@ class Xorshift128p extends RandomBase64 {
       }
     } else {
       // just creating a mess
-      _S0 = Splitmix64.instance.nextInt64();
-      _S1 = Splitmix64.instance.nextInt64();
+      _S0 = Splitmix64.instance.nextRaw64();
+      _S1 = Splitmix64.instance.nextRaw64();
     }
   }
 
   late int _S0, _S1;
 
   @override
-  int nextInt64() {
+  int nextRaw64() {
     // algorithm from "Further scramblings of Marsaglia’s xorshift generators"
     // by Sebastiano Vigna
     //

@@ -11,17 +11,17 @@ void main() {
     expect(Xrandom.expected() is Xorshift32, true);
     expect(Xrandom.expected() is Xrandom, true);
     expect(
-        List.generate(3, (_) => Xrandom.expected().nextInt32()),
-        List.generate(3, (_) => Xorshift32.expected().nextInt32()));
+        List.generate(3, (_) => Xrandom.expected().nextRaw32()),
+        List.generate(3, (_) => Xorshift32.expected().nextRaw32()));
     expect(
-        List.generate(3, (_) => Xrandom(777).nextInt32()),
-        List.generate(3, (_) => Xorshift32(777).nextInt32()));
+        List.generate(3, (_) => Xrandom(777).nextRaw32()),
+        List.generate(3, (_) => Xorshift32(777).nextRaw32()));
 
     final r1 = Xrandom();
     final r2 = Xrandom();
     expect(
-        List.generate(3, (_) => r1.nextInt32()),
-        isNot(List.generate(3, (_) => r2.nextInt32())));
+        List.generate(3, (_) => r1.nextRaw32()),
+        isNot(List.generate(3, (_) => r2.nextRaw32())));
   });
 
   test('Xrandom readme expected', () {
@@ -39,13 +39,13 @@ void main() {
     expect(XrandomHqJs.expected() is Xoshiro128pp, true);
     expect(XrandomHqJs.expected() is XrandomHqJs, true);
     expect(
-        List.generate(3, (_) => XrandomHqJs.expected().nextInt32()),
-        List.generate(3, (_) => Xoshiro128pp.expected().nextInt32()));
+        List.generate(3, (_) => XrandomHqJs.expected().nextRaw32()),
+        List.generate(3, (_) => Xoshiro128pp.expected().nextRaw32()));
 
     final r1 = XrandomHqJs();
     final r2 = XrandomHqJs();
     expect(
-        List.generate(3, (_) => r1.nextInt32()),
-        isNot(List.generate(3, (_) => r2.nextInt32())));
+        List.generate(3, (_) => r1.nextRaw32()),
+        isNot(List.generate(3, (_) => r2.nextRaw32())));
   });
 }

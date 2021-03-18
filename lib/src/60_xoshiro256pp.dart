@@ -20,17 +20,17 @@ class Xoshiro256pp extends RandomBase64 {
         throw ArgumentError('The seed should not consist of only zeros.');
       }
     } else {
-      _S0 = Splitmix64.instance.nextInt64();
-      _S1 = Splitmix64.instance.nextInt64();
-      _S2 = Splitmix64.instance.nextInt64();
-      _S3 = Splitmix64.instance.nextInt64();
+      _S0 = Splitmix64.instance.nextRaw64();
+      _S1 = Splitmix64.instance.nextRaw64();
+      _S2 = Splitmix64.instance.nextRaw64();
+      _S3 = Splitmix64.instance.nextRaw64();
     }
   }
 
   late int _S0, _S1, _S2, _S3;
 
   @override
-  int nextInt64() {
+  int nextRaw64() {
     // https://prng.di.unimi.it/xoshiro256plusplus.c
 
     final result =

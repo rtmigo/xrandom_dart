@@ -38,7 +38,7 @@ class Xorshift128 extends RandomBase32 {
   late int _a, _b, _c, _d;
 
   @override
-  int nextInt32() {
+  int nextRaw32() {
     // algorithm from p.5 of "Xorshift RNGs"
     // by George Marsaglia, 2003
     // https://www.jstatsoft.org/article/view/v008i14

@@ -24,14 +24,14 @@ class Xorshift64 extends RandomBase64 {
       }
       _state = seed;
     } else {
-      _state = Splitmix64.instance.nextInt64();
+      _state = Splitmix64.instance.nextRaw64();
     }
   }
 
   late int _state;
 
   @override
-  int nextInt64() {
+  int nextRaw64() {
     // algorithm from p.4 of "Xorshift RNGs"
     // by George Marsaglia, 2003
     // https://www.jstatsoft.org/article/view/v008i14

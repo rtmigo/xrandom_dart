@@ -37,7 +37,7 @@ class Xoshiro128pp extends RandomBase32 {
   late int _S0, _S1, _S2, _S3;
 
   @override
-  int nextInt32() {
+  int nextRaw32() {
     // https://prng.di.unimi.it/xoshiro128plusplus.c
 
     final rotlX1 = (_S0 + _S3) & 0xFFFFFFFF;

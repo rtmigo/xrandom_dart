@@ -13,7 +13,7 @@ import 'package:xrandom/xrandom.dart';
 
 void main() {
   test('64', () {
-    expect(() => Xorshift32().nextInt64(), throwsA(isA<Unsupported64Error>()));
+    expect(() => Xorshift32().nextRaw64(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xorshift64.expected(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xorshift128p.expected(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xoshiro256pp.expected(), throwsA(isA<Unsupported64Error>()));

@@ -120,7 +120,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
         final values =
             rdIntsAsStrings(refData(filePrefix, seedId, RefdataType.hexint));
         for (final item in enumerate(values)) {
-          expect((random as RandomBase64).nextInt64().toHexUint64(), item.value,
+          expect((random as RandomBase64).nextRaw64().toHexUint64(), item.value,
               reason: 'item ${item.index}');
         }
       });
@@ -129,7 +129,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
         final values =
             rdIntsAsStrings(refData(filePrefix, seedId, RefdataType.hexint));
         for (final item in enumerate(values)) {
-          expect(random.nextInt32().toHexUint32(), item.value,
+          expect(random.nextRaw32().toHexUint32(), item.value,
               reason: 'item ${item.index}');
         }
       });
@@ -138,7 +138,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 }
 
 List expectedList(RandomBase32 r) => [
-      (r is RandomBase64) ? r.nextInt64() : r.nextInt32(),
+      (r is RandomBase64) ? r.nextRaw64() : r.nextRaw32(),
       r.nextInt(100000),
       r.nextDouble(),
       r.nextBool(),
@@ -260,21 +260,21 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
       // returns the split or combined value
 
       if (!INT64_SUPPORTED) {
-         expect(()=>createExpectedRandom().nextInt64(), throwsA(isA<Unsupported64Error>()));
+         expect(()=>createExpectedRandom().nextRaw64(), throwsA(isA<Unsupported64Error>()));
          return;
       }
 
       // It must work both ways equally
 
       final random1 = createExpectedRandom();
-      int a64 = random1.nextInt64();
-      int b64 = random1.nextInt64();
+      int a64 = random1.nextRaw64();
+      int b64 = random1.nextRaw64();
 
       final random2 = createExpectedRandom();
-      expect(random2.nextInt32(), a64.higher32());
-      expect(random2.nextInt32(), a64.lower32());
-      expect(random2.nextInt32(), b64.higher32());
-      expect(random2.nextInt32(), b64.lower32());
+      expect(random2.nextRaw32(), a64.higher32());
+      expect(random2.nextRaw32(), a64.lower32());
+      expect(random2.nextRaw32(), b64.higher32());
+      expect(random2.nextRaw32(), b64.lower32());
     });
 
     // test('nextFloat roughly compares to nextDouble', () {

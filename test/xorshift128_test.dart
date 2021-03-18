@@ -25,7 +25,7 @@ void main() {
     await Future.delayed(Duration(milliseconds: 2));
     final random2 = Xorshift128();
 
-    expect([random1.nextInt32(), random1.nextInt32()],
-        isNot([random2.nextInt32(), random2.nextInt32()]));
+    expect([random1.nextRaw32(), random1.nextRaw32()],
+        isNot([random2.nextRaw32(), random2.nextRaw32()]));
   });
 }

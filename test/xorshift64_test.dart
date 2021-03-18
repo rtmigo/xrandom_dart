@@ -33,7 +33,7 @@ void main() {
     await Future.delayed(Duration(milliseconds: 2));
     final random2 = Xorshift64();
 
-    expect([random1.nextInt64(), random1.nextInt64()],
-        isNot([random2.nextInt64(), random2.nextInt64()]));
+    expect([random1.nextRaw64(), random1.nextRaw64()],
+        isNot([random2.nextRaw64(), random2.nextRaw64()]));
   });
 }

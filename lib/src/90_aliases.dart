@@ -26,7 +26,7 @@ class XrandomHq extends Xoshiro256pp {
 
     final seeder = Splitmix64(seed64);
     return XrandomHq._fullSeed(
-        seeder.nextInt64(), seeder.nextInt64(), seeder.nextInt64(), seeder.nextInt64());
+        seeder.nextRaw64(), seeder.nextRaw64(), seeder.nextRaw64(), seeder.nextRaw64());
   }
 
   static XrandomHq expected() => XrandomHq._fullSeed(
