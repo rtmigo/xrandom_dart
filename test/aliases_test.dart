@@ -32,6 +32,14 @@ void main() {
     expect(random.nextInt(1000), 509);
   });
 
+  test('Xrandom readme 12345', () {
+    final random = Xrandom(12345);
+    // you'll get same sequence of numbers every time
+    expect(random.nextInt(1000), 330);
+    expect(random.nextInt(1000), 807);
+    expect(random.nextInt(1000), 904);
+  });
+
 
   test('XrandomHqJs', () {
     expect(XrandomHqJs() is Xoshiro128pp, true);
