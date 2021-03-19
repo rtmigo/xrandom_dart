@@ -221,7 +221,7 @@ Therefore, the sequence generated for example by the
 `Xoshiro128pp.nextRaw32()` with seed `(1, 2, 3, 4)` is exactly the same as the [C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce with the same seed.
 
 The `double` values will also be exactly the same as if the `uint64_t` type 
-was converted to `double` in C99 by unsafe pointer conversion. There are no 
+was converted to `double_t` in C99 by unsafe pointer conversion. There are no 
 pointers or unsafe conversions in Dart. But `double`s are the same type, and their 
 random values will be the same.
 
