@@ -15,6 +15,6 @@ void main() {
 
   test('expected values', () {
     expect(expectedList(Xoshiro128pp.seeded()),
-        [3992448746, 47897, 0.1329367530455241, false, true, false]);
+        [1686059242, 97217, 0.26393020434967074, false, true, false]);
   });
 }
