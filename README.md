@@ -53,8 +53,10 @@ If you want the same numbers each time:
 ``` dart
 final random = Drandom(); // D for Dumb Determinism 
 
-test("no surprises", () {
-    expect(random.nextInt(1000), 522);
+test("no surprises ever", () {
+    expect(random.nextInt(100), 42);
+    expect(random.nextInt(100), 17);
+    expect(random.nextInt(100), 96);
 });
 ```
 

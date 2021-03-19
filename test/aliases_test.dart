@@ -6,6 +6,9 @@ import 'package:xrandom/src/90_aliases.dart';
 import 'package:xrandom/xrandom.dart';
 
 void main() {
+
+
+
   test('Xrandom', () {
     expect(Xrandom() is Xorshift32, true);
     expect(Xrandom(1) is Xorshift32, true);
@@ -43,8 +46,8 @@ void main() {
 
   test('Drandom readme', () {
     final random = Drandom();
-    expect( List.generate(5, (_) => random.nextInt(1000)),
-        [1282276250, 3989185767, 2009065675] );
+    expect( List.generate(5, (_) => random.nextInt(100)),
+        [42, 17, 96, 23, 46] );
 
   });
 
