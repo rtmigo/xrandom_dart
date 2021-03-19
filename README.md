@@ -222,7 +222,8 @@ Therefore, the sequence generated for example by the
 
 The `double` values will also be exactly the same as if the `uint64_t` type 
 was converted to `double` in C99 by unsafe pointer conversion. There are no 
-pointers or unsafe conversions in Dart, but the numbers are the same.
+pointers or unsafe conversions in Dart. But `double`s are the same, and their 
+values are the same.
 
 Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and **macOS** in **VM** and **Node.js** modes.
 
