@@ -177,6 +177,9 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 
 # More benchmarks
 
+**Fastest to slowest**
+(numbers show execution time)
+
 | JS | Class                  | nextInt | nextDouble | nextBool |
 |----|------------------------|--------:|-----------:|---------:|
 | ✓  | Xrandom                |     628 |        628 |      407 |
@@ -189,7 +192,7 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 |    | XrandomHq              |    1120 |       1154 |      394 |
 
 
-<sub>The numbers indicate the execution time. The lower the value, the faster the class works.</sub>
+
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 
