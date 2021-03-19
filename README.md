@@ -109,7 +109,7 @@ Sorted by `nextDouble` **fastest  to slowest**
 |    | Xorshift128p           |        629 |       395 |
 |    | Splitmix64             |        667 |       397 |
 | ✓  | Xorshift128            |        823 |       347 |
-| ✓  | **Random (dart:math)** |        929 |         0 |
+| ✓  | **Random (dart:math)** |        929 |           |
 |    | XrandomHq              |       1154 |       712 |
 | ✓  | XrandomJq              |       1204 |       536 |
 
