@@ -165,14 +165,14 @@ only comparison to `nextRaw32` is "apples-to-apples".
 You can use any generator from the library in the same way as in the examples with the `Xrandom` class.
 
 ``` dart
-final random = Splitmix64();
+final random = Mulberry32();
 
 quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 ```
 
 # Compatibility
 
-TL;DR `Xrandom` and `XrandomHq` work on all platforms. Others work on some.
+TL;DR `Xrandom`, `Qrandom`, `Drandom` work on all platforms. Others work on some.
 
 The library is written in pure Dart. Therefore, it works wherever Dart works.
 
