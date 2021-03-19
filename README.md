@@ -179,7 +179,7 @@ TL;DR `Xrandom`, `Qrandom`, `Drandom` work on all platforms. Others may not work
 
 The library is written in pure Dart. Therefore, it works wherever Dart works.
 
-But some of the classes really need full support for 64-bit integers. 
+But some of the classes need full support for 64-bit integers. 
 **JavaScript** actually only supports **53 bits**. If your target platform is JavaScript, then the selection will have to be 
 narrowed down to the options marked with **[✓] checkmark in the JS column**. Trying 
 to create a incompatible object in JavaScript-transpiled code will lead to `UnsupportedError`.
