@@ -89,13 +89,13 @@ abstract class RandomBase32 implements Random {
   // the code is possibly running in 53-bit JavaScript.
   //
 
-  /// Generates a non-negative random floating point value uniformly distributed
+  /// Generates a random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
   ///
   /// This method works faster than [nextDouble]. It sacrifices accuracy for speed.
-  /// The result is mapped from a single 32-bit non-zero integer to [double].
+  /// The result is mapped from a single 32-bit integer to [double].
   /// Therefore, the variability is limited by the number of possible values of
-  /// such integer: 2^32-1 (= 4 294 967 295).
+  /// such integer: 2^32 (= 4 294 967 296).
   ///
   /// This method uses the conversion suggested by J. Doornik in "Conversion of
   /// high-period random numbers to floating point" (2005).

@@ -83,7 +83,7 @@ Sorted by `nextInt` **fastest  to slowest**
 
 Unlike the `nextDouble`, `nextFloat` prefers speed to precision.
 It's still a `double`, but it has four billion shades instead of eight 
-quadrillions. Of course, it is also uniformly distributed.
+quadrillions.
 
 <details>
   <summary>Speed comparison</summary>

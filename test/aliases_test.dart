@@ -2,8 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import 'package:test/test.dart';
-import 'package:xrandom/src/90_aliases.dart';
-import 'package:xrandom/xrandom.dart';
+import 'package:xrandom/xrandom.dart'; // no imports for src should be here
 
 void main() {
 
