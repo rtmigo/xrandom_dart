@@ -177,7 +177,7 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 
 # More benchmarks
 
-**Fastest `nextInt` to slowest**
+**Fastest nextInt to slowest**
 (numbers show execution time)
 
 | JS | Class                  | nextInt | nextDouble | nextBool |
