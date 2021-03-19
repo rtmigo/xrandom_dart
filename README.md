@@ -77,10 +77,9 @@ test('my test', () {
 });    
 ```
 You can temporarily achieve the same effect by passing the `seed` 
-argument to the system `Random`. However, according to the documentation, 
-the system Random only promises randomness. If the dart:math changes 
-the implementation, it will start returning different numbers with the 
-same seed values.
+argument to the system `Random`. However, its documentation only 
+promises randomness. If the dart:math changes the implementation, it 
+will start returning different numbers with the same seed values.
 
 At the same time, Xrandom is designed to return the same values ​​today 
 and 10 years later.
