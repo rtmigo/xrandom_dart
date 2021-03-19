@@ -49,6 +49,29 @@ feedMonteCarloSimulation(random);
 
 ```
 
+If you want the test results to be the same now and 10 years later:
+
+
+
+
+
+``` dart
+test('my test', () {
+  final random = XrandomTs();
+
+  // you'll get same sequence of numbers every time
+  expect(random.nextInt(1000), 925);
+  expect(random.nextInt(1000), 686);
+  expect(random.nextInt(1000), 509);
+
+      
+});    
+```
+
+feedMonteCarloSimulation(random);
+
+```
+
 # Speed
 
 Generating random numbers with AOT-compiled binary.
