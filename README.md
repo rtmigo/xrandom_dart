@@ -12,13 +12,6 @@ Library priorities:
 - high-quality randomness
 - performance
 
-
-
-
-
-Algorithms are [Xoshiro](https://prng.di.unimi.it/) for **quality** and 
-[Xorshift](https://en.wikipedia.org/wiki/Xorshift) for **speed**.
-
 ----------
 
 It's has the same API as the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
