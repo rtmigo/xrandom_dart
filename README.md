@@ -177,16 +177,19 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 
 # More benchmarks
 
-| JS | Time (lower is better) | nextInt | nextDouble | nextBool |
+| JS | Class                  | nextInt | nextDouble | nextBool |
 |----|------------------------|--------:|-----------:|---------:|
-| ✓  | Xrandom                |     631 |        632 |      405 |
-| ✓  | Xorshift128            |     720 |        815 |      410 |
-|    | Xorshift64             |     756 |        575 |      385 |
-|    | Xorshift128p           |     772 |        632 |      387 |
-|    | Splitmix64             |     841 |        664 |      391 |
-| ✓  | *Random (dart:math)* |     *852* |        *925* |      *662* |
-| ✓  | XrandomJq              |     927 |       1206 |      422 |
-|    | XrandomHq              |    1134 |       1160 |      403 |
+| ✓  | Xrandom                |     628 |        628 |      407 |
+| ✓  | Xorshift128            |     722 |        823 |      409 |
+|    | Xorshift64             |     749 |        577 |      386 |
+|    | Xorshift128p           |     766 |        629 |      391 |
+|    | Splitmix64             |     836 |        667 |      385 |
+| ✓  | **Random (dart:math)** |     878 |        929 |      661 |
+| ✓  | XrandomJq              |     926 |       1204 |      414 |
+|    | XrandomHq              |    1120 |       1154 |      394 |
+
+
+<sub>The numbers indicate the execution time. The lower the value, the faster the class works.</sub>
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 
