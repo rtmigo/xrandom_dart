@@ -93,8 +93,7 @@ In fact, you don't even need the method. You can use any positive
 constant when creating the object.
 
 ``` dart
-final random = Xrandom(12345);
-// you'll get same sequence of numbers every time
+final random = Xrandom(12345); // same sequence of numbers every time
 }); 
 ```
 
