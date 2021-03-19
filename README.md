@@ -62,7 +62,7 @@ feedMonteCarloSimulation(random);
 If you want the same numbers each time:
 
 ``` dart
-final random = XrandomTst();
+final random = XrandomT();
 
 test("no surprises", () {
     expect(random.nextInt(1000), 522);
