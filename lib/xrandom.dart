@@ -4,9 +4,8 @@
 
 export 'src/21_base32.dart' show RandomBase32;
 export 'src/21_base64.dart' show RandomBase64;
-
-export 'src/60_mulberry32.dart' show Mulberry32;
 export 'src/50_splitmix64.dart' show Splitmix64;
+export 'src/60_mulberry32.dart' show Mulberry32;
 export 'src/60_xorshift128.dart' show Xorshift128;
 export 'src/60_xorshift128plus.dart' show Xorshift128p;
 export 'src/60_xorshift32.dart' show Xorshift32;

@@ -40,13 +40,32 @@ void main() {
     expect(random.nextInt(1000), 904);
   });
 
+  void checkRespectsSeed(RandomBase32 Function(int seed) create) {
+    expect( List.generate(3, (_) => create(123).nextRaw32()),
+        List.generate(3, (_) => create(123).nextRaw32()) );
+    expect( List.generate(3, (_) => create(123).nextRaw32()),
+        isNot(List.generate(3, (_) => create(321).nextRaw32())) );
+  }
+
   test('XrandomHq respects seed argument', () {
-    expect( List.generate(3, (_) => XrandomHq(123).nextRaw32()),
-            List.generate(3, (_) => XrandomHq(123).nextRaw32()) );
-    expect( List.generate(3, (_) => XrandomHq(123).nextRaw32()),
-            isNot(List.generate(3, (_) => XrandomHq(321).nextRaw32())) );
+    checkRespectsSeed((seed) => XrandomHq(seed));
   });
 
+  test('Xrandom respects seed argument', () {
+    checkRespectsSeed((seed) => Xrandom(seed));
+  });
+
+
+  test('XrandomHq returns constant values from seed', () {
+    final random = XrandomHq(10);
+    expect( List.generate(3, (_) => random.nextRaw32()),
+        [1282276250, 3989185767, 2009065675] );
+  });
+
+  test('XrandomHq range checking', () {
+    expect(()=>XrandomHq(0), throwsRangeError);
+    expect(()=>XrandomHq(0xFFFFFFFF+1), throwsRangeError);
+  });
 
 
 }

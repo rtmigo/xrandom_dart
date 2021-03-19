@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:xrandom/src/21_base32.dart';
 import 'package:xrandom/src/20_seeding.dart';
+import 'package:xrandom/src/21_base32.dart';
 
 import '00_ints.dart';
 
