@@ -52,8 +52,9 @@ If you are solving a math problem:
 ``` dart
 final random = XrandomHq();
 
-for (var i=0; i<BILLIONS; i++)
-    feedMonteCarloSimulation( random.nextDouble() );
+for (var i = 0; i < BILLIONS; i++) {
+  feedMonteCarloSimulation(random.nextDouble());
+}
 ```
 
 # Speed
