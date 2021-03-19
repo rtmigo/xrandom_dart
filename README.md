@@ -44,7 +44,6 @@ If you are solving a math problem:
 final random = XrandomHq();
 
 feedMonteCarloSimulation(random);
-
 ```
 
 # Speed
