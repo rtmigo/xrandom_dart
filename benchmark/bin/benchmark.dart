@@ -148,10 +148,10 @@ void main(List<String> arguments) {
         //emphasize = true;
       } else if (typestr == 'Xorshift32') {
         typestr = 'Xrandom';
-      } else if (typestr == 'Xoshiro256pp') {
-        typestr = 'XrandomHq';
+      // } else if (typestr == 'Xoshiro256pp') {
+      //   typestr = 'XrandomHq';
       } else if (typestr == 'Xoshiro128pp') {
-        typestr = 'XrandomJq';
+        typestr = 'XrandomHq';
       }
       row.add(typestr);
 
