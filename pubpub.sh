@@ -11,11 +11,13 @@ echo "$temp_pub_dir"
 rsync -Rrv ./ "$temp_pub_dir" \
   --exclude=".git" \
   --exclude="pubpub.sh" \
+  --exclude="todo.txt" \
   --exclude="benchmark/" \
   --exclude="reference/" \
   --exclude="README.md" \
   --exclude=".github" \
   --exclude="labuda/" \
+  --exclude="draft/" \
   --exclude="experiments"
 
 # removing everything before "\n# ", the first header

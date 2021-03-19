@@ -1,10 +1,12 @@
 # 0.5.0
 
+- Added Mulberry32
+
 - Renamed nextIntNN methods to nextRawNN 
 
-- Renamed XrandomHqJs to XrandomJq
+- Now there are only two aliases: Xrandom and XrandomHq
 
-- Speed optimizations 
+- nextInt() works faster 
 
 # 0.4.0
 

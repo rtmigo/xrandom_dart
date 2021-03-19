@@ -13,20 +13,11 @@ void main() {
 
   checkReferenceFiles(() => Xorshift128p(1, 2), 'a');
   checkReferenceFiles(() => Xorshift128p(42, 777), 'b');
-  checkReferenceFiles(
-      () => Xorshift128p(8378522730901710845, 1653112583875186020), 'c');
+  checkReferenceFiles(() => Xorshift128p(8378522730901710845, 1653112583875186020), 'c');
 
   test('expected values', () {
-    expect(expectedList(Xorshift128p.expected()), [
-      int.parse('8256696158060995935'),
-      27312,
-      0.04017928972328655,
-      false,
-      true,
-      false
-    ]
-        //    [1225539925, 51686, 0.40665327328483225, false, true, false]
-        );
+    expect(expectedList(Xorshift128p.expected()),
+        [int.parse('8256696158060995935'), 27312, 0.04017928972328655, false, true, false]);
   });
 
   test('madsen double', () {

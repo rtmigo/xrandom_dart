@@ -8,15 +8,6 @@ import 'package:xrandom/src/00_ints.dart';
 
 void main() {
 
-
-
-  // print(0x7fffffffffffffff % 5);
-  // print(-0x8000000000000000 % 5);
-  // print(-0x7fffffffffffffff % 5);
-  //print(0xFFFFFFFFFFFFFFFE);
-  //print(0x7FFFFFFFFFFFFFFF);
-  // return;
-
   test('string to int', () {
     // the problem with BigInt.toInt():
     expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(), '7fffffffffffffff');
@@ -70,13 +61,5 @@ void main() {
       expect(pair[0].uint32_to_int32(), pair[1], reason: '${pair[0].toRadixString(16)}');
       expect(pair[1].int32_to_uint32(), pair[0], reason: '${pair[0].toRadixString(16)}');
     }
-
-
-    // expect(0x7ffffffd.uint32_to_int32(), 2147483645);
-    // expect(0x7ffffffe.uint32_to_int32(), 2147483646);
-    // expect(0x7fffffff.uint32_to_int32(), 2147483647);
-    // expect(0x80000000.uint32_to_int32(), -2147483648);
-    // expect(0x80000001.uint32_to_int32(), -2147483647);
-    // expect(0x80000002.uint32_to_int32(), -2147483646);
   });
 }

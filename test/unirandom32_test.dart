@@ -94,24 +94,4 @@ void main() {
       3809083582
     ]);
   });
-
-  // test('check rewritten', ()
-  // {
-  //   final randomS = Random();
-  //   final random1 = Xorshift32.expected();
-  //   final random2 = Xorshift32.expected();
-  //
-  //   for (int i = 0; i < 100000000; ++i) {
-  //     int max = randomS.nextInt(0xFFFFFFFF) + 1;
-  //     expect(
-  //       nextInt_jdk(() => random1.nextInt32(), max),
-  //       nextInt_rewritten(() => random2.nextInt32(), max),
-  //     );
-  //   }
-  // });
-
-
-
-
-
 }
