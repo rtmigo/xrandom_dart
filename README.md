@@ -181,7 +181,7 @@ only comparison to `nextRaw32` is "apples-to-apples".
 |    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 |  |
 |    | `Splitmix64`   | [splitmix64](https://prng.di.unimi.it/splitmix64.c)               |  2015 |
 
-You can use any other generator from the library in the same way.
+You can use any generator from the library in the same way as in the examples with the `Xrandom` class.
 
 ``` dart
 final random = Splitmix64();
