@@ -112,7 +112,7 @@ Sorted by `nextDouble` **fastest  to slowest**
 These methods return the raw output of the generator uncompromisingly fast. Depending on the algorithm, 
 the output is a number consisting of either 32 random bits or 64 random bits. 
 
-Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, both methods work regardless of the algorithm.
+Xrandom combines small numbers or separates large ones. The methods work with any of the generators.вщ
 
 
 | JS    | Method        | Returns         | Equivalent of                   | 
