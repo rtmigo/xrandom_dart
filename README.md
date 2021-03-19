@@ -43,7 +43,7 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 If you are solving a math problem:
 
 ``` dart
-final random = Qrandom(); // Q for Quality for Quants
+final random = Qrandom(); // Q for Quality
 
 feedMonteCarloSimulation(random);
 ```
