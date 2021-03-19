@@ -1,7 +1,7 @@
 name: xrandom
 description: "All-purpose, rock-solid random number generators
               focused on the consistency and reproducibility"
-version: 0.5.0
+version: 0.5.1
 homepage: https://github.com/rtmigo/xrandom
 
 environment:
