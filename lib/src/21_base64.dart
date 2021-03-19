@@ -69,7 +69,21 @@ abstract class RandomBase64 extends RandomBase32 {
   //
 
   @override
-  int nextInt(int range) {
+  int nextInt(int max) {
+    if (max < 1 || max > 0xFFFFFFFF) {
+      throw RangeError.range(max, 1, 0xFFFFFFFF);
+    }
+
+    int r = nextRaw32();
+    int m = max - 1;
+
+    for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {}
+
+    return r;
+  }
+
+  @override
+  int nextInt_lemireONeill(int range) {
 
     // D. Lemire's "nearly divisionless" algorithm <https://arxiv.org/pdf/1805.10941.pdf>
     // TODO add modulo hacks by O'Neil <https://git.io/Jm0D7>
