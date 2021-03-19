@@ -122,7 +122,7 @@ void main(List<String> arguments) {
   void printColumns(List<DoWhat> whatz) {
     final rows = <List<dynamic>>[];
 
-    final header = ['JS', 'Time (lower is better)'];
+    final header = ['JS', 'Class'];
     for (final x in whatz) {
       final str = x.toString();
       header.add(str.substring(str.lastIndexOf('.') + 1));
