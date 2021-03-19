@@ -224,7 +224,7 @@ Therefore, the sequence generated for example by the
 
 The `double` values will also be the same as if the upper bits of `uint64_t` type 
 were converted to `double_t` in C99 by unsafe pointer casting. There are no 
-pointers or unsafe conversions in Dart. Moreover, there are no upper bits `uint64_t` in JavaScript.
+pointers or unsafe conversions in Dart. Moreover, there are no upper bits of `uint64_t` in JavaScript.
 But `double`s are the same type everywhere, and their random values will be the same.
 
 Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and **macOS** in **VM** and **Node.js** modes.
