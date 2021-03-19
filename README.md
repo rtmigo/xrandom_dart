@@ -75,7 +75,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 
 
-# Which to choose
+# Creating the object
 
 If you just want a random number:
 
