@@ -8,6 +8,8 @@
 
 - nextInt() works faster 
 
+- fixed: the case of generating zero by 64-bit generators
+
 # 0.4.0
 
 - nextFloat() method now uses more accurate type of conversion
