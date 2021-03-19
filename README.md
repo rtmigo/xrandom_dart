@@ -42,8 +42,11 @@ Generating 50 million random numbers with AOT-compiled binary.
 
 | Time (lower is better) | nextInt | nextDouble | nextBool |
 |------------------------|---------|------------|----------|
-| Random (dart:math)     |  1172   |    1541    |   1134   |
-| Xrandom             |   719   |    1126    |   710    |
+| Xrandom             |   628   |    628    |   407    |
+| Random (dart:math)     |  878   |    929    |   661   |
+
+
+
 
 
 
