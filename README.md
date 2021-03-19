@@ -71,7 +71,7 @@ not protect you from the dart:math implementation updates.
 
 The sequences produced by the `expected()` generators are intended to be reproducible.
 
-<sub>(but not until the library reaches 1.0)</sub>
+*(but not until the library reaches 1.0)*
 
 
 
