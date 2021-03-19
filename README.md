@@ -94,7 +94,6 @@ constant when creating the object.
 
 ``` dart
 final random = Xrandom(12345); // same sequence of numbers every time
-}); 
 ```
 
 
