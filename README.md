@@ -49,6 +49,9 @@ feedMonteCarloSimulation(random);
 
 ```
 
+# Classes
+
+## `Xrandom` is simple and fast
 
 
 
