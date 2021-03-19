@@ -51,7 +51,27 @@ Sorted by `nextInt` **fastest  to slowest**
 |    | XrandomHq              |    1120 |       1154 |      394 |
 
 
+# Reproducibility
 
+Xrandom's classes can also be created with `expected` method.
+It is made specifically for testing. 
+
+``` dart
+test('my test', () {
+  final random = Xrandom.expected();
+  // you'll get same sequence of numbers every time
+  expect(random.nextInt(1000), 925);
+  expect(random.nextInt(1000), 686);
+  expect(random.nextInt(1000), 509);  
+});    
+```
+
+You can achieve the same determinism by creating the `Random` with a `seed` argument. However, this does
+not protect you from the dart:math implementation updates.
+
+The sequences produced by the `expected()` generators are intended to be reproducible.
+
+*(but not until the library reaches 1.0)*
 
 
 
