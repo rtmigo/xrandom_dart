@@ -45,10 +45,9 @@ Sorted by `nextInt` **fastest  to slowest**
 
 | JS | Class                  | nextInt | nextDouble | nextBool |
 |----|------------------------|--------:|-----------:|---------:|
-| ✓  | Xrandom                |     628 |        628 |      407 |
-| ✓  | **Random (dart:math)** |     878 |        929 |      661 |
-| ✓  | XrandomJq              |     926 |       1204 |      414 |
-|    | XrandomHq              |    1120 |       1154 |      394 |
+| ✓  | Xrandom                |     626 |        626 |      410 |
+| ✓  | **Random (dart:math)** |     878 |        931 |      671 |
+| ✓  | XrandomHq              |     932 |       1223 |      415 |
 
 
 # Reproducibility
