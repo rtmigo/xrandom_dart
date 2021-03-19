@@ -12,7 +12,7 @@ void main() {
   // print('');
   // return;
 
-  testCommonRandom(() => Xoshiro256pp(), ()=>Xoshiro256pp.expected());
+  testCommonRandom(() => Xoshiro256pp(), ()=>Xoshiro256pp.seeded());
   checkReferenceFiles(() => Xoshiro256pp(1, 2, 3, 4), 'a');
   checkReferenceFiles(() => Xoshiro256pp(5, 23, 42, 777), 'b');
   checkReferenceFiles(
@@ -24,7 +24,7 @@ void main() {
       'c');
 
   test('expected values', () {
-    expect(expectedList(Xoshiro256pp.expected()), [
+    expect(expectedList(Xoshiro256pp.seeded()), [
       int.parse('9214259484446541290'),
       3031,
       0.9835800298090491,

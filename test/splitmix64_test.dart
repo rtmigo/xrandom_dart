@@ -9,7 +9,7 @@ import 'package:xrandom/xrandom.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Splitmix64(), ()=>Splitmix64.expected());
+  testCommonRandom(() => Splitmix64(), ()=>Splitmix64.seeded());
 
   //print(-6562126107>>1);
   //return;
@@ -21,7 +21,7 @@ void main() {
   // checkReferenceFiles(() => Splitmix64(3141592653589793238), 'c');
 
   test('expected values', () {
-    expect(expectedList(Splitmix64.expected()), [
+    expect(expectedList(Splitmix64.seeded()), [
       int.parse('-1280933994267506231'),
       75710,
       0.9449949262451789,

@@ -7,7 +7,7 @@ import 'package:xrandom/src/60_xorshift128.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Xorshift128(), ()=>Xorshift128.expected());
+  testCommonRandom(() => Xorshift128(), ()=>Xorshift128.seeded());
 
   checkReferenceFiles(() => Xorshift128(1, 2, 3, 4), 'a');
   checkReferenceFiles(() => Xorshift128(5, 23, 42, 777), 'b');
@@ -15,7 +15,7 @@ void main() {
       () => Xorshift128(1081037251, 1975530394, 2959134556, 1579461830), 'c');
 
   test('expected values', () {
-    expect(expectedList(Xorshift128.expected()),
+    expect(expectedList(Xorshift128.seeded()),
         [620283008, 25651, 0.8583931512916125, false, false, false]);
   });
 

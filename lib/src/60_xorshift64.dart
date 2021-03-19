@@ -47,7 +47,7 @@ class Xorshift64 extends RandomBase64 {
     return _state = x;
   }
 
-  static Xorshift64 expected() {
+  static Xorshift64 seeded() {
     return Xorshift64(_defaultSeed);
   }
 }

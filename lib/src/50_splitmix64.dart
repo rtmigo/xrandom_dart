@@ -44,7 +44,7 @@ class Splitmix64 extends RandomBase64 {
     return z ^ (z >> 31) & ~(-1 << (64 - 31));
   }
 
-  static Splitmix64 expected() {
+  static Splitmix64 seeded() {
     return Splitmix64(_defaultSeed);
   }
 

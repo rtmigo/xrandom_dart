@@ -19,7 +19,7 @@ class Mulberry32 extends RandomBase32 {
 
   static const defaultSeed = 0xd9e2fcc8;
 
-  static Mulberry32 expected() => Mulberry32(defaultSeed);
+  static Mulberry32 seeded() => Mulberry32(defaultSeed);
 
   @override
   int nextRaw32() {

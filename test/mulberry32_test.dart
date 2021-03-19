@@ -8,7 +8,7 @@ import 'package:xrandom/src/60_mulberry32.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Mulberry32(), () => Mulberry32.expected());
+  testCommonRandom(() => Mulberry32(), () => Mulberry32.seeded());
 
   checkReferenceFiles(() => Mulberry32(1), 'a');
   checkReferenceFiles(() => Mulberry32(0), 'b');

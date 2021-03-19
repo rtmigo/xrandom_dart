@@ -16,7 +16,7 @@ void main() {
     expect(Xrandom.expected() is Xrandom, true);
     expect(
         List.generate(3, (_) => Xrandom.expected().nextRaw32()),
-        List.generate(3, (_) => Xorshift32.expected().nextRaw32()));
+        List.generate(3, (_) => Xorshift32.seeded().nextRaw32()));
     expect(
         List.generate(3, (_) => Xrandom(777).nextRaw32()),
         List.generate(3, (_) => Xorshift32(777).nextRaw32()));

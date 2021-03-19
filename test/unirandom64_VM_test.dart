@@ -17,8 +17,8 @@ void main() {
   });
 
   test('nextBool on 64-bit generator: must return all bits', () {
-    final randomA = Xorshift64.expected();
-    final randomB = Xorshift64.expected();
+    final randomA = Xorshift64.seeded();
+    final randomB = Xorshift64.seeded();
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextRaw64();
@@ -30,8 +30,8 @@ void main() {
   });
 
   test('nextBool on 32-bit generator: must return all bits', () {
-    final randomA = Xorshift128.expected();
-    final randomB = Xorshift128.expected();
+    final randomA = Xorshift128.seeded();
+    final randomB = Xorshift128.seeded();
 
     for (var experiment = 0; experiment < 100; ++experiment) {
       var intA = randomA.nextRaw32();

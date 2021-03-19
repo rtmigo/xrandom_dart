@@ -49,7 +49,7 @@ class Xoshiro256pp extends RandomBase64 {
     return result;
   }
 
-  static Xoshiro256pp expected() {
+  static Xoshiro256pp seeded() {
     return Xoshiro256pp(
         defaultSeedA, defaultSeedB, defaultSeedC, defaultSeedD);
   }

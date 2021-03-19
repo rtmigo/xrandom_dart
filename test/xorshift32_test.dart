@@ -7,7 +7,7 @@ import 'package:xrandom/src/60_xorshift32.dart';
 import 'helper.dart';
 
 void main() {
-  testCommonRandom(() => Xorshift32(), ()=>Xorshift32.expected());
+  testCommonRandom(() => Xorshift32(), ()=>Xorshift32.seeded());
 
   checkReferenceFiles(() => Xorshift32(1), 'a');
   checkReferenceFiles(() => Xorshift32(42), 'b');
@@ -16,7 +16,7 @@ void main() {
   checkDoornikRandbl32(() => Xorshift32(42), 'b');
 
   test('expected values', () {
-    expect(expectedList(Xorshift32.expected()),
+    expect(expectedList(Xorshift32.seeded()),
         [1225539925, 51686, 0.40665327328483225, false, true, false]);
   });
 

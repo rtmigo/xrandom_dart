@@ -91,7 +91,7 @@ class Xorshift128p extends RandomBase64 {
   static final int _deterministicSeedA = int.parse('0x0ad1ea48a354036c');
   static final int _deterministicSeedB = int.parse('0x67c3c3204c3ae1f3');
 
-  static Xorshift128p expected() {
+  static Xorshift128p seeded() {
     return Xorshift128p(_deterministicSeedA, _deterministicSeedB);
   }
 }

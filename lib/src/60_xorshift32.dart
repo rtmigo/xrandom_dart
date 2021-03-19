@@ -19,7 +19,7 @@ class Xorshift32 extends RandomBase32 {
 
   static const defaultSeed = 0xd9e2fcc8;
 
-  static Xorshift32 expected() => Xorshift32(defaultSeed);
+  static Xorshift32 seeded() => Xorshift32(defaultSeed);
 
   @override
   int nextRaw32() {

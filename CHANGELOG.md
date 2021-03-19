@@ -1,10 +1,12 @@
 # 0.5.0
 
+- Aliases changed to Xrandom, Qrandom, Drandom
+
+- expected() methods changed to seeded()
+
 - Added Mulberry32
 
-- Renamed nextIntNN methods to nextRawNN 
-
-- Now there are only two aliases: Xrandom and XrandomHq
+- Renamed nextIntNN() methods to nextRawNN() 
 
 - nextInt() works faster 
 

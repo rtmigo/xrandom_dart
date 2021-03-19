@@ -64,7 +64,7 @@ class Xorshift128 extends RandomBase32 {
     return _a;
   }
 
-  static Xorshift128 expected() {
+  static Xorshift128 seeded() {
     return Xorshift128(0xd5dcc73b, 0x39398022, 0x91537a66, 0x6cb3accc);
   }
 }

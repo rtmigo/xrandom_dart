@@ -9,14 +9,14 @@ import 'helper.dart';
 import 'madsen.dart';
 
 void main() {
-  testCommonRandom(() => Xorshift128p(), () => Xorshift128p.expected());
+  testCommonRandom(() => Xorshift128p(), () => Xorshift128p.seeded());
 
   checkReferenceFiles(() => Xorshift128p(1, 2), 'a');
   checkReferenceFiles(() => Xorshift128p(42, 777), 'b');
   checkReferenceFiles(() => Xorshift128p(8378522730901710845, 1653112583875186020), 'c');
 
   test('expected values', () {
-    expect(expectedList(Xorshift128p.expected()),
+    expect(expectedList(Xorshift128p.seeded()),
         [int.parse('8256696158060995935'), 27312, 0.04017928972328655, false, true, false]);
   });
 

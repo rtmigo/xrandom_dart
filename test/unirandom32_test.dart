@@ -34,17 +34,17 @@ int nextInt_rewritten(int Function() nextInt32, int n) {
 void main() {
 
   test('int from range returns expected (4)', () {
-    final r = Xorshift32.expected();
+    final r = Xorshift32.seeded();
     expect(List.generate(20, (_) => r.nextInt(4)), [1, 2, 1, 0, 1, 2, 0, 1, 3, 0, 1, 2, 1, 1, 1, 1, 3, 2, 1, 2]);
   });
 
   test('int from range returns expected (4)', () {
-    final r = Xorshift32.expected();
+    final r = Xorshift32.seeded();
     expect(List.generate(20, (_) => r.nextInt(2)), [1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0]);
   });
 
   test('int from range returns expected (1000)', () {
-    final r = Xorshift32.expected();
+    final r = Xorshift32.seeded();
     expect(List.generate(20, (_) => r.nextInt(1000)), [
       925,
       686,
@@ -70,7 +70,7 @@ void main() {
   });
 
   test('int from range returns expected 0xFFFFFFFF', () {
-    final r = Xorshift32.expected();
+    final r = Xorshift32.seeded();
     expect(List.generate(20, (_) => r.nextInt(0xFFFFFFFF)), [
       1225539925,
       3858151686,
