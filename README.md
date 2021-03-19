@@ -79,12 +79,10 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 If you just want a random number:
 
 ``` dart
-final random = Xrandom();  // works on all platforms
+final random = Xrandom();
 
 quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 ``` 
-
-**`Xrandom`** class is **fast** and works **everywhere**.
 
 -------
 
@@ -92,25 +90,11 @@ If you are solving a math problem:
 
 
 ``` dart
-final random = XrandomHq();  // works on mobile and desktop
+final random = XrandomHq();
 
 for (var i=0; i<BILLIONS; i++)
     feedMonteCarloSimulation( random.nextDouble() );
 ```
-
-**`XrandomHq`** class is uncompromisingly  **high quality** and works on **64-bit platforms**: i.e. on all desktops, phones and tablets.
-
-But if your target is JavaScript (Flutter Web, Node.js):
-
-``` dart
-final random = XrandomJq();  // works on all platforms
-
-for (var i=0; i<BILLIONS; i++)  
-    feedMonteCarloSimulation( random.nextDouble() ); // on JS? O_O  
-```
-
-**`XrandomJq`** class is **high quality**, and works **everywhere**.
-
 
 # Additions to Random
 
@@ -193,8 +177,8 @@ only comparison to `nextRaw32` is "apples-to-apples".
 |    | `Xorshift64`   | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)      |  2003 |
 | ✓  | `Xorshift128`  | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)     |  2003 |
 |    | `Xorshift128p` | [xorshift128+ v2](https://arxiv.org/abs/1404.0390)                |  2015 |
-| ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `XrandomJq` |
-|    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 | `XrandomHq` |
+| ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `XrandomHq` |
+|    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 |  |
 |    | `Splitmix64`   | [splitmix64](https://prng.di.unimi.it/splitmix64.c)               |  2015 |
 
 # Compatibility
