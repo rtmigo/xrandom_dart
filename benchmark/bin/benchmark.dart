@@ -9,7 +9,7 @@ import 'package:xrandom/xrandom.dart';
 
 enum DoWhat { nextDouble, nextInt, nextBool, nextRaw32, nextRaw64, nextFloat,  }
 
-const NUM_EXPERIMENTS = 1; //50; //50;
+const NUM_EXPERIMENTS = 50;
 const NUM_ITEMS_PER_EXPERIMENT = 1000000;
 
 int measureTimeRuns = 0;
