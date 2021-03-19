@@ -28,6 +28,19 @@ var c = random.nextInt(n);
 var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 ```
 
+# Speed
+
+Generating random numbers with AOT-compiled binary.
+
+Sorted by `nextInt` **fastest  to slowest**
+(numbers show execution time)
+
+| JS | Class                  | nextInt | nextDouble | nextBool |
+|----|------------------------|--------:|-----------:|---------:|
+| ✓  | Xrandom                |     627 |        640 |      391 |
+| ✓  | **Random (dart:math)** |     895 |        929 |      662 |
+| ✓  | XrandomHq              |     933 |       1219 |      398 |
+
 # Creating the object
 
 If you just want a random number:
@@ -45,19 +58,6 @@ final random = XrandomHq();
 
 feedMonteCarloSimulation(random);
 ```
-
-# Speed
-
-Generating random numbers with AOT-compiled binary.
-
-Sorted by `nextInt` **fastest  to slowest**
-(numbers show execution time)
-
-| JS | Class                  | nextInt | nextDouble | nextBool |
-|----|------------------------|--------:|-----------:|---------:|
-| ✓  | Xrandom                |     627 |        640 |      391 |
-| ✓  | **Random (dart:math)** |     895 |        929 |      662 |
-| ✓  | XrandomHq              |     933 |       1219 |      398 |
 
 
 # Additions to Random
