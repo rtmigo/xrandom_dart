@@ -208,7 +208,7 @@ All the benchmarks on this page are from AOT-compiled binaries running on AMD A9
 # Consistency
 
 The library has been thoroughly **tested to match reference numbers** generated 
-by C algorithms. Not only integers, but also converted to double including 
+by C algorithms. Not only integers, but also randoms converted to double 
 including all decimal places that the compiler takes into account.
 
 The sources in C are taken directly from scientific publications or the 
