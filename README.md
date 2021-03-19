@@ -99,16 +99,19 @@ quadrillion.
 <details>
   <summary>Speed comparison</summary>
 
-| JS | Time (lower is better) | nextDouble | nextFloat |
+Sorted by `nextDouble` **fastest  to slowest**
+(numbers show execution time)
+
+| JS | Class                  | nextDouble | nextFloat |
 |----|------------------------|-----------:|----------:|
-|    | Xorshift64             |        588 |       368 |
-| ✓  | Xorshift32             |        648 |       236 |
-|    | Xorshift128p           |        656 |       395 |
-|    | Splitmix64             |        691 |       414 |
-| ✓  | Xorshift128            |        850 |       360 |
-| ✓  | *Random (dart:math)*     |        *962* |          |
-|    | Xoshiro256pp           |       1201 |       756 |
-| ✓  | Xoshiro128pp           |       1258 |       556 |
+|    | Xorshift64             |        577 |       358 |
+| ✓  | Xrandom                |        628 |       228 |
+|    | Xorshift128p           |        629 |       395 |
+|    | Splitmix64             |        667 |       397 |
+| ✓  | Xorshift128            |        823 |       347 |
+| ✓  | **Random (dart:math)** |        929 |         0 |
+|    | XrandomHq              |       1154 |       712 |
+| ✓  | XrandomJq              |       1204 |       536 |
 
 
 </details>
@@ -131,17 +134,20 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 <details>
   <summary>Speed comparison</summary>
   
+Sorted by `nextInt` **fastest  to slowest**  
+(numbers show execution time)
   
-| JS | Time (lower is better) | nextInt | nextRaw32 | nextRaw64 |
+  
+| JS | Class                  | nextInt | nextRaw32 | nextRaw64 |
 |----|------------------------|--------:|----------:|----------:|
-| ✓  | Xorshift32             |     646 |       232 |       558 |
-| ✓  | Xorshift128            |     764 |       353 |       811 |
-| ✓  | *Random (dart:math)*     |     *881* |          |          |
-|    | Xorshift64             |     948 |       368 |       529 |
-| ✓  | Xoshiro128pp           |     962 |       544 |      1221 |
-|    | Xorshift128p           |    1037 |       399 |       545 |
-|    | Splitmix64             |    1084 |       418 |       514 |
-|    | Xoshiro256pp           |    1535 |       761 |      1129 |
+| ✓  | Xrandom                |     628 |       222 |       535 |
+| ✓  | Xorshift128            |     722 |       334 |       778 |
+|    | Xorshift64             |     749 |       353 |       509 |
+|    | Xorshift128p           |     766 |       387 |       532 |
+|    | Splitmix64             |     836 |       403 |       503 |
+| ✓  | **Random (dart:math)** |     878 |           |           |
+| ✓  | XrandomJq              |     926 |       532 |      1191 |
+|    | XrandomHq              |    1120 |       724 |      1070 |
 
 Since `nextInt`'s return range is always limited to 32 bits, 
 only comparison to `nextRaw32` is "apples-to-apples".
