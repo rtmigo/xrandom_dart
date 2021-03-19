@@ -81,7 +81,7 @@ argument to the system `Random`. However, its documentation only
 promises randomness. If the dart:math changes the implementation, it 
 will start returning different numbers with the same seed values.
 
-At the same time, Xrandom is designed to return the same values ​​today 
+In contrast, Xrandom is designed to return the same values ​​today 
 and 10 years later.
 
 *(not until the library reaches 1.0)*
