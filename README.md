@@ -62,37 +62,6 @@ Sorted by `nextInt` **fastest  to slowest**
 | ✓  | **Random (dart:math)** |     895 |        929 |      662 |
 | ✓  | XrandomHq              |     933 |       1219 |      398 |
 
-# Reproducibility
-
-Xrandom's classes can also be created with `expected` method.
-It is made specifically for testing. 
-
-``` dart
-test('my test', () {
-  final random = Xrandom.expected();
-  // you'll get same sequence of numbers every time
-  expect(random.nextInt(1000), 925);
-  expect(random.nextInt(1000), 686);
-  expect(random.nextInt(1000), 509);  
-});    
-```
-You can temporarily achieve the same effect by passing the `seed` 
-argument to the system `Random`. However, its documentation only 
-promises randomness. If the dart:math changes the implementation, it 
-will start returning different numbers with the same seed values.
-
-In contrast, Xrandom is designed to return the same values ​​today 
-and 10 years later.
-
-*(not until the library reaches 1.0)*
-
-In fact, you don't even need the method. You can use any positive 
-constant when creating the object.
-
-``` dart
-final random = Xrandom(12345); // will return same numbers every time
-```
-
 
 # Additions to Random
 
