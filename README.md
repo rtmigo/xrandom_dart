@@ -14,7 +14,7 @@ Library priorities:
 
 ----------
 
-It's has the same API as the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
+It has the same API as the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
 
 ``` dart
 import 'package:xrandom/xrandom.dart';
@@ -98,8 +98,8 @@ final random = Xrandom(12345); // will return same numbers every time
 `nextFloat()` generates a floating-point value in range 0.0≤x<1.0.
 
 Unlike the `nextDouble`, `nextFloat` prefers speed to precision.
-It's still a `double`, but it has four billion shades instead on eight 
-quadrillion.
+It's still a `double`, but it has four billion shades instead of eight 
+quadrillions.
 
 <details>
   <summary>Speed comparison</summary>
