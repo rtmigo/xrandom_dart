@@ -84,7 +84,6 @@ final random = Xrandom();
 quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 ``` 
 
--------
 
 If you are solving a math problem:
 
