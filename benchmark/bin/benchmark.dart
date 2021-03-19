@@ -140,7 +140,8 @@ void main(List<String> arguments) {
 
       otherRows.add(row);
 
-      var typestr = random.runtimeType.toString();
+      var typekey = random.runtimeType.toString();
+      var typestr = typekey;
       if (typestr == '_Random') {
         typestr = '*Random (dart:math)*';
       } else if (typestr == 'Xorshift32') {
@@ -153,7 +154,7 @@ void main(List<String> arguments) {
       row.add(typestr);
 
       for (final doWhat in whatz) {
-        final times = results[typestr]![doWhat]!;
+        final times = results[typekey]![doWhat]!;
         final avg = mean(times);
         row.add(avg == 0 ? 0 : avg);
       }
