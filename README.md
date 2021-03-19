@@ -43,6 +43,8 @@ Sorted by `nextInt` **fastest  to slowest**
 
 # Creating the object
 
+The library provides classes that differ in the first letter: `Xrandom`, `Qrandom`, `Drandom`.
+
 If you just want a random number:
 
 ``` dart
