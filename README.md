@@ -220,5 +220,9 @@ which tested the 128+ similarly.
 Therefore, the sequence generated for example by the 
 `Xoshiro128pp.nextRaw32()` with seed `(1, 2, 3, 4)` is exactly the same as the [C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce with the same seed.
 
+The `double` values will also be exactly the same as if the `uint64_t` type 
+was converted to `double` in C99 by unsafe pointer conversion. There are no 
+pointers or unsafe conversions in Dart, but the numbers are the same.
+
 Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and **macOS** in **VM** and **Node.js** modes.
 
