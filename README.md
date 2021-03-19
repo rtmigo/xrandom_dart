@@ -79,7 +79,7 @@ Sorted by `nextInt` **fastest  to slowest**
 
 ## nextFloat
 
-`nextFloat()` generates a floating-point value in range 0.0≤x<1.0.
+`nextFloat()` generates a floating-point value uniformly distributed in the range 0.0 ≤ x <1.0.
 
 Unlike the `nextDouble`, `nextFloat` prefers speed to precision.
 It's still a `double`, but it has four billion shades instead of eight 
@@ -112,7 +112,7 @@ Sorted by `nextDouble` **fastest  to slowest**
 These methods return the raw output of the generator uncompromisingly fast. Depending on the algorithm, 
 the output is a number consisting of either 32 random bits or 64 random bits. 
 
-Xrandom combines small numbers or separates large ones. The methods work with any of the generators.
+Xrandom combines small integers or splits large ones. The methods work with any of the generators.
 
 
 | JS    | Method        | Returns         | Equivalent of                   | 
