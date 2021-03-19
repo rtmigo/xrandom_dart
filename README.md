@@ -114,14 +114,14 @@ Sorted by `nextDouble` **fastest  to slowest**
 
 | JS | Class                  | nextDouble | nextFloat |
 |----|------------------------|-----------:|----------:|
-|    | Xorshift64             |        577 |       358 |
-| ✓  | Xrandom                |        628 |       228 |
-|    | Xorshift128p           |        629 |       395 |
-|    | Splitmix64             |        667 |       397 |
-| ✓  | Xorshift128            |        823 |       347 |
-| ✓  | **Random (dart:math)** |        929 |           |
-|    | XrandomHq              |       1154 |       712 |
-| ✓  | XrandomJq              |       1204 |       536 |
+|    | Xorshift64             |        573 |       359 |
+| ✓  | Xrandom                |        626 |       225 |
+|    | Xorshift128p           |        631 |       391 |
+|    | Splitmix64             |        670 |       403 |
+| ✓  | Xorshift128            |        820 |       347 |
+| ✓  | **Random (dart:math)** |        931 |          |
+|    | Xoshiro256pp           |       1162 |       718 |
+| ✓  | XrandomHq              |       1223 |       535 |
 
 
 </details>
@@ -150,14 +150,15 @@ Sorted by `nextInt` **fastest  to slowest**
   
 | JS | Class                  | nextInt | nextRaw32 | nextRaw64 |
 |----|------------------------|--------:|----------:|----------:|
-| ✓  | Xrandom                |     628 |       222 |       535 |
-| ✓  | Xorshift128            |     722 |       334 |       778 |
-|    | Xorshift64             |     749 |       353 |       509 |
-|    | Xorshift128p           |     766 |       387 |       532 |
-|    | Splitmix64             |     836 |       403 |       503 |
-| ✓  | **Random (dart:math)** |     878 |           |           |
-| ✓  | XrandomJq              |     926 |       532 |      1191 |
-|    | XrandomHq              |    1120 |       724 |      1070 |
+| ✓  | Xrandom                |     626 |       224 |       543 |
+| ✓  | Xorshift128            |     725 |       338 |       776 |
+|    | Xorshift64             |     756 |       353 |       517 |
+|    | Xorshift128p           |     774 |       385 |       534 |
+|    | Splitmix64             |     840 |       398 |       497 |
+| ✓  | **Random (dart:math)** |     878 |          |          |
+| ✓  | XrandomHq              |     932 |       529 |      1184 |
+|    | Xoshiro256pp           |    1115 |       722 |      1076 |
+
 
 Since `nextInt`'s return range is always limited to 32 bits, 
 only comparison to `nextRaw32` is "apples-to-apples".
@@ -198,16 +199,14 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 
 | JS | Class                  | nextInt | nextDouble | nextBool |
 |----|------------------------|--------:|-----------:|---------:|
-| ✓  | Xrandom                |     628 |        628 |      407 |
-| ✓  | Xorshift128            |     722 |        823 |      409 |
-|    | Xorshift64             |     749 |        577 |      386 |
-|    | Xorshift128p           |     766 |        629 |      391 |
-|    | Splitmix64             |     836 |        667 |      385 |
-| ✓  | **Random (dart:math)** |     878 |        929 |      661 |
-| ✓  | XrandomJq              |     926 |       1204 |      414 |
-|    | XrandomHq              |    1120 |       1154 |      394 |
-
-
+| ✓  | Xrandom                |     626 |        626 |      410 |
+| ✓  | Xorshift128            |     725 |        820 |      410 |
+|    | Xorshift64             |     756 |        573 |      380 |
+|    | Xorshift128p           |     774 |        631 |      384 |
+|    | Splitmix64             |     840 |        670 |      388 |
+| ✓  | **Random (dart:math)** |     878 |        931 |      671 |
+| ✓  | XrandomHq              |     932 |       1223 |      415 |
+|    | Xoshiro256pp           |    1115 |       1162 |      402 |
 
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
