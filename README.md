@@ -192,6 +192,8 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 
 # Compatibility
 
+TL;DR `Xrandom` and `XrandomHq` work everywhere.
+
 The library is written in pure Dart. Therefore, it works wherever Dart works.
 
 But among the platforms supported by Dart, there is an unusual: 
