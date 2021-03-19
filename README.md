@@ -179,14 +179,14 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 
 | JS | Time (lower is better) | nextInt | nextDouble | nextBool |
 |----|------------------------|--------:|-----------:|---------:|
-| ✓  | Xorshift32             |     646 |        648 |      424 |
-| ✓  | Xorshift128            |     764 |        850 |      427 |
-| ✓  | **Random (dart:math)**     |     **881** |        **962** |      **692** |
-|    | Xorshift64             |     948 |        588 |      398 |
-| ✓  | Xoshiro128pp           |     962 |       1258 |      428 |
-|    | Xorshift128p           |    1037 |        656 |      407 |
-|    | Splitmix64             |    1084 |        691 |      404 |
-|    | Xoshiro256pp           |    1535 |       1201 |      415 |
+| ✓  | Xrandom                |     631 |        632 |      405 |
+| ✓  | Xorshift128            |     720 |        815 |      410 |
+|    | Xorshift64             |     756 |        575 |      385 |
+|    | Xorshift128p           |     772 |        632 |      387 |
+|    | Splitmix64             |     841 |        664 |      391 |
+| ✓  | **Random (dart:math)** |     852 |        925 |      662 |
+| ✓  | XrandomJq              |     927 |       1206 |      422 |
+|    | XrandomHq              |    1134 |       1160 |      403 |
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 
