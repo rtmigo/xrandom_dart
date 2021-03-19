@@ -69,9 +69,20 @@ abstract class RandomBase64 extends RandomBase32 {
   //
 
   @override
+  double nextDoubleZ() {
+    // the result of printf("%.60e", 0x1.0p-53):
+    const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
+
+    //_____(this.nextInt64()_>>>_11______________________)_*_0x1.0p-53
+    return ((this.nextRaw64() >> 11) & ~(-1 << (64 - 11))) * Z;
+  }
+
+  @override
   double nextDouble() {
     // the result of printf("%.60e", 0x1.0p-53):
     const double Z = 1.110223024625156540423631668090820312500000000000000000000000e-16;
+
+    return ((this.nextRaw64()&INT64_MAX_POSITIVE)>>10)*Z;
 
     //_____(this.nextInt64()_>>>_11______________________)_*_0x1.0p-53
     return ((this.nextRaw64() >> 11) & ~(-1 << (64 - 11))) * Z;
