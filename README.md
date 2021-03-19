@@ -42,12 +42,7 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 If you are solving a math problem:
 
 
-``` dart
-final random = XrandomHq();
 
-feedMonteCarloSimulation(random);
-
-```
 
 # Classes
 
@@ -60,9 +55,19 @@ Generating random numbers with AOT-compiled binary. Numbers show execution time.
 | ✓  | Xrandom                |     627 |        640 |      391 |
 | ✓  | **Random (dart:math)** |     895 |        929 |      662 |
 
-This algorithm does not produce a statistically perfect numbers.
+``` dart
+final random = Xrandom();
 
+quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
+``` 
 
+## `XrandomHq` is statistically better
+
+``` dart
+final random = XrandomHq();
+
+feedMonteCarloSimulation(random);
+```
 
 
 # Additions to Random
