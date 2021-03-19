@@ -2,11 +2,8 @@
 // SPDX-License-Identifier: MIT
 
 @TestOn('vm')
-
 import 'package:test/test.dart';
 import 'package:xrandom/src/50_splitmix64.dart';
-
-import 'package:xrandom/src/60_xorshift64.dart';
 import 'package:xrandom/xrandom.dart';
 
 import 'helper.dart';
@@ -26,7 +23,7 @@ void main() {
   test('expected values', () {
     expect(expectedList(Splitmix64.expected()), [
       int.parse('-1280933994267506231'),
-      73951,
+      75710,
       0.9449949262451789,
       false,
       false,

@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: MIT
 
 @TestOn('node')
-
 import "package:test/test.dart";
 import 'package:xrandom/src/00_errors.dart';
 import 'package:xrandom/src/50_splitmix64.dart';
-import 'package:xrandom/src/60_xorshift64.dart';
 import 'package:xrandom/src/60_xorshift128plus.dart';
+import 'package:xrandom/src/60_xorshift64.dart';
 import 'package:xrandom/src/60_xoshiro256pp.dart';
 import 'package:xrandom/xrandom.dart';
 

@@ -9,7 +9,7 @@ import 'package:xrandom/xrandom.dart';
 
 enum DoWhat { nextDouble, nextInt, nextBool, nextRaw32, nextRaw64, nextFloat,  }
 
-const NUM_EXPERIMENTS = 300; //50;
+const NUM_EXPERIMENTS = 50; //50;
 const NUM_ITEMS_PER_EXPERIMENT = 1000000;
 
 int measureTimeRuns = 0;
@@ -159,32 +159,26 @@ void main(List<String> arguments) {
 
   print('');
 //
-  //printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
+  printColumns([DoWhat.nextInt, DoWhat.nextDouble, DoWhat.nextBool]);
 
-  printColumns([DoWhat.nextInt]);
+  //printColumns([DoWhat.nextInt]);
 
 
   print('');
 
-  // printColumns([
-  //   DoWhat.nextFloat,
-  //   DoWhat.nextFloatUint,
-  //   DoWhat.nextFloatInline,
-  // ]);
 
+  printColumns([
+    DoWhat.nextInt,
+    DoWhat.nextRaw32,
+    DoWhat.nextRaw64,
+  ]);
 
-  // printColumns([
-  //   DoWhat.nextInt,
-  //   DoWhat.nextRaw32,
-  //   DoWhat.nextRaw64,
-  // ]);
-  //
-  // print('');
-  //
-  // printColumns([
-  //   DoWhat.nextDouble,
-  //   DoWhat.nextFloat,
-  // ]);
+  print('');
+
+  printColumns([
+    DoWhat.nextDouble,
+    DoWhat.nextFloat,
+  ]);
 
   print('');
 }

@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'dart:math';
 
 import 'package:test/test.dart';
 import 'package:xrandom/src/60_xorshift32.dart';

@@ -26,7 +26,7 @@ void main() {
   test('expected values', () {
     expect(expectedList(Xoshiro256pp.expected()), [
       int.parse('9214259484446541290'),
-      92508,
+      3031,
       0.9835800298090491,
       false,
       false,

@@ -1,10 +1,10 @@
 # 0.5.0
 
-- nextInt() now uses Lemire's nearlydivisionless algorithm
-
 - Renamed nextIntNN methods to nextRawNN 
 
-- Renamed XrandomHqJs to XrandomJq 
+- Renamed XrandomHqJs to XrandomJq
+
+- Speed optimizations 
 
 # 0.4.0
 

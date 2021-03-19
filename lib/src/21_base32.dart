@@ -47,12 +47,11 @@ abstract class RandomBase32 implements Random {
     if (max < 1 || max > 0xFFFFFFFF) {
       throw RangeError.range(max, 1, 0xFFFFFFFF);
     }
-
     int r = nextRaw32();
     int m = max - 1;
-
-    for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {}
-
+    for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {
+      // c'mon relax
+    }
     return r;
   }
 
@@ -65,7 +64,7 @@ abstract class RandomBase32 implements Random {
   // O'Neil <https://git.io/Jm0D7> calls it "Debiased Modulo (Once) —
   // Java's Method" aka "Debiased Mod (x1)". Her sources contain attempts to
   // optimize modulo division here. But these attempts were not even included
-  // in the article.
+  // in the article. I didn't do well either.
   //
   // Both JDK and Dart implementations have "a special treatment" for cases
   // when [max] is a power of two. Dart uses this case for speed: it returns
@@ -171,19 +170,19 @@ abstract class RandomBase32 implements Random {
   @internal
   int boolCache_prevShift = 0;
 
-  //
-  // REMARKS to nextBool():
-  //
-  // in dart:math it is return nextInt(2) == 0;
-  // which is an equivalent of
-  //   if ((2&-2)==2) return next()&(2-1);
-  //
-  // benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
-  //    Random      (from dart:math)            2424
-  //    XorShift32  return nextInt(2)==0        2136
-  //    XorShift32  this.next() % 2 == 0        1903
-  //    XorShift32  this.next() >= 0x80000000   1821
-  //    XorShift32  returning bits              1423
-  //
-  //
+//
+// REMARKS to nextBool():
+//
+// in dart:math it is return nextInt(2) == 0;
+// which is an equivalent of
+//   if ((2&-2)==2) return next()&(2-1);
+//
+// benchmarks 2021-03 with Xorshift32 (on Dell Seashell):
+//    Random      (from dart:math)            2424
+//    XorShift32  return nextInt(2)==0        2136
+//    XorShift32  this.next() % 2 == 0        1903
+//    XorShift32  this.next() >= 0x80000000   1821
+//    XorShift32  returning bits              1423
+//
+//
 }

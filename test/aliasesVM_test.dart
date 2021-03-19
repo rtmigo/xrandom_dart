@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: MIT
 
 @TestOn('vm')
-
 import 'package:test/test.dart';
 import 'package:xrandom/xrandom.dart';
 
