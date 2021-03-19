@@ -142,8 +142,10 @@ void main(List<String> arguments) {
 
       var typekey = random.runtimeType.toString();
       var typestr = typekey;
+      //bool emphasize = false;
       if (typestr == '_Random') {
-        typestr = '*Random (dart:math)*';
+        typestr = '**Random (dart:math)**';
+        //emphasize = true;
       } else if (typestr == 'Xorshift32') {
         typestr = 'Xrandom';
       } else if (typestr == 'Xoshiro256pp') {
