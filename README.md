@@ -99,7 +99,7 @@ Sorted by `nextDouble` **fastest  to slowest**
 |    | Mulberry32             |        841 |       301 |
 | ✓  | **Random (dart:math)** |        929 |           |
 |    | Xoshiro256pp           |       1182 |       713 |
-| ✓  | XrandomHq              |       1219 |       539 |
+| ✓  | Qrandom / Drandom              |       1219 |       539 |
 
 
 </details>
@@ -197,7 +197,7 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 |    | Xorshift128p           |     772 |        635 |      394 |
 |    | Splitmix64             |     838 |        658 |      392 |
 | ✓  | **Random (dart:math)** |     895 |        929 |      662 |
-| ✓  | XrandomHq              |     933 |       1219 |      398 |
+| ✓  | Qrandom / Drandom              |     933 |       1219 |      398 |
 |    | Xoshiro256pp           |    1138 |       1182 |      406 |
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
