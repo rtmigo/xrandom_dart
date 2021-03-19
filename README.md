@@ -38,12 +38,17 @@ var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 
 # Speed
 
-Generating 50 million random numbers with AOT-compiled binary. 
+Generating random numbers with AOT-compiled binary.
 
-| Time (lower is better) | nextInt | nextDouble | nextBool |
-|------------------------|---------|------------|----------|
-| Xrandom             |   628   |    628    |   407    |
-| Random (dart:math)     |  878   |    929    |   661   |
+Sorted by `nextInt` **fastest  to slowest**
+(numbers show execution time)
+
+| JS | Class                  | nextInt | nextDouble | nextBool |
+|----|------------------------|--------:|-----------:|---------:|
+| ✓  | Xrandom                |     628 |        628 |      407 |
+| ✓  | **Random (dart:math)** |     878 |        929 |      661 |
+| ✓  | XrandomJq              |     926 |       1204 |      414 |
+|    | XrandomHq              |    1120 |       1154 |      394 |
 
 
 
