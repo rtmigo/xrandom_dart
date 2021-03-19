@@ -140,11 +140,20 @@ void main(List<String> arguments) {
 
       otherRows.add(row);
 
-      final type = random.runtimeType.toString();
-      row.add(type == '_Random' ? '*Random (dart:math)*' : type);
+      var typestr = random.runtimeType.toString();
+      if (typestr == '_Random') {
+        typestr = '*Random (dart:math)*';
+      } else if (typestr == 'Xorshift32') {
+        typestr = 'Xrandom';
+      } else if (typestr == 'Xoshiro256pp') {
+        typestr = 'XrandomHq';
+      } else if (typestr == 'Xoshiro128pp') {
+        typestr = 'XrandomJq';
+      }
+      row.add(typestr);
 
       for (final doWhat in whatz) {
-        final times = results[type]![doWhat]!;
+        final times = results[typestr]![doWhat]!;
         final avg = mean(times);
         row.add(avg == 0 ? 0 : avg);
       }
