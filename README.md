@@ -53,20 +53,16 @@ feedMonteCarloSimulation(random);
 
 ## `Xrandom` is simple and fast
 
-
-
-# Speed
-
-Generating random numbers with AOT-compiled binary.
-
-Sorted by `nextInt` **fastest  to slowest**
-(numbers show execution time)
+Generating random numbers with AOT-compiled binary. Numbers show execution time.
 
 | JS | Class                  | nextInt | nextDouble | nextBool |
 |----|------------------------|--------:|-----------:|---------:|
 | ✓  | Xrandom                |     627 |        640 |      391 |
 | ✓  | **Random (dart:math)** |     895 |        929 |      662 |
-| ✓  | XrandomHq              |     933 |       1219 |      398 |
+
+This algorithm does not produce a statistically perfect numbers.
+
+
 
 
 # Additions to Random
