@@ -217,5 +217,8 @@ The Xorshift128+ results are also matched to reference values from
 [JavaScript xorshift library](https://github.com/AndreasMadsen/xorshift), 
 which tested the 128+ similarly.
 
+Therefore, the numbers generated for example by the 
+`Xoshiro128pp(1, 2, 3, 4).nextRaw32()` are exactly the same as the [C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce from the same seed.
+
 Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and **macOS** in **VM** and **Node.js** modes.
 
