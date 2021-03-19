@@ -76,12 +76,16 @@ test('my test', () {
   expect(random.nextInt(1000), 509);  
 });    
 ```
+You can temporarily achieve the same effect by passing the `seed` 
+argument to the system `Random`. However, according to the documentation, 
+the system Random only promises randomness. If the dart:math changes 
+the implementation, it will start returning different numbers with the 
+same seed values.
 
-You can achieve the same determinism by creating the `Random` with a `seed` 
-argument. However, this does not protect you from the dart:math implementation 
-updates. According to the spec, the **system Random is randomly random**. But the 
-sequences produced by the **Xrandom generators are intended to be 
-reproducible**. *(not until the library reaches 1.0)*
+At the same time, Xrandom is designed to return the same values ​​today 
+and 10 years later.
+
+*(not until the library reaches 1.0)*
 
 In fact, you don't even need the method. You can use any positive 
 constant when creating the object.
