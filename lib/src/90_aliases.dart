@@ -10,14 +10,14 @@ class Xrandom extends Xorshift32 {
   static Xorshift32 expected() => Xrandom(Xorshift32.defaultSeed);
 }
 
-class XrandomHq extends Xoshiro128pp {
-  XrandomHq._fullSeed(int a32, int b32, int c32, d32) : super(a32, b32, c32, d32);
+class Qrandom extends Xoshiro128pp {
+  Qrandom._fullSeed(int a32, int b32, int c32, d32) : super(a32, b32, c32, d32);
 
-  XrandomHq._noSeed() : super();
+  Qrandom._noSeed() : super();
 
-  factory XrandomHq([int? seed]) {
+  factory Qrandom([int? seed]) {
     if (seed == null) {
-      return XrandomHq._noSeed();
+      return Qrandom._noSeed();
     }
 
     RangeError.checkValueInInterval(seed, 1, 0xFFFFFFFF);
@@ -27,12 +27,15 @@ class XrandomHq extends Xoshiro128pp {
     final r2 = Xorshift32(seed ^ 0x53985f9c)..nextRaw32();
 
     // seeding values from smaller generators to the big one
-    return XrandomHq._fullSeed(r1.nextRaw32(), r2.nextRaw32(), r1.nextRaw32(), r2.nextRaw32());
+    return Qrandom._fullSeed(r1.nextRaw32(), r2.nextRaw32(), r1.nextRaw32(), r2.nextRaw32());
   }
 
-  static XrandomHq expected() => XrandomHq._fullSeed(
-    Xoshiro128pp.defaultSeedA,
-    Xoshiro128pp.defaultSeedB,
-    Xoshiro128pp.defaultSeedC,
-    Xoshiro128pp.defaultSeedD);
+  static Qrandom expected() => Qrandom._fullSeed(Xoshiro128pp.defaultSeedA,
+      Xoshiro128pp.defaultSeedB, Xoshiro128pp.defaultSeedC, Xoshiro128pp.defaultSeedD);
+}
+
+class Drandom extends Xoshiro128pp {
+  Drandom()
+      : super(Xoshiro128pp.defaultSeedA, Xoshiro128pp.defaultSeedB, Xoshiro128pp.defaultSeedC,
+            Xoshiro128pp.defaultSeedD);
 }

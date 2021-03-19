@@ -12,6 +12,6 @@ export 'src/60_xorshift32.dart' show Xorshift32;
 export 'src/60_xorshift64.dart' show Xorshift64;
 export 'src/60_xoshiro128pp.dart' show Xoshiro128pp;
 export 'src/60_xoshiro256pp.dart' show Xoshiro256pp;
-export 'src/90_aliases.dart' show Xrandom, XrandomHq, XrandomHqJs;
+export 'src/90_aliases.dart' show Xrandom, Qrandom, XrandomHqJs;
 
 

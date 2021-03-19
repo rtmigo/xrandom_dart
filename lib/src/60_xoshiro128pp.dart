@@ -67,10 +67,10 @@ class Xoshiro128pp extends RandomBase32 {
     return result & 0xFFFFFFFF;
   }
 
-  static const defaultSeedA = 0x17f235fb;
-  static const defaultSeedB = 0x53985f9c;
+  static const defaultSeedA = 0x5df57377;
+  static const defaultSeedB = 0xc71b06b6;
   static const defaultSeedC = 0xbc8d40f6;
-  static const defaultSeedD = 0xc7b9d576;
+  static const defaultSeedD = 0x1437c053;
 
   static Xoshiro128pp expected() {
     return Xoshiro128pp(defaultSeedA, defaultSeedB, defaultSeedC, defaultSeedD);

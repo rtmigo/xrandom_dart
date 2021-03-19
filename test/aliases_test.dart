@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import 'package:test/test.dart';
+import 'package:xrandom/src/90_aliases.dart';
 import 'package:xrandom/xrandom.dart';
 
 void main() {
@@ -40,6 +41,13 @@ void main() {
     expect(random.nextInt(1000), 904);
   });
 
+  test('Drandom readme', () {
+    final random = Drandom();
+    expect( List.generate(5, (_) => random.nextInt(1000)),
+        [1282276250, 3989185767, 2009065675] );
+
+  });
+
   void checkRespectsSeed(RandomBase32 Function(int seed) create) {
     expect( List.generate(3, (_) => create(123).nextRaw32()),
         List.generate(3, (_) => create(123).nextRaw32()) );
@@ -48,7 +56,7 @@ void main() {
   }
 
   test('XrandomHq respects seed argument', () {
-    checkRespectsSeed((seed) => XrandomHq(seed));
+    checkRespectsSeed((seed) => Qrandom(seed));
   });
 
   test('Xrandom respects seed argument', () {
@@ -57,14 +65,14 @@ void main() {
 
 
   test('XrandomHq returns constant values from seed', () {
-    final random = XrandomHq(10);
+    final random = Qrandom(10);
     expect( List.generate(3, (_) => random.nextRaw32()),
         [1282276250, 3989185767, 2009065675] );
   });
 
   test('XrandomHq range checking', () {
-    expect(()=>XrandomHq(0), throwsRangeError);
-    expect(()=>XrandomHq(0xFFFFFFFF+1), throwsRangeError);
+    expect(()=>Qrandom(0), throwsRangeError);
+    expect(()=>Qrandom(0xFFFFFFFF+1), throwsRangeError);
   });
 
 
