@@ -79,11 +79,11 @@ Sorted by `nextInt` **fastest  to slowest**
 
 ## nextFloat
 
-`nextFloat()` generates a floating-point value uniformly distributed in the range 0.0 ≤ x <1.0.
+`nextFloat()` generates a floating-point value in the range 0.0 ≤ x <1.0.
 
 Unlike the `nextDouble`, `nextFloat` prefers speed to precision.
 It's still a `double`, but it has four billion shades instead of eight 
-quadrillions.
+quadrillions. Of course, it is also uniformly distributed.
 
 <details>
   <summary>Speed comparison</summary>
