@@ -179,7 +179,7 @@ TL;DR `Xrandom`, `Qrandom`, `Drandom` work on all platforms. Others may not work
 
 The library is written in pure Dart. Therefore, it works wherever Dart works.
 
-But JavaScript is an unusual. Numbers in JavaScript have only 53 significant bits instead of 64.
+But JavaScript is unusual. Numbers in JavaScript have only 53 significant bits instead of 64.
 If your target platform is JavaScript, then the selection will have to be 
 narrowed down to the options marked with [✓] checkmark in the JS column.
 
@@ -218,10 +218,10 @@ The Xorshift128+ results are also matched to reference values from
 which tested the 128+ similarly.
 
 Therefore, the sequence generated for example by the 
-`Xoshiro128pp.nextRaw32()` with seed `(1, 2, 3, 4)` is exactly the same as the [C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce with the same seed.
+`Xoshiro128pp.nextRaw32()` with the seed `(1, 2, 3, 4)` is the same as the [C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce with the same seed.
 
-The `double` values will also be exactly the same as if the upper bits of `uint64_t` type 
-was converted to `double_t` in C99 by unsafe pointer conversion. There are no 
+The `double` values will also be the same as if the upper bits of `uint64_t` type 
+were converted to `double_t` in C99 by unsafe pointer casting. There are no 
 pointers or unsafe conversions in Dart. Moreover, there are no upper bits `uint64_t` in JavaScript.
 But `double`s are the same type everywhere, and their random values will be the same.
 
