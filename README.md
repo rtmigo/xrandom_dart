@@ -86,19 +86,15 @@ test('my test', () {
 
 You can achieve the same determinism by creating the `Random` with a `seed` 
 argument. However, this does not protect you from the dart:math implementation 
-updates. But the sequences produced by the `expected()` generators are 
+updates. But the sequences produced by the Xrandom generators are 
 intended to be reproducible. *But not until the library reaches 1.0.*
 
 In fact, you don't even need the method. You can use any positive 
 constant when creating the object.
 
 ``` dart
-test('my test', () {
-    final random = Xrandom(12345);
-    // you'll get same sequence of numbers every time
-    expect(random.nextInt(1000), 330);
-    expect(random.nextInt(1000), 807);
-    expect(random.nextInt(1000), 904);
+final random = Xrandom(12345);
+// you'll get same sequence of numbers every time
 }); 
 ```
 
