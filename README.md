@@ -175,7 +175,7 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 
 # Compatibility
 
-TL;DR `Xrandom`, `Qrandom`, `Drandom` work on all platforms. Others work on some.
+TL;DR `Xrandom`, `Qrandom`, `Drandom` work on all platforms. Others may not work on JS.
 
 The library is written in pure Dart. Therefore, it works wherever Dart works.
 
