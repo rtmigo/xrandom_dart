@@ -56,14 +56,6 @@ feedMonteCarloSimulation(random);
 
 ```
 
-You can use any other generator from the library in the same way.
-
-``` dart
-final random = Splitmix64();
-
-quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
-```
-
 # Speed
 
 Generating random numbers with AOT-compiled binary.
@@ -188,6 +180,14 @@ only comparison to `nextRaw32` is "apples-to-apples".
 | ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `XrandomHq` |
 |    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 |  |
 |    | `Splitmix64`   | [splitmix64](https://prng.di.unimi.it/splitmix64.c)               |  2015 |
+
+You can use any other generator from the library in the same way.
+
+``` dart
+final random = Splitmix64();
+
+quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
+```
 
 # Compatibility
 
