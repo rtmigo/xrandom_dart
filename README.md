@@ -79,8 +79,9 @@ test('my test', () {
 
 You can achieve the same determinism by creating the `Random` with a `seed` 
 argument. However, this does not protect you from the dart:math implementation 
-updates. But the sequences produced by the Xrandom generators are 
-intended to be reproducible. *(not until the library reaches 1.0)*
+updates. According to the spec, the system Random is randomly random. But the 
+sequences produced by the Xrandom generators are intended to be 
+reproducible. *(not until the library reaches 1.0)*
 
 In fact, you don't even need the method. You can use any positive 
 constant when creating the object.
