@@ -181,9 +181,11 @@ The library is written in pure Dart. Therefore, it works wherever Dart works.
 
 But JavaScript is unusual. Numbers in JavaScript have only 53 significant bits instead of 64.
 If your target platform is JavaScript, then the selection will have to be 
-narrowed down to the options marked with [✓] checkmark in the JS column.
+narrowed down to the options marked with [✓] checkmark in the JS column. Trying 
+to create a incompatible object in JavaScripts-transpiled code will lead to `UnsupportedError`.
 
-Trying to create a incompatible object in JavaScripts-transpiled code will lead to `UnsupportedError`.
+If your code compiles to native (like in **Flutter** apps for **Android** and **iOS**), 
+**64-bit** generators will work best for you. For example, `Xorshift64` for speed or `Xoshiro256pp` for quality.
 
 # More benchmarks
 
