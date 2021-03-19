@@ -39,7 +39,7 @@ Sorted by `nextInt` **fastest  to slowest**
 |----|------------------------|--------:|-----------:|---------:|
 | ✓  | Xrandom                |     627 |        640 |      391 |
 | ✓  | **Random (dart:math)** |     895 |        929 |      662 |
-| ✓  | XrandomHq              |     933 |       1219 |      398 |
+| ✓  | Qrandom              |     933 |       1219 |      398 |
 
 # Creating the object
 
