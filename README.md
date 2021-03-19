@@ -56,6 +56,14 @@ feedMonteCarloSimulation(random);
 
 ```
 
+You can use any other generator from the library in the same way.
+
+``` dart
+final random = Splitmix64();
+
+quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
+```
+
 # Speed
 
 Generating random numbers with AOT-compiled binary.
