@@ -100,7 +100,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 ## nextFloat
 
-`nextFloat` generates a floating-point value in range 0.0≤x<1.0.
+`nextFloat()` generates a floating-point value in range 0.0≤x<1.0.
 
 Unlike the `nextDouble`, `nextFloat` prefers speed to precision.
 It's still a `double`, but it has four billion shades instead on eight 
