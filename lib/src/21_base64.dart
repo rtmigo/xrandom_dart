@@ -77,7 +77,27 @@ abstract class RandomBase64 extends RandomBase32 {
     int r = nextRaw32();
     int m = max - 1;
 
-    for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {}
+    int u = r;
+
+    for (;;) {
+
+      int upm = u;
+      //upm%=max;
+
+      if (upm >= max) {
+        upm -= max;
+        if (upm >= max) {
+          upm %= max;
+        }
+      }
+
+      if (u - (r = upm) + m >= 0) {
+        break;
+      }
+
+      u = nextRaw32();
+    }
+
 
     return r;
   }
