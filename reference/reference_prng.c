@@ -1054,10 +1054,29 @@ void write_lemire_neill(char* name, uint32_t range) {
 	close_ref_outfile(ints_file);
 }
 
+//////
+/*
+void debug_oneil_hack() {
+
+    uint32_t range = 10;
+
+    uint32_t t = -range;
+
+    printf("-range: %d\n", t);
+
+    if (t >= range) {
+        t -= range;
+        if (t >= range)
+            t %= range;
+    }
+}*/
+
 ////////////////////////////////////////////////////////////////////////////////
 
 int main()
 {
+    //debug_oneil_hack();
+    //return 1;
 	// printf("-----\n");
 	// debug_lemire();
 	// printf("-----\n");
