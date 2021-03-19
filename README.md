@@ -35,6 +35,26 @@ var c = random.nextInt(n);
 var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 ```
 
+# Creating the object
+
+If you just want a random number:
+
+``` dart
+final random = Xrandom();
+
+quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
+``` 
+
+
+If you are solving a math problem:
+
+
+``` dart
+final random = XrandomHq();
+
+for (var i=0; i<BILLIONS; i++)
+    feedMonteCarloSimulation( random.nextDouble() );
+```
 
 # Speed
 
@@ -73,26 +93,7 @@ The sequences produced by the `expected()` generators are intended to be reprodu
 
 
 
-# Creating the object
 
-If you just want a random number:
-
-``` dart
-final random = Xrandom();
-
-quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
-``` 
-
-
-If you are solving a math problem:
-
-
-``` dart
-final random = XrandomHq();
-
-for (var i=0; i<BILLIONS; i++)
-    feedMonteCarloSimulation( random.nextDouble() );
-```
 
 # Additions to Random
 
