@@ -212,15 +212,15 @@ Trying to create a incompatible object in JavaScripts-transpiled code will lead 
 
 | JS | Class                  | nextInt | nextDouble | nextBool |
 |----|------------------------|--------:|-----------:|---------:|
-| ✓  | Xrandom                |     641 |        648 |      422 |
-| ✓  | Xorshift128            |     748 |        845 |      427 |
-|    | Xorshift64             |     763 |        584 |      398 |
-|    | Xorshift128p           |     790 |        652 |      405 |
-|    | Splitmix64             |     874 |        686 |      405 |
-| ✓  | **Random (dart:math)** |     897 |        966 |      687 |
-| ✓  | XrandomHq              |     955 |       1249 |      433 |
-|    | Xoshiro256pp           |    1143 |       1184 |      416 |
-
+| ✓  | Xrandom                |     626 |        638 |      389 |
+| ✓  | Xorshift128            |     725 |        826 |      396 |
+|    | Xorshift64             |     748 |        568 |      385 |
+| ✓  | Mulberry32             |     767 |        840 |      401 |
+|    | Xorshift128p           |     775 |        641 |      394 |
+|    | Splitmix64             |     840 |        660 |      392 |
+| ✓  | XrandomHq              |     926 |       1216 |      400 |
+| ✓  | **Random (dart:math)** |     927 |        925 |      662 |
+|    | Xoshiro256pp           |    1128 |       1192 |      402 |
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 

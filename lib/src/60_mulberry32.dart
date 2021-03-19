@@ -25,7 +25,7 @@ class Mulberry32 extends RandomBase32 {
   int nextRaw32() {
     _state = (_state + 0x6D2B79F5) & 0xFFFFFFFF;
     int z = _state;
-    z = (((z ^ (z >> 15))) * (z | 1)) & 0xFFFFFFFF;
+    z = (((z ^ (z >> 15))) * (z | 1)) & 0xFFFFFFFF;  // does not work on JS!
     z ^= z + (z ^ (z >> 7)) * (z | 61);
     z &= 0xFFFFFFFF;
     return z ^ (z >> 14);

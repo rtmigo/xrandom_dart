@@ -136,8 +136,13 @@ void main(List<String> arguments) {
     for (final random in listGenerators()) {
       final row = <dynamic>[];
 
+      var jsSupported = true;
+      if (random is RandomBase64 || random is Mulberry32) {
+        jsSupported = false;
+      }
+
       //if (random is RandomBase32)
-        row.add(( !(random is RandomBase64) | !(random is RandomBase32) ) ? '✓' : '' );
+        row.add( jsSupported ? '✓' : '' );
 
       otherRows.add(row);
 
