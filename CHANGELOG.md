@@ -6,6 +6,8 @@
 
 - Added Mulberry32
 
+- Added nextRaw53()
+
 - Renamed nextIntNN() methods to nextRawNN() 
 
 - nextInt() works faster 

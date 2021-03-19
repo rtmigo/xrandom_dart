@@ -25,14 +25,13 @@ extension BitInt on int {
   }
 
   /// Simulates result of `x >> shift` as if `x` were `uint64_t` in C.
+  ///
+  /// The difference between int64 and uint64 is that uint64 will shift all 64 of its bits,
+  /// but int64 will shift lower 63 and preserve the highest bit.
+  ///
+  /// As of 2021 Dart does not have neither unsigned 64-bit integers nor the ">>>" operator.
   @pragma('vm:prefer-inline')
-  int unsignedRightShift(int shift) {
-    // as of 2021 Dart does not have neither unsigned 64-bit integers or the ">>>"
-    // unsigned right shift that can be found in Java or JavaScript
-    //
-    // The difference between int64 and uint64 is that
-    // uint64 will shift all 64 of its bits,
-    // but int64 will shift lower 63 and preserve the highest bit
+  int unsignedRightShift(final int shift) {
 
     return (this >> shift) & ~(-1 << (64 - shift));
 
@@ -94,8 +93,10 @@ extension BitInt on int {
     }
   } //
 
-  /// ??? C-like conversion from value typed `int32_t` to `uint32_t`.
-  ///
+
+
+  /// Returns a numeric value corresponding to the interpretation of a 32-bit integer
+  /// as signed in C.
   ///
   /// ``` C
   /// for (int i=3; i>=-3; --i)
@@ -103,20 +104,22 @@ extension BitInt on int {
   /// for (int i=-0x80000000+2; i>=-0x80000000-3; --i)
   ///    printf("%d -> %u\n", i, i);
   /// }
+  /// ```
   ///
-  /// 3 -> 3
-  /// 2 -> 2
-  /// 1 -> 1
-  /// 0 -> 0
-  /// -1 -> 4294967295
-  /// -2 -> 4294967294
-  /// -3 -> 4294967293
-  /// -2147483646 -> 2147483650
-  /// -2147483647 -> 2147483649
-  /// -2147483648 -> 2147483648
-  /// 2147483647 -> 2147483647
-  /// 2147483646 -> 2147483646
-  /// 2147483645 -> 2147483645
+  /// 3 => 3
+  /// 2 => 2
+  /// 1 => 1
+  /// 0 => 0
+  /// -1 => 4294967295
+  /// -2 => 4294967294
+  /// -3 => 4294967293
+  ///
+  /// -2147483646 => 2147483650
+  /// -2147483647 => 2147483649
+  /// -2147483648 => 2147483648
+  /// 2147483647 => 2147483647
+  /// 2147483646 => 2147483646
+  /// 2147483645 => 2147483645
   @pragma('vm:prefer-inline')
   int int32_as_uint32() {
     assert(this>=-0x80000000);
@@ -129,26 +132,32 @@ extension BitInt on int {
     }
   }
 
-
-
-
-  /// ??? C-like conversion from value typed `int32_t` to `uint32_t`.
-  ///
+  /// Returns the value of C99 type casting from `int64_t` to `uint32_t`:
   /// ``` C
-  ///   int32_t x = ...;
-  ///   return (uint32_t)x;
+  ///   int64_t x = ...;
+  ///   uint32_t y = x;
   /// ```
+  ///
+  /// It is the same value as `int.toUnsigned(32)`. Which of these is faster?
   @pragma('vm:prefer-inline')
-  int int32_to_uint32() {
-    assert(this>=-0x80000000);
-    assert(this<=0x7FFFFFFF);
-    if (this>=0) {
-      return this;
-    }
-    else {
-      return (1<<32)+this;
-    }
+  int toUint32() {
+    return this&0xFFFFFFFF;
   }
 
-
+  /// Returns the value of C99 type casting like that:
+  /// ``` C
+  ///   int64_t x = ...;
+  ///   int32_t y = x;
+  /// ```
+  ///
+  /// The result is the same result as `int.toSigned(32)`. Which of these is faster?
+  @pragma('vm:prefer-inline')
+  int toInt32() {
+    if (this & 0x80000000==0) {
+      return this & 0xFFFFFFFF;
+    }
+    else {
+      return (this & 0xFFFFFFFF) - 0xFFFFFFFF - 1;
+    }
+  }
 }

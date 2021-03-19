@@ -117,8 +117,9 @@ Xrandom concatenates 32-bit sequences into 64-bit and vice versa. Therefore, bot
 
 | JS    | Method        | Returns         | Equivalent of                   | 
 |-------|--------|-----------------|---------------------------------|
-| ✓ | `nextRaw32()` | 32-bit unsigned | `nextInt(0xffffffff)+1`         |
-|   | `nextRaw64()` | 64-bit signed   | `nextInt(0xffffffffffffffff)+1` |
+| ✓ | `nextRaw32()` | 32-bit unsigned | `nextInt(pow(2,32))`         |
+| ✓ | `nextRaw53()` | 53-bit unsigned | `nextInt(pow(2,53))`         |
+|   | `nextRaw64()` | 64-bit signed   | `nextInt(pow(2,64))` |
 
 
 <details>

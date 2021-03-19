@@ -1154,14 +1154,6 @@ void debug_oneil_hack() {
 
 int main()
 {
-    // debug_mulberry();
-	// return 1;
-    //return 1;
-	// printf("-----\n");
-	// debug_lemire();
-	// printf("-----\n");
-	// return 1;
-
 	#define PI32 314159265
 	#define PI64 3141592653589793238ll
 

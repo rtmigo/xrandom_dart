@@ -4,6 +4,7 @@
 import 'dart:math';
 
 import 'package:meta/meta.dart';
+import 'package:xrandom/src/00_jsnumbers.dart';
 
 import '00_errors.dart';
 import '00_ints.dart';
@@ -41,6 +42,15 @@ abstract class RandomBase32 implements Random {
       throw Unsupported64Error();
     }
     return (this.nextRaw32() << 32) | this.nextRaw32();
+  }
+
+  /// Generates a non-negative random integer uniformly distributed in the range
+  /// from 0, inclusive, to 2^63, exclusive.
+  @pragma('vm:prefer-inline')
+  int nextRaw53() {
+    return INT64_SUPPORTED
+        ? nextRaw64().unsignedRightShift(11)
+        : combineUpper53bitsJS(nextRaw32(), nextRaw32());
   }
 
   @override

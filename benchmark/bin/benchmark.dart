@@ -157,7 +157,7 @@ void main(List<String> arguments) {
       // } else if (typestr == 'Xoshiro256pp') {
       //   typestr = 'XrandomHq';
       } else if (typestr == 'Xoshiro128pp') {
-        typestr = 'XrandomHq';
+        typestr = 'Qrandom / Drandom';
       }
       row.add(typestr);
 
