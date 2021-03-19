@@ -43,7 +43,7 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 If you are solving a math problem:
 
 ``` dart
-final random = Qrandom(); // Q for Quality 
+final random = Qrandom(); // Q for Quantative Quality 
 
 feedMonteCarloSimulation(random);
 ```
@@ -51,7 +51,7 @@ feedMonteCarloSimulation(random);
 If you want the same numbers each time:
 
 ``` dart
-final random = Drandom(); // D for Determinism 
+final random = Drandom(); // D for Dumb Determinism 
 
 test("no surprises", () {
     expect(random.nextInt(1000), 522);
