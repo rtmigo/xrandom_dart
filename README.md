@@ -70,8 +70,7 @@ You can achieve the same determinism by creating the `Random` with a `seed` argu
 not protect you from the dart:math implementation updates.
 
 The sequences produced by the `expected()` generators are intended to be reproducible.
-
-*(but not until the library reaches 1.0)*
+*But not until the library reaches 1.0.*
 
 
 
