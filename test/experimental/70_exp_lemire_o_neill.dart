@@ -1,4 +1,7 @@
-/*
+// SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
+// SPDX-License-Identifier: MIT
+
+/* ****************************************************************************
 
 2021-03-19
 ==========
@@ -7,11 +10,12 @@ I tried to make nextInt() faster than "the Java" method
 and failed.
 
 Was inspired by O'Neil <https://git.io/Jm0D7>.
-In her experiments in C ++ with Xeon processors,
+In her experiments in C++ with Xeon processors,
 Lemire's algorithm was clearly ahead of the rest.
 
 I was generating nextInt(max) where max is random
-from [1, 1<<32] on A9 netbook with Ubuntu.
+from [1, 1<<32] on A9 netbook with Ubuntu 20.04,
+Dart SDK version: 2.12.1 (stable)
 
 =======================================================
 
@@ -97,7 +101,7 @@ with divisionless algorithm (Lemire) + O'Neill hacks
 | ✓  | *Random (dart:math)*   |     895 |
 |    | Xoshiro256pp           |    1582 |
 
-*/
+**************************************************************************** */
 
 import 'package:meta/meta.dart';
 import 'package:xrandom/src/60_xorshift64.dart';

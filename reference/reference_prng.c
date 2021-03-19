@@ -773,7 +773,8 @@ void write_splitmix64(char* name, uint64_t a) {
 // https://github.com/umireon/my-random-stuff/blob/master/xorshift/splitmix32.c
 
 uint32_t next_splitmix32(uint32_t *x) {
-  uint32_t z = (*x += 0x9e3779b9);
+	exit(1);
+  uint32_t z = (*x += 0x9e3779b9); // ERROR!
   z = (z ^ (z >> 16)) * 0x85ebca6b;
   z = (z ^ (z >> 13)) * 0xc2b2ae35;
   return z ^ (z >> 16);
@@ -805,6 +806,84 @@ void write_splitmix32(char* name, uint32_t a) {
 	close_ref_outfile(doubles_file);
 	close_ref_outfile(ints_file);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// MULBERRY32
+// (c) 2017 by Tommy Ettinger (CC0)
+// https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
+
+//uint32_t x; /* The state can be seeded with any value. */
+
+struct mulberry32_state {
+  uint64_t x;
+};
+ 
+/* Call next() to get 32 pseudo-random bits, call it again to get more bits. */
+// It may help to make this inline, but you should see if it benefits your code.
+uint32_t mulberry32_next(struct mulberry32_state* state) {
+  uint32_t z = (state->x += 0x6D2B79F5UL);
+  z = (z ^ (z >> 15)) * (z | 1UL);
+  z ^= z + (z ^ (z >> 7)) * (z | 61UL);
+  return z ^ (z >> 14);
+}
+
+void write_mulberry32(char* name, uint32_t seed) {
+
+
+
+ 	char seed_str[256];
+	snprintf(seed_str, sizeof seed_str, "0x%x", seed);
+
+	char* alg_name = "mulberry32";
+	FILE *ints_file = open_ref_outfile_old(
+			alg_name, name, seed_str, "int");
+	FILE *doubles_file = open_ref_outfile_old(
+			alg_name, name, seed_str, "double_mult");
+	FILE *doubles_cast_file = open_ref_outfile_old(
+			alg_name, name, seed_str, "double_cast");
+
+	struct mulberry32_state state;
+	state.x = seed;
+
+	for (int i=0; i<VALUES_PER_SAMPLE; ++i) {
+		uint32_t x1 = mulberry32_next(&state);
+		fprintf(ints_file, "'%08x',\n", x1);
+		uint32_t x2 = mulberry32_next(&state);
+		fprintf(ints_file, "'%08x',\n", x2);
+
+		uint64_t combined = (((uint64_t)x1)<<32)|x2;
+
+		fprintf(doubles_file, "'%.20e',\n", 
+				vigna_uint64_to_double_mult(combined));
+		fprintf(doubles_cast_file, "'%.20e',\n", 
+				vigna_uint64_to_double_alt(combined));
+	}
+
+	close_ref_outfile(doubles_cast_file);
+	close_ref_outfile(doubles_file);
+	close_ref_outfile(ints_file);
+}
+
+// uint32_t mulberry32_next_debug(uint32_t x) {
+//   uint32_t z = (x += 0x6D2B79F5UL);
+//   printf("A: %u\n", z);
+//   z = (z ^ (z >> 15)) * (z | 1UL);
+//   printf("B: %u\n", z);
+//   z ^= z + (z ^ (z >> 7)) * (z | 61UL);
+//   printf("C: %u\n", z);
+//   uint32_t result = z ^ (z >> 14);
+//   printf("D: %u\n", result);
+//   return result;
+// }
+
+// void debug_mulberry() {
+// 	uint32_t x = 1;
+// 	mulberry32_next_debug(x);
+
+// //	mulberry32_next_debug
+
+
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
 //	TYCHE-I
@@ -1075,7 +1154,8 @@ void debug_oneil_hack() {
 
 int main()
 {
-    //debug_oneil_hack();
+    // debug_mulberry();
+	// return 1;
     //return 1;
 	// printf("-----\n");
 	// debug_lemire();
@@ -1122,10 +1202,15 @@ int main()
 	write_splitmix64("c", 777);
 	write_splitmix64("d", 0xf7d3b43bed078fa3ull);
 
-	write_splitmix32("a", 1);
-	write_splitmix32("b", 0);
-	write_splitmix32("c", 777);
-	write_splitmix32("d", 1081037251u);
+	write_mulberry32("a", 1);
+	write_mulberry32("b", 0);
+	write_mulberry32("c", 777);
+	write_mulberry32("d", 1081037251u);	
+
+	// write_splitmix32("a", 1);
+	// write_splitmix32("b", 0);
+	// write_splitmix32("c", 777);
+	// write_splitmix32("d", 1081037251u);
 
 	write_lemire("1000", 1000);
 	write_lemire("1", 1);

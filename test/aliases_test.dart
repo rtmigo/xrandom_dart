@@ -40,20 +40,13 @@ void main() {
     expect(random.nextInt(1000), 904);
   });
 
-
-  test('XrandomHqJs', () {
-    expect(XrandomHqJs() is Xoshiro128pp, true);
-    expect(XrandomHqJs(1) is Xoshiro128pp, true);
-    expect(XrandomHqJs.expected() is Xoshiro128pp, true);
-    expect(XrandomHqJs.expected() is XrandomHqJs, true);
-    expect(
-        List.generate(3, (_) => XrandomHqJs.expected().nextRaw32()),
-        List.generate(3, (_) => Xoshiro128pp.expected().nextRaw32()));
-
-    final r1 = XrandomHqJs();
-    final r2 = XrandomHqJs();
-    expect(
-        List.generate(3, (_) => r1.nextRaw32()),
-        isNot(List.generate(3, (_) => r2.nextRaw32())));
+  test('XrandomHq respects seed argument', () {
+    expect( List.generate(3, (_) => XrandomHq(123).nextRaw32()),
+            List.generate(3, (_) => XrandomHq(123).nextRaw32()) );
+    expect( List.generate(3, (_) => XrandomHq(123).nextRaw32()),
+            isNot(List.generate(3, (_) => XrandomHq(321).nextRaw32())) );
   });
+
+
+
 }

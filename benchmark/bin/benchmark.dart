@@ -9,7 +9,7 @@ import 'package:xrandom/xrandom.dart';
 
 enum DoWhat { nextDouble, nextInt, nextBool, nextRaw32, nextRaw64, nextFloat,  }
 
-const NUM_EXPERIMENTS = 500;
+const NUM_EXPERIMENTS = 25;
 const NUM_ITEMS_PER_EXPERIMENT = 1000000;
 
 int measureTimeRuns = 0;
@@ -103,6 +103,7 @@ void main(List<String> arguments) {
         Xoshiro128pp.expected(),
         Xoshiro256pp.expected(),
         Splitmix64.expected(),
+        Mulberry32.expected(),
       ];
 
   for (var experiment = 0; experiment < NUM_EXPERIMENTS; ++experiment) {
