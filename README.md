@@ -207,6 +207,8 @@ If your code compiles to native (like in **Flutter** apps for **Android** and **
 
 All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 
+The tables are created using the [tabular](https://pub.dev/packages/tabular) library.
+
 # Consistency
 
 The library has been thoroughly **tested to match reference numbers** generated 
