@@ -44,7 +44,7 @@ quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 If you are solving a math problem:
 
 ``` dart
-final random = Qrandom(); // Q is for statistical Quality
+final random = Qrandom(); // Q is for Quantifiable Quality
 
 feedMonteCarloSimulation(random);
 ```
