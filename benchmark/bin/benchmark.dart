@@ -21,6 +21,8 @@ int measureTime(Random r, DoWhat dbl) {
 
   final sw = Stopwatch()..start();
 
+  //bool is32 = (r is Xorshift128p);
+
   const N = NUM_ITEMS_PER_EXPERIMENT;
 
   switch (dbl) {

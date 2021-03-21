@@ -17,6 +17,23 @@ double doornikNextFloat(int u32) {
   return u32.uint32_to_int32() * M_RAN_INVM32 + 0.5;
 }
 
+/// An abstract base class for all generators in the library,
+/// based on algorithms that generate either 32-bit or 64-bit integers.
+///
+/// This class provides conversion options between the returned value types,
+/// but does not specify how exactly we get the original integer random number.
+///
+/// If the output of the algorithm is a 32-bit integer, then the generator inherits
+/// directly from [RandomBase32]. If the output of the algorithm is a 64-bit integer,
+/// then the generator inherits from [RandomBase64], that overloads some of the
+/// [RandomBase32] methods.
+///
+/// Only generators inherited from [RandomBase32], but not from [RandomBase64],
+/// can work in JavaScript. However, the mere fact of inheriting from [RandomBase32]
+/// is not synonymous with JavaScript compatibility. For example, the [Mulberry32]
+/// class is based on an algorithm that generates 32-bit integers and inherits from
+/// [RandomBase32]. But the algorithm requires 64-bit support, which is not
+/// available in JavaScript.
 abstract class RandomBase32 implements Random {
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 0 to 0xFFFFFFFF, both inclusive.
@@ -88,6 +105,23 @@ abstract class RandomBase32 implements Random {
     return nextRaw32().uint32_to_int32() * M_RAN_INVM32 + 0.5;
   }
 
+  /// Generates a random floating point value uniformly distributed
+  /// in the range from 0.0, inclusive, to 1.0, exclusive.
+  ///
+  /// The results of this method exactly repeat the numbers usually generated
+  /// by algorithms in C99 or C++. For example, this allows you to accurately
+  /// reproduce the values of the generator used in the Chrome browser.
+  ///
+  /// In C99, the type conversion is described by S. Vigna as follows:
+  ///
+  /// ```
+  /// static inline double to_double(uint64_t x) {
+  ///   const union { uint64_t i; double d; } u = {
+  ///     .i = UINT64_C(0x3FF) << 52 | x >> 12
+  ///   };
+  ///   return u.d - 1.0;
+  /// }
+  /// ```
   @override
   double nextDouble() {
     return nextRaw32() * 2.3283064365386963e-10 + (nextRaw32() >> 12) * 2.220446049250313e-16;

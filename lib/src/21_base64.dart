@@ -1,12 +1,15 @@
 // SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import '00_ints.dart';
 import '21_base32.dart';
 
-
-
+/// An abstract base class for generators based on algorithms that output 64-bit integers.
+///
+/// Overrides some converting methods for cases when 64-bit integers should be handled
+/// differently than 32-bit ones.
+///
+/// Instances of this class can work in Dart Native and VM, but not JavaScript.
 abstract class RandomBase64 extends RandomBase32 {
   /// Generates a non-negative random integer uniformly distributed in the range
   /// from 0 to 2^64-1, both inclusive.
@@ -23,9 +26,7 @@ abstract class RandomBase64 extends RandomBase32 {
   /// the upper 32 bits, and then the lower 32 bits of the generated numbers.
   @override
   int nextRaw32() {
-
     if (!_split64_charged) {
-
       _split64 = this.nextRaw64();
       _split64_charged = true;
 
@@ -47,8 +48,6 @@ abstract class RandomBase64 extends RandomBase32 {
 
   bool _split64_charged = false;
   int _split64 = 0;
-
-
 
   /// Generates a non-negative random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
@@ -113,7 +112,8 @@ abstract class RandomBase64 extends RandomBase32 {
   /// }
   /// ```
   double nextDoubleBitcast() {
+    return super.nextDouble();
     // this is the same as RandomBase32.nextDouble()
-    return nextRaw32() * 2.3283064365386963e-10 + (nextRaw32() >> 12) * 2.220446049250313e-16;
+    //return nextRaw32() * 2.3283064365386963e-10 + (nextRaw32() >> 12) * 2.220446049250313e-16;
   }
 }

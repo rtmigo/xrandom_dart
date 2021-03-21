@@ -1,3 +1,9 @@
+# 0.6.1
+
+- Updated documentation
+
+- Minor improvements
+
 # 0.6.0
 
 - Tests have been removed from the pub.dev package to reduce the size 
