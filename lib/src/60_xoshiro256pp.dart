@@ -30,8 +30,6 @@ class Xoshiro256pp extends RandomBase64 {
 
   @override
   int nextRaw64() {
-    // https://prng.di.unimi.it/xoshiro256plusplus.c
-
     final result =
         (((_S0 + _S3) << 23) | (((_S0 + _S3) >> (64 - 23)) & ~((-1 << (64 - (64 - 23)))))) + _S0;
 

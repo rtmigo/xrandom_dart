@@ -67,16 +67,6 @@ class Xoshiro128pp extends RandomBase32 {
     return result & 0xFFFFFFFF;
   }
 
-  // 3d1dc8a9 35bd9d36 387f1182 4eb8afb6
-  // 8e446f3a 3918f5f9 5c0a0b89 4a3a19c3
-  // 97382e38 f6a908dd abec010a 86797d7d
-  // 1f2f7252 ef22f9ba 342cf1c2 7152f3fe
-
-  // static const defaultSeedA = 0x8e446f3a;
-  // static const defaultSeedB = 0x3918f5f9;
-  // static const defaultSeedC = 0x5c0a0b89;
-  // static const defaultSeedD = 0x4a3a19c3;
-
   static const defaultSeedA = 0x543f8723;
   static const defaultSeedB = 0xb887dcb9;
   static const defaultSeedC = 0xe97537a6;

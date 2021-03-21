@@ -45,27 +45,26 @@ class Xorshift128p extends RandomBase64 {
 
   late int _S0, _S1;
 
+  /// Implements algorithm from "Further scramblings of Marsaglia’s xorshift generators"
+  /// by Sebastiano Vigna.
+  ///
+  /// There were at least two known versions of this algorithm.
+  ///
+  /// With constants 23, 17, 26:
+  /// - in paper by Vigna <https://arxiv.org/pdf/1404.0390v1.pdf> - Apr 2014
+  /// - in JavaScript V8 engine <https://git.io/Jqpma>
+  /// - on Wikipedia <https://en.wikipedia.org/wiki/Xorshift> (2021)
+  ///
+  /// With constants 23, 18, 5:
+  /// - in paper by Vigna https://arxiv.org/pdf/1404.0390v2.pdf - Dec 2015
+  /// - in paper by Vigna https://arxiv.org/pdf/1404.0390v3.pdf - May 2016
+  /// - in JavaScript xorshift library <https://git.io/JqWCP>
+  ///
+  /// "the most recent set of constants according to the author of the algorithm are:
+  /// 23, 18, and 5. Those are theoretically better than the initial set of numbers"
+  /// <https://stackoverflow.com/a/34432126>
   @override
   int nextRaw64() {
-    // algorithm from "Further scramblings of Marsaglia’s xorshift generators"
-    // by Sebastiano Vigna
-    //
-    // https://arxiv.org/abs/1404.0390 [v2] Mon, 14 Dec 2015 - page 6
-    // https://arxiv.org/abs/1404.0390 [v3] Mon, 23 May 2016 - page 6
-
-    // There were at least two versions of the constants used in algorithm.
-    // 23, 17, 26
-    //  - in paper by Vigna https://arxiv.org/pdf/1404.0390v1.pdf - Apr 2014
-    //  - in JavaScript V8 engine https://git.io/Jqpma
-    //  - on Wikipedia https://en.wikipedia.org/wiki/Xorshift
-    //
-    // 23, 18, 5
-    //  - in paper by Vigna https://arxiv.org/pdf/1404.0390v2.pdf - Dec 2015
-    //  - in JavaScript xorshift library <https://git.io/JqWCP>
-
-    // "the most recent set of constants according to the author of the algorithm are:
-    // 23, 18, and 5. Apparently it doesn't matter too much, but those are theoretically
-    // better than the initial set of numbers" <https://stackoverflow.com/a/34432126>
 
     var s1 = _S0;
     final s0 = _S1;

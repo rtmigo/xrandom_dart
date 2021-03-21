@@ -1,3 +1,10 @@
+# 0.6.0
+
+- Tests have been removed from the pub.dev package to reduce the size 
+  of the library
+
+- Updated documentation
+
 # 0.5.1
 
 - Aliases changed to Xrandom, Qrandom, Drandom

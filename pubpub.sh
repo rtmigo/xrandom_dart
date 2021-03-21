@@ -11,6 +11,7 @@ echo "$temp_pub_dir"
 rsync -Rrv ./ "$temp_pub_dir" \
   --exclude=".git" \
   --exclude="pubpub.sh" \
+  --exclude="test/" \
   --exclude="todo.txt" \
   --exclude="benchmark/" \
   --exclude="reference/" \
