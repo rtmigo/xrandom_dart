@@ -104,7 +104,7 @@ Sorted by `nextDouble` **fastest  to slowest**
 |    | Mulberry32             |        841 |       301 |
 | ✓  | **Random (dart:math)** |        929 |           |
 |    | Xoshiro256pp           |       1182 |       713 |
-| ✓  | Qrandom / Drandom              |       1219 |       539 |
+| ✓  | Qrandom / Drandom      |       1219 |       539 |
 
 
 </details>

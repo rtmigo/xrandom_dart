@@ -21,10 +21,10 @@ double doornikNextFloat(int u32) {
 /// based on algorithms that generate either 32-bit or 64-bit integers.
 ///
 /// This class provides conversion options between the returned value types,
-/// but does not specify how exactly we get the original integer random number.
+/// but does not specify how exactly we get the original random integer.
 ///
-/// If the output of the algorithm is a 32-bit integer, then the generator inherits
-/// directly from [RandomBase32]. If the output of the algorithm is a 64-bit integer,
+/// If the output of the algorithm is 32-bit, then the generator inherits
+/// directly from [RandomBase32]. If the output of the algorithm is 64-bit,
 /// then the generator inherits from [RandomBase64], that overloads some of the
 /// [RandomBase32] methods.
 ///

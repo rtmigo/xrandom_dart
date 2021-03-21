@@ -24,7 +24,9 @@ rsync -Rrv ./ "$temp_pub_dir" \
 
 # removing everything before "\n# ", the first header
 old_readme=$(cat README.md | tr '\n' '\r')
-new_readme=$(echo $old_readme | perl -p0e 's|^.*?\r# |# \1|' | tr '\r' '\n')
+new_readme=$(echo "$old_readme" | perl -p0e 's|^.*?\r# |# \1|')
+new_readme=$(echo "$new_readme" |  tr '\r' '\n')
+#№new_readme=$(echo $old_readme | perl -p0e 's|^.*?\r# |# \1|' | tr '\r' '\n')
 echo "$new_readme" > "$temp_pub_dir/README.md"
 
 cd "$temp_pub_dir"
