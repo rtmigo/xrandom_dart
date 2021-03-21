@@ -41,14 +41,6 @@ If you just want a random number:
 final random = Xrandom();
 
 quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
-``` 
-
-If you are solving a computational problem:
-
-``` dart
-final random = Qrandom(); // Q is for Quantifiable Quality
-
-feedMonteCarloSimulation(random);
 ```
 
 If you want the same numbers each time:
@@ -61,6 +53,14 @@ test("no surprises ever", () {
     expect(random.nextInt(100), 17);
     expect(random.nextInt(100), 96);
 });
+``` 
+
+If you are solving a computational problem:
+
+``` dart
+final random = Qrandom(); // Q is for Quantifiable Quality
+
+feedMonteCarloSimulation(random);
 ```
 
 # Speed
