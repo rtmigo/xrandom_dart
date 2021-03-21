@@ -1,5 +1,5 @@
-![Generic badge](https://img.shields.io/badge/tested_on-Windows_|_MacOS_|_Ubuntu-blue.svg)
-![Generic badge](https://img.shields.io/badge/tested_on-VM_|_JS-blue.svg)
+![Generic badge](https://img.shields.io/badge/testing_on-Windows_|_MacOS_|_Ubuntu-blue.svg)
+![Generic badge](https://img.shields.io/badge/testng_on-VM_|_Node_|_Chrome-blue.svg)
 [![Pub Package](https://img.shields.io/pub/v/xrandom.svg)](https://pub.dev/packages/xrandom)
 [![pub points](https://badges.bar/xrandom/pub%20points)](https://pub.dev/packages/xrandom/score)
 
