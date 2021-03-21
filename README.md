@@ -154,7 +154,7 @@ only comparison to `nextRaw32` is "apples-to-apples".
 
 # Algorithms
 
-| N | J | Class          | Algorithm                                                         |    Introduced | Alias |
+| Native | JS | Class          | Algorithm                                                         |    Introduced | Alias |
 |:------:|:--:|----------------|-------------------------------------------------------------------|:-----------------:|------|
 | ✓      | ✓  | `Xorshift32`   | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)      | 2003 | `Xrandom` |
 | ✓      |    | `Xorshift64`   | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)      |  2003 |
