@@ -154,7 +154,7 @@ only comparison to `nextRaw32` is "apples-to-apples".
 
 # Algorithms
 
-| <sub>Native</sub> | JS | Class          | Algorithm                                                         |    Introduced | Alias |
+| Native | JS | Class          | Algorithm                                                         |    Introduced | Alias |
 |:------:|:--:|----------------|-------------------------------------------------------------------|:-----------------:|------|
 | ✓      | ✓  | `Xorshift32`   | [xorshift32](https://www.jstatsoft.org/article/view/v008i14)      | 2003 | `Xrandom` |
 | ✓      |    | `Xorshift64`   | [xorshift64](https://www.jstatsoft.org/article/view/v008i14)      |  2003 |
@@ -226,9 +226,10 @@ Therefore, the sequence generated for example by the
 `Xoshiro128pp.nextRaw32()` with the seed `(1, 2, 3, 4)` is the same as the [C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce with the same seed.
 
 The `double` values will also be the same as if the upper bits of `uint64_t` type 
-were converted to `double_t` in C99 by unsafe pointer casting. There are no 
-pointers or unsafe conversions in Dart. Moreover, there are no upper bits of `uint64_t` in JavaScript.
-But `double`s are the same type everywhere, and their random values will be the same.
+were converted to `double_t` in C99 by unsafe pointer casting. No matter how 
+exotic pointer casting sounds for Dart, and even more so for JavaScript.
+JavaScript doesn't even have any upper bits of `uint64_t`. But `double`s are 
+the same type everywhere, and their random values will be the same.
 
 Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and **macOS** in **VM** and **Node.js** modes.
 
