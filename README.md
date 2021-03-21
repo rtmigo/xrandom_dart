@@ -1,4 +1,4 @@
-![Generic badge](https://img.shields.io/badge/status-it_works-darkgreen.svg)
+![Generic badge](https://img.shields.io/badge/status-it_works-ok.svg)
 [![Pub Package](https://img.shields.io/pub/v/xrandom.svg)](https://pub.dev/packages/xrandom)
 [![pub points](https://badges.bar/xrandom/pub%20points)](https://pub.dev/packages/xrandom/score)
 ![Generic badge](https://img.shields.io/badge/testing_on-Win_|_Mac_|_Linux-blue.svg)
