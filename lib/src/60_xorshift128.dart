@@ -6,9 +6,9 @@ import 'package:xrandom/src/21_base32.dart';
 
 import '00_ints.dart';
 
-/// Random number generator based on **xorshift128** algorithm by G. Marsaglia (2003).
-/// The reference implementation in C can be found in
-/// <https://www.jstatsoft.org/article/view/v008i14>.
+/// Random number generator based on **xorshift128** algorithm by G. Marsaglia.
+///
+/// [reference](https://www.jstatsoft.org/article/view/v008i14)
 class Xorshift128 extends RandomBase32 {
   Xorshift128([int? a, int? b, int? c, int? d]) {
     if (a != null || b != null || c != null || d != null) {

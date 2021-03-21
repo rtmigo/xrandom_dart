@@ -43,7 +43,7 @@ final random = Xrandom();
 quoteOfTheDay = quotes[ random.nextInt(quotes.length) ];
 ``` 
 
-If you are solving a math problem:
+If you are solving a computational problem:
 
 ``` dart
 final random = Qrandom(); // Q is for Quantifiable Quality
@@ -163,7 +163,7 @@ only comparison to `nextRaw32` is "apples-to-apples".
 | ✓      | ✓  | `Xorshift128`  | [xorshift128](https://www.jstatsoft.org/article/view/v008i14)     |  2003 |
 | ✓      |    | `Splitmix64`   | [splitmix64](https://prng.di.unimi.it/splitmix64.c)               |  2015 |
 | ✓      |    | `Xorshift128p` | [xorshift128+ v2](https://arxiv.org/abs/1404.0390)                |  2015 |
-| ✓      |    | `Mulberry32` | [mulberry32](https://gist.github.com/tommyettinger/46a874533244883189143505d203312c)                |  2017 |
+| ✓      |    | `Mulberry32`   | [mulberry32](https://git.io/JmoUq)                                |  2017 |
 | ✓      | ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `Qrandom`, `Drandom` |
 | ✓      |    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 |  |
 
@@ -207,9 +207,11 @@ If your code compiles to native (like in **Flutter** apps for **Android** and **
 | ✓  | Qrandom / Drandom              |     933 |       1219 |      398 |
 |    | Xoshiro256pp           |    1138 |       1182 |      406 |
 
-All the benchmarks on this page are from AOT-compiled binaries running on AMD A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
+All the benchmarks on this page are from AOT-compiled binaries running on AMD 
+A9-9420e with Ubuntu 20.04. Time is measured in milliseconds.
 
-The tables are created using the [tabular](https://pub.dev/packages/tabular) library.
+The tables are created using the [tabular](https://pub.dev/packages/tabular) 
+library.
 
 # Consistency
 
@@ -225,7 +227,9 @@ The Xorshift128+ results are also matched to reference values from
 which tested the 128+ similarly.
 
 Therefore, the sequence generated for example by the 
-`Xoshiro128pp.nextRaw32()` with the seed `(1, 2, 3, 4)` is the same as the [C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce with the same seed.
+`Xoshiro128pp.nextRaw32()` with the seed `(1, 2, 3, 4)` is the same as the 
+[C99 code](https://prng.di.unimi.it/xoshiro128plusplus.c) will produce 
+with the same seed.
 
 The `double` values will also be the same as if the upper bits of `uint64_t` type 
 were converted to `double_t` in C99 by unsafe pointer casting. No matter how 
@@ -233,5 +237,6 @@ exotic pointer casting sounds for Dart, and even more so for JavaScript.
 JavaScript doesn't even have any upper bits of `uint64_t`. But `double`s are 
 the same type everywhere, and their random values will be the same.
 
-Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and **macOS** in **VM** and **Node.js** modes.
+Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and 
+**macOS** in **VM** and **Node.js** modes.
 

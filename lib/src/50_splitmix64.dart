@@ -6,9 +6,9 @@ import '00_errors.dart';
 import '00_ints.dart';
 import '21_base64.dart';
 
-/// Random number generator based on **splitmix64** algorithm by S. Vigna (2015).
-/// The reference implementation in C can be found in
-/// <https://prng.di.unimi.it/splitmix64.c>.
+/// Random number generator based on **splitmix64** algorithm by S. Vigna.
+///
+/// [reference](https://prng.di.unimi.it/splitmix64.c)
 class Splitmix64 extends RandomBase64 {
   static final _defaultSeed = int.parse('0x76a5c5b65ce8677c');
 

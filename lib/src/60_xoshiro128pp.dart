@@ -6,9 +6,9 @@ import 'package:xrandom/src/21_base32.dart';
 
 import '00_ints.dart';
 
-/// Random number generator based on **xoshiro128++ 1.0** algorithm by D. Blackman and
-/// S. Vigna (2019). The reference implementation in C can be found in
-/// <https://prng.di.unimi.it/xoshiro128plusplus.c>.
+/// Random number generator based on **xoshiro128++ 1.0** algorithm by D. Blackman and S. Vigna.
+///
+/// [reference](https://prng.di.unimi.it/xoshiro128plusplus.c)
 class Xoshiro128pp extends RandomBase32 {
   Xoshiro128pp([int? a, int? b, int? c, int? d]) {
     if (a != null || b != null || c != null || d != null) {

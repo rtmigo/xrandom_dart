@@ -7,9 +7,9 @@ import '00_errors.dart';
 import '00_ints.dart';
 import '21_base64.dart';
 
-/// Random number generator based on **xorshift64** algorithm by G. Marsaglia (2003).
-/// The reference implementation in C can be found in
-/// <https://www.jstatsoft.org/article/view/v008i14>.
+/// Random number generator based on **xorshift64** algorithm by G. Marsaglia.
+///
+/// [reference](https://www.jstatsoft.org/article/view/v008i14)
 class Xorshift64 extends RandomBase64 {
   static final _defaultSeed = int.parse('0x76a5c5b65ce8677c');
 

@@ -5,9 +5,9 @@ import 'package:xrandom/src/50_splitmix64.dart';
 
 import '21_base64.dart';
 
-/// Random number generator based on **xoshiro256++ 1.0** algorithm by D. Blackman and
-/// S. Vigna (2019). The reference implementation in C can be found in
-/// <https://prng.di.unimi.it/xoshiro256plusplus.c>.
+/// Random number generator based on **xoshiro256++ 1.0** algorithm by D. Blackman and S. Vigna.
+///
+/// [reference](https://prng.di.unimi.it/xoshiro256plusplus.c)
 class Xoshiro256pp extends RandomBase64 {
   Xoshiro256pp([int? seed64a, int? seed64b, int? seed64c, int? seed64d]) {
     if (seed64a != null || seed64b != null || seed64c != null || seed64d != null) {

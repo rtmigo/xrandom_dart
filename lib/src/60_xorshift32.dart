@@ -3,9 +3,9 @@
 
 import 'package:xrandom/src/21_base32.dart';
 
-/// Random number generator based on **xorshift32** algorithm by G. Marsaglia (2003).
-/// The reference implementation in C can be found in
-/// <https://www.jstatsoft.org/article/view/v008i14>.
+/// Random number generator based on **xorshift32** algorithm by G. Marsaglia.
+///
+/// [reference](https://www.jstatsoft.org/article/view/v008i14)
 class Xorshift32 extends RandomBase32 {
   Xorshift32([int? seed32]) {
     if (seed32 != null) {

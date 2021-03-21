@@ -142,9 +142,9 @@ abstract class RandomBase32 implements Random {
     }
   }
 
-  @internal
+  @protected
   int boolCache = 0;
 
-  @internal
+  @protected
   int boolCache_prevShift = 0;
 }

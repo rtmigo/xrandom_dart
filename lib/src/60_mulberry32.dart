@@ -3,8 +3,9 @@
 
 import 'package:xrandom/src/21_base32.dart';
 
-/// Random number generator based on **mulberry32** algorithm by T. Ettinger (2017).
-/// The reference implementation in C can be found in <https://git.io/JmoUq>.
+/// Random number generator based on **mulberry32** algorithm by T. Ettinger.
+///
+/// [reference](https://git.io/JmoUq)
 class Mulberry32 extends RandomBase32 {
   Mulberry32([int? seed32]) {
     if (seed32 != null) {

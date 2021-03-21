@@ -56,17 +56,22 @@ abstract class RandomBase64 extends RandomBase32 {
   /// the highest 53 bits to fill in all the significant bits of the resulting [double].
   ///
   /// By choosing the upper bits, we get rid of the lower bits, which is good.
-  /// The lower bits are not so unpredictably random on many generators.
+  /// The lower bits are not so random on many generators.
   ///
   /// This method is [recommended](https://prng.di.unimi.it/) by S. Vigna for
   /// his Xorshift+ and Xoshiro family:
   ///
-  /// "(in C) 64-bit unsigned integer x should be converted to a 64-bit double using
-  ///  the expression
+  /// ```
+  /// (in C) 64-bit unsigned integer x should be converted to
+  /// a 64-bit double using the expression:
+  ///
   ///    (x >> 11) * 0x1.0p-53
-  ///  In Java you can use almost the same expression for a (signed)
-  ///  64-bit integer:
-  ///    (x >>> 11) * 0x1.0p-53"
+  ///
+  /// In Java you can use almost the same expression for a (signed)
+  /// 64-bit integer:
+  ///
+  ///    (x >>> 11) * 0x1.0p-53
+  /// ```
   @override
   double nextDouble() {
     // Z is the C99's printf("%.60e", 0x1.0p-53):
