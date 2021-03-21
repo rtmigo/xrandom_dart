@@ -2,7 +2,7 @@
 [![Pub Package](https://img.shields.io/pub/v/xrandom.svg)](https://pub.dev/packages/xrandom)
 [![pub points](https://badges.bar/xrandom/pub%20points)](https://pub.dev/packages/xrandom/score)
 ![Generic badge](https://img.shields.io/badge/testing_on-Windows_|_MacOS_|_Ubuntu-blue.svg)
-![Generic badge](https://img.shields.io/badge/testing_on-VM_|_Node_|_Chrome-blue.svg)
+![Generic badge](https://img.shields.io/badge/testing_on-VM_|_JS-blue.svg)
 
 
 # [xrandom](https://github.com/rtmigo/xrandom)
