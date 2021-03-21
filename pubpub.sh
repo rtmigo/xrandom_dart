@@ -16,6 +16,7 @@ rsync -Rrv ./ "$temp_pub_dir" \
   --exclude="benchmark/" \
   --exclude="reference/" \
   --exclude="README.md" \
+  --exclude="analysis_options.yaml" \
   --exclude=".github" \
   --exclude="labuda/" \
   --exclude="draft/" \
