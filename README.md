@@ -66,7 +66,7 @@ feedMonteCarloSimulation(random);
 If you prefer a specific algorithm:
 
 ``` dart
-final random = Xoshiro256pp(); // see list of algorithms below
+final random = Splitmix64(); // see list of algorithms below
 
 feedMonteCarloSimulation(random);
 ```
