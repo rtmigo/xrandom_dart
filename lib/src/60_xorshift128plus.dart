@@ -16,13 +16,13 @@ enum Xorshift128pConstants { c23_18_5 }
 /// There were at least two known versions of this algorithm.
 ///
 /// With constants 23, 17, 26:
-/// - in [paper by Vigna](https://arxiv.org/pdf/1404.0390v1.pdf) - Apr 2014
+/// - in [paper](https://arxiv.org/pdf/1404.0390v1.pdf) - Apr 2014
 /// - in [JavaScript V8 engine](https://git.io/Jqpma)
 /// - on [Wikipedia](https://en.wikipedia.org/wiki/Xorshift>) - 2021
 ///
 /// With constants 23, 18, 5:
-/// - in [paper by Vigna](https://arxiv.org/pdf/1404.0390v2.pdf) - Dec 2015
-/// - in [paper by Vigna](https://arxiv.org/pdf/1404.0390v3.pdf) - May 2016
+/// - in [paper](https://arxiv.org/pdf/1404.0390v2.pdf) - Dec 2015
+/// - in [paper](https://arxiv.org/pdf/1404.0390v3.pdf) - May 2016
 /// - in [JavaScript xorshift library](https://git.io/JqWCP)
 ///
 /// "the most recent set of constants according to the author of the algorithm are:

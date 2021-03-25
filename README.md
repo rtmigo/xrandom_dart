@@ -63,6 +63,14 @@ final random = Qrandom(); // Q is for Quantifiable Quality
 feedMonteCarloSimulation(random);
 ```
 
+If you prefer a specific algorithm:
+
+``` dart
+final random = Xoshiro256pp(); // see list of algorithms below
+
+feedMonteCarloSimulation(random);
+```
+
 # Speed
 
 Generating random numbers with AOT-compiled binary.
