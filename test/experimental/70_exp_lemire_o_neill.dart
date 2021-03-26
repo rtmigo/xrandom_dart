@@ -104,10 +104,10 @@ with divisionless algorithm (Lemire) + O'Neill hacks
 **************************************************************************** */
 
 import 'package:meta/meta.dart';
-import 'package:xrandom/src/60_xorshift64.dart';
+import 'package:xrandom/src/60_xorshift32.dart';
 
 @internal
-class Divisionless extends Xorshift64 {
+class Divisionless extends Xorshift32 {
 
   Divisionless(seed): super(seed);
 
@@ -142,7 +142,7 @@ class Divisionless extends Xorshift64 {
 }
 
 @internal
-class DivisionlessHacked extends Xorshift64 {
+class DivisionlessHacked extends Xorshift32 {
 
   DivisionlessHacked(seed): super(seed);
 
@@ -187,7 +187,7 @@ class DivisionlessHacked extends Xorshift64 {
 }
 
 @internal
-class JavaHacked extends Xorshift64 {
+class JavaHacked extends Xorshift32 {
 
   JavaHacked(seed): super(seed);
 

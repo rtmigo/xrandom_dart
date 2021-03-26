@@ -10,57 +10,97 @@ import 'package:xrandom/src/00_ints.dart';
 import 'package:xrandom/src/21_base32.dart';
 import 'package:xrandom/src/21_base64.dart';
 
-import 'data/generated.dart';
+import 'data/generated2.dart';
 
 const FAST = INT64_SUPPORTED;
 
-enum RefdataType { hexint, double_mult, double_cast, doornik_randbl_32 }
+//enum RefdataType { hexint, double_mult, double_cast, doornik_randbl_32 }
 
-Map refData(String algo, String seedId, RefdataType type) {
-  String suffix;
-  switch (type) {
-    case RefdataType.hexint:
-      suffix = 'int';
+// List<int> refInts(String sampleClass, String sampleName) {
+//   for (final m in referenceData) {
+//     if (m['sample_class'] == sampleClass &&
+//         m['sample_name'] == sampleName) {
+//
+//     }
+//
+// }
+
+Map refData(String algo, String seedId) {
+
+  switch (algo) {
+    case 'xoshiro256pp':
+      algo = 'xoshiro256++';
       break;
-    case RefdataType.double_mult:
-      suffix = 'double_mult';
+    case 'xoshiro128pp':
+      algo = 'xoshiro128++';
       break;
-    case RefdataType.double_cast:
-      suffix = 'double_cast';
+    case 'xorshift128p':
+      algo = 'xorshift128+';
       break;
-    case RefdataType.doornik_randbl_32:
-      suffix = 'doornik_randbl_32';
-      break;
+
   }
 
+  // String suffix;
+  // switch (type) {
+  //   case RefdataType.hexint:
+  //     suffix = 'int';
+  //     break;
+  //   case RefdataType.double_mult:
+  //     suffix = 'double_mult';
+  //     break;
+  //   case RefdataType.double_cast:
+  //     suffix = 'double_vigna_memcast';
+  //     break;
+  //   case RefdataType.doornik_randbl_32:
+  //     suffix = 'doornik_randbl_32';
+  //     break;
+  // }
+
   for (final m in referenceData) {
-    if (m['algorithm'] == algo &&
-        m['seed id'] == seedId &&
-        m['type'] == suffix) {
+    if (m['sample_class'] == algo &&
+        m['sample_name'] == seedId //&&
+    //#    m['type'] == suffix
+    )
+    {
       return m;
     }
   }
-  throw Exception('Not found [$algo] [$seedId] [$suffix]');
+  throw Exception('Not found [$algo] [$seedId]');
 }
 
 extension RdataExt on Map {
-  Iterable<int> refdataInts() => (this['values'] as List<String>).map((s) => int.parse(s, radix: 16));
+  Iterable<int> refdataInts() => (this['uint'] as List<String>).map((s) => int.parse(s, radix: 16));
+
+  Iterable<String> uintsAsStrings() {
+    return this['uint'];
+  }
   
-  //{
+
+  Iterable<double> doornik() =>
+      (this['double_doornik_randbl32'] as List<String>)
+          .map((s) => double.parse(s));
+
+  Iterable<double> double_memcast() =>
+      (this['double_vigna_bitcast'] as List<String>)
+          .map((s) => double.parse(s));
+
+  Iterable<double> double_multi() =>
+      (this['double_vigna_multiplication'] as List<String>)
+          .map((s) => double.parse(s));
+
+
+//{
   //   for (var line in m['values']) {
   //     yield int.parse(line);
   //   }  
 }
 
-Iterable<double> loadDoubles(Map m) sync* {
-  for (var line in m['values']) {
-    yield double.parse(line);
-  }
-}
+// Iterable<double> loadDoubles(Map m) sync* {
+//   for (var line in m['values']) {
+//     yield double.parse(line);
+//   }
+// }
 
-Iterable<String> rdIntsAsStrings(Map m) {
-  return m['values'];
-}
 
 
 void checkDoornikRandbl32(RandomBase32 Function() createRandom, String seedId) {
@@ -68,7 +108,7 @@ void checkDoornikRandbl32(RandomBase32 Function() createRandom, String seedId) {
   {
     final random = createRandom();
     final filePrefix = random.runtimeType.toString().toLowerCase();
-    final values = loadDoubles(refData(filePrefix, seedId, RefdataType.doornik_randbl_32));
+    final values = refData(filePrefix, seedId).doornik();
     for (final refItem in enumerate(values)) {
       assert(0<=refItem.value);
       assert(refItem.value<1.0);
@@ -89,24 +129,34 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
       filePrefix = random.runtimeType.toString().toLowerCase();
     });
 
+    test('nextRawXx', () {
+      bool is64 = createRandom() is RandomBase64;
+
+      final values = refData(filePrefix, seedId).uintsAsStrings();
+      for (final item in enumerate(values)) {
+        final hex = is64
+            ? (random as RandomBase64).nextRaw64().toHexUint64()
+            : random.nextRaw32().toHexUint32();
+        expect(hex, item.value, reason: 'item ${item.index}');
+      }
+    });
+
+
     test('toDouble', () {
-      final reftype = (random is RandomBase64)
-          ? RefdataType.double_mult
-          : RefdataType.double_cast;
-
-      //if (random is RandomBase64)
-
-      final values = loadDoubles(refData(filePrefix, seedId, reftype));
+      final values =  (random is RandomBase64)
+          ? refData(filePrefix, seedId).double_multi()
+          : refData(filePrefix, seedId).double_memcast();
       int idx = 0;
       for (final value in values) {
         expect(random.nextDouble(), value, reason: 'item ${idx++}');
       }
     });
 
+
     if (createRandom() is RandomBase64) {
-      test('nextDoubleMemcast', () {
+      test('nextDoubleBitcast', () {
         final values =
-            loadDoubles(refData(filePrefix, seedId, RefdataType.double_cast));
+            refData(filePrefix, seedId).double_memcast();
         int idx = 0;
         for (final value in values) {
           expect((random as RandomBase64).nextDoubleBitcast(), value,
@@ -115,25 +165,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
       });
     }
 
-    if (createRandom() is RandomBase64) {
-      test('nextInt64', () {
-        final values =
-            rdIntsAsStrings(refData(filePrefix, seedId, RefdataType.hexint));
-        for (final item in enumerate(values)) {
-          expect((random as RandomBase64).nextRaw64().toHexUint64(), item.value,
-              reason: 'item ${item.index}');
-        }
-      });
-    } else {
-      test('nextInt32', () {
-        final values =
-            rdIntsAsStrings(refData(filePrefix, seedId, RefdataType.hexint));
-        for (final item in enumerate(values)) {
-          expect(random.nextRaw32().toHexUint32(), item.value,
-              reason: 'item ${item.index}');
-        }
-      });
-    }
+
   });
 }
 

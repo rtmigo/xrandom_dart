@@ -16,20 +16,20 @@ void main() {
   void checkLemire(String argId, int range) {
     test('lemire $argId', () {
       final random = Divisionless(777);
-      for (var ref in enumerate(refData('lemire', argId, RefdataType.hexint).refdataInts())) {
+      for (var ref in enumerate(refData('lemire_divisionless', argId).refdataInts())) {
         expect(ref.value, random.nextInt(range), reason: 'pos: ${ref.index}');
       }
     });
 
-    test('lemire neill $argId', () {
-      // the reference data is expected to be the same data as "lemire". We just check
-      // that the O'Neill's "Lemire with extra tweak" returns the same as the methods
-      // without tweaks
-      final random = Divisionless(777);
-      for (var ref in enumerate(refData('lemire-neill', argId, RefdataType.hexint).refdataInts())) {
-        expect(ref.value, random.nextInt(range));
-      }
-    });
+    // test('lemire neill $argId', () {
+    //   // the reference data is expected to be the same data as "lemire". We just check
+    //   // that the O'Neill's "Lemire with extra tweak" returns the same as the methods
+    //   // without tweaks
+    //   final random = Divisionless(777);
+    //   for (var ref in enumerate(refData('lemire-neill', argId, RefdataType.hexint).refdataInts())) {
+    //     expect(ref.value, random.nextInt(range));
+    //   }
+    // });
   }
 
   checkLemire('1000', 1000);

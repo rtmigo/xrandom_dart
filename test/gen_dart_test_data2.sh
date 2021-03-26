@@ -1,23 +1,24 @@
 #!/bin/bash
 set -e && cd "${0%/*}"
 
-# rebuilds the test/data/generated.dart file with values generated
-# by newly compiled C99 program
+# rebuilds the test/data/generated2.dart file
 
 # creating temp dir and planning to remove it
 temp_build_dir=$(mktemp -d -t c99build-XXXXXXX)
 trap 'echo "Removing temp dir $temp_build_dir" && rm -rf $temp_build_dir' EXIT
 
 # compiling and running
-c99 reference_prng.c -o "$temp_build_dir/exe"
-outfile="$(realpath ../test/data/generated.dart)"
-cd "$temp_build_dir"
-"$temp_build_dir/exe"
+g++ "../../../c/randomref/main.cpp" --std=c++2a -o "$temp_build_dir/compiled.exe"
 
-# see files created until they're removed
-# ls -s ./*.json
+# running
+json="$($temp_build_dir/compiled.exe)"
 
-# combining multiple JSONs to a single Dart file
+# replacing double quotes to single quotes
+# shellcheck disable=SC2001
+json_but_single_quotes=$(sed 's/"/'\''/g' <<< "$json")
+
+# transforming JSON into a dart file
+outfile="$(realpath data/generated2.dart)"
 {
   echo "// reference data for github.com/rtmigo/xrandom"
   echo "// SPDX-FileCopyrightText: (c) 2021 Art Galkin <ortemeo@gmail.com>"
@@ -25,9 +26,9 @@ cd "$temp_build_dir"
   echo ""
   echo "// $(date)"
   echo ""
-  echo "final referenceData = ["
-  cat ./*.json
-  echo "];"
+  echo "final referenceData = "
+  echo "$json_but_single_quotes"
+  echo ";"
 } > "$outfile"
 
 echo "Done."
