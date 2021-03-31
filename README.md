@@ -223,8 +223,8 @@ library.
 
 # Consistency
 
-The library has been thoroughly **tested to match reference numbers** generated 
-by the same algorithms implemented in C99. Not only `int`s, but also numbers
+The library has been thoroughly **tested to match [reference numbers](https://github.com/rtmigo/randomref)** generated 
+by the same algorithms implemented in C++. Not only `int`s, but also numbers
 converted to `double` including all decimal places that the compiler takes 
 into account.
 
