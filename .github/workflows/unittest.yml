@@ -54,8 +54,7 @@ jobs:
       - name: Install dependencies
         run: dart pub get
       - name: Analyze
-        #run: dart analyze --fatal-infos
-        run: dart analyze
+        run: dart analyze lib --fatal-infos
       - name: Publish (dry run)
         run: dart pub publish --dry-run
 
