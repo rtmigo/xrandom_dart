@@ -31,7 +31,7 @@ abstract class Xoshiro256 extends RandomBase64 {
   @override
   int nextRaw64() {
     // the only difference between 256PP and 256SS is in the next line.
-    // Maybe, instead of calling a function, leave the code inline for speed?
+    // TODO Maybe, instead of calling a function, copy-paste the code inline for speed?
     final result = _next_result_init();
 
     final t = _S1 << 17;
