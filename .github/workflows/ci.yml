@@ -101,7 +101,7 @@ jobs:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   to-pubdev:
-    needs: to-master
+    #needs: to-master
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -126,6 +126,7 @@ jobs:
           echo 'test/' >> .gitignore
           echo '.github/' >> .gitignore
           echo 'todo.txt' >> .gitignore
+          cat .gitignore
 
       - name: Patching 'README.md' for PubDev instead of GitHub
         run:
