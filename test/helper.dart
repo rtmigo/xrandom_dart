@@ -14,22 +14,15 @@ import 'data/generated2.dart';
 
 const FAST = INT64_SUPPORTED;
 
-//enum RefdataType { hexint, double_mult, double_cast, doornik_randbl_32 }
-
-// List<int> refInts(String sampleClass, String sampleName) {
-//   for (final m in referenceData) {
-//     if (m['sample_class'] == sampleClass &&
-//         m['sample_name'] == sampleName) {
-//
-//     }
-//
-// }
 
 Map refData(String algo, String seedId) {
 
   switch (algo) {
     case 'xoshiro256pp':
       algo = 'xoshiro256++';
+      break;
+    case 'xoshiro256ss':
+      algo = 'xoshiro256**';
       break;
     case 'xoshiro128pp':
       algo = 'xoshiro128++';
@@ -40,27 +33,9 @@ Map refData(String algo, String seedId) {
 
   }
 
-  // String suffix;
-  // switch (type) {
-  //   case RefdataType.hexint:
-  //     suffix = 'int';
-  //     break;
-  //   case RefdataType.double_mult:
-  //     suffix = 'double_mult';
-  //     break;
-  //   case RefdataType.double_cast:
-  //     suffix = 'double_vigna_memcast';
-  //     break;
-  //   case RefdataType.doornik_randbl_32:
-  //     suffix = 'doornik_randbl_32';
-  //     break;
-  // }
-
   for (final m in referenceData) {
     if (m['sample_class'] == algo &&
-        m['sample_name'] == seedId //&&
-    //#    m['type'] == suffix
-    )
+        m['sample_name'] == seedId)
     {
       return m;
     }
@@ -74,7 +49,7 @@ extension RdataExt on Map {
   Iterable<String> uintsAsStrings() {
     return this['uint'];
   }
-  
+
 
   Iterable<double> doornik() =>
       (this['double_doornik_randbl32'] as List<String>)
@@ -87,19 +62,7 @@ extension RdataExt on Map {
   Iterable<double> double_multi() =>
       (this['double_vigna_multiplication'] as List<String>)
           .map((s) => double.parse(s));
-
-
-//{
-  //   for (var line in m['values']) {
-  //     yield int.parse(line);
-  //   }  
 }
-
-// Iterable<double> loadDoubles(Map m) sync* {
-//   for (var line in m['values']) {
-//     yield double.parse(line);
-//   }
-// }
 
 
 

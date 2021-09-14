@@ -40,7 +40,7 @@ abstract class RandomBase64 extends RandomBase32 {
       final result = _split64 & UINT32_MAX;
       _split64_charged = false; // on the next call we'll need a new random here
 
-      assert(result != 0);
+      // assert(result != 0); ?!
       assert(result <= 0xFFFFFFFF);
       return result;
     }
