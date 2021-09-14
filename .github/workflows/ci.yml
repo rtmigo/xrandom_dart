@@ -77,6 +77,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Stub
+        run: echo hi
 
 #      # UPDATE MASTER BRANCH
 #
