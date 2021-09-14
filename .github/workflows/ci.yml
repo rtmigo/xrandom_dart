@@ -121,36 +121,39 @@ jobs:
           }
           EOF
 
-      - name: Patching '.gitignore' for PubDev instead of GitHub
-        run:
-          echo 'test/' >> .gitignore
-          echo '.github/' >> .gitignore
-          echo 'todo.txt' >> .gitignore
-          cat .gitignore
+      - name: Reformat, test and publish
+        run: .github/publish_pubdev.sh
 
-      - name: Patching 'README.md' for PubDev instead of GitHub
-        run:
-
-          # removing everything before "\n# ", the first header
-          readme_text=$(cat README.md | tr '\n' '\r')
-          readme_text=$(echo "$readme_text" | perl -p0e 's|^.*?\r# |# \1|')
-          readme_text=$(echo "$readme_text" | tr '\r' '\n')
-          echo "$readme_text" > README.md
-
-      - name: Install dependencies
-        run: dart pub get
-
-      - name: Reformat code
-        run: dart format .
-
-      - name: Analyze reformatted
-        run: dart analyze --fatal-infos
-
-      #- name: Unit-tests for reformatted code
-      #  run: dart test
-
-      - name: Publish package
-        run:
-          pub publish --dry-run
-          #pub publish -f --dry-run
+#      - name: Patching '.gitignore' for PubDev instead of GitHub
+#        run:
+#          echo 'test/' >> .gitignore
+#          echo '.github/' >> .gitignore
+#          echo 'todo.txt' >> .gitignore
+#          cat .gitignore
+#
+#      - name: Patching 'README.md' for PubDev instead of GitHub
+#        run:
+#
+#          # removing everything before "\n# ", the first header
+#          readme_text=$(cat README.md | tr '\n' '\r')
+#          readme_text=$(echo "$readme_text" | perl -p0e 's|^.*?\r# |# \1|')
+#          readme_text=$(echo "$readme_text" | tr '\r' '\n')
+#          echo "$readme_text" > README.md
+#
+#      - name: Install dependencies
+#        run: dart pub get
+#
+#      - name: Reformat code
+#        run: dart format .
+#
+#      - name: Analyze reformatted
+#        run: dart analyze --fatal-infos
+#
+#      #- name: Unit-tests for reformatted code
+#      #  run: dart test
+#
+#      - name: Publish package
+#        run:
+#          pub publish --dry-run
+#          #pub publish -f --dry-run
 
