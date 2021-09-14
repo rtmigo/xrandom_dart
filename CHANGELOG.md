@@ -1,3 +1,8 @@
+# 0.7.0
+
+- fixed: in debug mode RandomBase64.nextInt32 was throwing an assertion error 
+instead of returning 0 as a random result
+
 # 0.6.4+2
 
 - Updated documentation

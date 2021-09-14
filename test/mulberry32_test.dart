@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 @TestOn('vm')
-import "package:test/test.dart";
+import 'package:test/test.dart';
 import 'package:xrandom/src/60_mulberry32.dart';
 
 import 'helper.dart';
