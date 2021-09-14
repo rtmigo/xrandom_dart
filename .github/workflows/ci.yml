@@ -125,19 +125,16 @@ jobs:
         run:
           echo 'test/' >> .gitignore
           echo '.github/' >> .gitignore
-          echo 'README.md.bak' >> .gitignore
           echo 'todo.txt' >> .gitignore
 
       - name: Patching 'README.md' for PubDev instead of GitHub
         run:
 
           # removing everything before "\n# ", the first header
-          cp ./README.md ./README.md.bak
           readme_text=$(cat README.md | tr '\n' '\r')
           readme_text=$(echo "$readme_text" | perl -p0e 's|^.*?\r# |# \1|')
           readme_text=$(echo "$readme_text" | tr '\r' '\n')
           echo "$readme_text" > README.md
-          #echo "$readme_text"
 
       - name: Install dependencies
         run: dart pub get
