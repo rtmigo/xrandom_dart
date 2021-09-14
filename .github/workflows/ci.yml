@@ -146,8 +146,8 @@ jobs:
       - name: Analyze reformatted
         run: dart analyze --fatal-infos
 
-      - name: Unit-tests for reformatted code
-        run: dart test
+      #- name: Unit-tests for reformatted code
+      #  run: dart test
 
       - name: Publish package
         run:
