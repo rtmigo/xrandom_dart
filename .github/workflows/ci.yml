@@ -78,25 +78,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # UPDATE MASTER BRANCH
-
-      - name: Merge to master branch
-        uses: devmasx/merge-branch@v1.3.1
-        with:
-          type: now
-          target_branch: master
-          github_token: ${{ github.token }}
-
-      # ADD GITHUB RELEASE
-
-      - name: Get version from pubspec.yaml
-        run: echo "PKGVER=$(sed -n "s/version://p" pubspec.yaml | xargs)" >> $GITHUB_ENV
-      - name: Publish GitHub release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ env.PKGVER }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      # UPDATE MASTER BRANCH
+#
+#      - name: Merge to master branch
+#        uses: devmasx/merge-branch@v1.3.1
+#        with:
+#          type: now
+#          target_branch: master
+#          github_token: ${{ github.token }}
+#
+#      # ADD GITHUB RELEASE
+#
+#      - name: Get version from pubspec.yaml
+#        run: echo "PKGVER=$(sed -n "s/version://p" pubspec.yaml | xargs)" >> $GITHUB_ENV
+#      - name: Publish GitHub release
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          tag_name: ${{ env.PKGVER }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   to-pubdev:
     needs: to-master
@@ -104,16 +104,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: dart-lang/setup-dart@v1
-      - name: Install dependencies
-        run: dart pub get
-      - name: Format
-        run: dart format .
-      - name: Test formatted
-        run: dart test
-      - name: Analyze formatted
-        run: dart analyze --fatal-infos
 
-      - name: Setup credentials
+      - name: Setup PubDev credentials
         # data from cat ~/.pub-cache/credentials.json
         run: |
           mkdir -p ~/.pub-cache
@@ -126,6 +118,21 @@ jobs:
             "expiration": 1570721159347
           }
           EOF
+
+
+      - name: Install dependencies
+        run: dart pub get
+      - name: Format
+        run: dart format .
+      - name: Test formatted
+        run: dart test
+      - name: Analyze formatted
+        run: dart analyze --fatal-infos
+      -
+
       - name: Publish package
-        run: pub publish -f
+        run:
+          echo 'test/' >> .gitignore
+          echo '.github/' >> .gitignore
+          pub publish -f --dry-run
 
