@@ -121,7 +121,6 @@ jobs:
           }
           EOF
 
-
       - name: Install dependencies
         run: dart pub get
 
