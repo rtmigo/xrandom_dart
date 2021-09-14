@@ -129,10 +129,11 @@ jobs:
       - name: Patching 'README.md' for PubDev instead of GitHub
         run:
           # removing everything before "\n# ", the first header
-          old_readme=$(cat README.md | tr '\n' '\r')
-          new_readme=$(echo "$old_readme" | perl -p0e 's|^.*?\r# |# \1|')
-          new_readme=$(echo "$new_readme" | tr '\r' '\n')
-          echo "$new_readme" > README.md
+          readme_text=$(cat README.md | tr '\n' '\r')
+          readme_text=$(echo "$readme_text" | perl -p0e 's|^.*?\r# |# \1|')
+          readme_text=$(echo "$readme_text" | tr '\r' '\n')
+          echo "$readme_text" > README.md
+          echo "$readme_text"
 
       - name: Install dependencies
         run: dart pub get
