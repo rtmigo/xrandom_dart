@@ -43,3 +43,30 @@ jobs:
       - name: Tests
         run: dart test --platform ${{ matrix.platform }}
 
+
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 2.12.0
+      - name: Install dependencies
+        run: dart pub get
+      - name: Analyze
+        run: dart analyze --fatal-infos
+      - name: Publish (dry run)
+        run: dart pub publish --dry-run
+
+  merge-to-staging:
+    needs: [test, analyze]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge current -> master
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: staging
+          github_token: ${{ github.token }}
+
