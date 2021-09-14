@@ -122,10 +122,12 @@ jobs:
           EOF
 
       - name: Patching gitignore for PubDev instead of GitHub
+        run:
           echo 'test/' >> .gitignore
           echo '.github/' >> .gitignore
 
       - name: Patching readme for PubDev instead of GitHub
+        run:
           # removing everything before "\n# ", the first header
           old_readme=$(cat README.md | tr '\n' '\r')
           new_readme=$(echo "$old_readme" | perl -p0e 's|^.*?\r# |# \1|')
