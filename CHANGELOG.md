@@ -1,15 +1,10 @@
-# 0.7.0
+# 0.7.0+1
 
 - Added Xoshiro256**
 
 - fixed: for 64-bit generators `.nextInt32` was throwing an assertion error 
 instead of returning 0 as a random result
 
-# 0.6.4+2
-
-- Updated documentation
-
-- Minor improvements
 
 # 0.6.0
 

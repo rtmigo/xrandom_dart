@@ -176,8 +176,8 @@ only comparison to `nextRaw32` is "apples-to-apples".
 | ✓      |    | `Splitmix64`   | [splitmix64](https://prng.di.unimi.it/splitmix64.c)               |  2015 |
 | ✓      |    | `Xorshift128p` | [xorshift128+ v2](https://arxiv.org/abs/1404.0390)                |  2015 |
 | ✓      |    | `Mulberry32`   | [mulberry32](https://git.io/JmoUq)                                |  2017 |
-| ✓      | ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `Qrandom`, `Drandom` |
 | ✓      |    | `Xoshiro256ss` | [xoshiro256** 1.0](https://xoshiro.di.unimi.it/xoshiro256starstar.c) |  2018 |  |
+| ✓      | ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `Qrandom`, `Drandom` |
 | ✓      |    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 |  |
 
 
@@ -254,5 +254,5 @@ JavaScript doesn't even have any upper bits of `uint64_t`. But `double`s are the
 same type everywhere, and their random values will be the same.
 
 Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and
-*macOS** in **VM** and **Node.js** modes.
+**macOS** in **VM** and **Node.js** modes.
 
