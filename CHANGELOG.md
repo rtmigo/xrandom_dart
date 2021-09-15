@@ -1,7 +1,8 @@
 # 0.7.0
 
 - Added Xoshiro256**
-- fixed: in debug mode RandomBase64.nextInt32 was throwing an assertion error 
+
+- fixed: for 64-bit generators `.nextInt32` was throwing an assertion error 
 instead of returning 0 as a random result
 
 # 0.6.4+2
