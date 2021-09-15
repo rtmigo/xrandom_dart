@@ -254,5 +254,5 @@ JavaScript doesn't even have any upper bits of `uint64_t`. But `double`s are the
 same type everywhere, and their random values will be the same.
 
 Testing is done in the GitHub Actions cloud on **Windows**, **Ubuntu**, and
-*macOS** in **VM** and **Node.js** modes.
+**macOS** in **VM** and **Node.js** modes.
 
