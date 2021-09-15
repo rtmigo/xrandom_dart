@@ -77,31 +77,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Stub
-        run: echo hi?
 
-#      # UPDATE MASTER BRANCH
-#
-#      - name: Merge to master branch
-#        uses: devmasx/merge-branch@v1.3.1
-#        with:
-#          type: now
-#          target_branch: master
-#          github_token: ${{ github.token }}
-#
-#      # ADD GITHUB RELEASE
-#
-#      - name: Get version from pubspec.yaml
-#        run: echo "PKGVER=$(sed -n "s/version://p" pubspec.yaml | xargs)" >> $GITHUB_ENV
-#      - name: Publish GitHub release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          tag_name: ${{ env.PKGVER }}
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # UPDATE MASTER BRANCH
+
+      - name: Merge to master branch
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: master
+          github_token: ${{ github.token }}
+
+      # ADD GITHUB RELEASE
+
+      - name: Get version from pubspec.yaml
+        run: echo "PKGVER=$(sed -n "s/version://p" pubspec.yaml | xargs)" >> $GITHUB_ENV
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.PKGVER }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   to-pubdev:
-    #needs: to-master
+    needs: to-master
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -121,39 +119,24 @@ jobs:
           }
           EOF
 
-
       - name:  Patching 'README.md' for PubDev instead of GitHub
         run:
           .github/patch_readme_for_pubdev.sh
 
-#          echo 'test/' >> .gitignore
-#          echo '.github/' >> .gitignore
-#          echo 'todo.txt' >> .gitignore
-#          cat .gitignore
-#
-#      - name: Patching 'README.md' for PubDev instead of GitHub
-#        run:
-#
-#          # removing everything before "\n# ", the first header
-#          readme_text=$(cat README.md | tr '\n' '\r')
-#          readme_text=$(echo "$readme_text" | perl -p0e 's|^.*?\r# |# \1|')
-#          readme_text=$(echo "$readme_text" | tr '\r' '\n')
-#          echo "$readme_text" > README.md
-#
       - name: Install dependencies
         run: dart pub get
-#
+
       - name: Reformat code
         run: dart format .
-#
+
       - name: Analyze reformatted
         run: dart analyze --fatal-infos
-#
-#      #- name: Unit-tests for reformatted code
-#      #  run: dart test
-#
+
+      - name: Unit-tests for reformatted code
+        run: dart test
+
       - name: Publish package
         run:
-          pub publish --dry-run
-          #pub publish -f --dry-run
+          #pub publish --dry-run
+          pub publish -f
 
