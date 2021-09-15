@@ -1,0 +1,142 @@
+# https://github.com/dart-lang/setup-dart
+
+name: unittest
+
+on:
+  push:
+    branches: [dev]
+    paths-ignore:
+      - 'example/*'
+      - '**.md'
+      - '**.txt'
+
+  pull_request:
+    branches: [dev]
+    paths-ignore:
+      - 'example/*'
+      - '**.md'
+      - '**.txt'
+
+jobs:
+  test:
+    timeout-minutes: 9
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest] # [ubuntu-latest, macos-latest, windows-latest]
+        sdk: [2.12.0] # dart is null-safe since 2.12
+        platform: [node, vm, chrome]
+        #sdk: [stable, beta, dev, 2.12.0-29.10.beta]
+    steps:
+      - uses: actions/checkout@v2
+#      - uses: actions/setup-node@v2
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+
+      - name: Install dependencies
+        run: dart pub get
+
+#      - name: VM tests
+#        run: dart test
+
+      - name: Tests
+        run: dart test --platform ${{ matrix.platform }}
+
+
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 2.12.0
+      - name: Install dependencies
+        run: dart pub get
+      - name: Analyze
+        run: dart analyze lib --fatal-infos
+      - name: Publish (dry run)
+        run: dart pub publish --dry-run
+
+  merge-to-staging:
+    needs: [test, analyze]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge current -> master
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: staging
+          github_token: ${{ github.token }}
+
+
+  to-master:
+    if: github.event.head_commit.message=='publish'
+    needs: [test, analyze]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # UPDATE MASTER BRANCH
+
+      - name: Merge to master branch
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: master
+          github_token: ${{ github.token }}
+
+      # ADD GITHUB RELEASE
+
+      - name: Get version from pubspec.yaml
+        run: echo "PKGVER=$(sed -n "s/version://p" pubspec.yaml | xargs)" >> $GITHUB_ENV
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.PKGVER }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  to-pubdev:
+    needs: to-master
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Setup PubDev credentials
+        # data from cat ~/.pub-cache/credentials.json
+        run: |
+          mkdir -p ~/.pub-cache
+          cat <<EOF > ~/.pub-cache/credentials.json
+          {
+            "accessToken":"${{ secrets.PUBDEV_ACCESS_TOKEN }}",
+            "refreshToken":"${{ secrets.PUBDEV_REFRESH_TOKEN }}",
+            "tokenEndpoint":"https://accounts.google.com/o/oauth2/token",
+            "scopes": [ "openid", "https://www.googleapis.com/auth/userinfo.email" ],
+            "expiration": 1570721159347
+          }
+          EOF
+
+      - name:  Patching 'README.md' for PubDev instead of GitHub
+        run:
+          .github/patch_readme_for_pubdev.sh
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Reformat code
+        run: dart format .
+
+      - name: Analyze reformatted
+        run: dart analyze --fatal-infos
+
+      - name: Unit-tests for reformatted code
+        run: dart test
+
+      - name: Publish package
+        run:
+          #pub publish --dry-run
+          pub publish -f
+

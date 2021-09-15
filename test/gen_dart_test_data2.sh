@@ -1,6 +1,20 @@
 #!/bin/bash
 set -e && cd "${0%/*}"
 
+realpath() {
+  # needed for macOS
+  OURPWD=$PWD
+  cd "$(dirname "$1")"
+  LINK=$(readlink "$(basename "$1")")
+  while [ "$LINK" ]; do
+    cd "$(dirname "$LINK")"
+    LINK=$(readlink "$(basename "$1")")
+  done
+  REALPATH="$PWD/$(basename "$1")"
+  cd "$OURPWD"
+  echo "$REALPATH"
+}
+
 # rebuilds the test/data/generated2.dart file
 
 # creating temp dir and planning to remove it

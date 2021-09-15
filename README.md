@@ -17,7 +17,8 @@ Library priorities:
 
 ----------
 
-It has the same API as the standard [`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
+It has the same API as the standard
+[`Random`](https://api.dart.dev/stable/2.12.1/dart-math/Random-class.html)
 
 ``` dart
 import 'package:xrandom/xrandom.dart';
@@ -33,7 +34,8 @@ var unordered = [1, 2, 3, 4, 5]..shuffle(random);
 
 # Creating the object
 
-The library provides classes that differ in the first letter: `Xrandom`, `Qrandom`, `Drandom`.
+The library provides classes that differ in the first letter: `Xrandom`,
+`Qrandom`, `Drandom`.
 
 If you just want a random number:
 
@@ -120,10 +122,12 @@ Sorted by `nextDouble` **fastest  to slowest**
 
 ## nextRaw
 
-These methods return the raw output of the generator uncompromisingly fast. Depending on the algorithm, 
-the output is a number consisting of either 32 random bits or 64 random bits. 
+These methods return the raw output of the generator uncompromisingly fast.
+Depending on the algorithm, the output is a number consisting of either 32
+random bits or 64 random bits.
 
-Xrandom combines small integers or splits large ones. The methods work with any of the generators.
+Xrandom combines small integers or splits large ones. The methods work with any
+of the generators.
 
 
 | JS    | Method        | Returns         | Equivalent of                   | 
@@ -173,6 +177,7 @@ only comparison to `nextRaw32` is "apples-to-apples".
 | ✓      |    | `Xorshift128p` | [xorshift128+ v2](https://arxiv.org/abs/1404.0390)                |  2015 |
 | ✓      |    | `Mulberry32`   | [mulberry32](https://git.io/JmoUq)                                |  2017 |
 | ✓      | ✓  | `Xoshiro128pp` | [xoshiro128++ 1.0](https://prng.di.unimi.it/xoshiro128plusplus.c) |  2019 | `Qrandom`, `Drandom` |
+| ✓      |    | `Xoshiro256ss` | [xoshiro256** 1.0](https://xoshiro.di.unimi.it/xoshiro256starstar.c) |  2018 |  |
 | ✓      |    | `Xoshiro256pp` | [xoshiro256++ 1.0](https://prng.di.unimi.it/xoshiro256plusplus.c) |  2019 |  |
 
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 @TestOn('vm')
-import "package:test/test.dart";
+import 'package:test/test.dart';
 import 'package:xrandom/src/60_xorshift128plus.dart';
 
 import 'helper.dart';
@@ -21,7 +21,7 @@ void main() {
   });
 
   test('madsen double', () {
-    final madsen = madsenSample["double"]!["1-2"]!;
+    final madsen = madsenSample['double']!['1-2']!;
     final random = Xorshift128p(1, 2);
 
     for (String expectedStr in madsen) {
