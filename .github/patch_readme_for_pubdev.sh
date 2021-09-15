@@ -9,4 +9,4 @@ readme_text=$(echo "$readme_text" | perl -p0e 's|^.*?\r# |# \1|')
 readme_text=$(echo "$readme_text" | tr '\r' '\n')
 echo "$readme_text" > README.md
 
-
+cat README.md
