@@ -121,11 +121,11 @@ jobs:
           }
           EOF
 
-      - name: Reformat, test and publish
-        run: .github/publish_pubdev.sh
 
-#      - name: Patching '.gitignore' for PubDev instead of GitHub
-#        run:
+      - name:  Patching 'README.md' for PubDev instead of GitHub
+        run:
+          .github/patch_readme_for_pubdev.sh
+
 #          echo 'test/' >> .gitignore
 #          echo '.github/' >> .gitignore
 #          echo 'todo.txt' >> .gitignore
@@ -140,20 +140,20 @@ jobs:
 #          readme_text=$(echo "$readme_text" | tr '\r' '\n')
 #          echo "$readme_text" > README.md
 #
-#      - name: Install dependencies
-#        run: dart pub get
+      - name: Install dependencies
+        run: dart pub get
 #
-#      - name: Reformat code
-#        run: dart format .
+      - name: Reformat code
+        run: dart format .
 #
-#      - name: Analyze reformatted
-#        run: dart analyze --fatal-infos
+      - name: Analyze reformatted
+        run: dart analyze --fatal-infos
 #
 #      #- name: Unit-tests for reformatted code
 #      #  run: dart test
 #
-#      - name: Publish package
-#        run:
-#          pub publish --dry-run
-#          #pub publish -f --dry-run
+      - name: Publish package
+        run:
+          pub publish --dry-run
+          #pub publish -f --dry-run
 
