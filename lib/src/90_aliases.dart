@@ -34,8 +34,3 @@ class Qrandom extends Xoshiro128pp {
       Xoshiro128pp.defaultSeedB, Xoshiro128pp.defaultSeedC, Xoshiro128pp.defaultSeedD);
 }
 
-class Drandom extends Xoshiro128pp {
-  Drandom()
-      : super(Xoshiro128pp.defaultSeedA, Xoshiro128pp.defaultSeedB, Xoshiro128pp.defaultSeedC,
-            Xoshiro128pp.defaultSeedD);
-}
