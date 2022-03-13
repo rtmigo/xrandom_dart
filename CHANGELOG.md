@@ -1,3 +1,7 @@
+# 0.7.1
+
+- fixed: `nextInt` for `max>=0x80000000` returned non-uniformly distributed numbers
+
 # 0.7.0+1
 
 - Added Xoshiro256**

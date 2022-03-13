@@ -43,12 +43,7 @@ void main() {
     expect(random.nextInt(1000), 904);
   });
 
-  test('Drandom readme', () {
-    final random = Drandom();
-    expect( List.generate(5, (_) => random.nextInt(100)),
-        [42, 17, 96, 23, 46] );
 
-  });
 
   void checkRespectsSeed(RandomBase32 Function(int seed) create) {
     expect( List.generate(3, (_) => create(123).nextRaw32()),
