@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest] # [ubuntu-latest, macos-latest, windows-latest]
-        sdk: [2.12.0] # dart is null-safe since 2.12
+        sdk: [2.12.0,  2.16.1] # dart is null-safe since 2.12
         platform: [node, vm, chrome]
         #sdk: [stable, beta, dev, 2.12.0-29.10.beta]
     steps:
