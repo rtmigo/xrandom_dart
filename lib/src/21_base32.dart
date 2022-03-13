@@ -70,7 +70,7 @@ abstract class RandomBase32 implements Random {
         : combineUpper53bitsJS(nextRaw32(), nextRaw32());
   }
 
-  static final int _POW2_32 = 1 << 32;
+  static final int _POW2_32 = 4294967296; // it's (1 << 32), but for JS we must set constant
 
   @override
   int nextInt(int max) {
