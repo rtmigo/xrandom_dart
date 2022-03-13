@@ -17,4 +17,11 @@ void main() {
         [1686059242, 361797217, 1133571596, 465717623, 1522544346] );
   });
 
+  test('Drandom nextInt range', () {
+    final random = Drandom();
+
+    expect(()=>random.nextInt(0x80000000), throwsRangeError); // no problem
+    random.nextInt(0x80000001); // problem
+  });
+
 }

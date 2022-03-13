@@ -13,15 +13,15 @@ class Drandom extends Xoshiro128pp {
   ///
   /// This implementation is slightly faster than the standard one for
   /// all [max] values, except for [max], which are powers of two.
-  // @override
-  // int nextInt(int max) {
-  //   if (max < 1 || max > 0x7FFFFFFF) {
-  //     throw RangeError.range(max, 1, 0x7FFFFFFF);
-  //   }
-  //   int r = nextRaw32();
-  //   int m = max - 1;
-  //   for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {}
-  //   return r;
-  // }
+  @override
+  int nextInt(int max) {
+    if (max < 1 || max > 0x80000000) {
+      throw RangeError.range(max, 1, 0x80000000);
+    }
+    int r = nextRaw32();
+    int m = max - 1;
+    for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {}
+    return r;
+  }
 
 }

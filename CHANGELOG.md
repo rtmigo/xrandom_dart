@@ -1,6 +1,7 @@
 # 0.7.1
 
 - fixed: `nextInt` results for `max >= 0x80000000` were not uniformly distributed
+- narrowed the range of possible `max` values for `Drandom`
 
 # 0.7.0+1
 
