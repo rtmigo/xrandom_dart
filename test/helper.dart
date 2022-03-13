@@ -169,7 +169,6 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
       expect(zeroFound, isTrue);
     });
 
-
     test('Seed is different each time', () {
       // even with different seeds, we can get rare matches of results.
       // But most of the the results should be unique
@@ -180,32 +179,11 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
           greaterThan(90));
     });
 
-    // test('Huge ints: (1<<32)',
-    //     () => checkHugeInts(createRandom(), 4294967296));
-    // // "the fast case for powers of two"
-    // test('Huge ints: 0x80000000',
-    //     () => checkHugeInts(createRandom(), 0x80000000));
-    //
-    // test('Huge ints: JS_MAX_SAFE_INTEGER',
-    //         () => checkHugeInts(createRandom(), JS_MAX_SAFE_INTEGER));
-    //
-    // if (INT64_SUPPORTED) {
-    //   test('Huge ints: 0x7FFFFFFFFFFFFFFF',
-    //           () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
-    // }
-
-
-
     test('nextIntCheckRange', () {
       final r = createRandom();
       expect(() => r.nextInt(-1), throwsRangeError);
       expect(() => r.nextInt(0), throwsRangeError);
       expect(() => r.nextInt(0xFFFFFFFF+2), throwsRangeError);
-      // if (INT64_SUPPORTED) {
-      //   r.nextInt(0xFFFFFFFF + 1); // no errors
-      // } else {
-      //   expect(() => r.nextInt(0xFFFFFFFF + 1), throwsRangeError);
-      // }
 
       // no errors
       r.nextInt(1);
@@ -273,17 +251,10 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
       expect(random2.nextRaw32(), b64.lower32());
     });
 
-    // test('nextFloat roughly compares to nextDouble', () {
-    //   final r1 = createRandom();
-    //   final r2 = createRandom();
-    //
-    //   const N = 1000;
-    //   for (int i = 0; i < N; ++i) {
-    //     final d = r1.nextDouble();
-    //     var x = r.nextInt(1);
-    //     expect(x, 0);
-    //   }
-    // });
+    test('large ints uniformity', () {
+      final r = createRandom();
+      checkUniformityForLargeInts(r);
+    });
   });
 }
 
@@ -325,6 +296,33 @@ void checkBooleans(Random r) {
   expect(countTrue, greaterThan(N * 0.4));
   expect(countTrue, lessThan(N * 0.6));
 }
+
+void checkUniformityForLargeInts(Random random) {
+
+  // making sure that there is no problem described here:
+  // https://github.com/rtmigo/xrandom_dart/issues/3
+
+  const mid = 1431655765; // (1 << 32) ~/ 3;
+  const max = mid * 2;
+  var lower = 0;
+  var upper = 0;
+  for (var i = 0; i < 10000000; i++) {
+    if (random.nextInt(max) < mid) {
+      lower++;
+    } else {
+      upper++;
+    }
+  }
+
+  const int expected = 5000000;
+  const int delta    = 100000;
+  
+  expect(lower, greaterThan(expected-delta));
+  expect(lower, lessThan(expected+delta));
+  expect(upper, greaterThan(expected-delta));
+  expect(upper, lessThan(expected+delta));
+}
+
 
 void checkIntegers(Random r) {
   int countMin = 0;

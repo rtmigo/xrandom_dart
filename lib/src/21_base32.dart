@@ -70,11 +70,14 @@ abstract class RandomBase32 implements Random {
         : combineUpper53bitsJS(nextRaw32(), nextRaw32());
   }
 
-  static final int _POW2_32 = 4294967296; // it's (1 << 32), but for JS we must set constant
+  static final int _POW2_32 = 4294967296; // it's (1 << 32), but for JS we have to a constant
 
+  /// Generates a non-negative random integer uniformly distributed in
+  /// the range from 0, inclusive, to [max], exclusive.
   @override
   int nextInt(int max) {
-    // https://github.com/dart-lang/sdk/blob/6faa5f3bd00ad8cbc640b3fc80cf7466c002a7df/sdk/lib/_internal/wasm/lib/math_patch.dart
+    // almost the same as https://bit.ly/35OH1Vh
+
     if (max <= 0 || max > _POW2_32) {
       throw RangeError.range(
           max, 1, _POW2_32, 'max', 'Must be positive and <= 2^32');
@@ -92,25 +95,6 @@ abstract class RandomBase32 implements Random {
     } while ((rnd32 - result + max) > _POW2_32);
     return result;
   }
-
-  // /// Generates a non-negative random integer uniformly distributed in
-  // /// the range from 0, inclusive, to [max], exclusive.
-  // ///
-  // /// To make the distribution uniform, we use the so-called
-  // /// [Debiased Modulo Once - Java Method](https://git.io/Jm0D7).
-  // ///
-  // /// This implementation is slightly faster than the standard one for
-  // /// all [max] values, except for [max], which are powers of two.
-  // @override
-  // int nextInt(int max) {
-  //   if (max < 1 || max > 0xFFFFFFFF) {
-  //     throw RangeError.range(max, 1, 0xFFFFFFFF);
-  //   }
-  //   int r = nextRaw32();
-  //   int m = max - 1;
-  //   for (int u = r; u - (r = u % max) + m < 0; u = nextRaw32()) {}
-  //   return r;
-  // }
 
   /// Generates a random floating point value uniformly distributed
   /// in the range from 0.0, inclusive, to 1.0, exclusive.
