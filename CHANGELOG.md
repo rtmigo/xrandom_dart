@@ -1,6 +1,6 @@
 # 0.7.1
 
-- fixed: `nextInt` for `max>=0x80000000` returned non-uniformly distributed numbers
+- fixed: `nextInt` results for `max >= 0x80000000` were not uniformly distributed
 
 # 0.7.0+1
 
