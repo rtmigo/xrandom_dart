@@ -70,7 +70,7 @@ abstract class RandomBase32 implements Random {
         : combineUpper53bitsJS(nextRaw32(), nextRaw32());
   }
 
-  static final int _POW2_32 = 4294967296; // it's (1 << 32), but for JS we have to a constant
+  static final int _POW2_32 = 4294967296; // it's (1 << 32). For JS it's safer to set a constant
 
   /// Generates a non-negative random integer uniformly distributed in
   /// the range from 0, inclusive, to [max], exclusive.
