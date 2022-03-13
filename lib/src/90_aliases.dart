@@ -33,4 +33,3 @@ class Qrandom extends Xoshiro128pp {
   static Qrandom seeded() => Qrandom._fullSeed(Xoshiro128pp.defaultSeedA,
       Xoshiro128pp.defaultSeedB, Xoshiro128pp.defaultSeedC, Xoshiro128pp.defaultSeedD);
 }
-
