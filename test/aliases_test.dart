@@ -9,10 +9,10 @@ void main() {
 
 
   test('Xrandom', () {
-    expect(Xrandom() is Xorshift32, true);
-    expect(Xrandom(1) is Xorshift32, true);
-    expect(Xrandom.expected() is Xorshift32, true);
-    expect(Xrandom.expected() is Xrandom, true);
+    expect(Xrandom(), isA<Xorshift32>());
+    expect(Xrandom(1), isA<Xorshift32>());
+    expect(Xrandom.expected(), isA<Xorshift32>());
+    expect(Xrandom.expected(), isA<Xrandom>());
     expect(
         List.generate(3, (_) => Xrandom.expected().nextRaw32()),
         List.generate(3, (_) => Xorshift32.seeded().nextRaw32()));
