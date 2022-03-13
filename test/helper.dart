@@ -185,6 +185,7 @@ void testCommonRandom(RandomBase32 Function() createRandom,
       r.nextInt(0xFFFFFFFF + 1);
     });
 
+
     test('nextInt(2) works almost like next bool', () {
       final r = createRandom();
 
