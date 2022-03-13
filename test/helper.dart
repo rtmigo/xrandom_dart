@@ -16,7 +16,6 @@ const FAST = INT64_SUPPORTED;
 
 
 Map refData(String algo, String seedId) {
-
   switch (algo) {
     case 'xoshiro256pp':
       algo = 'xoshiro256++';
@@ -30,13 +29,11 @@ Map refData(String algo, String seedId) {
     case 'xorshift128p':
       algo = 'xorshift128+';
       break;
-
   }
 
   for (final m in referenceData) {
     if (m['sample_class'] == algo &&
-        m['sample_name'] == seedId)
-    {
+        m['sample_name'] == seedId) {
       return m;
     }
   }
@@ -65,16 +62,14 @@ extension RdataExt on Map {
 }
 
 
-
 void checkDoornikRandbl32(RandomBase32 Function() createRandom, String seedId) {
-  test('doornik_randbl_32 ${createRandom().runtimeType} seedId=$seedId', ()
-  {
+  test('doornik_randbl_32 ${createRandom().runtimeType} seedId=$seedId', () {
     final random = createRandom();
     final filePrefix = random.runtimeType.toString().toLowerCase();
     final values = refData(filePrefix, seedId).doornik();
     for (final refItem in enumerate(values)) {
-      assert(0<=refItem.value);
-      assert(refItem.value<1.0);
+      assert(0 <= refItem.value);
+      assert(refItem.value < 1.0);
       expect(random.nextFloat(), refItem.value,
           reason: 'refitem ${refItem.index}');
     }
@@ -106,7 +101,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
 
 
     test('toDouble', () {
-      final values =  (random is RandomBase64)
+      final values = (random is RandomBase64)
           ? refData(filePrefix, seedId).double_multi()
           : refData(filePrefix, seedId).double_memcast();
       int idx = 0;
@@ -119,7 +114,7 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
     if (createRandom() is RandomBase64) {
       test('nextDoubleBitcast', () {
         final values =
-            refData(filePrefix, seedId).double_memcast();
+        refData(filePrefix, seedId).double_memcast();
         int idx = 0;
         for (final value in values) {
           expect((random as RandomBase64).nextDoubleBitcast(), value,
@@ -127,12 +122,11 @@ void checkReferenceFiles(RandomBase32 Function() createRandom, String seedId) {
         }
       });
     }
-
-
   });
 }
 
-List expectedList(RandomBase32 r) => [
+List expectedList(RandomBase32 r) =>
+    [
       (r is RandomBase64) ? r.nextRaw64() : r.nextRaw32(),
       r.nextInt(100000),
       r.nextDouble(),
@@ -145,9 +139,9 @@ String trimLeadingZeros(String s) {
   return s.replaceAll(RegExp(r'^0+(?=.)'), '');
 }
 
-void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Function() createExpectedRandom) {
+void testCommonRandom(RandomBase32 Function() createRandom,
+    RandomBase32 Function() createExpectedRandom) {
   group('Common random ${createRandom().runtimeType}', () {
-
     test('nextDouble', () => checkDoubles(createRandom(), true));
     test('nextFloat', () => checkDoubles(createRandom(), false));
 
@@ -157,60 +151,38 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
     test('ints when power of two', () {
       final r = createExpectedRandom();
       bool zeroFound = false;
-      for (int i=0; i<1000; ++i)
-        {
-          int x = r.nextInt(128);
-          expect(x, greaterThanOrEqualTo(0));
-          expect(x, lessThan(128));
-          if (x==0) {
-            zeroFound = true;
-          }
+      for (int i = 0; i < 1000; ++i) {
+        int x = r.nextInt(128);
+        expect(x, greaterThanOrEqualTo(0));
+        expect(x, lessThan(128));
+        if (x == 0) {
+          zeroFound = true;
         }
+      }
       expect(zeroFound, isTrue);
     });
-
 
     test('Seed is different each time', () {
       // even with different seeds, we can get rare matches of results.
       // But most of the the results should be unique
       expect(
-          List.generate(100, (index) => createRandom().nextDouble())
+          List
+              .generate(100, (index) => createRandom().nextDouble())
               .toSet()
               .length,
           greaterThan(90));
     });
 
-    // test('Huge ints: (1<<32)',
-    //     () => checkHugeInts(createRandom(), 4294967296));
-    // // "the fast case for powers of two"
-    // test('Huge ints: 0x80000000',
-    //     () => checkHugeInts(createRandom(), 0x80000000));
-    //
-    // test('Huge ints: JS_MAX_SAFE_INTEGER',
-    //         () => checkHugeInts(createRandom(), JS_MAX_SAFE_INTEGER));
-    //
-    // if (INT64_SUPPORTED) {
-    //   test('Huge ints: 0x7FFFFFFFFFFFFFFF',
-    //           () => checkHugeInts(createRandom(), int.parse('0x7FFFFFFFFFFFFFFF')));
-    // }
-
-
-
     test('nextIntCheckRange', () {
       final r = createRandom();
       expect(() => r.nextInt(-1), throwsRangeError);
       expect(() => r.nextInt(0), throwsRangeError);
-      expect(() => r.nextInt(0xFFFFFFFF+2), throwsRangeError);
-      // if (INT64_SUPPORTED) {
-      //   r.nextInt(0xFFFFFFFF + 1); // no errors
-      // } else {
-      //   expect(() => r.nextInt(0xFFFFFFFF + 1), throwsRangeError);
-      // }
+      expect(() => r.nextInt(0xFFFFFFFF + 2), throwsRangeError);
 
       // no errors
       r.nextInt(1);
       r.nextInt(0xFFFFFFFF);
-      r.nextInt(0xFFFFFFFF+1);
+      r.nextInt(0xFFFFFFFF + 1);
     });
 
     test('nextInt(2) works almost like next bool', () {
@@ -250,14 +222,13 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
     });
 
     test('next32 <-> next64', () {
-
       // we don't specify, whether the generator 64 bit or 32 bit,
       // so which method returns the generator output and which
       // returns the split or combined value
 
       if (!INT64_SUPPORTED) {
-         expect(()=>createExpectedRandom().nextRaw64(), throwsA(isA<Unsupported64Error>()));
-         return;
+        expect(() => createExpectedRandom().nextRaw64(), throwsA(isA<Unsupported64Error>()));
+        return;
       }
 
       // It must work both ways equally
@@ -273,17 +244,10 @@ void testCommonRandom(RandomBase32 Function() createRandom, RandomBase32 Functio
       expect(random2.nextRaw32(), b64.lower32());
     });
 
-    // test('nextFloat roughly compares to nextDouble', () {
-    //   final r1 = createRandom();
-    //   final r2 = createRandom();
-    //
-    //   const N = 1000;
-    //   for (int i = 0; i < N; ++i) {
-    //     final d = r1.nextDouble();
-    //     var x = r.nextInt(1);
-    //     expect(x, 0);
-    //   }
-    // });
+    test('large ints uniformity', () {
+      final r = createRandom();
+      checkUniformityForLargeInts(r);
+    });
   });
 }
 
@@ -325,6 +289,36 @@ void checkBooleans(Random r) {
   expect(countTrue, greaterThan(N * 0.4));
   expect(countTrue, lessThan(N * 0.6));
 }
+
+void checkUniformityForLargeInts(Random random) {
+  // eliminating the issue:
+  // https://github.com/rtmigo/xrandom_dart/issues/3
+
+  const mid = 1431655765; // (1 << 32) ~/ 3;
+  const max = mid * 2;
+  var lower = 0;
+  var upper = 0;
+  const N = 10000000;
+  for (var i = 0; i < N; i++) {
+    if (random.nextInt(max) < mid) {
+      lower++;
+    } else {
+      upper++;
+    }
+  }
+
+  const int expected = 5000000;
+  const int delta = 100000;
+
+  assert(expected * 2 == N);
+  assert(delta * 50 == expected);
+
+  expect(lower, greaterThan(expected - delta));
+  expect(lower, lessThan(expected + delta));
+  expect(upper, greaterThan(expected - delta));
+  expect(upper, lessThan(expected + delta));
+}
+
 
 void checkIntegers(Random r) {
   int countMin = 0;
