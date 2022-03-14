@@ -74,8 +74,8 @@ void main() {
     ];
 
     for (final pair in data) {
-      expect(pair[0].toUint32(), pair[1], reason: '${pair[0].toRadixString(16)}');
-      expect(pair[0].toUint32().toUint32(), pair[1], reason: '${pair[0].toRadixString(16)}');
+      expect(pair[0].toUint32(), pair[1], reason: pair[0].toRadixString(16));
+      expect(pair[0].toUint32().toUint32(), pair[1], reason: pair[0].toRadixString(16));
     }
   });
 
@@ -107,7 +107,7 @@ void main() {
     ];
 
     for (final pair in data) {
-      expect(pair[0].toInt32(), pair[1], reason: '${pair[0].toRadixString(16)}');
+      expect(pair[0].toInt32(), pair[1], reason: pair[0].toRadixString(16));
     }
   });
 
@@ -132,8 +132,8 @@ void main() {
       [0x80000001, -2147483647],
       [0x80000002, -2147483646],
     ]) {
-      expect(pair[0].uint32_to_int32(), pair[1], reason: '${pair[0].toRadixString(16)}');
-      expect(pair[1].int32_as_uint32(), pair[0], reason: '${pair[0].toRadixString(16)}');
+      expect(pair[0].uint32_to_int32(), pair[1], reason: pair[0].toRadixString(16));
+      expect(pair[1].int32_as_uint32(), pair[0], reason: pair[0].toRadixString(16));
     }
   });
 }
