@@ -204,7 +204,6 @@ void testCommonRandom(RandomBase32 Function() createRandom,
         } else {
           throw AssertionError();
         }
-        ;
       }
 
       expect(countZeroes, greaterThan(N * 0.3));

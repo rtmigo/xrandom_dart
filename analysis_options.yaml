@@ -1,6 +1,6 @@
 # default set of lint rules enforced for projects at Google
 # https://github.com/dart-lang/pedantic#enabled-lints
-include: package:pedantic/analysis_options.yaml
+include: package:lints/recommended.yaml
 
 # http://dart-lang.github.io/linter/lints
 linter:
@@ -8,6 +8,9 @@ linter:
     omit_local_variable_types: false
     unnecessary_this: false
     await_only_futures: true
+    file_names: false
+    constant_identifier_names: false
+    non_constant_identifier_names: false
 
 analyzer:
 #   exclude:
