@@ -8,10 +8,13 @@ import 'package:xrandom/xrandom.dart';
 
 void main() {
   test('64', () {
+    Xorshift32(); // no errors
     expect(() => Xorshift32().nextRaw64(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xorshift64.seeded(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xorshift128p.seeded(), throwsA(isA<Unsupported64Error>()));
     expect(() => Xoshiro256pp.seeded(), throwsA(isA<Unsupported64Error>()));
+    expect(() => Xoshiro256ss.seeded(), throwsA(isA<Unsupported64Error>()));
     expect(() => Splitmix64.seeded(), throwsA(isA<Unsupported64Error>()));
+    expect(() => Mulberry32.seeded(), throwsA(isA<Unsupported64Error>()));
   });
 }
