@@ -8,7 +8,7 @@ import 'package:quiver/iterables.dart';
 import 'package:test/test.dart';
 
 import 'experimental/70_exp_lemire_o_neill.dart';
-import 'helper.dart';
+import 'common.dart';
 
 void main() {
 

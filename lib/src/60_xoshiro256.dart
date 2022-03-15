@@ -3,11 +3,16 @@
 
 import 'package:xrandom/src/50_splitmix64.dart';
 
+import '00_errors.dart';
+import '00_ints.dart';
 import '21_base64.dart';
 
 /// Base class for Xoshiro256++ and Xoshiro256**
 abstract class Xoshiro256 extends RandomBase64 {
   Xoshiro256([int? seed64a, int? seed64b, int? seed64c, int? seed64d]) {
+    if (!INT64_SUPPORTED) {
+      throw Unsupported64Error();
+    }
     if (seed64a != null || seed64b != null || seed64c != null || seed64d != null) {
       _S0 = seed64a!;
       _S1 = seed64b!;

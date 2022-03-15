@@ -5,7 +5,7 @@
 import 'package:test/test.dart';
 import 'package:xrandom/src/60_xorshift128plus.dart';
 
-import 'helper.dart';
+import 'common.dart';
 import 'madsen.dart';
 
 void main() {

@@ -3,11 +3,18 @@
 
 import 'package:xrandom/src/21_base32.dart';
 
+import '00_errors.dart';
+import '00_ints.dart';
+
 /// Random number generator based on **mulberry32** algorithm by T. Ettinger.
 ///
 /// [reference](https://git.io/JmoUq)
 class Mulberry32 extends RandomBase32 {
   Mulberry32([int? seed32]) {
+    // although it's "32", it still needs long values
+    if (!INT64_SUPPORTED) {
+      throw Unsupported64Error();
+    }
     if (seed32 != null) {
       RangeError.checkValueInInterval(seed32, 0, 0xFFFFFFFF);
       _state = seed32;

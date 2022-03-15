@@ -4,7 +4,7 @@
 import 'package:test/test.dart';
 import 'package:xrandom/src/60_xorshift32.dart';
 
-import 'helper.dart';
+import 'common.dart';
 
 void main() {
   testCommonRandom(() => Xorshift32(), ()=>Xorshift32.seeded());
