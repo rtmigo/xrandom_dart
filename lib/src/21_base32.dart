@@ -79,9 +79,9 @@ abstract class RandomBase32 implements Random {
     // almost the same as https://bit.ly/35OH1Vh
 
     if (max <= 0 || max > _POW2_32) {
-      throw RangeError.range(
-          max, 1, _POW2_32, 'max', 'Must be positive and <= 2^32');
+      throw RangeError.range(max, 1, _POW2_32, 'max', 'Must be positive and <= 2^32');
     }
+    
     if ((max & -max) == max) {
       // Fast case for powers of two.
       return nextRaw32() & (max - 1);
@@ -155,4 +155,3 @@ abstract class RandomBase32 implements Random {
   @protected
   int boolCache_prevShift = 0;
 }
-

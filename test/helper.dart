@@ -146,7 +146,7 @@ void testCommonRandom(RandomBase32 Function() createRandom,
     test('nextFloat', () => checkDoubles(createRandom(), false));
 
     test('bools', () => checkBooleans(createRandom()));
-    test('ints', () => checkIntegers(createRandom()));
+    test('ints', () => check_nextInt_bounds(createRandom()));
 
     test('ints when power of two', () {
       final r = createExpectedRandom();
@@ -243,10 +243,21 @@ void testCommonRandom(RandomBase32 Function() createRandom,
       expect(random2.nextRaw32(), b64.lower32());
     });
 
-    test('large ints uniformity', () {
+    test('nextInt returns uniform result for max > 1<<32', () {
       final r = createRandom();
-      checkUniformityForLargeInts(r);
+      check_nextInt_is_uniform_for_large_max(r);
     });
+
+    var r = Random();
+    for (int i=0; i<10; ++i) {
+      // generating max from range 1000..(1<<32)
+      int max = 0;
+      while ((max = r.nextInt(0xFFFFFFFF+1)+1)<1000) {}
+
+      test('nextInt returns uniform results for max=$max', () {
+        check_nextInt_is_uniform(createRandom(), max);
+      });
+    }
   });
 }
 
@@ -289,7 +300,9 @@ void checkBooleans(Random r) {
   expect(countTrue, lessThan(N * 0.6));
 }
 
-void checkUniformityForLargeInts(Random random) {
+void check_nextInt_is_uniform_for_large_max(Random random) {
+  // checking whether nextInt results are uniform for max exceeding 31<<1 
+  //  
   // eliminating the issue:
   // https://github.com/rtmigo/xrandom_dart/issues/3
 
@@ -318,8 +331,51 @@ void checkUniformityForLargeInts(Random random) {
   expect(upper, lessThan(expected + delta));
 }
 
+void check_nextInt_is_uniform(Random random, int max) {
+  // we will split range (0..max) to three equal bins: (0..a) (a..b) (b..max)
+  // Then we generate random ints from (0..max), and counting how many results correspond
+  // to particular bin. If the distribution is uniform, we'll get roughly the same count
+  // of results in each bin.
 
-void checkIntegers(Random r) {
+  int a = (max * (1 / 3)).round();
+  int b = (max * (2 / 3)).round();
+
+  assert (0 < a);
+  assert (a < b);
+  assert (b < max);
+
+  int countA=0, countB=0, countC=0;
+
+  const N = 10000000;
+
+  for (int i=0; i<N; ++i) {
+
+    var x = random.nextInt(max);
+    if (x<a) {
+      countA++;
+    } else if (x<b) {
+      countB++;
+    } else {
+      countC++;
+    }
+  }
+
+  final int expected = (N/3).round();
+  final int delta = (expected*0.1).round();
+
+  expect(countA, greaterThan(expected - delta));
+  expect(countA, lessThan(expected + delta));
+
+  expect(countB, greaterThan(expected - delta));
+  expect(countB, lessThan(expected + delta));
+
+  expect(countC, greaterThan(expected - delta));
+  expect(countC, lessThan(expected + delta));
+}
+
+
+/// Check that `nextInt(max)` returns only values from the `0 < x < max`, including `0` and `max-1`.
+void check_nextInt_bounds(Random r) {
   int countMin = 0;
   int countMax = 0;
 
