@@ -81,9 +81,12 @@ abstract class RandomBase32 implements Random {
     if (max <= 0 || max > _POW2_32) {
       throw RangeError.range(max, 1, _POW2_32, 'max', 'Must be positive and <= 2^32');
     }
-    
+
+    // to check whether max is a power of two we use
+    // condition (https://stackoverflow.com/a/1006999/11700241)
+    assert(max>0); // the condition returns wrong result for 0, but it's never 0
     if ((max & -max) == max) {
-      // Fast case for powers of two.
+      // max is a power of two
       return nextRaw32() & (max - 1);
     }
 
