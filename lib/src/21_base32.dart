@@ -76,7 +76,7 @@ abstract class RandomBase32 implements Random {
   /// the range from 0, inclusive, to [max], exclusive.
   @override
   int nextInt(int max) {
-    // almost the same as https://bit.ly/35OH1Vh
+    // almost the same as https://bit.ly/35OH1Vh by Dart authors, BSD
 
     if (max <= 0 || max > _POW2_32) {
       throw RangeError.range(max, 1, _POW2_32, 'max', 'Must be positive and <= 2^32');
