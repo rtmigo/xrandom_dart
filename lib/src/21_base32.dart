@@ -70,7 +70,7 @@ abstract class RandomBase32 implements Random {
         : combineUpper53bitsJS(nextRaw32(), nextRaw32());
   }
 
-  static final int _POW2_32 = 4294967296; // it's (1 << 32). For JS it's safer to set a constant
+  static const int _POW2_32 = 4294967296; // it's (1 << 32). For JS it's safer to set a constant
 
   /// Generates a non-negative random integer uniformly distributed in
   /// the range from 0, inclusive, to [max], exclusive.
@@ -81,12 +81,16 @@ abstract class RandomBase32 implements Random {
     if (max <= 0 || max > _POW2_32) {
       throw RangeError.range(max, 1, _POW2_32, 'max', 'Must be positive and <= 2^32');
     }
-    
+
+    // to check whether max is a power of two we use
+    // condition (https://stackoverflow.com/a/1006999/11700241)
+    assert(max>0); // the condition returns wrong result for 0, but it's never 0
     if ((max & -max) == max) {
-      // Fast case for powers of two.
+      // max is a power of two
       return nextRaw32() & (max - 1);
     }
 
+    // max is not a power of two
     int rnd32;
     int result;
     do {
