@@ -5,7 +5,7 @@
 import 'package:test/test.dart';
 import 'package:xrandom/src/60_mulberry32.dart';
 
-import 'helper.dart';
+import 'common.dart';
 
 void main() {
   testCommonRandom(() => Mulberry32(), () => Mulberry32.seeded());
@@ -33,3 +33,4 @@ void main() {
     expect(List.generate(10, (_) => random.nextRaw32()), exp);
   });
 }
+

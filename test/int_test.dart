@@ -7,11 +7,6 @@ import 'package:test/test.dart';
 import 'package:xrandom/src/00_ints.dart';
 
 void main() {
-
-  //print(1420068584772107736.truncateToDouble());
-
-  //return;
-
   test('string to int', () {
     // the problem with BigInt.toInt():
     expect(BigInt.parse('0xf7d3b43bed078fa3').toInt().toHexUint64(), '7fffffffffffffff');
@@ -79,8 +74,6 @@ void main() {
     }
   });
 
-
-
   test('toInt32', () {
     // C99:
     // int64_t src = rand_uint64();
@@ -111,12 +104,7 @@ void main() {
     }
   });
 
-
-
   test('uint32 to int32', () {
-
-
-
     // 0x7ffffffd 2147483645 -> 2147483645
     // 0x7ffffffe 2147483646 -> 2147483646
     // 0x7fffffff 2147483647 -> 2147483647
@@ -124,7 +112,7 @@ void main() {
     // 0x80000001 2147483649 -> -2147483647
     // 0x80000002 2147483650 -> -2147483646
 
-    for (final pair in[
+    for (final pair in [
       [0x7ffffffd, 2147483645],
       [0x7ffffffe, 2147483646],
       [0x7fffffff, 2147483647],

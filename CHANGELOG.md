@@ -1,13 +1,17 @@
+# 0.7.2
+
+- Fixed: `Xoshiro256pp`, `Xoshiro256pp` and `Muberry32` were not throwing `Unsupported64Error` when
+  created in JS
+
 # 0.7.1
 
-- fixed: `nextInt` results for `max >= 0x80000000` were not uniformly distributed
-- narrowed the range of possible `max` values for `Drandom`
+- Fixed: `nextInt` results for `max >= 0x80000000` were not uniformly distributed
+- Narrowed the range of possible `max` values for `Drandom`
 
 # 0.7.0+1
 
 - Added Xoshiro256**
-
-- fixed: for 64-bit generators `.nextInt32` was throwing an assertion error 
+- Fixed: for 64-bit generators `.nextInt32` was throwing an assertion error
 instead of returning 0 as a random result
 
 

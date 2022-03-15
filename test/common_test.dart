@@ -4,7 +4,7 @@
 
 import 'package:test/test.dart';
 
-import 'helper.dart';
+import 'common.dart';
 
 void main() {
   test('test', () {
