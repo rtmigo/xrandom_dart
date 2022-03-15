@@ -4,7 +4,7 @@
 import 'package:test/test.dart';
 import 'package:xrandom/src/60_xoshiro128pp.dart';
 
-import 'helper.dart';
+import 'common.dart';
 
 void main() {
   testCommonRandom(() => Xoshiro128pp(), ()=>Xoshiro128pp.seeded());
@@ -12,7 +12,6 @@ void main() {
   checkReferenceFiles(() => Xoshiro128pp(5, 23, 42, 777), 'b');
   checkReferenceFiles(
       () => Xoshiro128pp(1081037251, 1975530394, 2959134556, 1579461830), 'c');
-
 
   test('expected values', () {
     expect(expectedList(Xoshiro128pp.seeded()),

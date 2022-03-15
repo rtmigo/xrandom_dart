@@ -6,19 +6,15 @@ import 'package:test/test.dart';
 import 'package:xrandom/src/50_splitmix64.dart';
 import 'package:xrandom/xrandom.dart';
 
-import 'helper.dart';
+import 'common.dart';
 
 void main() {
   testCommonRandom(() => Splitmix64(), ()=>Splitmix64.seeded());
-
-  //print(-6562126107>>1);
-  //return;
 
   checkReferenceFiles(() => Splitmix64(1), 'a');
   checkReferenceFiles(() => Splitmix64(0), 'b');
   checkReferenceFiles(() => Splitmix64(777), 'c');
   checkReferenceFiles(() => Splitmix64(int.parse('0xf7d3b43bed078fa3')), 'd');
-  // checkReferenceFiles(() => Splitmix64(3141592653589793238), 'c');
 
   test('expected values', () {
     expect(expectedList(Splitmix64.seeded()), [

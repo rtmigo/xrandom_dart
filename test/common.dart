@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: (c) 2021 Art Galkin <github.com/rtmigo>
+// SPDX-FileCopyrightText: (c) 2021-2022 Art Galkin <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
 import 'dart:math';
